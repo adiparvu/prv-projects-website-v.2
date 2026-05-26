@@ -22,6 +22,24 @@ python3 -m http.server 8080
 
 Then visit `http://localhost:8080`.
 
+## Live site (international)
+
+Repository is **private**, so GitHub Pages must be enabled once in your account:
+
+1. Open **https://github.com/adiparvu/prv-projects-website-v.2/settings/pages**
+2. Under **Build and deployment** → Source: **GitHub Actions**
+3. Re-run the workflow **Deploy to GitHub Pages** (Actions tab)
+
+Permanent URL (after the steps above):
+
+**https://adiparvu.github.io/prv-projects-website-v.2/**
+
+Alternative: set the repo to **Public** (Settings → General → Change visibility), then Pages works the same way.
+
+### Instant preview (no GitHub setup)
+
+Deploy folder to [Netlify Drop](https://app.netlify.com/drop) — drag `index.html`, `css/`, and `js/` for a permanent `*.netlify.app` link.
+
 ## Structure
 
 ```
