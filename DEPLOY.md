@@ -2,14 +2,32 @@
 
 ## Varianta A: GitHub Pages (recomandat)
 
-1. **https://github.com/adiparvu/prv-projects-website-v.2/settings/pages**
-2. Source: **Deploy from a branch**
-3. Branch: **`gh-pages`** · Folder: **`/ (root)`**
-4. Save
+### Pas 1 — Activează Pages (obligatoriu, o singură dată)
 
-**URL live:** https://adiparvu.github.io/prv-projects-website-v.2/
+1. Deschide **https://github.com/adiparvu/prv-projects-website-v.2/settings/pages**
+2. La **Build and deployment** → **Source**: alege **Deploy from a branch**
+3. **Branch**: `gh-pages` · **Folder**: `/ (root)`
+4. Apasă **Save**
 
-Deploy automat la fiecare `git push` pe `main` (workflow GitHub Actions).
+Așteaptă 1–3 minute. Dacă vezi „Your site is live at…”, merge.
+
+### Pas 2 — URL
+
+**Site:** https://adiparvu.github.io/prv-projects-website-v.2/
+
+| Pagină | Link |
+|--------|------|
+| Acasă | https://adiparvu.github.io/prv-projects-website-v.2/ |
+| Despre | https://adiparvu.github.io/prv-projects-website-v.2/despre-noi.html |
+| Blog | https://adiparvu.github.io/prv-projects-website-v.2/blog/ |
+
+La fiecare `git push` pe `main`, workflow-ul **Deploy to GitHub Pages** actualizează branch-ul `gh-pages`.
+
+### Dacă tot vezi 404
+
+- Verifică **Actions** că ultimul run e verde: https://github.com/adiparvu/prv-projects-website-v.2/actions
+- Confirmă că branch-ul `gh-pages` conține folderele `blog/` și `projects/` (nu doar `index.html`)
+- Hard refresh: Ctrl+Shift+R (sau Cmd+Shift+R)
 
 ---
 
