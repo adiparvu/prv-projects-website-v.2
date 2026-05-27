@@ -66,50 +66,56 @@
   footer.className = "footer glass-panel";
   footer.dataset.reveal = "";
   footer.innerHTML = `
-    <div class="footer-brand">
-      <a href="${base}/index.html#hero" class="footer-logo">PRV Projects</a>
-      <p class="footer-tagline" data-i18n="footer.tagline">Partenerul tău digital pentru branduri care vor să iasă în evidență.</p>
-      <span class="footer-copy">© <span class="footer-year"></span> — <span data-i18n="footer.craft">Crafted with liquid glass</span></span>
-    </div>
-    <div class="footer-col">
-      <span class="footer-heading" data-i18n="footer.follow">Urmărește-ne</span>
-      <div class="footer-social" data-social-root>
-        <div class="social-primary">${primaryHtml}</div>
-        <div class="social-more-wrap">
-          <button type="button" class="social-more-btn glass-inset" aria-expanded="false" aria-controls="social-more-panel" title="Mai multe rețele" data-i18n-title="footer.moreSocial">
-            <span class="social-more-icon">+</span>
-            <span class="social-more-label" data-i18n="footer.more">Mai multe</span>
-          </button>
-          <div id="social-more-panel" class="social-more-panel glass-inset" hidden>
-            ${moreHtml}
+    <div class="footer-shell">
+      <div class="footer-grid-top">
+        <div class="footer-brand">
+          <a href="${base}/index.html#hero" class="footer-logo">PRV <span>Projects</span></a>
+          <p class="footer-tagline" data-i18n="footer.tagline">Partenerul tău digital pentru branduri care vor să iasă în evidență.</p>
+        </div>
+        <div class="footer-newsletter-col">
+          <span class="footer-heading" data-i18n="footer.newsletter.title">Newsletter</span>
+          <p class="footer-newsletter-desc" data-i18n="footer.newsletter.desc">Insight-uri design, proiecte noi și oferte — o dată pe lună, fără spam.</p>
+          <form class="footer-newsletter-form" id="footer-newsletter" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+            <input type="hidden" name="form-name" value="newsletter" />
+            <p class="hidden" aria-hidden="true"><input name="bot-field" tabindex="-1" autocomplete="off" /></p>
+            <div class="footer-newsletter-row glass-inset">
+              <input type="email" name="email" required autocomplete="email" data-i18n-placeholder="footer.newsletter.placeholder" placeholder="email@exemplu.ro" aria-label="Email newsletter" />
+              <button type="submit" class="btn btn-primary" data-i18n="footer.newsletter.btn">Abonează-te</button>
+            </div>
+            <p class="footer-newsletter-note" data-i18n="footer.newsletter.privacy">Prin abonare accepți comunicări de la PRV Projects. Dezabonare oricând.</p>
+            <p class="footer-newsletter-msg" id="newsletter-msg" role="status" hidden></p>
+          </form>
+        </div>
+        <div class="footer-col footer-nav-col">
+          <span class="footer-heading" data-i18n="footer.explore">Explorează</span>
+          <nav class="footer-links" aria-label="Footer">
+            <a href="${base}/index.html#services" data-i18n="nav.services">Servicii</a>
+            <a href="${base}/index.html#work" data-i18n="nav.work">Proiecte</a>
+            <a href="${base}/index.html#differentiate" data-i18n="footer.why">De ce noi</a>
+            <a href="${base}/blog/index.html" data-i18n="nav.blog">Blog</a>
+            <a href="${base}/index.html#contact" data-i18n="nav.contact">Contact</a>
+          </nav>
+          <a href="mailto:hello@prvprojects.com" class="footer-email">hello@prvprojects.com</a>
+        </div>
+      </div>
+      <div class="footer-social-row">
+        <span class="footer-heading" data-i18n="footer.follow">Urmărește-ne</span>
+        <div class="footer-social" data-social-root>
+          <div class="social-primary">${primaryHtml}</div>
+          <div class="social-more-wrap">
+            <button type="button" class="social-more-btn glass-inset" aria-expanded="false" aria-controls="social-more-panel" title="Mai multe rețele" data-i18n-title="footer.moreSocial">
+              <span class="social-more-icon">+</span>
+              <span class="social-more-label" data-i18n="footer.more">Mai multe</span>
+            </button>
+            <div id="social-more-panel" class="social-more-panel glass-inset" hidden>
+              ${moreHtml}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="footer-col footer-newsletter-col">
-      <span class="footer-heading" data-i18n="footer.newsletter.title">Newsletter</span>
-      <p class="footer-newsletter-desc" data-i18n="footer.newsletter.desc">Insight-uri design, proiecte noi și oferte — o dată pe lună, fără spam.</p>
-      <form class="footer-newsletter-form" id="footer-newsletter" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
-        <input type="hidden" name="form-name" value="newsletter" />
-        <p class="hidden" aria-hidden="true"><input name="bot-field" tabindex="-1" autocomplete="off" /></p>
-        <div class="footer-newsletter-row glass-inset">
-          <input type="email" name="email" required autocomplete="email" data-i18n-placeholder="footer.newsletter.placeholder" placeholder="email@exemplu.ro" aria-label="Email newsletter" />
-          <button type="submit" class="btn btn-primary" data-i18n="footer.newsletter.btn">Abonează-te</button>
-        </div>
-        <p class="footer-newsletter-note" data-i18n="footer.newsletter.privacy">Prin abonare accepți comunicări de la PRV Projects. Dezabonare oricând.</p>
-        <p class="footer-newsletter-msg" id="newsletter-msg" role="status" hidden></p>
-      </form>
-    </div>
-    <div class="footer-col footer-nav-col">
-      <span class="footer-heading" data-i18n="footer.explore">Explorează</span>
-      <nav class="footer-links" aria-label="Footer">
-        <a href="${base}/index.html#services" data-i18n="nav.services">Servicii</a>
-        <a href="${base}/index.html#work" data-i18n="nav.work">Proiecte</a>
-        <a href="${base}/index.html#differentiate" data-i18n="footer.why">De ce noi</a>
-        <a href="${base}/blog/index.html" data-i18n="nav.blog">Blog</a>
-        <a href="${base}/index.html#contact" data-i18n="nav.contact">Contact</a>
-      </nav>
-      <a href="mailto:hello@prvprojects.com" class="footer-email">hello@prvprojects.com</a>
+      <div class="footer-meta">
+        <span class="footer-copy">© <span class="footer-year"></span> — <span data-i18n="footer.craft">Crafted with liquid glass</span></span>
+      </div>
     </div>
   `;
 
