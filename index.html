@@ -28,13 +28,14 @@
   <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
 
   <header class="nav glass-panel" data-reveal>
-    <a href="#hero" class="logo" aria-label="PRV Projects acasă">
+    <a href="#hero" class="logo logo-animated" aria-label="PRV Projects acasă">
       <span class="logo-mark">PRV</span>
       <span class="logo-type">Projects</span>
     </a>
     <nav class="nav-links" aria-label="Principal">
       <a href="#services" data-i18n="nav.services">Servicii</a>
       <a href="#work" data-i18n="nav.work">Proiecte</a>
+      <a href="blog/index.html" data-i18n="nav.blog">Blog</a>
       <a href="#differentiate" data-i18n="nav.why">De ce noi</a>
       <a href="#experience" data-i18n="nav.about">Despre</a>
       <a href="#contact" data-i18n="nav.contact">Contact</a>
@@ -276,6 +277,30 @@
       </div>
     </section>
 
+    <section class="section blog-teaser-section" id="blog">
+      <div class="section-header" data-reveal>
+        <span class="section-tag" data-i18n="blog.tag">Blog &amp; insight-uri</span>
+        <h2 class="section-title gradient-text" data-i18n="blog.teaserTitle">Învață de la echipa PRV</h2>
+        <p class="section-intro" data-i18n="blog.teaserIntro">Articole despre design, conversie și performanță — scrise pentru fondatori și marketeri.</p>
+      </div>
+      <div class="blog-teaser-grid">
+        <a href="blog/liquid-glass-ui-2025.html" class="blog-teaser-card glass-panel" data-reveal>
+          <span class="blog-teaser-vis blog-vis-1"></span>
+          <h3 data-i18n="blog.post1.title">Liquid glass în 2025</h3>
+          <span class="work-cta" data-i18n="blog.readMore">Citește →</span>
+        </a>
+        <a href="blog/design-conversie.html" class="blog-teaser-card glass-panel" data-reveal>
+          <span class="blog-teaser-vis blog-vis-2"></span>
+          <h3 data-i18n="blog.post2.title">Design &amp; conversie</h3>
+          <span class="work-cta" data-i18n="blog.readMore">Citește →</span>
+        </a>
+        <a href="blog/index.html" class="blog-teaser-card glass-panel blog-teaser-all" data-reveal>
+          <span data-i18n="blog.allPosts">Toate articolele</span>
+          <span class="work-cta" data-i18n="blog.viewBlog">Vezi blogul →</span>
+        </a>
+      </div>
+    </section>
+
     <section class="section cta-section" id="contact">
       <div class="cta glass-panel immersive-panel" data-reveal>
         <h2 class="cta-title">
@@ -295,8 +320,12 @@
 
   <footer id="site-footer"></footer>
 
+  <script src="js/site-config.js"></script>
   <script src="js/i18n-config.js"></script>
+  <script src="js/newsletter.js"></script>
   <script src="js/i18n.js" defer></script>
+  <script src="js/cookies.js" defer></script>
+  <script src="js/analytics.js" defer></script>
   <script src="js/footer.js" defer></script>
   <script src="js/main.js" type="module"></script>
 </body>

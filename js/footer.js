@@ -2,8 +2,8 @@
  * PRV Projects — Footer + social (primary + expandable more)
  */
 (function () {
-  const isProjectPage = /\/projects\//.test(location.pathname);
-  const base = isProjectPage ? ".." : ".";
+  const isNested = /\/projects\//.test(location.pathname) || /\/blog\//.test(location.pathname);
+  const base = isNested ? ".." : ".";
 
   const socialPrimary = [
     {
@@ -89,7 +89,9 @@
     <div class="footer-col footer-newsletter-col">
       <span class="footer-heading" data-i18n="footer.newsletter.title">Newsletter</span>
       <p class="footer-newsletter-desc" data-i18n="footer.newsletter.desc">Insight-uri design, proiecte noi și oferte — o dată pe lună, fără spam.</p>
-      <form class="footer-newsletter-form" id="footer-newsletter" novalidate>
+      <form class="footer-newsletter-form" id="footer-newsletter" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="newsletter" />
+        <p class="hidden" aria-hidden="true"><input name="bot-field" tabindex="-1" autocomplete="off" /></p>
         <div class="footer-newsletter-row glass-inset">
           <input type="email" name="email" required autocomplete="email" data-i18n-placeholder="footer.newsletter.placeholder" placeholder="email@exemplu.ro" aria-label="Email newsletter" />
           <button type="submit" class="btn btn-primary" data-i18n="footer.newsletter.btn">Abonează-te</button>
@@ -104,6 +106,7 @@
         <a href="${base}/index.html#services" data-i18n="nav.services">Servicii</a>
         <a href="${base}/index.html#work" data-i18n="nav.work">Proiecte</a>
         <a href="${base}/index.html#differentiate" data-i18n="footer.why">De ce noi</a>
+        <a href="${base}/blog/index.html" data-i18n="nav.blog">Blog</a>
         <a href="${base}/index.html#contact" data-i18n="nav.contact">Contact</a>
       </nav>
       <a href="mailto:hello@prvprojects.com" class="footer-email">hello@prvprojects.com</a>
@@ -136,7 +139,7 @@
   const newsletterForm = footer.querySelector("#footer-newsletter");
   const newsletterMsg = footer.querySelector("#newsletter-msg");
 
-  newsletterForm?.addEventListener("submit", (e) => {
+  newsletterForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const input = newsletterForm.querySelector('input[type="email"]');
     const btn = newsletterForm.querySelector("button[type=submit]");
@@ -148,16 +151,23 @@
       return;
     }
 
-    const subs = JSON.parse(localStorage.getItem("prv-newsletter") || "[]");
-    if (!subs.includes(email)) subs.push(email);
-    localStorage.setItem("prv-newsletter", JSON.stringify(subs));
-
     btn.disabled = true;
-    input.value = "";
-    showNewsletterMsg("success");
+    try {
+      if (window.PRV_NEWSLETTER) {
+        await window.PRV_NEWSLETTER.subscribe(email);
+      } else {
+        const subs = JSON.parse(localStorage.getItem("prv-newsletter") || "[]");
+        if (!subs.includes(email)) subs.push(email);
+        localStorage.setItem("prv-newsletter", JSON.stringify(subs));
+      }
+      input.value = "";
+      showNewsletterMsg("success");
+    } catch {
+      showNewsletterMsg("error");
+    }
     setTimeout(() => {
       btn.disabled = false;
-      newsletterMsg.hidden = true;
+      if (newsletterMsg.classList.contains("is-success")) newsletterMsg.hidden = true;
     }, 5000);
   });
 

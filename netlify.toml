@@ -1,6 +1,10 @@
 [build]
   publish = "."
 
+# Newsletter form (footer)
+[build.processing]
+  skip_processing = false
+
 [[headers]]
   for = "/*"
   [headers.values]

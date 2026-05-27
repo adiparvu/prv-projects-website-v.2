@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="system">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Blog PRV Projects — design digital, liquid glass, SEO și conversie." />
+  <title>Blog · PRV Projects</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><canvas id="liquid-canvas" class="liquid-canvas"></canvas><div class="grain"></div></div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav glass-panel">
+    <a href="../index.html#hero" class="logo logo-animated"><span class="logo-mark">PRV</span><span class="logo-type">Projects</span></a>
+    <nav class="nav-links">
+      <a href="../index.html#work" data-i18n="nav.work">Proiecte</a>
+      <a href="index.html" data-i18n="nav.blog">Blog</a>
+      <a href="../index.html#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <div id="lang-picker" class="lang-picker-host"></div>
+      <a href="../index.html#contact" class="btn btn-primary" data-i18n="nav.cta">Hai să vorbim</a>
+    </div>
+  </header>
+
+  <main class="blog-main">
+    <header class="blog-header" data-reveal>
+      <span class="section-tag" data-i18n="blog.tag">Blog &amp; insight-uri</span>
+      <h1 class="section-title gradient-text" data-i18n="blog.title">Idei care îți cresc brandul</h1>
+      <p class="section-intro" data-i18n="blog.intro">Design, performanță și strategie — articole scurte, aplicabile imediat.</p>
+    </header>
+
+    <div class="blog-grid">
+      <article class="blog-card glass-panel" data-reveal>
+        <a href="liquid-glass-ui-2025.html" class="blog-card-visual blog-vis-1"></a>
+        <div class="blog-card-body">
+          <time datetime="2025-05-10" data-i18n="blog.post1.date">10 mai 2025</time>
+          <h2><a href="liquid-glass-ui-2025.html" data-i18n="blog.post1.title">De ce liquid glass domină UI-ul premium în 2025</a></h2>
+          <p data-i18n="blog.post1.excerpt">Glassmorphism evoluat: cum obții adâncime, viteză și un look recognoscibil fără să sacrifice accesibilitatea.</p>
+          <a href="liquid-glass-ui-2025.html" class="work-cta" data-i18n="blog.readMore">Citește articolul →</a>
+        </div>
+      </article>
+      <article class="blog-card glass-panel" data-reveal>
+        <a href="design-conversie.html" class="blog-card-visual blog-vis-2"></a>
+        <div class="blog-card-body">
+          <time datetime="2025-04-22" data-i18n="blog.post2.date">22 aprilie 2025</time>
+          <h2><a href="design-conversie.html" data-i18n="blog.post2.title">5 principii de design care dublează rata de conversie</a></h2>
+          <p data-i18n="blog.post2.excerpt">De la ierarhie vizuală la CTA-uri magnetice — le aplicăm la fiecare proiect PRV.</p>
+          <a href="design-conversie.html" class="work-cta" data-i18n="blog.readMore">Citește articolul →</a>
+        </div>
+      </article>
+      <article class="blog-card glass-panel" data-reveal>
+        <a href="seo-performanta-2025.html" class="blog-card-visual blog-vis-3"></a>
+        <div class="blog-card-body">
+          <time datetime="2025-03-15" data-i18n="blog.post3.date">15 martie 2025</time>
+          <h2><a href="seo-performanta-2025.html" data-i18n="blog.post3.title">SEO + performanță: nu alege între frumos și rapid</a></h2>
+          <p data-i18n="blog.post3.excerpt">Lighthouse 99 și conținut indexabil — cum le aliniem în același produs digital.</p>
+          <a href="seo-performanta-2025.html" class="work-cta" data-i18n="blog.readMore">Citește articolul →</a>
+        </div>
+      </article>
+    </div>
+
+    <section class="blog-cta glass-panel immersive-panel" data-reveal>
+      <h2 data-i18n="blog.ctaTitle">Vrei aceste principii aplicate brandului tău?</h2>
+      <p data-i18n="blog.ctaSub">Hai să construim împreună site-ul care convertește.</p>
+      <a href="../index.html#contact" class="btn btn-primary btn-lg" data-i18n="blog.ctaBtn">Contactează PRV</a>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script src="../js/site-config.js"></script>
+  <script src="../js/i18n-config.js"></script>
+  <script src="../js/newsletter.js"></script>
+  <script src="../js/i18n.js" defer></script>
+  <script src="../js/cookies.js" defer></script>
+  <script src="../js/analytics.js" defer></script>
+  <script src="../js/footer.js" defer></script>
+  <script type="module" src="../js/main.js"></script>
+</body>
+</html>
