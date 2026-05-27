@@ -18,7 +18,7 @@ jobs:
         run: |
           mkdir -p _site
           cp index.html favicon.svg 404.html _site/
-          cp -r css js _site/
+          cp -r css js projects _site/
           touch _site/.nojekyll
 
       - name: Deploy to gh-pages branch

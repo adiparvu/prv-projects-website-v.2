@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="system">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Orbit Spatial — experiență WebGL immersive by PRV Projects." />
+  <title>Orbit Spatial · PRV Projects</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body class="page-project">
+  <div class="ambient" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><canvas id="liquid-canvas" class="liquid-canvas"></canvas><div class="grain"></div></div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+  <header class="nav glass-panel">
+    <a href="../index.html#hero" class="logo"><span class="logo-mark">PRV</span><span class="logo-type">Projects</span></a>
+    <nav class="nav-links"><a href="../index.html#work" data-i18n="nav.work">Proiecte</a><a href="../index.html#contact" data-i18n="nav.contact">Contact</a></nav>
+    <div class="nav-actions"><button type="button" class="lang-btn glass-inset" id="lang-toggle">RO</button><a href="../index.html#contact" class="btn btn-primary" data-i18n="project.ctaShort">Lucrează cu noi</a></div>
+  </header>
+  <main class="project-main">
+    <nav class="breadcrumb glass-inset"><a href="../index.html#work" data-i18n="project.back">← Proiecte</a><span>/</span><span>Orbit Spatial</span></nav>
+    <header class="project-hero" data-reveal>
+      <span class="section-tag">Immersive · 2024</span>
+      <h1>Orbit Spatial</h1>
+      <p class="project-lead" data-i18n="p.orbit.lead">Poveste 3D în browser — WebGL, UI frosted și mișcare cinematică care transformă vizitatorii în exploratori.</p>
+    </header>
+    <div class="project-slider glass-panel" data-slider data-reveal>
+      <div class="slider-viewport"><div class="slider-track">
+        <div class="slider-slide slide-orbit-1"></div><div class="slider-slide slide-orbit-2"></div><div class="slider-slide slide-orbit-3"></div><div class="slider-slide slide-orbit-4"></div>
+      </div></div>
+      <button type="button" class="slider-arrow slider-arrow--prev" data-slider-prev aria-label="Anterior">‹</button>
+      <button type="button" class="slider-arrow slider-arrow--next" data-slider-next aria-label="Următor">›</button>
+      <div class="slider-dots"></div>
+    </div>
+    <div class="project-grid">
+      <section class="glass-panel project-block" data-reveal><h2 data-i18n="project.challenge">Provocarea</h2><p data-i18n="p.orbit.challenge">Brandul avea o poveste puternică, dar site-ul static nu transmitea inovația produsului spațial.</p></section>
+      <section class="glass-panel project-block" data-reveal><h2 data-i18n="project.solution">Soluția PRV</h2><p data-i18n="p.orbit.solution">Am combinat scene WebGL ușoare cu panouri liquid glass — performanță ridicată și wow-factor memorabil.</p></section>
+      <section class="glass-panel project-block project-results" data-reveal><h2 data-i18n="project.results">Rezultate</h2><ul class="results-list"><li><strong>3×</strong> <span data-i18n="p.orbit.r1">timp mediu pe pagină</span></li><li><strong>+44%</strong> <span data-i18n="p.orbit.r2">lead-uri demo solicitate</span></li></ul></section>
+    </div>
+    <section class="project-diff glass-panel" data-reveal>
+      <h2 data-i18n="project.diffTitle">Ce ne diferențiază pe acest proiect</h2>
+      <div class="diff-grid">
+        <article><h3 data-i18n="p.orbit.d1t">Immersive fără sacrificii</h3><p data-i18n="p.orbit.d1">3D doar unde adaugă valoare — nu pentru show; optimizat pentru laptop și mobil.</p></article>
+        <article><h3 data-i18n="p.orbit.d2t">Storytelling vizual</h3><p data-i18n="p.orbit.d2">Fiecare scroll dezvăluie o capitolă — ca un film, nu ca un PDF.</p></article>
+        <article><h3 data-i18n="p.orbit.d3t">Stack modern</h3><p data-i18n="p.orbit.d3">WebGL, motion design și glass UI integrate într-un singur limbaj de brand.</p></article>
+      </div>
+    </section>
+    <section class="project-cta glass-panel immersive-panel" data-reveal>
+      <h2 data-i18n="project.ctaTitle">Vrei să iasă produsul tău din ecran?</h2>
+      <p data-i18n="project.ctaSub">Construim experiențe immersive care rămân rapide și accesibile.</p>
+      <a href="../index.html#contact" class="btn btn-primary btn-lg" data-i18n="project.ctaBtn">Programează un call gratuit</a>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="../js/i18n.js" defer></script>
+  <script src="../js/footer.js" defer></script>
+  <script type="module">import { initProjectSlider } from "../js/project-slider.js"; import "../js/main.js"; initProjectSlider();</script>
+</body>
+</html>

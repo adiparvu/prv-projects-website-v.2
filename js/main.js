@@ -360,7 +360,30 @@ function initForm() {
 }
 
 // ——— Boot ———
-document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("year") &&
+  (document.getElementById("year").textContent = new Date().getFullYear());
+
+document.addEventListener("prv:footer-ready", () => {
+  if (window.PRV_I18N?.applyLang) {
+    window.PRV_I18N.applyLang(window.PRV_I18N.getLang());
+  }
+  document.querySelectorAll("[data-reveal]").forEach((el) => {
+    if (!el.classList.contains("revealed")) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("revealed");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      observer.observe(el);
+    }
+  });
+});
 
 initTheme();
 initLiquidCanvas();

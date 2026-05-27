@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="system">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Nova Health — case study PRV Projects. Platformă medicală calmă și accesibilă." />
+  <title>Nova Health · PRV Projects</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body class="page-project">
+  <div class="ambient" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><canvas id="liquid-canvas" class="liquid-canvas"></canvas><div class="grain"></div></div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+  <header class="nav glass-panel">
+    <a href="../index.html#hero" class="logo"><span class="logo-mark">PRV</span><span class="logo-type">Projects</span></a>
+    <nav class="nav-links"><a href="../index.html#work" data-i18n="nav.work">Proiecte</a><a href="../index.html#contact" data-i18n="nav.contact">Contact</a></nav>
+    <div class="nav-actions"><button type="button" class="lang-btn glass-inset" id="lang-toggle">RO</button><a href="../index.html#contact" class="btn btn-primary" data-i18n="project.ctaShort">Lucrează cu noi</a></div>
+  </header>
+  <main class="project-main">
+    <nav class="breadcrumb glass-inset"><a href="../index.html#work" data-i18n="project.back">← Proiecte</a><span>/</span><span>Nova Health</span></nav>
+    <header class="project-hero" data-reveal>
+      <span class="section-tag">Healthcare · 2024</span>
+      <h1>Nova Health</h1>
+      <p class="project-lead" data-i18n="p.nova.lead">O platformă medicală care pune pacientul pe primul loc — calmă, accesibilă și umană, fără compromisuri tehnice.</p>
+    </header>
+    <div class="project-slider glass-panel" data-slider data-reveal>
+      <div class="slider-viewport"><div class="slider-track">
+        <div class="slider-slide slide-nova-1"></div><div class="slider-slide slide-nova-2"></div><div class="slider-slide slide-nova-3"></div>
+      </div></div>
+      <button type="button" class="slider-arrow slider-arrow--prev" data-slider-prev aria-label="Anterior">‹</button>
+      <button type="button" class="slider-arrow slider-arrow--next" data-slider-next aria-label="Următor">›</button>
+      <div class="slider-dots"></div>
+    </div>
+    <div class="project-grid">
+      <section class="glass-panel project-block" data-reveal><h2 data-i18n="project.challenge">Provocarea</h2><p data-i18n="p.nova.challenge">Informațiile medicale erau greu de parcurs, iar stresul vizual descuraja utilizatorii vârstnici și familiile lor.</p></section>
+      <section class="glass-panel project-block" data-reveal><h2 data-i18n="project.solution">Soluția PRV</h2><p data-i18n="p.nova.solution">Am creat fluxuri lineare, contrast WCAG AA+, micro-interacțiuni blânde și un ton vizual care transmite siguranță.</p></section>
+      <section class="glass-panel project-block project-results" data-reveal><h2 data-i18n="project.results">Rezultate</h2><ul class="results-list"><li><strong>+61%</strong> <span data-i18n="p.nova.r1">programări finalizate online</span></li><li><strong>4.9★</strong> <span data-i18n="p.nova.r2">rating experiență pacient</span></li></ul></section>
+    </div>
+    <section class="project-diff glass-panel" data-reveal>
+      <h2 data-i18n="project.diffTitle">Ce ne diferențiază pe acest proiect</h2>
+      <div class="diff-grid">
+        <article><h3 data-i18n="p.nova.d1t">Empatie în UX</h3><p data-i18n="p.nova.d1">Testăm cu scenarii reale — programări, rezultate, urgențe — nu doar cu mockup-uri frumoase.</p></article>
+        <article><h3 data-i18n="p.nova.d2t">Accesibilitate nativă</h3><p data-i18n="p.nova.d2">Nu o adăugăm la final; o proiectăm din prima linie de cod.</p></article>
+        <article><h3 data-i18n="p.nova.d3t">Conformitate & design</h3><p data-i18n="p.nova.d3">Echilibrăm cerințele medicale cu o estetică care inspiră calm, nu anxietate.</p></article>
+      </div>
+    </section>
+    <section class="project-cta glass-panel immersive-panel" data-reveal>
+      <h2 data-i18n="project.ctaTitle">Ai un produs în healthcare sau wellbeing?</h2>
+      <p data-i18n="project.ctaSub">Construim experiențe în care oamenii au încredere să se îngrijească de ei înșiși.</p>
+      <a href="../index.html#contact" class="btn btn-primary btn-lg" data-i18n="project.ctaBtn">Programează un call gratuit</a>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="../js/i18n.js" defer></script>
+  <script src="../js/footer.js" defer></script>
+  <script type="module">import { initProjectSlider } from "../js/project-slider.js"; import "../js/main.js"; initProjectSlider();</script>
+</body>
+</html>

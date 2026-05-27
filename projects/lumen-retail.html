@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="system">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lumen Retail — e-commerce premium case study PRV Projects." />
+  <title>Lumen Retail · PRV Projects</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body class="page-project">
+  <div class="ambient" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><canvas id="liquid-canvas" class="liquid-canvas"></canvas><div class="grain"></div></div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+  <header class="nav glass-panel">
+    <a href="../index.html#hero" class="logo"><span class="logo-mark">PRV</span><span class="logo-type">Projects</span></a>
+    <nav class="nav-links"><a href="../index.html#work" data-i18n="nav.work">Proiecte</a><a href="../index.html#contact" data-i18n="nav.contact">Contact</a></nav>
+    <div class="nav-actions"><button type="button" class="lang-btn glass-inset" id="lang-toggle">RO</button><a href="../index.html#contact" class="btn btn-primary" data-i18n="project.ctaShort">Lucrează cu noi</a></div>
+  </header>
+  <main class="project-main">
+    <nav class="breadcrumb glass-inset"><a href="../index.html#work" data-i18n="project.back">← Proiecte</a><span>/</span><span>Lumen Retail</span></nav>
+    <header class="project-hero" data-reveal>
+      <span class="section-tag">E-commerce · 2025</span>
+      <h1>Lumen Retail</h1>
+      <p class="project-lead" data-i18n="p.lumen.lead">Magazin online care vinde prin emoție și claritate — checkout fluid, produse care străluiesc, conversie fără fricțiune.</p>
+    </header>
+    <div class="project-slider glass-panel" data-slider data-reveal>
+      <div class="slider-viewport"><div class="slider-track">
+        <div class="slider-slide slide-lumen-1"></div><div class="slider-slide slide-lumen-2"></div><div class="slider-slide slide-lumen-3"></div>
+      </div></div>
+      <button type="button" class="slider-arrow slider-arrow--prev" data-slider-prev aria-label="Anterior">‹</button>
+      <button type="button" class="slider-arrow slider-arrow--next" data-slider-next aria-label="Următor">›</button>
+      <div class="slider-dots"></div>
+    </div>
+    <div class="project-grid">
+      <section class="glass-panel project-block" data-reveal><h2 data-i18n="project.challenge">Provocarea</h2><p data-i18n="p.lumen.challenge">Coșul abandonat era ridicat, iar brandul premium era afișat ca un template generic.</p></section>
+      <section class="glass-panel project-block" data-reveal><h2 data-i18n="project.solution">Soluția PRV</h2><p data-i18n="p.lumen.solution">Am refăcut UX-ul de la coș la confirmare, cu micro-animații, recomandări vizuale și un design care justifică prețul.</p></section>
+      <section class="glass-panel project-block project-results" data-reveal><h2 data-i18n="project.results">Rezultate</h2><ul class="results-list"><li><strong>+27%</strong> <span data-i18n="p.lumen.r1">rată conversie checkout</span></li><li><strong>−34%</strong> <span data-i18n="p.lumen.r2">abandon coș</span></li></ul></section>
+    </div>
+    <section class="project-diff glass-panel" data-reveal>
+      <h2 data-i18n="project.diffTitle">Ce ne diferențiază pe acest proiect</h2>
+      <div class="diff-grid">
+        <article><h3 data-i18n="p.lumen.d1t">Vânzare prin design</h3><p data-i18n="p.lumen.d1">Fiecare pagină de produs e construită să răspundă la „de ce acum?” — nu doar „ce e?”.</p></article>
+        <article><h3 data-i18n="p.lumen.d2t">Mobile-first commerce</h3><p data-i18n="p.lumen.d2">70% din trafic vine de pe telefon — acolo am optimizat primul.</p></article>
+        <article><h3 data-i18n="p.lumen.d3t">Integrare marketing</h3><p data-i18n="p.lumen.d3">Site-ul vorbește aceeași limbă cu campaniile tale social & email.</p></article>
+      </div>
+    </section>
+    <section class="project-cta glass-panel immersive-panel" data-reveal>
+      <h2 data-i18n="project.ctaTitle">Vrei mai multe vânzări, nu doar un site frumos?</h2>
+      <p data-i18n="project.ctaSub">Transformăm vizitatorii în clienți fideli — împreună.</p>
+      <a href="../index.html#contact" class="btn btn-primary btn-lg" data-i18n="project.ctaBtn">Programează un call gratuit</a>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="../js/i18n.js" defer></script>
+  <script src="../js/footer.js" defer></script>
+  <script type="module">import { initProjectSlider } from "../js/project-slider.js"; import "../js/main.js"; initProjectSlider();</script>
+</body>
+</html>
