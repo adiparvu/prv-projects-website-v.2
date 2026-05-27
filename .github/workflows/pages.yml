@@ -17,11 +17,9 @@ jobs:
       - name: Prepare publish directory
         run: |
           mkdir -p _site
-          cp index.html favicon.svg 404.html _site/
+          cp index.html favicon.svg 404.html robots.txt sitemap.xml _redirects _site/
           cp -r css js projects blog _site/
           cp -r js/translations _site/js/
-          cp js/site-config.js _site/js/
-          touch _site/.nojekyll
 
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4

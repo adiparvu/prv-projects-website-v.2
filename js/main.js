@@ -340,15 +340,25 @@ function initMagneticButtons() {
 }
 
 // ——— Form ———
-function initForm() {
-  document.querySelector(".cta-form")?.addEventListener("submit", (e) => {
+async function initForm() {
+  document.querySelector(".cta-form")?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const input = e.target.querySelector('input[type="email"]');
     const btn = e.target.querySelector("button");
     const original = btn.textContent;
     const thanks = window.PRV_I18N?.strings?.["form.thanks"] || "Mulțumim — revenim curând";
-    btn.textContent = thanks;
+    const email = input?.value?.trim();
+    if (!email) return;
+
     btn.disabled = true;
+    try {
+      if (window.PRV_NEWSLETTER) {
+        await window.PRV_NEWSLETTER.subscribe(email);
+      }
+    } catch {
+      /* tot arătăm mulțumim — verifică spam */
+    }
+    btn.textContent = thanks;
     input.value = "";
     setTimeout(() => {
       btn.textContent = original;
