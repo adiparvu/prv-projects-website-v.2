@@ -141,5 +141,12 @@
   "p.lumen.d3t": "Integrare marketing",
   "p.lumen.d3": "Site-ul vorbește aceeași limbă cu social & email.",
   "p.lumen.ctaTitle": "Vrei mai multe vânzări, nu doar un site frumos?",
-  "p.lumen.ctaSub": "Transformăm vizitatorii în clienți fideli — împreună."
+  "p.lumen.ctaSub": "Transformăm vizitatorii în clienți fideli — împreună.",
+  "footer.newsletter.title": "Newsletter",
+  "footer.newsletter.desc": "Insight-uri design, proiecte noi și oferte — o dată pe lună, fără spam.",
+  "footer.newsletter.placeholder": "email@exemplu.ro",
+  "footer.newsletter.btn": "Abonează-te",
+  "footer.newsletter.privacy": "Prin abonare accepți comunicări de la PRV Projects. Dezabonare oricând.",
+  "footer.newsletter.success": "Mulțumim! Ești abonat la newsletter.",
+  "footer.newsletter.error": "Introdu o adresă de email validă."
 }

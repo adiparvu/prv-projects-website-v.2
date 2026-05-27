@@ -141,5 +141,12 @@
   "p.lumen.d3t": "Pazarlama entegrasyonu",
   "p.lumen.d3": "Site, sosyal ve e-postayla aynı dili konuşur.",
   "p.lumen.ctaTitle": "Sadece güzel site değil, daha fazla satış mı istiyorsunuz?",
-  "p.lumen.ctaSub": "Ziyaretçileri sadık müşterilere dönüştürüyoruz — birlikte."
+  "p.lumen.ctaSub": "Ziyaretçileri sadık müşterilere dönüştürüyoruz — birlikte.",
+  "footer.newsletter.title": "Bülten",
+  "footer.newsletter.desc": "Tasarım içgörüleri, yeni projeler ve teklifler — ayda bir, spam yok.",
+  "footer.newsletter.placeholder": "siz@sirket.com",
+  "footer.newsletter.btn": "Abone ol",
+  "footer.newsletter.privacy": "Abone olarak PRV Projects iletişimini kabul edersiniz. İstediğiniz zaman çıkın.",
+  "footer.newsletter.success": "Teşekkürler! Bültenimize abone oldunuz.",
+  "footer.newsletter.error": "Geçerli bir e-posta adresi girin."
 }

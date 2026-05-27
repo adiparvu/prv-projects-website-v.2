@@ -141,5 +141,12 @@
   "p.lumen.d3t": "Marketing integration",
   "p.lumen.d3": "Сайт говорит на одном языке с social и email.",
   "p.lumen.ctaTitle": "Нужны продажи, а не просто красивый сайт?",
-  "p.lumen.ctaSub": "Превращаем посетителей в лояльных клиентов — вместе."
+  "p.lumen.ctaSub": "Превращаем посетителей в лояльных клиентов — вместе.",
+  "footer.newsletter.title": "Рассылка",
+  "footer.newsletter.desc": "Инсайты дизайна, новые проекты и предложения — раз в месяц, без спама.",
+  "footer.newsletter.placeholder": "you@company.com",
+  "footer.newsletter.btn": "Подписаться",
+  "footer.newsletter.privacy": "Подписываясь, вы соглашаетесь на рассылку PRV Projects. Отписка в любой момент.",
+  "footer.newsletter.success": "Спасибо! Вы подписаны на рассылку.",
+  "footer.newsletter.error": "Введите корректный email."
 }

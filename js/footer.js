@@ -86,6 +86,18 @@
         </div>
       </div>
     </div>
+    <div class="footer-col footer-newsletter-col">
+      <span class="footer-heading" data-i18n="footer.newsletter.title">Newsletter</span>
+      <p class="footer-newsletter-desc" data-i18n="footer.newsletter.desc">Insight-uri design, proiecte noi și oferte — o dată pe lună, fără spam.</p>
+      <form class="footer-newsletter-form" id="footer-newsletter" novalidate>
+        <div class="footer-newsletter-row glass-inset">
+          <input type="email" name="email" required autocomplete="email" data-i18n-placeholder="footer.newsletter.placeholder" placeholder="email@exemplu.ro" aria-label="Email newsletter" />
+          <button type="submit" class="btn btn-primary" data-i18n="footer.newsletter.btn">Abonează-te</button>
+        </div>
+        <p class="footer-newsletter-note" data-i18n="footer.newsletter.privacy">Prin abonare accepți comunicări de la PRV Projects. Dezabonare oricând.</p>
+        <p class="footer-newsletter-msg" id="newsletter-msg" role="status" hidden></p>
+      </form>
+    </div>
     <div class="footer-col footer-nav-col">
       <span class="footer-heading" data-i18n="footer.explore">Explorează</span>
       <nav class="footer-links" aria-label="Footer">
@@ -120,6 +132,44 @@
       if (moreBtn) moreBtn.querySelector(".social-more-icon").textContent = "+";
     }
   });
+
+  const newsletterForm = footer.querySelector("#footer-newsletter");
+  const newsletterMsg = footer.querySelector("#newsletter-msg");
+
+  newsletterForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const input = newsletterForm.querySelector('input[type="email"]');
+    const btn = newsletterForm.querySelector("button[type=submit]");
+    const email = input?.value?.trim();
+
+    if (!email || !input.checkValidity()) {
+      showNewsletterMsg("error");
+      input?.focus();
+      return;
+    }
+
+    const subs = JSON.parse(localStorage.getItem("prv-newsletter") || "[]");
+    if (!subs.includes(email)) subs.push(email);
+    localStorage.setItem("prv-newsletter", JSON.stringify(subs));
+
+    btn.disabled = true;
+    input.value = "";
+    showNewsletterMsg("success");
+    setTimeout(() => {
+      btn.disabled = false;
+      newsletterMsg.hidden = true;
+    }, 5000);
+  });
+
+  function showNewsletterMsg(type) {
+    const strings = window.PRV_I18N?.strings || {};
+    newsletterMsg.hidden = false;
+    newsletterMsg.className = `footer-newsletter-msg is-${type}`;
+    newsletterMsg.textContent =
+      type === "success"
+        ? strings["footer.newsletter.success"] || "Mulțumim! Ești abonat."
+        : strings["footer.newsletter.error"] || "Introdu un email valid.";
+  }
 
   window.dispatchEvent(new CustomEvent("prv:footer-ready"));
 })();

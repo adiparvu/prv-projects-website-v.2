@@ -141,5 +141,12 @@
   "p.lumen.d3t": "Marketing-Integration",
   "p.lumen.d3": "Die Site spricht dieselbe Sprache wie Social & E-Mail.",
   "p.lumen.ctaTitle": "Wollen Sie mehr Umsatz, nicht nur eine schöne Site?",
-  "p.lumen.ctaSub": "Wir verwandeln Besucher in treue Kunden — gemeinsam."
+  "p.lumen.ctaSub": "Wir verwandeln Besucher in treue Kunden — gemeinsam.",
+  "footer.newsletter.title": "Newsletter",
+  "footer.newsletter.desc": "Design-Insights, neue Projekte und Angebote — einmal im Monat, kein Spam.",
+  "footer.newsletter.placeholder": "sie@firma.de",
+  "footer.newsletter.btn": "Abonnieren",
+  "footer.newsletter.privacy": "Mit der Anmeldung stimmen Sie Mitteilungen von PRV Projects zu. Jederzeit abmelden.",
+  "footer.newsletter.success": "Danke! Sie sind für unseren Newsletter angemeldet.",
+  "footer.newsletter.error": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
 }

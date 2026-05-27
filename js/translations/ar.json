@@ -141,5 +141,12 @@
   "p.lumen.d3t": "تكامل تسويقي",
   "p.lumen.d3": "الموقع يتحدث نفس لغة السوشيال والبريد.",
   "p.lumen.ctaTitle": "تريد مبيعات أكثر، لا موقعاً جميلاً فقط؟",
-  "p.lumen.ctaSub": "نحوّل الزوار إلى عملاء أوفياء — معاً."
+  "p.lumen.ctaSub": "نحوّل الزوار إلى عملاء أوفياء — معاً.",
+  "footer.newsletter.title": "النشرة الإخبارية",
+  "footer.newsletter.desc": "رؤى التصميم ومشاريع جديدة وعروض — مرة شهرياً، بدون إزعاج.",
+  "footer.newsletter.placeholder": "you@company.com",
+  "footer.newsletter.btn": "اشترك",
+  "footer.newsletter.privacy": "بالاشتراك توافق على تواصل PRV Projects. إلغاء الاشتراك في أي وقت.",
+  "footer.newsletter.success": "شكراً! تم اشتراكك في النشرة.",
+  "footer.newsletter.error": "يرجى إدخال بريد إلكتروني صالح."
 }

@@ -141,5 +141,12 @@
   "p.lumen.d3t": "Integracja marketingowa",
   "p.lumen.d3": "Strona mówi tym samym językiem co social i email.",
   "p.lumen.ctaTitle": "Chcesz więcej sprzedaży, nie tylko piękną stronę?",
-  "p.lumen.ctaSub": "Zamieniamy odwiedzających w lojalnych klientów — razem."
+  "p.lumen.ctaSub": "Zamieniamy odwiedzających w lojalnych klientów — razem.",
+  "footer.newsletter.title": "Newsletter",
+  "footer.newsletter.desc": "Design, nowe projekty i oferty — raz w miesiącu, bez spamu.",
+  "footer.newsletter.placeholder": "ty@firma.pl",
+  "footer.newsletter.btn": "Zapisz się",
+  "footer.newsletter.privacy": "Zapisując się, zgadzasz się na komunikację od PRV Projects. Wypisz się w każdej chwili.",
+  "footer.newsletter.success": "Dziękujemy! Jesteś zapisany do newslettera.",
+  "footer.newsletter.error": "Wprowadź prawidłowy adres e-mail."
 }

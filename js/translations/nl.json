@@ -141,5 +141,12 @@
   "p.lumen.d3t": "Marketingintegratie",
   "p.lumen.d3": "De site spreekt dezelfde taal als social & email.",
   "p.lumen.ctaTitle": "Wil je meer omzet, niet alleen een mooie site?",
-  "p.lumen.ctaSub": "Wij zetten bezoekers om in loyale klanten — samen."
+  "p.lumen.ctaSub": "Wij zetten bezoekers om in loyale klanten — samen.",
+  "footer.newsletter.title": "Nieuwsbrief",
+  "footer.newsletter.desc": "Designinzichten, nieuwe projecten en aanbiedingen — één keer per maand, geen spam.",
+  "footer.newsletter.placeholder": "jij@bedrijf.nl",
+  "footer.newsletter.btn": "Abonneren",
+  "footer.newsletter.privacy": "Door te abonneren ga je akkoord met communicatie van PRV Projects. Altijd uitschrijven.",
+  "footer.newsletter.success": "Bedankt! Je bent geabonneerd op onze nieuwsbrief.",
+  "footer.newsletter.error": "Voer een geldig e-mailadres in."
 }
