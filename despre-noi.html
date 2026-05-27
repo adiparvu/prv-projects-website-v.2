@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="system">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PRV Projects — studio de renovări interioare premium în Bruxelles. Povestea echipei, valorile și procesul nostru." />
+  <meta name="keywords" content="renovări interioare Bruxelles, firmă renovări români Belgia, PRV Projects despre noi" />
+  <meta name="color-scheme" content="dark light" />
+  <meta property="og:title" content="Despre noi · PRV Projects — Bruxelles" />
+  <meta property="og:description" content="9 ani în Belgia, 200+ proiecte. Echipă proprie, transparență totală, garanție decennală." />
+  <meta property="og:type" content="website" />
+  <title>Despre noi · PRV Projects — Renovări Bruxelles</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <canvas id="liquid-canvas" class="liquid-canvas"></canvas>
+    <div class="grain"></div>
+  </div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav glass-panel" data-reveal>
+    <a href="index.html#hero" class="logo logo-animated" aria-label="PRV Projects acasă">
+      <span class="logo-mark">PRV</span>
+      <span class="logo-type">Projects</span>
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="index.html#services" data-i18n="nav.services">Servicii</a>
+      <a href="index.html#work" data-i18n="nav.work">Proiecte</a>
+      <a href="blog/index.html" data-i18n="nav.blog">Blog</a>
+      <a href="index.html#differentiate" data-i18n="nav.why">De ce noi</a>
+      <a href="despre-noi.html" data-i18n="nav.about">Despre noi</a>
+      <a href="index.html#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <div id="lang-picker" class="lang-picker-host"></div>
+      <div class="theme-switcher glass-inset" role="group" aria-label="Temă culoare">
+        <button type="button" class="theme-btn" data-theme-set="light" aria-pressed="false" title="Luminos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+        <button type="button" class="theme-btn active" data-theme-set="system" aria-pressed="true" title="Sistem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+        </button>
+        <button type="button" class="theme-btn" data-theme-set="dark" aria-pressed="false" title="Întunecat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+      <a href="index.html#contact" class="btn btn-primary" data-i18n="nav.cta">Cere o ofertă</a>
+    </div>
+    <button type="button" class="nav-toggle" aria-label="Deschide meniul" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" id="about-hero" style="min-height: auto; padding-bottom: 4rem;">
+      <div class="hero-content">
+        <p class="eyebrow shimmer-text" data-split data-i18n="about.hero.eyebrow">DESPRE NOI · BRUXELLES</p>
+        <h1 class="hero-title">
+          <span class="line" data-split data-i18n="about.hero.line1">Am început dintr-o</span>
+          <span class="line gradient-text" data-split data-i18n="about.hero.line2">frustrare.</span>
+          <span class="line" data-split data-i18n="about.hero.line3">Astăzi suntem firma care nu te face să regreți.</span>
+        </h1>
+        <p class="hero-sub" data-reveal data-i18n="about.hero.sub"></p>
+        <div class="hero-cta" data-reveal>
+          <a href="index.html#work" class="btn btn-primary btn-lg"><span data-i18n="about.hero.cta1">Vezi proiectele</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="index.html#contact" class="btn btn-glass" data-i18n="about.hero.cta2">Cere o ofertă</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="poveste">
+      <div class="section-header" data-reveal>
+        <span class="section-tag" data-i18n="about.story.tag">POVESTEA NOASTRĂ</span>
+        <h2 class="section-title gradient-text" data-i18n="about.story.title">De la un appartement în Saint-Gilles la peste 200 de case renovate</h2>
+      </div>
+      <article class="glass-panel about-prose" data-reveal style="padding: 2rem 2.25rem;">
+        <p data-i18n="about.story.p1"></p>
+        <p data-i18n="about.story.p2"></p>
+        <p data-i18n="about.story.p3"></p>
+        <p data-i18n="about.story.p4"></p>
+        <p data-i18n="about.story.p5"></p>
+      </article>
+    </section>
+
+    <section class="section differentiate-section" id="valori">
+      <div class="section-header" data-reveal>
+        <span class="section-tag" data-i18n="about.values.tag">CE NE GHIDEAZĂ</span>
+        <h2 class="section-title gradient-text" data-i18n="about.values.title">Cinci reguli pe care nu le încălcăm</h2>
+        <p class="section-intro" data-reveal data-i18n="about.values.intro"></p>
+      </div>
+      <div class="diff-cards">
+        <article class="diff-card glass-panel" data-reveal data-tilt><span class="diff-num">01</span><h3 data-i18n="about.values.c1.title"></h3><p data-i18n="about.values.c1.desc"></p></article>
+        <article class="diff-card glass-panel" data-reveal data-tilt><span class="diff-num">02</span><h3 data-i18n="about.values.c2.title"></h3><p data-i18n="about.values.c2.desc"></p></article>
+        <article class="diff-card glass-panel" data-reveal data-tilt><span class="diff-num">03</span><h3 data-i18n="about.values.c3.title"></h3><p data-i18n="about.values.c3.desc"></p></article>
+        <article class="diff-card glass-panel" data-reveal data-tilt><span class="diff-num">04</span><h3 data-i18n="about.values.c4.title"></h3><p data-i18n="about.values.c4.desc"></p></article>
+        <article class="diff-card glass-panel" data-reveal data-tilt><span class="diff-num">05</span><h3 data-i18n="about.values.c5.title"></h3><p data-i18n="about.values.c5.desc"></p></article>
+      </div>
+    </section>
+
+    <section class="section" id="echipa">
+      <div class="section-header" data-reveal>
+        <span class="section-tag" data-i18n="about.team.tag">OAMENII DIN SPATELE PROIECTELOR</span>
+        <h2 class="section-title gradient-text" data-i18n="about.team.title">O echipă, nu o platformă de meseriași</h2>
+        <p class="section-intro" data-reveal data-i18n="about.team.intro"></p>
+      </div>
+      <div class="team-grid">
+        <article class="feature glass-panel" data-reveal data-tilt><h3 data-i18n="about.team.t1.name">Adrian P.</h3><p class="work-meta" data-i18n="about.team.t1.role"></p><p data-i18n="about.team.t1.bio"></p></article>
+        <article class="feature glass-panel" data-reveal data-tilt><h3 data-i18n="about.team.t2.name">Mihai R.</h3><p class="work-meta" data-i18n="about.team.t2.role"></p><p data-i18n="about.team.t2.bio"></p></article>
+        <article class="feature glass-panel" data-reveal data-tilt><h3 data-i18n="about.team.t3.name">Andreea M.</h3><p class="work-meta" data-i18n="about.team.t3.role"></p><p data-i18n="about.team.t3.bio"></p></article>
+        <article class="feature glass-panel" data-reveal data-tilt><h3 data-i18n="about.team.t4.name">Bianca T.</h3><p class="work-meta" data-i18n="about.team.t4.role"></p><p data-i18n="about.team.t4.bio"></p></article>
+      </div>
+    </section>
+
+    <section class="section stats-section" id="about-stats">
+      <div class="stats glass-panel stats--4" data-reveal>
+        <div class="stat" data-count="200" data-count-suffix="+"><span class="stat-num">0</span><span class="stat-label" data-i18n="about.stats.s1"></span></div>
+        <div class="stat" data-count="9"><span class="stat-num">0</span><span class="stat-label" data-i18n="about.stats.s2"></span></div>
+        <div class="stat" data-count="14"><span class="stat-num">0</span><span class="stat-label" data-i18n="about.stats.s3"></span></div>
+        <div class="stat" data-count="100" data-count-suffix="%"><span class="stat-num">0</span><span class="stat-label" data-i18n="about.stats.s4"></span></div>
+      </div>
+    </section>
+
+    <section class="section differentiate-section" id="proces">
+      <div class="section-header" data-reveal>
+        <span class="section-tag" data-i18n="about.process.tag">CUM LUCRĂM</span>
+        <h2 class="section-title gradient-text" data-i18n="about.process.title">De la primul telefon la cheile în mână</h2>
+        <p class="section-intro" data-reveal data-i18n="about.process.intro"></p>
+      </div>
+      <div class="diff-cards">
+        <article class="diff-card glass-panel" data-reveal data-tilt><span class="diff-num">01</span><h3 data-i18n="about.process.p1.title"></h3><p data-i18n="about.process.p1.desc"></p></article>
+        <article class="diff-card glass-panel" data-reveal data-tilt><span class="diff-num">02</span><h3 data-i18n="about.process.p2.title"></h3><p data-i18n="about.process.p2.desc"></p></article>
+        <article class="diff-card glass-panel" data-reveal data-tilt><span class="diff-num">03</span><h3 data-i18n="about.process.p3.title"></h3><p data-i18n="about.process.p3.desc"></p></article>
+        <article class="diff-card glass-panel" data-reveal data-tilt><span class="diff-num">04</span><h3 data-i18n="about.process.p4.title"></h3><p data-i18n="about.process.p4.desc"></p></article>
+      </div>
+    </section>
+
+    <section class="section cta-section" id="about-cta">
+      <div class="cta glass-panel immersive-panel" data-reveal>
+        <span class="section-tag" data-i18n="about.final.tag">URMĂTORUL PROIECT</span>
+        <h2 class="cta-title section-title gradient-text" data-i18n="about.final.title">Ne potrivim?</h2>
+        <p data-i18n="about.final.sub"></p>
+        <div class="hero-cta" style="margin-top: 1.5rem; justify-content: center;">
+          <a href="index.html#contact" class="btn btn-primary btn-lg" data-i18n="about.final.cta1">Cere o ofertă</a>
+          <a href="index.html#work" class="btn btn-glass" data-i18n="about.final.cta2">Vezi proiectele recente</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script src="js/site-config.js"></script>
+  <script src="js/i18n-config.js"></script>
+  <script src="js/newsletter.js"></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/cookies.js" defer></script>
+  <script src="js/analytics.js" defer></script>
+  <script src="js/footer.js" defer></script>
+  <script src="js/main.js" type="module"></script>
+</body>
+</html>

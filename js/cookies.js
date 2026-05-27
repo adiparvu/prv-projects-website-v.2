@@ -63,7 +63,7 @@
       e.preventDefault();
       alert(
         window.PRV_I18N?.strings?.["cookie.policyText"] ||
-          "PRV Projects: datele sunt procesate conform GDPR. Contact: hello@prvprojects.com"
+          "PRV Projects: datele sunt procesate conform GDPR. Contact: hello@prvprojects.be"
       );
     });
 

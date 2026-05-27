@@ -70,7 +70,7 @@
       <div class="footer-grid-top">
         <div class="footer-brand">
           <a href="${base}/index.html#hero" class="footer-logo">PRV <span>Projects</span></a>
-          <p class="footer-tagline" data-i18n="footer.tagline">Partenerul tău digital pentru branduri care vor să iasă în evidență.</p>
+          <p class="footer-tagline" data-i18n="footer.tagline">Partenerul tău pentru renovări interioare premium. Bruxelles și împrejurimi.</p>
         </div>
         <div class="footer-newsletter-col">
           <span class="footer-heading" data-i18n="footer.newsletter.title">Newsletter</span>
@@ -93,9 +93,10 @@
             <a href="${base}/index.html#work" data-i18n="nav.work">Proiecte</a>
             <a href="${base}/index.html#differentiate" data-i18n="footer.why">De ce noi</a>
             <a href="${base}/blog/index.html" data-i18n="nav.blog">Blog</a>
+            <a href="${base}/despre-noi.html" data-i18n="nav.about">Despre noi</a>
             <a href="${base}/index.html#contact" data-i18n="nav.contact">Contact</a>
           </nav>
-          <a href="mailto:hello@prvprojects.com" class="footer-email">hello@prvprojects.com</a>
+          <a href="mailto:hello@prvprojects.be" class="footer-email">hello@prvprojects.be</a>
         </div>
       </div>
       <div class="footer-social-row">
@@ -114,7 +115,7 @@
         </div>
       </div>
       <div class="footer-meta">
-        <span class="footer-copy">© <span class="footer-year"></span> — <span data-i18n="footer.craft">Crafted with liquid glass</span></span>
+        <span class="footer-copy">© <span class="footer-year"></span> PRV Projects · <span data-i18n="footer.craft">Renovări care durează</span></span>
       </div>
     </div>
   `;

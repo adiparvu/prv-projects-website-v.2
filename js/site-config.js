@@ -6,7 +6,7 @@ window.PRV_CONFIG = {
   gaMeasurementId: "",
 
   /** Email unde primești abonările newsletter + mesajele */
-  contactEmail: "hello@prvprojects.com",
+  contactEmail: "hello@prvprojects.be",
 
   newsletter: {
     /**
@@ -14,7 +14,7 @@ window.PRV_CONFIG = {
      * formspree | mailchimp | netlify | local
      */
     provider: "formsubmit",
-    formsubmitEmail: "hello@prvprojects.com",
+    formsubmitEmail: "hello@prvprojects.be",
 
     formspreeId: "",
     mailchimpAction: "",

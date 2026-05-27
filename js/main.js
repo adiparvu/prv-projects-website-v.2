@@ -298,6 +298,7 @@ function initCounters() {
         if (!entry.isIntersecting) return;
         const stat = entry.target;
         const target = parseInt(stat.dataset.count, 10);
+        const suffix = stat.dataset.countSuffix || "";
         const numEl = stat.querySelector(".stat-num");
         const duration = 1800;
         const start = performance.now();
@@ -308,7 +309,8 @@ function initCounters() {
 
         function frame(now) {
           const p = Math.min((now - start) / duration, 1);
-          numEl.textContent = Math.round(easeOut(p) * target);
+          const n = Math.round(easeOut(p) * target);
+          numEl.textContent = p >= 1 ? `${n}${suffix}` : String(n);
           if (p < 1) requestAnimationFrame(frame);
         }
 

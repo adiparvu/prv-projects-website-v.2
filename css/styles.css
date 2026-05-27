@@ -1910,6 +1910,16 @@ body.pointer-active .cursor-glow {
   text-align: center;
 }
 
+.stats.stats--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 900px) {
+  .stats.stats--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .stat-num {
   display: block;
   font-size: clamp(2.5rem, 5vw, 3.5rem);
@@ -1940,6 +1950,49 @@ body.pointer-active .cursor-glow {
   font-size: 1.5rem;
   margin-bottom: 1rem;
   color: var(--accent-1);
+}
+
+.feature-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: block;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.feature-icon svg.fill-icon {
+  fill: currentColor;
+  stroke: none;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.about-prose {
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.about-prose p + p {
+  margin-top: 1rem;
 }
 
 .feature h3 {

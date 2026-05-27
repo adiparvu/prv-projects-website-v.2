@@ -1,8 +1,10 @@
 /** Copiază ca site-config.js și completează valorile */
 window.PRV_CONFIG = {
   gaMeasurementId: "G-XXXXXXXXXX",
+  contactEmail: "hello@prvprojects.be",
   newsletter: {
-    provider: "formspree",
+    provider: "formsubmit",
+    formsubmitEmail: "hello@prvprojects.be",
     formspreeId: "your_form_id",
     mailchimpAction: "https://xxx.list-manage.com/subscribe/post?u=...&id=...",
     mailchimpHiddenName: "b_xxxxxxxx",
