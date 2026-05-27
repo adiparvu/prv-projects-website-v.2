@@ -346,9 +346,7 @@ function initForm() {
     const input = e.target.querySelector('input[type="email"]');
     const btn = e.target.querySelector("button");
     const original = btn.textContent;
-    const thanks =
-      window.PRV_I18N?.strings?.[window.PRV_I18N.getLang()]?.["form.thanks"] ||
-      "Mulțumim — revenim curând";
+    const thanks = window.PRV_I18N?.strings?.["form.thanks"] || "Mulțumim — revenim curând";
     btn.textContent = thanks;
     btn.disabled = true;
     input.value = "";

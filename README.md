@@ -1,6 +1,25 @@
 # PRV Projects — Website v2
 
-Site **liquid glass** / glassmorphism cu teme **Dark · Light · System**, efecte immersive și limba **RO / EN**.
+Site **liquid glass** / glassmorphism cu teme **Dark · Light · System**, efecte immersive și **12 limbi**.
+
+### Limbi suportate
+
+| Cod | Limbă |
+|-----|--------|
+| RO | Română |
+| EN | Engleză |
+| NL | Neerlandeză |
+| FR | Franceză |
+| DE | Germană |
+| PL | Poloneză |
+| ES | Spaniolă |
+| IT | Italiană |
+| TR | Turcă |
+| AR | Arabă (RTL) |
+| RU | Rusă |
+| UK | Ucraineană |
+
+Selector în meniu → listă completă cu nume native.
 
 ## Vizionare internațională
 

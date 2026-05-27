@@ -1,238 +1,188 @@
 /**
- * PRV Projects — RO / EN translations
+ * PRV Projects — 12 languages i18n
  */
 (function () {
   const STORAGE_LANG = "prv-lang";
+  const DEFAULT_LANG = "ro";
+  const cache = {};
 
-  const strings = {
-    ro: {
-      "nav.services": "Servicii",
-      "nav.work": "Proiecte",
-      "nav.why": "De ce noi",
-      "nav.about": "Despre",
-      "nav.contact": "Contact",
-      "nav.cta": "Hai să vorbim",
-      "hero.eyebrow": "Design digital · Liquid glass",
-      "hero.line1": "Construim",
-      "hero.line2": "experiențe",
-      "hero.line3": "care prind viață.",
-      "hero.sub":
-        "Suntem studioul care transformă branduri ambițioase în experiențe digitale de top. Design liquid glass, strategie clară și execuție care te face să fii ales — nu doar văzut.",
-      "hero.cta1": "Vezi proiectele",
-      "hero.cta2": "Serviciile noastre",
-      "hero.scroll": "Scroll",
-      "card1.label": "Mișcare",
-      "card1.title": "Adâncime fluidă",
-      "card1.desc": "Parallax & fizică spring",
-      "card2.label": "Sticlă",
-      "card2.title": "Blur lichid",
-      "card2.desc": "Reflexii & refracție",
-      "card3.label": "Temă",
-      "card3.title": "Adaptiv",
-      "card3.desc": "Dark · Light · System",
-      "services.tag": "Ce oferim",
-      "services.title": "Tot ce ai nevoie, sub un singur acoperiș",
-      "services.intro": "De la primul pixel la ultima campanie — construim ecosistemul tău digital ca să crești fără haos.",
-      "services.s1.title": "Web & E-commerce",
-      "services.s1.desc": "Site-uri responsive, rapide, optimizate SEO, cu UI liquid glass.",
-      "services.s2.title": "Branding & Design",
-      "services.s2.desc": "Identitate vizuală, logo, materiale marketing premium.",
-      "services.s3.title": "Marketing digital",
-      "services.s3.desc": "SEO, social media, campanii orientate spre conversie.",
-      "services.s4.title": "Video & Motion",
-      "services.s4.desc": "Producție video, animații, motion graphics immersive.",
-      "work.tag": "Proiecte selectate",
-      "work.title": "Proiecte care",
-      "work.titleEm": "vând povestea ta",
-      "work.intro": "Fiecare case study e o dovadă — nu o promisiune. Apasă pentru detalii, slider foto și ce am făcut diferit.",
-      "work.viewCase": "Vezi case study →",
-      "work.p1": "Fintech care inspiră încredere — dashboard live, glass UI, +38% engagement.",
-      "work.p2": "Sănătate digitală cu empatie — accesibilitate nativă, +61% programări online.",
-      "work.p3": "Immersive WebGL — poveste 3D care triplează timpul pe site.",
-      "work.p4": "E-commerce premium — checkout care convertește, +27% vânzări.",
-      "diff.tag": "De ce PRV Projects",
-      "diff.title": "Nu suntem încă o agenție. Suntem partenerul tău de creștere.",
-      "diff.intro": "Într-o piață plină de template-uri și promisiuni goale, livrăm experiențe care se simt scumpe, clare și memorabile.",
-      "diff.c1.title": "Strategie înainte de pixel",
-      "diff.c1.desc": "Înțelegem obiectivul tău de business — apoi designăm. Nu invers.",
-      "diff.c2.title": "Liquid glass, nu trend de moment",
-      "diff.c2.desc": "Sistem vizual propriu — premium, adaptiv, recognoscibil instant.",
-      "diff.c3.title": "Livrare end-to-end",
-      "diff.c3.desc": "Web, brand, social, video — un singur echipaj, un singur standard de calitate.",
-      "diff.c4.title": "Transparență totală",
-      "diff.c4.desc": "Știi mereu unde suntem, ce urmează și cât costă — fără surprize.",
-      "diff.c5.title": "Obsesie pentru performanță",
-      "diff.c5.desc": "Frumos și rapid — Lighthouse, SEO și conversie sunt parte din design.",
-      "diff.c6.title": "Tu ești următorul proiect",
-      "diff.c6.desc": "Fiecare brand pe care îl lansăm devine referința următorului client. Poți fi tu.",
-      "diff.cta": "Începe colaborarea",
-      "stats.s1": "Proiecte livrate",
-      "stats.s2": "Ani de experiență UI",
-      "stats.s3": "Scoruri Lighthouse",
-      "feat.f1.title": "Sistem liquid glass",
-      "feat.f1.desc": "Blur multi-strat, noise și margini speculare per temă.",
-      "feat.f2.title": "Mișcare immersive",
-      "feat.f2.desc": "Parallax la scroll, butoane magnetice, text reveal.",
-      "feat.f3.title": "Teme inteligente",
-      "feat.f3.desc": "Respectă prefers-color-scheme + override manual.",
-      "cta.line1": "Pregătit pentru",
-      "cta.line2": "ceva fluid?",
-      "cta.sub": "Un mesaj de la tine e începutul unui produs pe care utilizatorii îl vor iubi. Răspundem în 24h — fără obligații.",
-      "cta.placeholder": "tu@companie.ro",
-      "cta.btn": "Începe un proiect",
-      "footer.craft": "Crafted with liquid glass",
-      "footer.tagline": "Partenerul tău digital pentru branduri care vor să iasă în evidență.",
-      "footer.follow": "Urmărește-ne",
-      "footer.more": "Mai multe",
-      "footer.moreSocial": "Mai multe rețele sociale",
-      "footer.explore": "Explorează",
-      "footer.why": "De ce noi",
-      "form.thanks": "Mulțumim — revenim curând",
-      "project.back": "← Proiecte",
-      "project.challenge": "Provocarea",
-      "project.solution": "Soluția PRV",
-      "project.results": "Rezultate",
-      "project.diffTitle": "Ce ne diferențiază pe acest proiect",
-      "project.ctaTitle": "Vrei același nivel de claritate pentru produsul tău?",
-      "project.ctaSub": "Hai să construim împreună o experiență pe care utilizatorii o vor recomanda.",
-      "project.ctaBtn": "Programează un call gratuit",
-      "project.ctaShort": "Lucrează cu noi",
-    },
-    en: {
-      "nav.services": "Services",
-      "nav.work": "Work",
-      "nav.why": "Why us",
-      "nav.about": "About",
-      "nav.contact": "Contact",
-      "nav.cta": "Let's talk",
-      "hero.eyebrow": "Digital craft · Liquid glass",
-      "hero.line1": "We shape",
-      "hero.line2": "immersive",
-      "hero.line3": "experiences.",
-      "hero.sub":
-        "We're the studio that turns ambitious brands into top-tier digital experiences. Liquid glass design, clear strategy, and execution that gets you chosen — not just seen.",
-      "hero.cta1": "Explore work",
-      "hero.cta2": "Our services",
-      "hero.scroll": "Scroll",
-      "card1.label": "Motion",
-      "card1.title": "Fluid depth",
-      "card1.desc": "Parallax & spring physics",
-      "card2.label": "Glass",
-      "card2.title": "Liquid blur",
-      "card2.desc": "Specular highlights & refraction",
-      "card3.label": "Theme",
-      "card3.title": "Adaptive",
-      "card3.desc": "Dark · Light · System",
-      "services.tag": "What we offer",
-      "services.title": "Everything you need, under one roof",
-      "services.intro": "From the first pixel to the last campaign — we build your digital ecosystem so you grow without chaos.",
-      "services.s1.title": "Web & E-commerce",
-      "services.s1.desc": "Fast, responsive, SEO-optimized sites with liquid glass UI.",
-      "services.s2.title": "Branding & Design",
-      "services.s2.desc": "Visual identity, logos, premium marketing materials.",
-      "services.s3.title": "Digital marketing",
-      "services.s3.desc": "SEO, social media, conversion-focused campaigns.",
-      "services.s4.title": "Video & Motion",
-      "services.s4.desc": "Video production, animation, immersive motion graphics.",
-      "work.tag": "Selected work",
-      "work.title": "Projects that",
-      "work.titleEm": "sell your story",
-      "work.intro": "Every case study is proof — not a promise. Tap for details, photo slides, and what we did differently.",
-      "work.viewCase": "View case study →",
-      "work.p1": "Fintech that builds trust — live dashboard, glass UI, +38% engagement.",
-      "work.p2": "Digital health with empathy — native accessibility, +61% online bookings.",
-      "work.p3": "Immersive WebGL — 3D story that triples time on site.",
-      "work.p4": "Premium e-commerce — checkout that converts, +27% sales.",
-      "diff.tag": "Why PRV Projects",
-      "diff.title": "Not just another agency. Your growth partner.",
-      "diff.intro": "In a market full of templates and empty promises, we deliver experiences that feel premium, clear, and memorable.",
-      "diff.c1.title": "Strategy before pixels",
-      "diff.c1.desc": "We understand your business goal — then we design. Not the other way around.",
-      "diff.c2.title": "Liquid glass, not a fad",
-      "diff.c2.desc": "Our own visual system — premium, adaptive, instantly recognizable.",
-      "diff.c3.title": "End-to-end delivery",
-      "diff.c3.desc": "Web, brand, social, video — one crew, one quality bar.",
-      "diff.c4.title": "Full transparency",
-      "diff.c4.desc": "You always know where we are, what's next, and what it costs — no surprises.",
-      "diff.c5.title": "Performance obsession",
-      "diff.c5.desc": "Beautiful and fast — Lighthouse, SEO, and conversion are part of design.",
-      "diff.c6.title": "You're the next project",
-      "diff.c6.desc": "Every brand we launch becomes the next client's reference. It could be you.",
-      "diff.cta": "Start collaborating",
-      "stats.s1": "Projects shipped",
-      "stats.s2": "Years crafting UI",
-      "stats.s3": "Lighthouse scores",
-      "feat.f1.title": "Liquid glass system",
-      "feat.f1.desc": "Multi-layer blur, noise, and specular edges per theme.",
-      "feat.f2.title": "Immersive motion",
-      "feat.f2.desc": "Scroll parallax, magnetic buttons, text reveals.",
-      "feat.f3.title": "Theme intelligence",
-      "feat.f3.desc": "Respects prefers-color-scheme with manual override.",
-      "cta.line1": "Ready for",
-      "cta.line2": "something fluid?",
-      "cta.sub": "A message from you is the start of a product users will love. We reply within 24h — no obligation.",
-      "cta.placeholder": "you@company.com",
-      "cta.btn": "Start a project",
-      "footer.craft": "Crafted with liquid glass",
-      "footer.tagline": "Your digital partner for brands that want to stand out.",
-      "footer.follow": "Follow us",
-      "footer.more": "More",
-      "footer.moreSocial": "More social networks",
-      "footer.explore": "Explore",
-      "footer.why": "Why us",
-      "form.thanks": "Thanks — we'll be in touch",
-      "project.back": "← Projects",
-      "project.challenge": "The challenge",
-      "project.solution": "The PRV solution",
-      "project.results": "Results",
-      "project.diffTitle": "What sets us apart on this project",
-      "project.ctaTitle": "Want the same clarity for your product?",
-      "project.ctaSub": "Let's build an experience users will recommend together.",
-      "project.ctaBtn": "Book a free call",
-      "project.ctaShort": "Work with us",
-    },
-  };
+  function getBasePath() {
+    return /\/projects\//.test(location.pathname) ? ".." : ".";
+  }
 
-  let currentLang = localStorage.getItem(STORAGE_LANG) || "ro";
+  function getLangMeta(code) {
+    return (window.PRV_LANGUAGES || []).find((l) => l.code === code);
+  }
 
-  function applyLang(lang) {
-    currentLang = lang;
-    localStorage.setItem(STORAGE_LANG, lang);
-    document.documentElement.lang = lang;
+  async function loadLocale(code) {
+    if (cache[code]) return cache[code];
+    const base = getBasePath();
+    const res = await fetch(`${base}/js/translations/${code}.json`);
+    if (!res.ok) throw new Error(`Locale ${code} not found`);
+    const data = await res.json();
+    cache[code] = data;
+    return data;
+  }
 
+  function detectInitialLang() {
+    const saved = localStorage.getItem(STORAGE_LANG);
+    if (saved) return saved;
+    const codes = (window.PRV_LANGUAGES || []).map((l) => l.code);
+    const browser = (navigator.language || "").toLowerCase();
+    const match = codes.find((c) => browser.startsWith(c));
+  return match || DEFAULT_LANG;
+  }
+
+  let currentLang = detectInitialLang();
+  let strings = {};
+
+  function applyToDOM() {
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
-      const text = strings[lang]?.[key];
+      const text = strings[key];
       if (text != null) el.textContent = text;
     });
 
     document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
       const key = el.getAttribute("data-i18n-placeholder");
-      const text = strings[lang]?.[key];
-      if (text != null) el.placeholder = text;
+      if (strings[key] != null) el.placeholder = strings[key];
     });
 
     document.querySelectorAll("[data-i18n-title]").forEach((el) => {
       const key = el.getAttribute("data-i18n-title");
-      const text = strings[lang]?.[key];
-      if (text != null) el.title = text;
+      if (strings[key] != null) el.title = strings[key];
     });
 
-    const toggle = document.getElementById("lang-toggle");
-    if (toggle) toggle.textContent = lang.toUpperCase();
-
-    window.dispatchEvent(new CustomEvent("prv:langchange", { detail: { lang } }));
+    document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-aria");
+      if (strings[key] != null) el.setAttribute("aria-label", strings[key]);
+    });
   }
 
-  document.getElementById("lang-toggle")?.addEventListener("click", () => {
-    applyLang(currentLang === "ro" ? "en" : "ro");
-  });
+  function updatePickerUI() {
+    const trigger = document.getElementById("lang-trigger");
+    const meta = getLangMeta(currentLang);
+    if (trigger && meta) {
+      trigger.querySelector(".lang-trigger-code").textContent = meta.flag;
+      trigger.querySelector(".lang-trigger-name").textContent = meta.native;
+    }
+    document.querySelectorAll(".lang-option").forEach((btn) => {
+      const active = btn.dataset.lang === currentLang;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-selected", String(active));
+    });
+  }
 
-  window.PRV_I18N = { applyLang, strings, getLang: () => currentLang };
+  function setDocumentDir(lang) {
+    const meta = getLangMeta(lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = meta?.rtl ? "rtl" : "ltr";
+    document.body.classList.toggle("is-rtl", !!meta?.rtl);
+  }
+
+  async function applyLang(lang, { save = true } = {}) {
+    const codes = (window.PRV_LANGUAGES || []).map((l) => l.code);
+    if (!codes.includes(lang)) lang = DEFAULT_LANG;
+
+    try {
+      strings = await loadLocale(lang);
+    } catch {
+      strings = await loadLocale(DEFAULT_LANG);
+      lang = DEFAULT_LANG;
+    }
+
+    if (!strings["project.ctaTitle"]) {
+      strings = { ...(await loadLocale(DEFAULT_LANG)), ...strings };
+    }
+
+    currentLang = lang;
+    if (save) localStorage.setItem(STORAGE_LANG, lang);
+    setDocumentDir(lang);
+    applyToDOM();
+    updatePickerUI();
+    window.dispatchEvent(new CustomEvent("prv:langchange", { detail: { lang, strings } }));
+  }
+
+  function buildLangPicker() {
+    const host = document.getElementById("lang-picker");
+    if (!host || !window.PRV_LANGUAGES) return;
+
+    host.innerHTML = `
+      <div class="lang-picker">
+        <button type="button" class="lang-trigger glass-inset" id="lang-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="lang-trigger-code">RO</span>
+          <span class="lang-trigger-name">Română</span>
+          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="lang-dropdown glass-panel" id="lang-dropdown" role="listbox" hidden>
+          <p class="lang-dropdown-title" data-i18n="lang.choose">Alege limba</p>
+          <div class="lang-options"></div>
+        </div>
+      </div>
+    `;
+
+    const options = host.querySelector(".lang-options");
+    window.PRV_LANGUAGES.forEach((l) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "lang-option";
+      btn.role = "option";
+      btn.dataset.lang = l.code;
+      btn.innerHTML = `<span class="lang-option-flag">${l.flag}</span><span class="lang-option-native">${l.native}</span><span class="lang-option-label">${l.label}</span>`;
+      btn.addEventListener("click", () => {
+        applyLang(l.code);
+        closeDropdown();
+      });
+      options.appendChild(btn);
+    });
+
+    const trigger = host.querySelector("#lang-trigger");
+    const dropdown = host.querySelector("#lang-dropdown");
+
+    function openDropdown() {
+      dropdown.hidden = false;
+      trigger.setAttribute("aria-expanded", "true");
+      host.classList.add("is-open");
+    }
+
+    function closeDropdown() {
+      dropdown.hidden = true;
+      trigger.setAttribute("aria-expanded", "false");
+      host.classList.remove("is-open");
+    }
+
+    trigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dropdown.hidden ? openDropdown() : closeDropdown();
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!host.contains(e.target)) closeDropdown();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeDropdown();
+    });
+  }
+
+  window.PRV_I18N = {
+    applyLang,
+    getLang: () => currentLang,
+    get strings() {
+      return strings;
+    },
+    loadLocale,
+  };
+
+  async function init() {
+    buildLangPicker();
+    await applyLang(currentLang, { save: false });
+    document.addEventListener("prv:footer-ready", () => applyLang(currentLang));
+  }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => applyLang(currentLang));
+    document.addEventListener("DOMContentLoaded", init);
   } else {
-    applyLang(currentLang);
+    init();
   }
 })();

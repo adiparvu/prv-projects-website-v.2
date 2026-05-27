@@ -15,7 +15,7 @@
   <header class="nav glass-panel">
     <a href="../index.html#hero" class="logo"><span class="logo-mark">PRV</span><span class="logo-type">Projects</span></a>
     <nav class="nav-links"><a href="../index.html#work" data-i18n="nav.work">Proiecte</a><a href="../index.html#contact" data-i18n="nav.contact">Contact</a></nav>
-    <div class="nav-actions"><button type="button" class="lang-btn glass-inset" id="lang-toggle">RO</button><a href="../index.html#contact" class="btn btn-primary" data-i18n="project.ctaShort">Lucrează cu noi</a></div>
+    <div class="nav-actions"><div id="lang-picker" class="lang-picker-host"></div><a href="../index.html#contact" class="btn btn-primary" data-i18n="project.ctaShort">Lucrează cu noi</a></div>
   </header>
   <main class="project-main">
     <nav class="breadcrumb glass-inset"><a href="../index.html#work" data-i18n="project.back">← Proiecte</a><span>/</span><span>Nova Health</span></nav>
@@ -46,12 +46,13 @@
       </div>
     </section>
     <section class="project-cta glass-panel immersive-panel" data-reveal>
-      <h2 data-i18n="project.ctaTitle">Ai un produs în healthcare sau wellbeing?</h2>
-      <p data-i18n="project.ctaSub">Construim experiențe în care oamenii au încredere să se îngrijească de ei înșiși.</p>
+      <h2 data-i18n="p.nova.ctaTitle">Ai un produs în healthcare sau wellbeing?</h2>
+      <p data-i18n="p.nova.ctaSub">Construim experiențe în care oamenii au încredere să se îngrijească de ei înșiși.</p>
       <a href="../index.html#contact" class="btn btn-primary btn-lg" data-i18n="project.ctaBtn">Programează un call gratuit</a>
     </section>
   </main>
   <footer id="site-footer"></footer>
+  <script src="../js/i18n-config.js"></script>
   <script src="../js/i18n.js" defer></script>
   <script src="../js/footer.js" defer></script>
   <script type="module">import { initProjectSlider } from "../js/project-slider.js"; import "../js/main.js"; initProjectSlider();</script>
