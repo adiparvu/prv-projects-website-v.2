@@ -1,6 +1,7 @@
 /** PRV Shop — bootstrap */
 
 import { initEcosystem } from "../prv-platform.js";
+import { wireShopNavLinks } from "../site-paths.js";
 import { mountShopLayout, getMainEl } from "./layout.js";
 import { loadCatalog } from "./catalog.js";
 import { renderHome } from "./pages/home.js";
@@ -23,6 +24,7 @@ function getParam(name) {
 
 export async function bootShop(page) {
   initEcosystem();
+  wireShopNavLinks();
   document.body.classList.add("shop-body");
   mountShopLayout({ active: "shop" });
 

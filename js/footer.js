@@ -2,8 +2,18 @@
  * PRV Projects — Footer + social (primary + slider for more)
  */
 (function () {
-  const isNested = /\/projects\//.test(location.pathname) || /\/blog\//.test(location.pathname);
-  const base = isNested ? ".." : ".";
+  function footerBase() {
+    const path = location.pathname;
+    if (path.includes("/shop/")) {
+      const rest = path.split("/shop/")[1] || "";
+      const dirs = rest.split("/").filter((s) => s && !/\.html?$/i.test(s));
+      const levels = dirs.length + 1;
+      return levels <= 1 ? ".." : Array(levels).fill("..").join("/");
+    }
+    if (/\/projects\//.test(path) || /\/blog\//.test(path)) return "..";
+    return ".";
+  }
+  const base = footerBase();
 
   const socialPrimary = [
     {
@@ -95,6 +105,7 @@
         <div class="footer-col footer-nav-col">
           <span class="footer-heading" data-i18n="footer.explore">Explorează</span>
           <nav class="footer-links" aria-label="Footer">
+            <a href="${base === "." ? "shop/index.html" : `${base}/shop/index.html`}" data-i18n="nav.shop">Shop</a>
             <a href="${base}/servicii.html" data-i18n="nav.services">Servicii</a>
             <a href="${base}/proiecte.html" data-i18n="nav.work">Proiecte</a>
             <a href="${base}/de-ce-noi.html" data-i18n="footer.why">De ce noi</a>
