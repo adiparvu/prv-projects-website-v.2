@@ -2282,6 +2282,13 @@ body.pointer-active .cursor-glow {
 }
 
 @media (max-width: 768px) {
+  /* Header centered on mobile/tablet */
+  .nav {
+    position: fixed;
+    justify-content: center;
+    padding: 0 0.75rem;
+  }
+
   .nav-links,
   .nav-actions .btn-primary {
     display: none;
@@ -2289,6 +2296,23 @@ body.pointer-active .cursor-glow {
 
   .nav-toggle {
     display: flex;
+  }
+
+  /* Keep logo centered, toggle left, actions right */
+  .nav { position: relative; }
+
+  .nav-toggle {
+    margin-right: auto;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav-actions {
+    margin-left: auto;
   }
 
   .nav.nav-open .nav-links {
