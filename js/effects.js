@@ -3,7 +3,8 @@
  */
 
 const NAV_OFFSET = 88;
-const STAGGER_MS = 100;
+const STAGGER_BASE_MS = 80;
+const STAGGER_STEP_MS = 10; /* 80, 90, 100, 110, 120 ms */
 
 function prefersReduced() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -43,6 +44,8 @@ function initStagger() {
     const children = [...grid.children];
     children.forEach((child, i) => {
       child.style.setProperty("--stagger-i", String(i));
+      const delay = STAGGER_BASE_MS + (i % 5) * STAGGER_STEP_MS;
+      child.style.setProperty("--stagger-delay", `${delay}ms`);
     });
 
     const observer = new IntersectionObserver(
@@ -117,12 +120,14 @@ function observeIconDraw(svg) {
   observer.observe(svg);
 }
 
+/** Iconițe servicii — stroke-draw la scroll */
 function initIconDraw() {
-  document.querySelectorAll(".feature-icon svg").forEach((svg) => {
-    if (svg.classList.contains("fx-icon-draw") || svg.classList.contains("fx-icon-filled")) {
+  document.querySelectorAll(".services-grid .feature-icon svg").forEach((svg) => {
+    if (svg.dataset.fxIconReady === "1") {
       observeIconDraw(svg);
       return;
     }
+    svg.dataset.fxIconReady = "1";
     const hasStroke = svg.querySelector('[stroke]:not([stroke="none"])');
     const onlyFill = svg.querySelector("path[fill]:not([fill='none'])");
     if (hasStroke || svg.getAttribute("fill") === "none") {
@@ -132,21 +137,6 @@ function initIconDraw() {
     } else {
       prepareStrokeIcon(svg);
     }
-    observeIconDraw(svg);
-  });
-
-  document.querySelectorAll(".nav-links a svg").forEach((svg) => {
-    svg.classList.add("fx-nav-icon");
-    const paths = svg.querySelectorAll("path, circle, line");
-    paths.forEach((el) => {
-      try {
-        const len = el.getTotalLength?.() || 48;
-        el.style.strokeDasharray = String(len);
-        el.style.strokeDashoffset = String(len);
-      } catch {
-        /* ignore */
-      }
-    });
     observeIconDraw(svg);
   });
 }
@@ -183,9 +173,7 @@ function initRipple() {
 
 // ——— 11. FAQ polish ———
 function initFaqFx() {
-  document.querySelectorAll(".faq-item.fx-faq").forEach((item) => {
-    item.classList.add("fx-faq");
-  });
+  document.querySelectorAll(".faq-item").forEach((item) => item.classList.add("fx-faq"));
 }
 
 // ——— 14. CTA particles ———

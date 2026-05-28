@@ -5,8 +5,6 @@
 
 import { initProjectSlider } from "./project-slider.js";
 import { initEffects, showFormSuccess } from "./effects.js";
-import { initHeroVideo } from "./hero-video.js";
-import { initHeroGlass3d } from "./hero-glass-3d.js";
 
 const STORAGE_KEY = "prv-theme";
 const DEFAULT_THEME = "light";
@@ -716,7 +714,5 @@ initMaxVisibleCarousels();
 initMagneticButtons();
 initForm();
 initEffects();
-initHeroVideo();
-initHeroGlass3d();
 
 if (document.querySelector("[data-slider]")) initProjectSlider();

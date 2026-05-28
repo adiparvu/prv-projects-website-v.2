@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="css/prv-brand.css" />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/effects.css" />
-  <link rel="stylesheet" href="css/hero-premium.css" />
   <script src="js/theme-init.js"></script>
   <script src="js/site-config.js"></script>
 </head>
@@ -42,7 +41,7 @@
       <h1 class="section-title gradient-text">Încearcă fiecare animație</h1>
       <p class="section-intro">
         Pagină de test — poți compara efectele înainte să le activăm pe homepage.
-        <strong><a href="index.html">Homepage complet</a></strong> — video hero + WebGL glass + iconițe animate.
+        <strong><a href="index.html">Homepage complet</a></strong> — toate efectele active (fără video / WebGL).
       </p>
     </section>
 
@@ -60,9 +59,6 @@
       <a href="#fx-11">11 FAQ</a>
       <a href="#fx-12">12 Temă</a>
       <a href="#fx-13">13 Particule</a>
-      <a href="#fx-14">14 Video</a>
-      <a href="#fx-15">15 WebGL</a>
-      <a href="#fx-16">16 Iconițe</a>
     </nav>
 
     <div class="fx-demo-list">
@@ -101,12 +97,12 @@
 
       <article class="fx-demo-block glass-panel" id="fx-4">
         <span class="fx-demo-num">Efect 4</span>
-        <h2>Icon stroke-draw</h2>
-        <p class="fx-demo-desc">SVG desenat la scroll în viewport.</p>
-        <div class="fx-demo-preview features" style="max-width:280px">
+        <h2>Iconițe servicii — stroke-draw</h2>
+        <p class="fx-demo-desc">SVG desenat la scroll (secțiunea Servicii pe site).</p>
+        <div class="fx-demo-preview features services-grid" style="max-width:320px">
           <article class="feature glass-panel">
             <div class="feature-icon">
-              <svg class="fx-icon-draw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                 <polyline points="9 22 9 12 15 12 15 22"/>
               </svg>
@@ -211,50 +207,6 @@
         <p class="fx-demo-desc">Treci cu mouse-ul peste butonul primary (#0071e3).</p>
         <a href="contact.html" class="btn btn-primary btn-lg fx-particles">Cere o ofertă</a>
       </article>
-
-      <article class="fx-demo-block glass-panel" id="fx-14">
-        <span class="fx-demo-num">Efect 14</span>
-        <h2>Video hero — șantier / finisaj</h2>
-        <p class="fx-demo-desc">Mut, loop, overlay glass. Înlocuiește clipul în <code>assets/video/</code> + <code>site-config.js</code>.</p>
-        <div class="fx-demo-preview hero-showcase" style="height:280px">
-          <div class="hero-video-wrap" data-hero-video>
-            <video class="hero-video" muted loop playsinline autoplay preload="metadata"
-              poster="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80"></video>
-            <div class="hero-video-overlay" aria-hidden="true"></div>
-            <div class="hero-video-glass" aria-hidden="true"></div>
-            <span class="hero-video-badge">Șantier · finisaj</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="fx-demo-block glass-panel" id="fx-15">
-        <span class="fx-demo-num">Efect 15</span>
-        <h2>WebGL / Three.js — material glass 3D</h2>
-        <p class="fx-demo-desc">Panou sticlă + sferă (transmission). Mișcă mouse-ul peste canvas (desktop).</p>
-        <div class="fx-demo-preview hero-showcase" style="height:300px">
-          <canvas id="hero-glass-canvas" class="hero-glass-canvas" style="position:relative;inset:auto;width:100%;height:100%;transform:none"></canvas>
-        </div>
-      </article>
-
-      <article class="fx-demo-block glass-panel" id="fx-16">
-        <span class="fx-demo-num">Efect 16</span>
-        <h2>Animație pe toate iconițele</h2>
-        <p class="fx-demo-desc">Stroke-draw sau pop la scroll + respirație discretă. Nav: hover în header.</p>
-        <div class="fx-demo-preview features" style="grid-template-columns:repeat(3,1fr);gap:0.75rem">
-          <article class="feature glass-panel">
-            <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
-            <h3>Fill</h3>
-          </article>
-          <article class="feature glass-panel">
-            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div>
-            <h3>Stroke</h3>
-          </article>
-          <article class="feature glass-panel">
-            <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 .5-5.5 4.5 1.8 7.5L12 18l-6.3 3.5L7.5 14 2 9.5 9 9l3-7z"/></svg></div>
-            <h3>Star</h3>
-          </article>
-        </div>
-      </article>
     </div>
   </main>
 
@@ -267,12 +219,7 @@
   <script src="js/faq.js" defer></script>
   <script type="module">
     import { showFormSuccess } from "./js/effects.js";
-    import { initHeroVideo } from "./js/hero-video.js";
-    import { initHeroGlass3d } from "./js/hero-glass-3d.js";
     import "./js/main.js";
-
-    initHeroVideo();
-    initHeroGlass3d();
 
     document.getElementById("fx-demo-form-btn")?.addEventListener("click", (e) => {
       showFormSuccess(e.currentTarget, "Mulțumim — revenim în 24h");
