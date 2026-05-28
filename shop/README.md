@@ -2,6 +2,8 @@
 
 Premium ecommerce layer for PRV Projects — same liquid-glass design system as the marketing site, with an airier, product-first layout and trust-focused checkout.
 
+Part of the **unified web + mobile ecosystem** (App Store / Google Play intent). See `docs/PRODUCT_ECOSYSTEM.md` and `js/api/client.js`.
+
 ## Public routes (static)
 
 | Route | File |
@@ -25,8 +27,11 @@ Legacy `shop.html` redirects to `shop/index.html`.
 In `js/site-config.js`:
 
 ```js
+product: {
+  api: { baseUrl: "https://api.prvprojects.be" }, // all surfaces (web + native)
+},
 shop: {
-  apiBase: "", // e.g. "https://api.prvprojects.be"
+  apiBase: "", // optional override
   stripePublishableKey: "", // pk_live_...
   currency: "EUR",
   locale: "ro-BE",

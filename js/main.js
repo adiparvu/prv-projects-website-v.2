@@ -5,6 +5,7 @@
 
 import { initProjectSlider } from "./project-slider.js";
 import { initEffects, showFormSuccess } from "./effects.js";
+import { initEcosystem } from "./prv-platform.js";
 
 const STORAGE_KEY = "prv-theme";
 const DEFAULT_THEME = "light";
@@ -702,6 +703,7 @@ document.addEventListener("prv:footer-ready", () => {
   });
 });
 
+initEcosystem();
 initTheme();
 initLiquidCanvas();
 initCursorGlow();

@@ -1,0 +1,85 @@
+/* PRV — cross-platform ecosystem (web · PWA · native shells) */
+
+/* Safe areas for notched devices & standalone PWA */
+@supports (padding: max(0px)) {
+  body.prv-native-shell .nav,
+  body.prv-platform-pwa .nav,
+  body.shop-body .shop-header {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  body.shop-body .shop-header {
+    padding-top: max(0.55rem, env(safe-area-inset-top));
+  }
+
+  body.prv-native-shell .shop-shell,
+  body.prv-platform-pwa .shop-shell {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .prv-install-bar {
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    left: max(1rem, env(safe-area-inset-left));
+    right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Touch-friendly commerce & nav */
+@media (max-width: 768px) {
+  body.prv-mobile .btn,
+  body.prv-mobile .shop-cart-btn,
+  body.prv-mobile .shop-account-nav a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  body.prv-mobile .shop-pay-opt {
+    min-height: 48px;
+  }
+}
+
+/* PWA install bar */
+.prv-install-bar {
+  position: fixed;
+  z-index: 500;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 28rem;
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+
+.prv-install-bar p {
+  margin: 0;
+  flex: 1 1 12rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.prv-install-bar-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Reduce motion globally when requested */
+@media (prefers-reduced-motion: reduce) {
+  body.prv-mobile .orb,
+  body.prv-mobile .liquid-canvas {
+    display: none;
+  }
+}
+
+/* Native shell: lighter effects for battery */
+body.prv-native-shell .liquid-canvas {
+  opacity: 0.2;
+}
+
+body.prv-native-shell .cursor-glow {
+  display: none;
+}

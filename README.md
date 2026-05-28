@@ -2,6 +2,18 @@
 
 Site **liquid glass** / glassmorphism cu teme **Dark · Light · System**, efecte immersive și **12 limbi**.
 
+## Ecosistem produs (web + mobil)
+
+PRV este construit ca **ecosistem unificat web + mobil**, cu intenția de livrare în **App Store** și **Google Play** — nu doar ca dashboard desktop.
+
+| Strat | Locație |
+|-------|---------|
+| Arhitectură | [`docs/PRODUCT_ECOSYSTEM.md`](docs/PRODUCT_ECOSYSTEM.md) |
+| Platformă (web / PWA / iOS / Android) | `js/prv-platform.js` |
+| API unificat | `js/api/client.js` |
+| Shop | [`shop/`](shop/) |
+| App-uri native (viitor) | [`apps/README.md`](apps/README.md) |
+
 ### Limbi suportate
 
 | Cod | Limbă |

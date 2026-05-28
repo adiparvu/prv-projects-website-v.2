@@ -1,5 +1,6 @@
 /**
  * PRV Projects — Site configuration (configurat)
+ * @see docs/PRODUCT_ECOSYSTEM.md — unified web + mobile (App Store / Play)
  */
 window.PRV_CONFIG = {
   /** Google Analytics 4 — adaugă ID-ul tău G-... din analytics.google.com */
@@ -40,7 +41,29 @@ window.PRV_CONFIG = {
   effectsEnabled: true,
 
   /**
+   * Product ecosystem — one PRV across web, PWA, iOS, Android
+   * Native shells set window.PRVNative; see apps/README.md
+   */
+  product: {
+    vision: "unified-web-mobile",
+    targets: ["web", "pwa", "ios", "android"],
+    api: {
+      baseUrl: "", // unified backend, e.g. https://api.prvprojects.be
+      version: "v1",
+    },
+    native: {
+      ios: { bundleId: "be.prvprojects.app", appStoreUrl: "" },
+      android: { packageName: "be.prvprojects.app", playStoreUrl: "" },
+    },
+    pwa: {
+      enabled: true,
+      installPrompt: true,
+    },
+  },
+
+  /**
    * PRV Shop — ecommerce (demo: localStorage; live: apiBase + Stripe)
+   * apiBase overrides product.api.baseUrl when set
    * @see shop/README.md
    */
   shop: {
