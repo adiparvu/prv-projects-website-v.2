@@ -2302,17 +2302,20 @@ body.pointer-active .cursor-glow {
 
   /* Keep logo centered, toggle left, actions right */
   .nav-toggle {
+    grid-column: 1;
     justify-self: start;
     margin: 0;
   }
 
   .logo {
+    grid-column: 2;
     position: static;
     transform: none;
     justify-self: center;
   }
 
   .nav-actions {
+    grid-column: 3;
     justify-self: end;
     margin: 0;
   }
