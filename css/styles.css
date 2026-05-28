@@ -1191,6 +1191,47 @@ body.pointer-active .cursor-glow {
   grid-auto-columns: max-content;
 }
 
+.social-select {
+  position: relative;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-secondary);
+  padding: 0 40px 0 14px;
+  display: flex;
+  align-items: center;
+}
+
+.social-select__native {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  outline: none;
+  width: 100%;
+  cursor: pointer;
+  padding: 0;
+}
+
+.social-select__chev {
+  position: absolute;
+  right: 12px;
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.social-select:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-1);
+}
+
 .social-more-btn {
   display: inline-flex;
   align-items: center;

@@ -106,14 +106,14 @@
           ${
             socialMore.length
               ? `<div class="social-more-wrap">
-                  <div class="prv-carousel" style="padding: .65rem .75rem;">
-                    <div class="prv-carousel-track" data-social-track aria-label="Mai multe rețele sociale">
-                      ${moreHtml}
-                    </div>
-                    <div class="prv-carousel-controls" style="margin-top:.5rem;">
-                      <button type="button" class="btn btn-glass" data-social-prev aria-label="Înapoi">←</button>
-                      <button type="button" class="btn btn-glass" data-social-next aria-label="Înainte">→</button>
-                    </div>
+                  <div class="social-select glass-inset">
+                    <svg class="social-select__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                    <select class="social-select__native" data-social-select aria-label="Alege o platformă">
+                      <option value="" selected disabled>Mai multe rețele</option>
+                      ${socialMore
+                        .map((s) => `<option value="${s.href}">${s.label}</option>`)
+                        .join("")}
+                    </select>
                   </div>
                 </div>`
               : ""
@@ -129,19 +129,13 @@
   const yearEl = footer.querySelector(".footer-year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  const socialTrack = footer.querySelector("[data-social-track]");
-  const socialPrev = footer.querySelector("[data-social-prev]");
-  const socialNext = footer.querySelector("[data-social-next]");
-
-  function scrollSocial(dir) {
-    if (!socialTrack) return;
-    const first = socialTrack.firstElementChild;
-    const step = first ? first.getBoundingClientRect().width + 12 : 220;
-    socialTrack.scrollBy({ left: dir * step, behavior: "smooth" });
-  }
-
-  socialPrev?.addEventListener("click", () => scrollSocial(-1));
-  socialNext?.addEventListener("click", () => scrollSocial(1));
+  const socialSelect = footer.querySelector("[data-social-select]");
+  socialSelect?.addEventListener("change", () => {
+    const href = socialSelect.value;
+    if (!href) return;
+    window.open(href, "_blank", "noopener,noreferrer");
+    socialSelect.selectedIndex = 0;
+  });
 
   const newsletterForm = footer.querySelector("#footer-newsletter");
   const newsletterMsg = footer.querySelector("#newsletter-msg");
