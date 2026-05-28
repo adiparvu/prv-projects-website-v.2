@@ -1,0 +1,70 @@
+import { formatMoney, escapeHtml } from "../format.js";
+import { trustList } from "../components.js";
+import { ShopRoutes } from "../routes.js";
+import { ShopStore } from "../store.js";
+import { computeTotals, renderSummaryHtml } from "../checkout.js";
+
+export function renderCart(main, catalog) {
+  const cart = ShopStore.getCart();
+
+  if (!cart.items.length) {
+    main.innerHTML = `
+      <div class="shop-empty glass-panel">
+        <h2>Coșul tău e gol</h2>
+        <p>Descoperă produsele recomandate pentru șantierul tău.</p>
+        <a href="${ShopRoutes.home()}" class="btn btn-primary" style="margin-top:1rem">Înapoi la shop</a>
+      </div>`;
+    return;
+  }
+
+  const totals = computeTotals(catalog, cart);
+
+  main.innerHTML = `
+    <h1 class="section-title" style="margin-bottom:1.25rem">Coș</h1>
+    <div class="shop-layout-2">
+      <div class="glass-panel" style="padding:0 1.25rem">
+        ${cart.items
+          .map(
+            (item) => `
+          <div class="shop-line-item" data-product-id="${escapeHtml(item.productId)}">
+            <img src="${escapeHtml(item.image)}" alt="" />
+            <div>
+              <a href="${ShopRoutes.product(item.slug)}"><strong>${escapeHtml(item.name)}</strong></a>
+              <p class="work-meta">${formatMoney(item.priceCents)} / buc</p>
+              <div class="shop-qty" style="margin-top:0.5rem">
+                <button type="button" data-line-minus>−</button>
+                <input type="number" value="${item.qty}" min="1" data-line-qty />
+                <button type="button" data-line-plus>+</button>
+              </div>
+            </div>
+            <div><strong>${formatMoney(item.priceCents * item.qty)}</strong></div>
+          </div>`
+          )
+          .join("")}
+      </div>
+      <aside class="shop-summary glass-panel">
+        ${renderSummaryHtml(totals)}
+        ${trustList()}
+        <a href="${ShopRoutes.checkout()}" class="btn btn-primary btn-lg" style="width:100%;margin-top:1rem">Finalizează</a>
+      </aside>
+    </div>
+  `;
+
+  main.querySelectorAll(".shop-line-item").forEach((row) => {
+    const id = row.dataset.productId;
+    row.querySelector("[data-line-minus]")?.addEventListener("click", () => {
+      const input = row.querySelector("[data-line-qty]");
+      ShopStore.updateQty(id, parseInt(input.value, 10) - 1);
+      renderCart(main, catalog);
+    });
+    row.querySelector("[data-line-plus]")?.addEventListener("click", () => {
+      const input = row.querySelector("[data-line-qty]");
+      ShopStore.updateQty(id, parseInt(input.value, 10) + 1);
+      renderCart(main, catalog);
+    });
+    row.querySelector("[data-line-qty]")?.addEventListener("change", (e) => {
+      ShopStore.updateQty(id, parseInt(e.target.value, 10) || 1);
+      renderCart(main, catalog);
+    });
+  });
+}

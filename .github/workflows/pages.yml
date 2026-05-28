@@ -21,7 +21,7 @@ jobs:
           mkdir -p _site
           cp index.html favicon.svg app-icon.svg app-icon-180.png app-icon-192.png app-icon-512.png manifest.webmanifest 404.html robots.txt sitemap.xml despre-noi.html servicii.html proiecte.html de-ce-noi.html contact.html search.html shop.html faq.html confidentialitate.html _site/
           [ -f _redirects ] && cp _redirects _site/
-          cp -r css js projects blog _site/
+          cp -r css js projects blog shop data dashboard _site/
           test -f _site/index.html
           test -d _site/projects
           test -d _site/blog

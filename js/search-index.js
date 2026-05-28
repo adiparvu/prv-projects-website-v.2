@@ -109,4 +109,10 @@ window.PRV_SEARCH_INDEX = [
     title: "Finisaje premium",
     tags: "finisaje sticlă beton materiale",
   },
+  {
+    url: "shop/index.html",
+    type: "shop",
+    title: "PRV Shop",
+    tags: "shop magazin finisaje materiale pachete renovare cumpărături",
+  },
 ];

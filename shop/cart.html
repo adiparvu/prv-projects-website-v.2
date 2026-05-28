@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coș · PRV Shop</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../css/prv-brand.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/effects.css" />
+  <link rel="stylesheet" href="../css/shop.css" />
+  <script src="../js/theme-init.js"></script>
+</head>
+<body class="fx-page-enter">
+  <div class="ambient" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><canvas id="liquid-canvas" class="liquid-canvas"></canvas><div class="grain"></div></div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+  <div id="shop-root"></div>
+  <script src="../js/site-config.js"></script>
+  <script src="../js/i18n-config.js"></script>
+  <script src="../js/i18n.js" defer></script>
+  <script src="../js/footer.js" defer></script>
+  <script src="../js/cookies.js" defer></script>
+  <script src="../js/main.js" type="module"></script>
+  <script type="module">
+    import { bootShop } from "../js/shop/boot.js";
+    bootShop("cart");
+  </script>
+</body>
+</html>

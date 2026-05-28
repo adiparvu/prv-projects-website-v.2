@@ -3,6 +3,7 @@
  */
 (function () {
   const cfg = window.PRV_CONFIG || {};
+  if (cfg.floatingCtaEnabled === false) return;
   const wa = (cfg.whatsappNumber || "").replace(/\D/g, "");
   if (!wa && !cfg.contactEmail) return;
 

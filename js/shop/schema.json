@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PRV Shop Data Model",
+  "description": "Core entities for customer shop and future dashboard admin API",
+  "definitions": {
+    "product": {
+      "type": "object",
+      "required": ["id", "slug", "name", "priceCents", "categorySlug", "stock"],
+      "properties": {
+        "id": { "type": "string" },
+        "slug": { "type": "string" },
+        "sku": { "type": "string" },
+        "name": { "type": "string" },
+        "shortDescription": { "type": "string" },
+        "description": { "type": "string" },
+        "categorySlug": { "type": "string" },
+        "priceCents": { "type": "integer" },
+        "compareAtCents": { "type": ["integer", "null"] },
+        "stock": { "type": "integer" },
+        "featured": { "type": "boolean" },
+        "images": {
+          "type": "array",
+          "items": { "type": "object", "properties": { "url": { "type": "string" }, "alt": { "type": "string" } } }
+        },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "category": {
+      "type": "object",
+      "required": ["id", "slug", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "slug": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "image": { "type": "string" },
+        "sort": { "type": "integer" }
+      }
+    },
+    "cart": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "items": { "type": "array" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "order": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "status": { "enum": ["pending", "paid", "processing", "shipped", "completed", "cancelled"] },
+        "items": { "type": "array" },
+        "subtotalCents": { "type": "integer" },
+        "discountCents": { "type": "integer" },
+        "shippingCents": { "type": "integer" },
+        "totalCents": { "type": "integer" },
+        "currency": { "type": "string" },
+        "payment": { "type": "object" },
+        "customer": { "type": "object" },
+        "invoiceId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      }
+    },
+    "invoice": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderId": { "type": "string" },
+        "number": { "type": "string" },
+        "pdfUrl": { "type": "string" },
+        "issuedAt": { "type": "string" }
+      }
+    },
+    "paymentRecord": {
+      "type": "object",
+      "properties": {
+        "provider": { "enum": ["stripe"] },
+        "method": { "enum": ["card", "apple_pay", "paypal", "bancontact"] },
+        "status": { "type": "string" },
+        "stripeSessionId": { "type": "string" },
+        "stripePaymentIntentId": { "type": "string" }
+      }
+    }
+  }
+}

@@ -38,4 +38,15 @@ window.PRV_CONFIG = {
 
   /** Micro-interacțiuni (sweep, stagger, scroll, particule CTA, etc.) */
   effectsEnabled: true,
+
+  /**
+   * PRV Shop — ecommerce (demo: localStorage; live: apiBase + Stripe)
+   * @see shop/README.md
+   */
+  shop: {
+    apiBase: "",
+    stripePublishableKey: "",
+    currency: "EUR",
+    locale: "ro-BE",
+  },
 };
