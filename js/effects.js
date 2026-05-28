@@ -74,31 +74,80 @@ function initLazyImages() {
   });
 }
 
-// ——— 4. Icon stroke draw ———
+// ——— 4. Icon animations (toate iconițele) ———
+function prepareStrokeIcon(svg) {
+  svg.classList.add("fx-icon-draw", "fx-icon-animated");
+  const shapes = svg.querySelectorAll("path, line, polyline, rect, circle");
+  shapes.forEach((el) => {
+    const stroke = el.getAttribute("stroke");
+    const fill = el.getAttribute("fill");
+    if ((!stroke || stroke === "none") && fill && fill !== "none") {
+      el.setAttribute("fill", "none");
+      el.setAttribute("stroke", "currentColor");
+      el.setAttribute("stroke-width", el.getAttribute("stroke-width") || "1.75");
+    }
+    try {
+      const len = el.getTotalLength?.() || 120;
+      el.style.strokeDasharray = String(len);
+      el.style.strokeDashoffset = String(len);
+    } catch {
+      /* ignore */
+    }
+  });
+}
+
+function prepareFilledIcon(svg) {
+  svg.classList.add("fx-icon-filled", "fx-icon-animated");
+}
+
+function observeIconDraw(svg) {
+  if (svg.dataset.fxObserved === "1") return;
+  svg.dataset.fxObserved = "1";
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("fx-drawn");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.3, rootMargin: "0px 0px -5% 0px" }
+  );
+  observer.observe(svg);
+}
+
 function initIconDraw() {
-  document.querySelectorAll(".feature-icon svg.fx-icon-draw").forEach((svg) => {
-    const paths = svg.querySelectorAll("path, line, polyline, rect, circle");
+  document.querySelectorAll(".feature-icon svg").forEach((svg) => {
+    if (svg.classList.contains("fx-icon-draw") || svg.classList.contains("fx-icon-filled")) {
+      observeIconDraw(svg);
+      return;
+    }
+    const hasStroke = svg.querySelector('[stroke]:not([stroke="none"])');
+    const onlyFill = svg.querySelector("path[fill]:not([fill='none'])");
+    if (hasStroke || svg.getAttribute("fill") === "none") {
+      prepareStrokeIcon(svg);
+    } else if (onlyFill) {
+      prepareFilledIcon(svg);
+    } else {
+      prepareStrokeIcon(svg);
+    }
+    observeIconDraw(svg);
+  });
+
+  document.querySelectorAll(".nav-links a svg").forEach((svg) => {
+    svg.classList.add("fx-nav-icon");
+    const paths = svg.querySelectorAll("path, circle, line");
     paths.forEach((el) => {
       try {
-        const len = el.getTotalLength?.() || 120;
+        const len = el.getTotalLength?.() || 48;
         el.style.strokeDasharray = String(len);
         el.style.strokeDashoffset = String(len);
       } catch {
         /* ignore */
       }
     });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("fx-drawn");
-          observer.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.35 }
-    );
-    observer.observe(svg);
+    observeIconDraw(svg);
   });
 }
 
