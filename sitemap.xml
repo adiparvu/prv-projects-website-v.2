@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/</loc><priority>1.0</priority></url>
   <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/despre-noi.html</loc><priority>0.9</priority></url>
+  <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/servicii.html</loc></url>
+  <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/proiecte.html</loc></url>
+  <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/de-ce-noi.html</loc></url>
+  <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/contact.html</loc></url>
   <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/search.html</loc></url>
   <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/shop.html</loc></url>
   <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/blog/</loc><priority>0.8</priority></url>

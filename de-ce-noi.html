@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>De ce noi · PRV Projects</title>
+  <meta name="description" content="De ce PRV Projects: termene respectate, preț fix, echipă proprie și transparență totală. Renovări premium în Bruxelles." />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="stylesheet" href="css/prv-brand.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="page-why">
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <canvas id="liquid-canvas" class="liquid-canvas"></canvas>
+    <div class="grain"></div>
+  </div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav glass-panel" data-reveal>
+    <a href="index.html#hero" class="logo logo-animated" aria-label="PRV Projects acasă">
+      <span class="logo-icon" aria-hidden="true">
+        <svg viewBox="0 0 100 100" role="img" aria-label="PRV">
+          <g fill="currentColor">
+            <rect x="22" y="18" width="15" height="64" rx="5"/>
+            <rect x="22" y="67" width="56" height="15" rx="5"/>
+          </g>
+        </svg>
+      </span>
+      <span class="logo-mark">PRV</span>
+      <span class="logo-type">Projects</span>
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="search.html" class="nav-icon-link" aria-label="Caută">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      </a>
+      <a href="shop.html" class="nav-shop-link" aria-label="Shop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 2l1.5 6h9L18 2"/><path d="M4 8h16l-1 14H5L4 8z"/><path d="M9 11v7"/><path d="M15 11v7"/></svg>
+        <span>Shop</span>
+      </a>
+      <a href="servicii.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l9 7-9 7-9-7 9-7z"/><path d="M3 10v11h18V10"/></svg>
+        <span data-i18n="nav.services">Servicii</span>
+      </a>
+      <a href="proiecte.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 10h8M8 14h5"/></svg>
+        <span data-i18n="nav.work">Proiecte</span>
+      </a>
+      <a href="blog/index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19a2 2 0 0 0 2 2h14"/><path d="M6 17V5a2 2 0 0 1 2-2h12v16H8a2 2 0 0 0-2 2z"/><path d="M10 7h6M10 11h8M10 15h6"/></svg>
+        <span data-i18n="nav.blog">Blog</span>
+      </a>
+      <a href="de-ce-noi.html" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l3 7 7 .5-5.5 4.5 1.8 7.5L12 18l-6.3 3.5L7.5 14 2 9.5 9 9l3-7z"/></svg>
+        <span data-i18n="nav.why">De ce noi</span>
+      </a>
+      <a href="despre-noi.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span data-i18n="nav.about">Despre noi</span>
+      </a>
+      <a href="contact.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg>
+        <span data-i18n="nav.contact">Contact</span>
+      </a>
+    </nav>
+    <div class="nav-actions">
+      <div id="lang-picker" class="lang-picker-host"></div>
+      <a href="contact.html" class="btn btn-primary" data-i18n="nav.cta">Cere o ofertă</a>
+    </div>
+    <button type="button" class="nav-toggle" aria-label="Deschide meniul" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main style="padding-top: 7rem;">
+    <section class="section differentiate-section">
+      <div class="section-header" data-reveal>
+        <span class="section-tag" data-i18n="diff.tag">De ce PRV Projects</span>
+        <h1 class="section-title gradient-text" data-i18n="diff.title">Nu suntem încă o agenție. Suntem partenerul tău de creștere.</h1>
+        <p class="section-intro" data-i18n="diff.intro">Într-o piață plină de template-uri și promisiuni goale, livrăm experiențe care se simt scumpe, clare și memorabile.</p>
+      </div>
+
+      <div class="diff-cards">
+        <article class="diff-card glass-panel" data-reveal data-tilt>
+          <span class="diff-num">01</span>
+          <h3 data-i18n="diff.c1.title">Strategie înainte de pixel</h3>
+          <p data-i18n="diff.c1.desc">Înțelegem obiectivul tău de business — apoi designăm. Nu invers.</p>
+        </article>
+        <article class="diff-card glass-panel" data-reveal data-tilt>
+          <span class="diff-num">02</span>
+          <h3 data-i18n="diff.c2.title">Liquid glass, nu trend de moment</h3>
+          <p data-i18n="diff.c2.desc">Sistem vizual propriu — premium, adaptiv, recognoscibil instant.</p>
+        </article>
+        <article class="diff-card glass-panel" data-reveal data-tilt>
+          <span class="diff-num">03</span>
+          <h3 data-i18n="diff.c3.title">Livrare end-to-end</h3>
+          <p data-i18n="diff.c3.desc">Web, brand, social, video — un singur echipaj, un singur standard de calitate.</p>
+        </article>
+        <article class="diff-card glass-panel" data-reveal data-tilt>
+          <span class="diff-num">04</span>
+          <h3 data-i18n="diff.c4.title">Transparență totală</h3>
+          <p data-i18n="diff.c4.desc">Știi mereu unde suntem, ce urmează și cât costă — fără surprize.</p>
+        </article>
+        <article class="diff-card glass-panel" data-reveal data-tilt>
+          <span class="diff-num">05</span>
+          <h3 data-i18n="diff.c5.title">Obsesie pentru performanță</h3>
+          <p data-i18n="diff.c5.desc">Frumos și rapid — Lighthouse, SEO și conversie sunt parte din design.</p>
+        </article>
+        <article class="diff-card glass-panel highlight-card" data-reveal data-tilt>
+          <span class="diff-num">06</span>
+          <h3 data-i18n="diff.c6.title">Tu ești următorul proiect</h3>
+          <p data-i18n="diff.c6.desc">Fiecare brand pe care îl lansăm devine referința următorului client. Poți fi tu.</p>
+          <a href="contact.html" class="btn btn-primary" data-i18n="diff.cta">Începe colaborarea</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section stats-section" id="experience">
+      <div class="stats glass-panel" data-reveal>
+        <div class="stat" data-count="200" data-count-suffix="+">
+          <span class="stat-num">0</span>
+          <span class="stat-label" data-i18n="stats.s1">Proiecte finalizate</span>
+        </div>
+        <div class="stat" data-count="9">
+          <span class="stat-num">0</span>
+          <span class="stat-label" data-i18n="stats.s2">Ani de experiență</span>
+        </div>
+        <div class="stat" data-count="100" data-count-suffix="%">
+          <span class="stat-num">0</span>
+          <span class="stat-label" data-i18n="stats.s3">Termene respectate</span>
+        </div>
+      </div>
+      <div class="features">
+        <article class="feature glass-panel" data-reveal>
+          <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3 data-i18n="feat.f1.title">Echipă proprie</h3>
+          <p data-i18n="feat.f1.desc">Fără subcontractori la întâmplare. Aceleași mâini de la primul ciocan la ultima tușă.</p>
+        </article>
+        <article class="feature glass-panel" data-reveal>
+          <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M4 15v-3a6 6 0 0 1 12 0v3"/></svg></div>
+          <h3 data-i18n="feat.f2.title">Șef de șantier dedicat</h3>
+          <p data-i18n="feat.f2.desc">O singură persoană răspunde de proiectul tău. Un singur număr de telefon.</p>
+        </article>
+        <article class="feature glass-panel" data-reveal>
+          <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div>
+          <h3 data-i18n="feat.f3.title">Raport zilnic cu poze</h3>
+          <p data-i18n="feat.f3.desc">Vezi exact ce s-a făcut azi, fără să vii pe șantier.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="cta glass-panel immersive-panel" data-reveal>
+        <h2 class="cta-title">
+          <span data-split>Vrei să</span>
+          <span class="gradient-text" data-split>știi</span>
+          <span data-split>din prima?</span>
+        </h2>
+        <p>Spune-ne bugetul și termenul. Îți spunem ce e realist și cum îl atingem fără “surprize”.</p>
+        <div class="hero-cta" style="justify-content:center; margin-top:1rem;">
+          <a href="contact.html" class="btn btn-primary btn-lg">Cere o ofertă</a>
+          <a href="proiecte.html" class="btn btn-glass">Vezi proiectele</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script src="js/site-config.js"></script>
+  <script src="js/i18n-config.js"></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/cookies.js" defer></script>
+  <script src="js/analytics.js" defer></script>
+  <script src="js/footer.js" defer></script>
+  <script src="js/main.js" type="module"></script>
+</body>
+</html>

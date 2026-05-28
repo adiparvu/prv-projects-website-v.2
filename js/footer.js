@@ -95,12 +95,12 @@
         <div class="footer-col footer-nav-col">
           <span class="footer-heading" data-i18n="footer.explore">Explorează</span>
           <nav class="footer-links" aria-label="Footer">
-            <a href="${base}/index.html#services" data-i18n="nav.services">Servicii</a>
-            <a href="${base}/index.html#work" data-i18n="nav.work">Proiecte</a>
-            <a href="${base}/index.html#differentiate" data-i18n="footer.why">De ce noi</a>
+            <a href="${base}/servicii.html" data-i18n="nav.services">Servicii</a>
+            <a href="${base}/proiecte.html" data-i18n="nav.work">Proiecte</a>
+            <a href="${base}/de-ce-noi.html" data-i18n="footer.why">De ce noi</a>
             <a href="${base}/blog/index.html" data-i18n="nav.blog">Blog</a>
             <a href="${base}/despre-noi.html" data-i18n="nav.about">Despre noi</a>
-            <a href="${base}/index.html#contact" data-i18n="nav.contact">Contact</a>
+            <a href="${base}/contact.html" data-i18n="nav.contact">Contact</a>
           </nav>
           <a href="mailto:hello@prvprojects.be" class="footer-email">hello@prvprojects.be</a>
         </div>
