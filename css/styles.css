@@ -1595,6 +1595,9 @@ body.pointer-active .cursor-glow {
 .slider-viewport {
   overflow: hidden;
   border-radius: calc(var(--radius-lg) - 4px);
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .slider-track {
