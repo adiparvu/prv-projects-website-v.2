@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Efecte preview · PRV Projects</title>
+  <link rel="stylesheet" href="css/prv-brand.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/effects.css" />
+  <script src="js/theme-init.js"></script>
+</head>
+<body class="fx-page-enter fx-scroll-driven page-effects-demo">
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <canvas id="liquid-canvas" class="liquid-canvas"></canvas>
+    <div class="grain"></div>
+  </div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav glass-panel">
+    <a href="index.html" class="logo logo-animated">
+      <span class="logo-mark">PRV</span>
+      <span class="logo-type">Projects</span>
+    </a>
+    <nav class="nav-links" aria-label="Demo">
+      <a href="index.html">← Site</a>
+    </nav>
+    <div class="nav-actions">
+      <div id="lang-picker" class="lang-picker-host"></div>
+      <a href="contact.html" class="btn btn-primary fx-particles">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="fx-demo-hero glass-panel fx-sweep" data-reveal>
+      <p class="eyebrow">PREVIEW EFECTE</p>
+      <h1 class="section-title gradient-text">Încearcă fiecare animație</h1>
+      <p class="section-intro">
+        Pagină de test — poți compara efectele înainte să le activăm pe homepage.
+        Schimbă tema din meniu pentru <strong>#12 crossfade</strong>.
+      </p>
+    </section>
+
+    <nav class="fx-demo-nav glass-panel" aria-label="Jump la efect">
+      <a href="#fx-1">1 Sweep</a>
+      <a href="#fx-2">2 Stagger</a>
+      <a href="#fx-3">3 Scroll</a>
+      <a href="#fx-4">4 Icon draw</a>
+      <a href="#fx-5">5 Scroll orbs</a>
+      <a href="#fx-6">6 H-scroll</a>
+      <a href="#fx-7">7 Page enter</a>
+      <a href="#fx-8">8 Imagini</a>
+      <a href="#fx-9">9 Formular</a>
+      <a href="#fx-10">10 Ripple</a>
+      <a href="#fx-11">11 FAQ</a>
+      <a href="#fx-12">12 Temă</a>
+      <a href="#fx-13">13 Particule</a>
+    </nav>
+
+    <div class="fx-demo-list">
+      <article class="fx-demo-block glass-panel" id="fx-1">
+        <span class="fx-demo-num">Efect 1</span>
+        <h2>Light sweep pe glass</h2>
+        <p class="fx-demo-desc">Reflexie discretă care trece peste panoul hero/CTA la ~7s.</p>
+        <div class="fx-demo-preview">
+          <div class="cta glass-panel fx-sweep immersive-panel" style="padding: 1.5rem;">
+            <p style="margin:0">Card CTA cu sweep — observă reflexia albastră.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="fx-demo-block glass-panel" id="fx-2">
+        <span class="fx-demo-num">Efect 2</span>
+        <h2>Stagger reveal</h2>
+        <p class="fx-demo-desc">Cardurile apar una după alta (delay 100ms). Scroll până aici dacă nu le vezi.</p>
+        <div class="fx-demo-preview features services-grid" data-stagger>
+          <article class="feature glass-panel"><h3>Unu</h3><p>Primul card</p></article>
+          <article class="feature glass-panel"><h3>Doi</h3><p>Al doilea</p></article>
+          <article class="feature glass-panel"><h3>Trei</h3><p>Al treilea</p></article>
+          <article class="feature glass-panel"><h3>Patru</h3><p>Al patrulea</p></article>
+        </div>
+      </article>
+
+      <article class="fx-demo-block glass-panel" id="fx-3">
+        <span class="fx-demo-num">Efect 3</span>
+        <h2>Smooth scroll + offset nav</h2>
+        <p class="fx-demo-desc">Ancoră cu offset pentru header fix.</p>
+        <div class="fx-demo-preview" style="display:flex;gap:0.5rem;flex-wrap:wrap">
+          <a href="#fx-13" class="btn btn-glass fx-ripple">→ #fx-13 (jos)</a>
+          <a href="#fx-1" class="btn btn-glass fx-ripple">→ #fx-1 (sus)</a>
+        </div>
+      </article>
+
+      <article class="fx-demo-block glass-panel" id="fx-4">
+        <span class="fx-demo-num">Efect 4</span>
+        <h2>Icon stroke-draw</h2>
+        <p class="fx-demo-desc">SVG desenat la scroll în viewport.</p>
+        <div class="fx-demo-preview features" style="max-width:280px">
+          <article class="feature glass-panel">
+            <div class="feature-icon">
+              <svg class="fx-icon-draw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <h3>Servicii</h3>
+          </article>
+        </div>
+      </article>
+
+      <article class="fx-demo-block glass-panel" id="fx-5">
+        <span class="fx-demo-num">Efect 5</span>
+        <h2>Scroll-driven orbs (CSS)</h2>
+        <p class="fx-demo-desc">Orbele din fundal își schimbă opacitatea/poziția pe măsură ce scroll-ezi pagina.</p>
+        <p class="section-intro">Scroll încet în sus/jos și urmărește cercurile colorate din ambient.</p>
+      </article>
+
+      <article class="fx-demo-block glass-panel" id="fx-6">
+        <span class="fx-demo-num">Efect 6</span>
+        <h2>Horizontal scroll proiecte (mobil)</h2>
+        <p class="fx-demo-desc">Pe ecran &lt;900px: swipe cinematic. Pe desktop rămâne grid.</p>
+        <div class="fx-demo-preview work-grid fx-h-scroll">
+          <article class="work-item glass-panel work-link">
+            <div class="work-visual work-1"></div>
+            <div class="work-body"><h3>Proiect A</h3></div>
+          </article>
+          <article class="work-item glass-panel work-link">
+            <div class="work-visual work-2"></div>
+            <div class="work-body"><h3>Proiect B</h3></div>
+          </article>
+          <article class="work-item glass-panel work-link wide">
+            <div class="work-visual work-3"></div>
+            <div class="work-body"><h3>Proiect C</h3></div>
+          </article>
+        </div>
+      </article>
+
+      <article class="fx-demo-block glass-panel" id="fx-7">
+        <span class="fx-demo-num">Efect 7</span>
+        <h2>Page enter fade</h2>
+        <p class="fx-demo-desc">La prima încărcare, conținutul iese din blur (o dată). Reîncarcă pagina (F5) pentru a-l revedea.</p>
+      </article>
+
+      <article class="fx-demo-block glass-panel" id="fx-8">
+        <span class="fx-demo-num">Efect 8</span>
+        <h2>Lazy fade-in imagini</h2>
+        <p class="fx-demo-desc">Blur → sharp când imaginea s-a încărcat.</p>
+        <div class="fx-demo-preview work-item glass-panel" style="min-height:200px;position:relative;overflow:hidden">
+          <img
+            class="fx-img"
+            src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80"
+            alt="Interior demo"
+            loading="lazy"
+            width="800"
+            height="500"
+          />
+        </div>
+      </article>
+
+      <article class="fx-demo-block glass-panel" id="fx-9">
+        <span class="fx-demo-num">Efect 9</span>
+        <h2>Succes formular</h2>
+        <p class="fx-demo-desc">Check animat + mesaj (fără confetti).</p>
+        <button type="button" class="btn btn-primary" id="fx-demo-form-btn">Simulează trimitere</button>
+      </article>
+
+      <article class="fx-demo-block glass-panel" id="fx-10">
+        <span class="fx-demo-num">Efect 10</span>
+        <h2>Ripple pe butoane glass</h2>
+        <p class="fx-demo-desc">Click pe buton pentru undă discretă.</p>
+        <button type="button" class="btn btn-glass fx-ripple">Buton glass</button>
+      </article>
+
+      <article class="fx-demo-block glass-panel" id="fx-11">
+        <span class="fx-demo-num">Efect 11 + tooltips</span>
+        <h2>FAQ accordion + tooltip glass</h2>
+        <p class="fx-demo-desc">
+          Termeni:
+          <span data-fx-tooltip="Asigurare obligatorie în Belgia pentru lucrări structurale — 10 ani de la recepție.">garanție decennală</span>,
+          <span data-fx-tooltip="Ofertă detaliată agreată înainte de start; modificările sunt documentate.">preț fix</span>.
+        </p>
+        <div class="faq-list" data-faq-list style="margin-top:1rem">
+          <details class="faq-item glass-inset fx-faq">
+            <summary>Întrebare demo 1</summary>
+            <p>Răspuns cu animație de înălțime și icon rotativ pe summary.</p>
+          </details>
+          <details class="faq-item glass-inset fx-faq">
+            <summary>Întrebare demo 2</summary>
+            <p>Deschide un singur item odată (comportament FAQ site).</p>
+          </details>
+        </div>
+      </article>
+
+      <article class="fx-demo-block glass-panel" id="fx-12">
+        <span class="fx-demo-num">Efect 12</span>
+        <h2>Theme transition 300ms</h2>
+        <p class="fx-demo-desc">Folosește selectorul de temă din header — crossfade, nu salt brusc.</p>
+      </article>
+
+      <article class="fx-demo-block glass-panel" id="fx-13">
+        <span class="fx-demo-num">Efect 13</span>
+        <h2>Particule albastre la hover CTA</h2>
+        <p class="fx-demo-desc">Treci cu mouse-ul peste butonul primary (#0071e3).</p>
+        <a href="contact.html" class="btn btn-primary btn-lg fx-particles">Cere o ofertă</a>
+      </article>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/site-config.js"></script>
+  <script src="js/i18n-config.js"></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/footer.js" defer></script>
+  <script src="js/faq.js" defer></script>
+  <script type="module">
+    import { showFormSuccess } from "./js/effects.js";
+    import "./js/main.js";
+
+    document.getElementById("fx-demo-form-btn")?.addEventListener("click", (e) => {
+      showFormSuccess(e.currentTarget, "Mulțumim — revenim în 24h");
+    });
+  </script>
+</body>
+</html>

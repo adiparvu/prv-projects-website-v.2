@@ -4,6 +4,7 @@
  */
 
 import { initProjectSlider } from "./project-slider.js";
+import { initEffects, showFormSuccess } from "./effects.js";
 
 const STORAGE_KEY = "prv-theme";
 const DEFAULT_THEME = "light";
@@ -32,7 +33,7 @@ function getThemeLabel(preference) {
   return THEME_META[preference]?.short || preference;
 }
 
-function applyTheme(preference) {
+function applyThemeCore(preference) {
   const root = document.documentElement;
   const effective = getEffectiveTheme(preference);
 
@@ -55,6 +56,14 @@ function applyTheme(preference) {
   });
 
   updateThemePickerTrigger(preference);
+}
+
+function applyTheme(preference) {
+  if (window.PRV_FX?.themeTransition) {
+    window.PRV_FX.themeTransition(applyThemeCore, preference);
+  } else {
+    applyThemeCore(preference);
+  }
 }
 
 function updateThemePickerTrigger(preference) {
@@ -629,6 +638,26 @@ async function submitQuoteForm(form, btn) {
   } catch {
     /* verifică spam / FormSubmit activation */
   }
+
+  const useFx =
+    window.PRV_CONFIG?.effectsEnabled !== false &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (useFx) {
+    showFormSuccess(btn, thanks);
+    form.reset();
+    setTimeout(() => {
+      const wrap = form.querySelector(".fx-form-success-wrap");
+      wrap?.remove();
+      if (btn.hidden) {
+        btn.hidden = false;
+        btn.disabled = false;
+        btn.textContent = original;
+      }
+    }, 4500);
+    return;
+  }
+
   btn.textContent = thanks;
   form.reset();
   setTimeout(() => {
@@ -684,5 +713,6 @@ initCounters();
 initMaxVisibleCarousels();
 initMagneticButtons();
 initForm();
+initEffects();
 
 if (document.querySelector("[data-slider]")) initProjectSlider();

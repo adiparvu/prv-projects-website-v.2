@@ -31,4 +31,7 @@ window.PRV_CONFIG = {
   },
 
   siteUrl: "https://adiparvu.github.io/prv-projects-website-v.2",
+
+  /** Micro-interacțiuni (sweep, stagger, scroll, particule CTA, etc.) */
+  effectsEnabled: true,
 };

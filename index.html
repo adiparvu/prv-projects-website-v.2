@@ -20,9 +20,10 @@
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="stylesheet" href="css/prv-brand.css" />
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/effects.css" />
   <script src="js/theme-init.js"></script>
 </head>
-<body>
+<body class="fx-page-enter fx-scroll-driven">
   <div class="ambient" aria-hidden="true">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
@@ -81,7 +82,7 @@
     </nav>
     <div class="nav-actions">
       <div id="lang-picker" class="lang-picker-host"></div>
-      <a href="contact.html" class="btn btn-primary" data-i18n="nav.cta">Cere o ofertă</a>
+      <a href="contact.html" class="btn btn-primary fx-particles" data-i18n="nav.cta">Cere o ofertă</a>
     </div>
     <button type="button" class="nav-toggle" aria-label="Deschide meniul" aria-expanded="false">
       <span></span><span></span>
@@ -101,23 +102,23 @@
           Renovăm apartamente, maisons de maître și spații comerciale în Bruxelles și împrejurimi, cu atenție obsesivă la detaliu, termene respectate la zi și transparență totală pe costuri. Tu te uiți la rezultat. Noi ne ocupăm de tot restul — de la demolare la ultimul mâner.
         </p>
         <div class="hero-cta" data-reveal>
-          <a href="#contact" class="btn btn-primary btn-lg">
+          <a href="#contact" class="btn btn-primary btn-lg fx-particles">
             <span data-i18n="hero.cta1">Cere o ofertă</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <a href="proiecte.html" class="btn btn-glass" data-i18n="hero.cta2">Vezi proiectele</a>
+          <a href="proiecte.html" class="btn btn-glass fx-ripple" data-i18n="hero.cta2">Vezi proiectele</a>
         </div>
       </div>
 
       <div class="hero-visual" data-parallax="0.15">
         <div class="glass-stack">
-          <article class="glass-card card-1" data-tilt>
+          <article class="glass-card card-1 fx-sweep" data-tilt>
             <div class="card-shine"></div>
             <span class="card-label" data-i18n="card1.label">CALITATE</span>
             <h3 data-i18n="card1.title">Finisaj impecabil</h3>
             <p data-i18n="card1.desc">Verificat la lupă, garantat 2 ani</p>
           </article>
-          <article class="glass-card card-2" data-tilt>
+          <article class="glass-card card-2 fx-sweep" data-tilt>
             <div class="card-shine"></div>
             <span class="card-label" data-i18n="card2.label">TERMENE</span>
             <h3 data-i18n="card2.title">Predăm la zi</h3>
@@ -159,24 +160,24 @@
         <h2 class="section-title gradient-text" data-i18n="services.title">Tot ce ai nevoie, sub un singur contract</h2>
         <p class="section-intro" data-reveal data-i18n="services.intro">De la prima măsurătoare la cheile în mână — coordonăm toată lucrarea ca să te muți fără stres.</p>
       </div>
-      <div class="features services-grid">
-        <article class="feature glass-panel" data-reveal data-tilt>
-          <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div class="features services-grid" data-stagger>
+        <article class="feature glass-panel" data-tilt>
+          <div class="feature-icon" aria-hidden="true"><svg class="fx-icon-draw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
           <h3 data-i18n="services.s1.title">Renovări complete la cheie</h3>
           <p data-i18n="services.s1.desc">Apartamente și case renovate integral: demolare, refacere instalații, finisaje, mobilier la comandă, predare cu cheile pe masă.</p>
         </article>
-        <article class="feature glass-panel" data-reveal data-tilt>
-          <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6 6.5 3 2 5v11c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-4.5-2L15 6"/><path d="M10 8v11"/><path d="M14 8v11"/><path d="M8 8h8"/></svg></div>
+        <article class="feature glass-panel" data-tilt>
+          <div class="feature-icon" aria-hidden="true"><svg class="fx-icon-draw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M9 6 6.5 3 2 5v11c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-4.5-2L15 6"/><path d="M10 8v11"/><path d="M14 8v11"/><path d="M8 8h8"/></svg></div>
           <h3 data-i18n="services.s2.title">Amenajări băi &amp; bucătării</h3>
           <p data-i18n="services.s2.desc">Cele mai pretențioase camere din casă, executate impecabil — de la hidroizolație la blat de quartz.</p>
         </article>
-        <article class="feature glass-panel" data-reveal data-tilt>
-          <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+        <article class="feature glass-panel" data-tilt>
+          <div class="feature-icon" aria-hidden="true"><svg class="fx-icon-draw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
           <h3 data-i18n="services.s3.title">Design &amp; planificare 3D</h3>
           <p data-i18n="services.s3.desc">Vezi cum va arăta totul înainte să spargi un perete. Plan 3D, alegere materiale, optimizare buget.</p>
         </article>
-        <article class="feature glass-panel" data-reveal data-tilt>
-          <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg></div>
+        <article class="feature glass-panel" data-tilt>
+          <div class="feature-icon" aria-hidden="true"><svg class="fx-icon-draw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg></div>
           <h3 data-i18n="services.s4.title">Renovări comerciale</h3>
           <p data-i18n="services.s4.desc">Cabinete medicale, birouri, magazine, restaurante — execuție rapidă, respectând orele tale de program.</p>
         </article>
@@ -189,7 +190,7 @@
         <h2 class="section-title gradient-text" data-i18n="work.title">Proiecte care vorbesc despre noi</h2>
         <p class="section-intro" data-reveal data-i18n="work.intro">Fiecare proiect e o promisiune ținută — nu un portfolio. Apasă pentru detalii, poze înainte/după și ce-am făcut diferit.</p>
       </div>
-      <div class="work-grid">
+      <div class="work-grid fx-h-scroll">
         <a href="projects/aurora-residence.html" class="work-item glass-panel work-link wide" data-reveal data-tilt>
           <div class="work-visual work-1"></div>
           <div class="work-body">
@@ -292,6 +293,11 @@
     </section>
 
     <section class="section stats-section" id="experience">
+      <p class="section-intro trust-terms" data-reveal style="text-align:center;margin-bottom:1rem">
+        <span data-fx-tooltip="Garanție legală 10 ani pentru lucrări structurale în Belgia, conform legislației.">garanție decennală</span>
+        <span aria-hidden="true"> · </span>
+        <span data-fx-tooltip="Deviz agreat înainte de start; modificările sunt estimate și aprobate în scris.">preț fix</span>
+      </p>
       <div class="stats glass-panel" data-reveal>
         <div class="stat" data-count="200" data-count-suffix="+">
           <span class="stat-num">0</span>
@@ -384,7 +390,7 @@
     </section>
 
     <section class="section cta-section" id="contact">
-      <div class="cta glass-panel immersive-panel" data-reveal>
+      <div class="cta glass-panel immersive-panel fx-sweep" data-reveal>
         <h2 class="cta-title">
           <span data-split data-i18n="cta.line1">Gata să</span>
           <span class="gradient-text" data-split data-i18n="cta.line2">începem?</span>
@@ -394,7 +400,7 @@
           <div class="input-wrap glass-inset">
             <input type="email" name="email" data-i18n-placeholder="cta.placeholder" placeholder="tu@email.ro" required autocomplete="email" />
           </div>
-          <button type="submit" class="btn btn-primary btn-lg" data-i18n="cta.btn">Cere o ofertă</button>
+          <button type="submit" class="btn btn-primary btn-lg fx-particles fx-ripple" data-i18n="cta.btn">Cere o ofertă</button>
         </form>
       </div>
     </section>
