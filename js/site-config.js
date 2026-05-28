@@ -14,8 +14,12 @@ window.PRV_CONFIG = {
   /**
    * WhatsApp (fără + sau spații) — ex: "32470123456"
    * Lasă gol pentru a ascunde butonul floating.
+   * Notă: butonul floating (colț) este dezactivat — folosește CTA din header.
    */
   whatsappNumber: "",
+
+  /** Buton floating jos-dreapta (WhatsApp + ofertă) — false = dezactivat */
+  floatingCtaEnabled: false,
 
   newsletter: {
     /**
