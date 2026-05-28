@@ -1,10 +1,12 @@
 <!doctype html>
-<html lang="ro">
+<html lang="ro" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact · PRV Projects</title>
-  <meta name="description" content="Contact PRV Projects. Cere o ofertă pentru renovări interioare premium în Bruxelles. Răspuns în 24h." />
+  <meta name="description" content="Contact PRV Projects. Cere o ofertă pentru renovări interioare premium în Belgia. Răspuns în 24h." />
+  <meta property="og:title" content="Contact · PRV Projects" />
+  <meta property="og:type" content="website" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="stylesheet" href="css/prv-brand.css" />
   <link rel="stylesheet" href="css/styles.css" />
@@ -75,7 +77,7 @@
     </button>
   </header>
 
-  <main style="padding-top: 7rem;">
+  <main class="page-main">
     <section class="section cta-section">
       <div class="cta glass-panel immersive-panel" data-reveal>
         <h1 class="cta-title">
@@ -83,27 +85,53 @@
           <span class="gradient-text" data-split data-i18n="cta.line2">începem?</span>
         </h1>
         <p data-i18n="cta.sub">Trimite-ne planul, o schiță sau o poză cu spațiul tău. Răspundem în 24h cu o estimare orientativă — fără obligații, fără presiune.</p>
-        <form class="cta-form" action="#" method="get">
-          <div class="input-wrap glass-inset">
-            <input type="email" name="email" data-i18n-placeholder="cta.placeholder" placeholder="tu@email.ro" required autocomplete="email" />
+
+        <form class="quote-form" data-quote-form novalidate>
+          <div class="quote-form-grid">
+            <div class="input-wrap glass-inset">
+              <input type="text" name="name" id="quote-name" data-i18n-placeholder="form.name" placeholder="Nume" required autocomplete="name" />
+            </div>
+            <div class="input-wrap glass-inset">
+              <input type="email" name="email" id="quote-email" data-i18n-placeholder="cta.placeholder" placeholder="tu@email.ro" required autocomplete="email" />
+            </div>
+            <div class="input-wrap glass-inset">
+              <input type="tel" name="phone" id="quote-phone" data-i18n-placeholder="form.phone" placeholder="Telefon" autocomplete="tel" />
+            </div>
+            <div class="input-wrap glass-inset">
+              <input type="text" name="city" id="quote-city" data-i18n-placeholder="form.city" placeholder="Oraș / zonă" autocomplete="address-level2" />
+            </div>
+            <div class="input-wrap glass-inset quote-form-span-2">
+              <select name="projectType" id="quote-type" class="quote-select" aria-label="Tip proiect">
+                <option value="" data-i18n="form.projectTypeDefault">Tip proiect</option>
+                <option value="full" data-i18n="form.projectTypeFull">Renovare completă</option>
+                <option value="kitchen" data-i18n="form.projectTypeKitchen">Bucătărie</option>
+                <option value="bath" data-i18n="form.projectTypeBath">Baie</option>
+                <option value="commercial" data-i18n="form.projectTypeCommercial">Comercial</option>
+                <option value="other" data-i18n="form.projectTypeOther">Altul</option>
+              </select>
+            </div>
+            <div class="input-wrap glass-inset quote-form-span-2">
+              <textarea name="message" id="quote-message" rows="4" data-i18n-placeholder="form.message" placeholder="Descrie pe scurt spațiul, suprafața și termenul dorit…"></textarea>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-lg" data-i18n="cta.btn">Cere o ofertă</button>
+          <button type="submit" class="btn btn-primary btn-lg quote-form-submit" data-i18n="cta.btn">Cere o ofertă</button>
         </form>
-        <div class="features" style="margin-top: 1.5rem;">
+
+        <div class="features contact-features">
           <article class="feature glass-panel" data-reveal>
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg></div>
-            <h3>Email</h3>
+            <h3 data-i18n="contact.email.title">Email</h3>
             <p><a href="mailto:hello@prvprojects.be">hello@prvprojects.be</a></p>
           </article>
           <article class="feature glass-panel" data-reveal>
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s8-4.5 8-11a8 8 0 1 0-16 0c0 6.5 8 11 8 11z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <h3>Arie</h3>
-            <p>Belgia: Bruxelles, Antwerpen, Gent, Brugge, Leuven, Liège, Namur, Charleroi, Mechelen, Hasselt, Mons și împrejurimi.</p>
+            <h3 data-i18n="contact.area.title">Arie</h3>
+            <p data-i18n="contact.area.text">Belgia: Bruxelles, Antwerpen, Gent, Brugge, Leuven, Liège, Namur, Charleroi, Mechelen, Hasselt, Mons și împrejurimi.</p>
           </article>
           <article class="feature glass-panel" data-reveal>
             <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M12 3v18"/></svg></div>
-            <h3>Ce trimitem înapoi</h3>
-            <p>Pași clari + estimare orientativă + întrebările corecte ca să nu arzi bani.</p>
+            <h3 data-i18n="contact.reply.title">Ce trimitem înapoi</h3>
+            <p data-i18n="contact.reply.text">Pași clari + estimare orientativă + întrebările corecte ca să nu arzi bani.</p>
           </article>
         </div>
       </div>
@@ -112,11 +140,15 @@
 
   <footer id="site-footer"></footer>
   <script src="js/site-config.js"></script>
+  <script src="js/seo.js"></script>
   <script src="js/i18n-config.js"></script>
+  <script src="js/newsletter.js"></script>
+  <script src="js/quote-form.js"></script>
   <script src="js/i18n.js" defer></script>
   <script src="js/cookies.js" defer></script>
   <script src="js/analytics.js" defer></script>
   <script src="js/footer.js" defer></script>
+  <script src="js/floating-cta.js" defer></script>
   <script src="js/main.js" type="module"></script>
 </body>
 </html>

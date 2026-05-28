@@ -593,31 +593,57 @@ function initMagneticButtons() {
   });
 }
 
-// ——— Form ———
-async function initForm() {
-  document.querySelector(".cta-form")?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const input = e.target.querySelector('input[type="email"]');
-    const btn = e.target.querySelector("button");
-    const original = btn.textContent;
-    const thanks = window.PRV_I18N?.strings?.["form.thanks"] || "Mulțumim — revenim curând";
-    const email = input?.value?.trim();
-    if (!email) return;
+// ——— Forms (ofertă + newsletter rapid) ———
+function formStrings() {
+  return window.PRV_I18N?.strings || {};
+}
 
-    btn.disabled = true;
-    try {
-      if (window.PRV_NEWSLETTER) {
-        await window.PRV_NEWSLETTER.subscribe(email);
-      }
-    } catch {
-      /* tot arătăm mulțumim — verifică spam */
+async function submitQuoteForm(form, btn) {
+  const s = formStrings();
+  const thanks = s["form.thanks"] || "Mulțumim — revenim curând";
+  const sending = s["form.sending"] || "Se trimite…";
+  const original = btn.textContent;
+  const fd = new FormData(form);
+  const email = (fd.get("email") || "").toString().trim();
+  if (!email) return;
+
+  const isFull = form.hasAttribute("data-quote-form");
+  const payload = {
+    type: isFull ? "contact-full" : "contact-quick",
+    email,
+    name: (fd.get("name") || "").toString().trim(),
+    phone: (fd.get("phone") || "").toString().trim(),
+    city: (fd.get("city") || "").toString().trim(),
+    projectType: (fd.get("projectType") || "").toString().trim(),
+    message: (fd.get("message") || "").toString().trim(),
+  };
+
+  btn.disabled = true;
+  btn.textContent = sending;
+  try {
+    if (window.PRV_QUOTE) {
+      await window.PRV_QUOTE.submit(payload);
+    } else if (window.PRV_NEWSLETTER) {
+      await window.PRV_NEWSLETTER.subscribe(email);
     }
-    btn.textContent = thanks;
-    input.value = "";
-    setTimeout(() => {
-      btn.textContent = original;
-      btn.disabled = false;
-    }, 3000);
+  } catch {
+    /* verifică spam / FormSubmit activation */
+  }
+  btn.textContent = thanks;
+  form.reset();
+  setTimeout(() => {
+    btn.textContent = original;
+    btn.disabled = false;
+  }, 4000);
+}
+
+function initForm() {
+  document.querySelectorAll(".cta-form, .quote-form").forEach((form) => {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      if (btn) submitQuoteForm(form, btn);
+    });
   });
 }
 

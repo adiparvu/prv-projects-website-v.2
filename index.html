@@ -9,7 +9,9 @@
   <meta property="og:title" content="PRV Projects — Renovări care îți respectă casa, timpul și banii" />
   <meta property="og:description" content="Renovăm apartamente și case premium în Belgia și împrejurimi. Echipă proprie, șef de șantier dedicat, garanție decennală și 2 ani pe finisaje." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://adiparvu.github.io/prv-projects-website-v.2/app-icon-512.png" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://adiparvu.github.io/prv-projects-website-v.2/app-icon-512.png" />
   <title>PRV Projects — Renovări interioare premium Bruxelles | La cheie, garantat</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/app-icon-180.png" />
@@ -351,6 +353,36 @@
       </p>
     </section>
 
+    <section class="section testimonials-section" id="testimonials">
+      <div class="section-header" data-reveal>
+        <span class="section-tag" data-i18n="testimonials.tag">Clienți</span>
+        <h2 class="section-title gradient-text" data-i18n="testimonials.title">Ce spun cei care s-au mutat deja</h2>
+      </div>
+      <div class="testimonials-grid">
+        <blockquote class="testimonial glass-panel" data-reveal>
+          <p data-i18n="testimonials.t1.text">„Termenul a fost respectat la zi, iar bugetul final a fost cel agreat — fără surprize.”</p>
+          <footer>
+            <cite data-i18n="testimonials.t1.name">Maria D.</cite>
+            <span data-i18n="testimonials.t1.meta">Apartament · Bruxelles</span>
+          </footer>
+        </blockquote>
+        <blockquote class="testimonial glass-panel" data-reveal>
+          <p data-i18n="testimonials.t2.text">„Comunicare zilnică cu poze, echipă curată, finisaje impecabile. Recomand.”</p>
+          <footer>
+            <cite data-i18n="testimonials.t2.name">Thomas V.</cite>
+            <span data-i18n="testimonials.t2.meta">Loft · Antwerpen</span>
+          </footer>
+        </blockquote>
+        <blockquote class="testimonial glass-panel" data-reveal>
+          <p data-i18n="testimonials.t3.text">„Am vorbit română pe șantier — pentru noi a contat enorm.”</p>
+          <footer>
+            <cite data-i18n="testimonials.t3.name">Andrei &amp; Ioana</cite>
+            <span data-i18n="testimonials.t3.meta">Casă · Gent</span>
+          </footer>
+        </blockquote>
+      </div>
+    </section>
+
     <section class="section cta-section" id="contact">
       <div class="cta glass-panel immersive-panel" data-reveal>
         <h2 class="cta-title">
@@ -358,7 +390,7 @@
           <span class="gradient-text" data-split data-i18n="cta.line2">începem?</span>
         </h2>
         <p data-i18n="cta.sub">Trimite-ne planul, o schiță sau o poză cu spațiul tău. Răspundem în 24h cu o estimare orientativă — fără obligații, fără presiune.</p>
-        <form class="cta-form" action="#" method="get">
+        <form class="cta-form" novalidate>
           <div class="input-wrap glass-inset">
             <input type="email" name="email" data-i18n-placeholder="cta.placeholder" placeholder="tu@email.ro" required autocomplete="email" />
           </div>
@@ -371,12 +403,15 @@
   <footer id="site-footer"></footer>
 
   <script src="js/site-config.js"></script>
+  <script src="js/seo.js"></script>
   <script src="js/i18n-config.js"></script>
   <script src="js/newsletter.js"></script>
+  <script src="js/quote-form.js"></script>
   <script src="js/i18n.js" defer></script>
   <script src="js/cookies.js" defer></script>
   <script src="js/analytics.js" defer></script>
   <script src="js/footer.js" defer></script>
+  <script src="js/floating-cta.js" defer></script>
   <script src="js/main.js" type="module"></script>
 </body>
 </html>

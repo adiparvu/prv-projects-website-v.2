@@ -1,15 +1,16 @@
 <!doctype html>
-<html lang="ro">
+<html lang="ro" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Search · PRV Projects</title>
+  <title>Caută · PRV Projects</title>
+  <meta name="description" content="Caută proiecte, servicii și articole PRV Projects." />
   <meta name="robots" content="noindex" />
   <link rel="stylesheet" href="css/prv-brand.css" />
   <link rel="stylesheet" href="css/styles.css" />
   <script src="js/theme-init.js"></script>
 </head>
-<body>
+<body class="page-search">
   <div class="ambient" aria-hidden="true">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
@@ -33,17 +34,37 @@
       <span class="logo-type">Projects</span>
     </a>
     <nav class="nav-links" aria-label="Principal">
-      <a href="search.html" class="nav-icon-link" aria-label="Caută">
+      <a href="search.html" class="nav-icon-link" aria-current="page" aria-label="Caută">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
       </a>
       <a href="shop.html" class="nav-shop-link" aria-label="Shop">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 2l1.5 6h9L18 2"/><path d="M4 8h16l-1 14H5L4 8z"/><path d="M9 11v7"/><path d="M15 11v7"/></svg>
         <span>Shop</span>
       </a>
-      <a href="proiecte.html" data-i18n="nav.work">Proiecte</a>
-      <a href="blog/index.html" data-i18n="nav.blog">Blog</a>
-      <a href="despre-noi.html" data-i18n="nav.about">Despre noi</a>
-      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="servicii.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l9 7-9 7-9-7 9-7z"/><path d="M3 10v11h18V10"/></svg>
+        <span data-i18n="nav.services">Servicii</span>
+      </a>
+      <a href="proiecte.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 10h8M8 14h5"/></svg>
+        <span data-i18n="nav.work">Proiecte</span>
+      </a>
+      <a href="blog/index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19a2 2 0 0 0 2 2h14"/><path d="M6 17V5a2 2 0 0 1 2-2h12v16H8a2 2 0 0 0-2 2z"/><path d="M10 7h6M10 11h8M10 15h6"/></svg>
+        <span data-i18n="nav.blog">Blog</span>
+      </a>
+      <a href="de-ce-noi.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l3 7 7 .5-5.5 4.5 1.8 7.5L12 18l-6.3 3.5L7.5 14 2 9.5 9 9l3-7z"/></svg>
+        <span data-i18n="nav.why">De ce noi</span>
+      </a>
+      <a href="despre-noi.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span data-i18n="nav.about">Despre noi</span>
+      </a>
+      <a href="contact.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg>
+        <span data-i18n="nav.contact">Contact</span>
+      </a>
     </nav>
     <div class="nav-actions">
       <div id="lang-picker" class="lang-picker-host"></div>
@@ -54,27 +75,41 @@
     </button>
   </header>
 
-  <main style="padding-top: 7rem;">
-    <section class="section glass-panel" style="max-width: 920px; margin: 0 auto;">
+  <main class="page-main">
+    <section class="section search-section glass-panel">
       <div class="section-head">
-        <h1 class="section-title gradient-text" data-split>Caută</h1>
-        <p class="section-sub">Pagină placeholder. Când lansăm shop-ul, aici legăm și căutarea internă.</p>
+        <h1 class="section-title gradient-text" data-i18n="search.title">Caută</h1>
+        <p class="section-sub" data-i18n="search.sub">Proiecte, servicii, blog — tot conținutul site-ului.</p>
       </div>
-      <div class="glass-inset" style="padding: 1rem;">
-        <form action="search.html" method="get" class="form" style="display:flex; gap:.75rem; align-items:center; flex-wrap:wrap;">
-          <input name="q" placeholder="Ex: bucătărie, apartament, finisaje…" class="input" style="flex:1; min-width: 240px;" />
-          <button type="submit" class="btn btn-primary">Caută</button>
-        </form>
-      </div>
+      <form class="search-form glass-inset" role="search" action="search.html" method="get">
+        <input
+          type="search"
+          name="q"
+          id="search-input"
+          class="input search-input"
+          data-i18n-placeholder="search.placeholder"
+          placeholder="Ex: bucătărie, Bruxelles, renovare…"
+          autocomplete="off"
+        />
+        <button type="submit" class="btn btn-primary" data-i18n="search.btn">Caută</button>
+      </form>
+      <p id="search-count" class="search-count" hidden></p>
+      <div id="search-results" class="search-results" aria-live="polite"></div>
+      <p id="search-empty" class="search-empty glass-inset" hidden data-i18n="search.empty">Niciun rezultat. Încearcă alt termen.</p>
     </section>
   </main>
 
   <footer id="site-footer"></footer>
   <script src="js/site-config.js"></script>
-  <script src="js/i18n.js"></script>
+  <script src="js/seo.js"></script>
+  <script src="js/i18n-config.js"></script>
+  <script src="js/search-index.js"></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/cookies.js" defer></script>
+  <script src="js/analytics.js" defer></script>
+  <script src="js/footer.js" defer></script>
+  <script src="js/floating-cta.js" defer></script>
   <script src="js/main.js" type="module"></script>
-  <script src="js/footer.js"></script>
-  <script src="js/cookies.js"></script>
-  <script src="js/analytics.js"></script>
+  <script src="js/search.js" defer></script>
 </body>
 </html>

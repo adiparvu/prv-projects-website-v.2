@@ -39,6 +39,16 @@ La fiecare `git push` pe `main`, workflow-ul **Deploy to GitHub Pages** actualiz
 
 Newsletter Netlify Forms: formularul din footer are `data-netlify="true"` — funcționează automat pe Netlify.
 
+### Formulare ofertă (FormSubmit)
+
+Cererile de pe **Contact** și emailul rapid de pe homepage merg la `hello@prvprojects.be` prin [FormSubmit](https://formsubmit.co).
+
+La **primul mesaj** primești un email de activare — apasă linkul ca să activezi trimiterea.
+
+În `js/site-config.js`:
+- `formsubmitEmail` — destinatar
+- `whatsappNumber` — ex. `"32470123456"` pentru buton floating (gol = ascuns)
+
 ---
 
 ## Configurare (#2 Newsletter + #9 Analytics)

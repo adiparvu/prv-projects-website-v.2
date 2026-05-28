@@ -8,6 +8,15 @@ window.PRV_CONFIG = {
   /** Email unde primești abonările newsletter + mesajele */
   contactEmail: "hello@prvprojects.be",
 
+  /** FormSubmit — cereri ofertă (același email ca newsletter) */
+  formsubmitEmail: "hello@prvprojects.be",
+
+  /**
+   * WhatsApp (fără + sau spații) — ex: "32470123456"
+   * Lasă gol pentru a ascunde butonul floating.
+   */
+  whatsappNumber: "",
+
   newsletter: {
     /**
      * formsubmit = trimite direct pe email (fără cont, activare la primul mesaj)
