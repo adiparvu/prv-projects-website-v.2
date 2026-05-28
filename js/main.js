@@ -11,14 +11,20 @@ function getSystemTheme() {
 }
 
 function getEffectiveTheme(preference) {
-  if (preference === "system") return getSystemTheme();
+  if (!preference || preference === "system") return getSystemTheme();
   return preference;
 }
 
 function applyTheme(preference) {
   const root = document.documentElement;
   const effective = getEffectiveTheme(preference);
-  root.setAttribute("data-theme", preference);
+
+  // PRV branding requirement:
+  // - manual theme uses html[data-theme="dark|light"]
+  // - system theme uses prefers-color-scheme (no data-theme attr)
+  if (!preference || preference === "system") root.removeAttribute("data-theme");
+  else root.setAttribute("data-theme", preference);
+
   root.setAttribute("data-effective-theme", effective);
   root.style.colorScheme = effective;
 

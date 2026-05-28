@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="system">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PRV — Carduri & carte de vizită</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/app-icon-180.png" />
+  <meta name="theme-color" content="#F6F6F4" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0B0B0B" media="(prefers-color-scheme: dark)" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="stylesheet" href="css/prv-brand.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .cards-shell { max-width: 1100px; margin: 0 auto; padding: var(--section-pad); display: grid; gap: 1.25rem; }
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    @media (max-width: 980px) { .cards-grid { grid-template-columns: 1fr; } }
+    .cards-toolbar { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+    .cards-toolbar .btn { white-space: nowrap; }
+    .card-wrap { padding: 1.25rem; }
+    .card-wrap h2 { font-family: var(--font-display); font-size: 1rem; letter-spacing: -0.02em; margin-bottom: .75rem; }
+    .card-actions { display:flex; gap:.5rem; margin-top:.75rem; flex-wrap:wrap; }
+  </style>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <canvas id="liquid-canvas" class="liquid-canvas"></canvas>
+    <div class="grain"></div>
+  </div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav glass-panel" data-reveal>
+    <a href="index.html#hero" class="logo logo-animated" aria-label="PRV Projects acasă">
+      <span class="logo-mark">PRV</span>
+      <span class="logo-type">Projects</span>
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="index.html#services">Servicii</a>
+      <a href="index.html#work">Proiecte</a>
+      <a href="blog/index.html">Blog</a>
+      <a href="despre-noi.html">Despre noi</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="theme-switcher glass-inset" role="group" aria-label="Temă culoare">
+        <button type="button" class="theme-btn" data-theme-set="light" aria-pressed="false" title="Luminos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+        <button type="button" class="theme-btn active" data-theme-set="system" aria-pressed="true" title="Sistem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+        </button>
+        <button type="button" class="theme-btn" data-theme-set="dark" aria-pressed="false" title="Întunecat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+      <a href="index.html#contact" class="btn btn-primary">Cere o ofertă</a>
+    </div>
+    <button type="button" class="nav-toggle" aria-label="Deschide meniul" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main class="cards-shell">
+    <div class="cards-toolbar">
+      <div>
+        <p class="eyebrow shimmer-text" data-split>PRV · BRAND</p>
+        <h1 class="section-title gradient-text" data-split>Carduri & carte de vizită</h1>
+      </div>
+      <div class="glass-inset" style="padding:.6rem .8rem; font-family:var(--prv-mono); font-size:.85rem;">
+        Loyalty: fără reduceri / discount
+      </div>
+    </div>
+
+    <section class="cards-grid">
+      <article class="glass-panel card-wrap" data-reveal>
+        <h2>EmployeeCard — față</h2>
+        <div id="emp-front"></div>
+        <div class="card-actions">
+          <button class="btn btn-glass" data-flip="emp">Vezi spate</button>
+        </div>
+      </article>
+
+      <article class="glass-panel card-wrap" data-reveal>
+        <h2>LoyaltyCard — membru</h2>
+        <div id="loyalty"></div>
+      </article>
+
+      <article class="glass-panel card-wrap" data-reveal>
+        <h2>BusinessCard — față/spate</h2>
+        <div id="biz"></div>
+        <div class="card-actions">
+          <button class="btn btn-glass" data-flip="biz">Întoarce</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/site-config.js"></script>
+  <script src="js/i18n-config.js"></script>
+  <script src="js/newsletter.js"></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/cookies.js" defer></script>
+  <script src="js/analytics.js" defer></script>
+  <script src="js/footer.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script type="module">
+    import { mountEmployeeCard, mountLoyaltyCard, mountBusinessCard } from "./js/brand/cards.js";
+    import { PRV } from "./src/brand/index.js";
+    import "./js/main.js";
+
+    const employee = { name: "Adrian P.", id: "PRV-EMP-001", role: "Project Director", qrPayload: "prv://employee/PRV-EMP-001" };
+    const member = { name: "Client PRV", cardNumberMasked: "PRV •••• 1842", qrPayload: "prv://member/1842" };
+    const biz = { legalName: PRV.legalName, tagline: PRV.tagline, address: PRV.contact.address, site: PRV.contact.site, phone: PRV.contact.phone, email: PRV.contact.email, name: "Adrian P.", role: "Project Director" };
+
+    let empSide = "front";
+    let bizSide = "front";
+
+    async function renderAll() {
+      await mountEmployeeCard(document.getElementById("emp-front"), { side: empSide, tone: document.documentElement.getAttribute("data-effective-theme") === "dark" ? "matte" : "light", employee });
+      await mountLoyaltyCard(document.getElementById("loyalty"), { tone: document.documentElement.getAttribute("data-effective-theme") === "dark" ? "matte" : "light", member });
+      await mountBusinessCard(document.getElementById("biz"), { side: bizSide, tone: bizSide === "back" ? "light" : (document.documentElement.getAttribute("data-effective-theme") === "dark" ? "matte" : "light"), data: biz });
+    }
+
+    document.querySelector('[data-flip="emp"]').addEventListener("click", async () => {
+      empSide = empSide === "front" ? "back" : "front";
+      await renderAll();
+      document.querySelector('[data-flip="emp"]').textContent = empSide === "front" ? "Vezi spate" : "Vezi față";
+    });
+
+    document.querySelector('[data-flip="biz"]').addEventListener("click", async () => {
+      bizSide = bizSide === "front" ? "back" : "front";
+      await renderAll();
+    });
+
+    window.addEventListener("prv:langchange", renderAll);
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderAll);
+    await renderAll();
+  </script>
+</body>
+</html>
+

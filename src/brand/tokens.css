@@ -1,0 +1,54 @@
+:root {
+  /* paletă brută */
+  --prv-ink: #0f0f0f;
+  --prv-matte: #161616;
+  --prv-paper: #f6f6f4;
+  --prv-silver: #8a8a8e;
+  --prv-hair: #e3e3df;
+
+  /* tokens semantice — TEMA LIGHT (default) */
+  --prv-bg: var(--prv-paper);
+  --prv-surface: #ffffff;
+  --prv-text: var(--prv-ink);
+  --prv-text-muted: var(--prv-silver);
+  --prv-border: var(--prv-hair);
+  --prv-logo: var(--prv-ink);
+
+  /* tipografie */
+  --prv-font: -apple-system, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --prv-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* formă */
+  --prv-radius-card: 15px;
+  --prv-radius-app: 24px;
+  --prv-shadow-card: 0 20px 40px -20px rgba(0, 0, 0, 0.55);
+}
+
+/* TEMA DARK — prin atribut manual */
+:root[data-theme="dark"] {
+  --prv-bg: #0b0b0b;
+  --prv-surface: var(--prv-matte);
+  --prv-text: var(--prv-paper);
+  --prv-text-muted: var(--prv-silver);
+  --prv-border: rgba(255, 255, 255, 0.12);
+  --prv-logo: var(--prv-paper);
+}
+
+/* TEMA DARK — automat din sistem, doar dacă nu e setată manual */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --prv-bg: #0b0b0b;
+    --prv-surface: var(--prv-matte);
+    --prv-text: var(--prv-paper);
+    --prv-text-muted: var(--prv-silver);
+    --prv-border: rgba(255, 255, 255, 0.12);
+    --prv-logo: var(--prv-paper);
+  }
+}
+
+body {
+  background: var(--prv-bg);
+  color: var(--prv-text);
+  font-family: var(--prv-font);
+}
+

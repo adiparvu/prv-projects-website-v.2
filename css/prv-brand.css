@@ -1,0 +1,38 @@
+@import "../src/brand/tokens.css";
+@import "../src/brand/cards.css";
+
+/* Mapare tokens PRV peste sistemul vechi (fără culori extra) */
+:root {
+  --font-sans: var(--prv-font);
+  --font-display: var(--prv-font);
+
+  --bg-base: var(--prv-bg);
+  --bg-elevated: var(--prv-surface);
+  --text-primary: var(--prv-text);
+  --text-secondary: color-mix(in srgb, var(--prv-text) 68%, transparent);
+  --text-muted: color-mix(in srgb, var(--prv-text) 48%, transparent);
+
+  --glass-shadow: rgba(0, 0, 0, 0.2);
+
+  /* păstrăm variabilele existente, dar monocrom */
+  --accent-1: var(--prv-text);
+  --accent-2: var(--prv-text-muted);
+  --accent-3: var(--prv-text);
+  --gradient-hero: linear-gradient(180deg, var(--prv-text), var(--prv-text-muted));
+  --gradient-mesh-1: color-mix(in srgb, var(--prv-text) 18%, transparent);
+  --gradient-mesh-2: color-mix(in srgb, var(--prv-text-muted) 16%, transparent);
+  --gradient-mesh-3: color-mix(in srgb, var(--prv-text) 10%, transparent);
+}
+
+/* Dacă tema dark e activă manual, păstrează monocrom + contrast */
+:root[data-theme="dark"] {
+  --glass-shadow: rgba(0, 0, 0, 0.55);
+}
+
+/* Logo / mark trebuie să folosească currentColor */
+.logo,
+.footer-logo,
+.footer-logo span {
+  color: var(--prv-logo);
+}
+

@@ -1,0 +1,101 @@
+.prv-card {
+  position: relative;
+  aspect-ratio: 1.586/1;
+  border-radius: var(--prv-radius-card);
+  overflow: hidden;
+  padding: 20px;
+  font-family: var(--prv-font);
+}
+
+.prv-card--matte {
+  background: var(--prv-matte);
+  color: var(--prv-paper);
+  box-shadow: var(--prv-shadow-card);
+}
+.prv-card--matte::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 130% at 85% 0%, rgba(255, 255, 255, 0.05), transparent 42%);
+  pointer-events: none;
+}
+
+.prv-card--light {
+  background: #fff;
+  color: var(--prv-ink);
+  border: 1px solid var(--prv-border);
+}
+
+.prv-card__logo {
+  position: relative;
+  z-index: 2;
+  color: inherit;
+}
+.prv-card__who {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  z-index: 2;
+}
+.prv-card__name {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.prv-card__role {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  opacity: 0.6;
+}
+.prv-card__corner {
+  position: absolute;
+  right: 20px;
+  bottom: 18px;
+  z-index: 2;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  font-family: var(--prv-mono);
+  opacity: 0.65;
+}
+
+.prv-field {
+  margin-top: 9px;
+}
+.prv-field:first-child {
+  margin-top: 0;
+}
+.prv-field__l {
+  font-size: 8px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: 0.55;
+}
+.prv-field__v {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 2px;
+  font-family: var(--prv-mono);
+}
+.prv-card__fields {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  z-index: 2;
+}
+
+.prv-qrbox {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  background: #fff;
+  padding: 5px;
+  border-radius: 7px;
+  z-index: 2;
+}
+
+.prv-biz {
+  aspect-ratio: 1.75/1;
+}
