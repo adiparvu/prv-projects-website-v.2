@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search · PRV Projects</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="css/prv-brand.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <canvas id="liquid-canvas" class="liquid-canvas"></canvas>
+    <div class="grain"></div>
+  </div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav glass-panel" data-reveal>
+    <a href="index.html#hero" class="logo logo-animated" aria-label="PRV Projects acasă">
+      <span class="logo-icon" aria-hidden="true">
+        <svg viewBox="0 0 100 100" role="img" aria-label="PRV">
+          <g fill="currentColor">
+            <rect x="22" y="18" width="15" height="64" rx="5"/>
+            <rect x="22" y="67" width="56" height="15" rx="5"/>
+          </g>
+        </svg>
+      </span>
+      <span class="logo-mark">PRV</span>
+      <span class="logo-type">Projects</span>
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="search.html" class="nav-icon-link" aria-label="Caută">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      </a>
+      <a href="shop.html" class="nav-shop-link" aria-label="Shop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 2l1.5 6h9L18 2"/><path d="M4 8h16l-1 14H5L4 8z"/><path d="M9 11v7"/><path d="M15 11v7"/></svg>
+        <span>Shop</span>
+      </a>
+      <a href="index.html#work" data-i18n="nav.work">Proiecte</a>
+      <a href="blog/index.html" data-i18n="nav.blog">Blog</a>
+      <a href="despre-noi.html" data-i18n="nav.about">Despre noi</a>
+      <a href="index.html#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <div id="lang-picker" class="lang-picker-host"></div>
+      <a href="index.html#contact" class="btn btn-primary" data-i18n="nav.cta">Cere o ofertă</a>
+    </div>
+    <button type="button" class="nav-toggle" aria-label="Deschide meniul" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main style="padding-top: 7rem;">
+    <section class="section glass-panel" style="max-width: 920px; margin: 0 auto;">
+      <div class="section-head">
+        <h1 class="section-title gradient-text" data-split>Caută</h1>
+        <p class="section-sub">Pagină placeholder. Când lansăm shop-ul, aici legăm și căutarea internă.</p>
+      </div>
+      <div class="glass-inset" style="padding: 1rem;">
+        <form action="search.html" method="get" class="form" style="display:flex; gap:.75rem; align-items:center; flex-wrap:wrap;">
+          <input name="q" placeholder="Ex: bucătărie, apartament, finisaje…" class="input" style="flex:1; min-width: 240px;" />
+          <button type="submit" class="btn btn-primary">Caută</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script src="js/site-config.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/cookies.js"></script>
+  <script src="js/analytics.js"></script>
+</body>
+</html>
