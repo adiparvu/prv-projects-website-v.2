@@ -1,5 +1,5 @@
 /**
- * PRV Projects — Footer + social (primary + expandable more)
+ * PRV Projects — Footer + social (primary + slider for more)
  */
 (function () {
   const isNested = /\/projects\//.test(location.pathname) || /\/blog\//.test(location.pathname);
@@ -103,15 +103,21 @@
         <span class="footer-heading" data-i18n="footer.follow">Urmărește-ne</span>
         <div class="footer-social" data-social-root>
           <div class="social-primary">${primaryHtml}</div>
-          <div class="social-more-wrap">
-            <button type="button" class="social-more-btn glass-inset" aria-expanded="false" aria-controls="social-more-panel" title="Mai multe rețele" data-i18n-title="footer.moreSocial">
-              <span class="social-more-icon">+</span>
-              <span class="social-more-label" data-i18n="footer.more">Mai multe</span>
-            </button>
-            <div id="social-more-panel" class="social-more-panel glass-inset" hidden>
-              ${moreHtml}
-            </div>
-          </div>
+          ${
+            socialMore.length
+              ? `<div class="social-more-wrap">
+                  <div class="prv-carousel" style="padding: .65rem .75rem;">
+                    <div class="prv-carousel-track" data-social-track aria-label="Mai multe rețele sociale">
+                      ${moreHtml}
+                    </div>
+                    <div class="prv-carousel-controls" style="margin-top:.5rem;">
+                      <button type="button" class="btn btn-glass" data-social-prev aria-label="Înapoi">←</button>
+                      <button type="button" class="btn btn-glass" data-social-next aria-label="Înainte">→</button>
+                    </div>
+                  </div>
+                </div>`
+              : ""
+          }
         </div>
       </div>
       <div class="footer-meta">
@@ -123,25 +129,19 @@
   const yearEl = footer.querySelector(".footer-year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  const moreBtn = footer.querySelector(".social-more-btn");
-  const morePanel = footer.querySelector(".social-more-panel");
+  const socialTrack = footer.querySelector("[data-social-track]");
+  const socialPrev = footer.querySelector("[data-social-prev]");
+  const socialNext = footer.querySelector("[data-social-next]");
 
-  moreBtn?.addEventListener("click", () => {
-    const open = morePanel.hidden;
-    morePanel.hidden = !open;
-    moreBtn.setAttribute("aria-expanded", String(open));
-    moreBtn.classList.toggle("is-open", open);
-    moreBtn.querySelector(".social-more-icon").textContent = open ? "×" : "+";
-  });
+  function scrollSocial(dir) {
+    if (!socialTrack) return;
+    const first = socialTrack.firstElementChild;
+    const step = first ? first.getBoundingClientRect().width + 12 : 220;
+    socialTrack.scrollBy({ left: dir * step, behavior: "smooth" });
+  }
 
-  document.addEventListener("click", (e) => {
-    if (!footer.contains(e.target) && morePanel && !morePanel.hidden) {
-      morePanel.hidden = true;
-      moreBtn?.setAttribute("aria-expanded", "false");
-      moreBtn?.classList.remove("is-open");
-      if (moreBtn) moreBtn.querySelector(".social-more-icon").textContent = "+";
-    }
-  });
+  socialPrev?.addEventListener("click", () => scrollSocial(-1));
+  socialNext?.addEventListener("click", () => scrollSocial(1));
 
   const newsletterForm = footer.querySelector("#footer-newsletter");
   const newsletterMsg = footer.querySelector("#newsletter-msg");

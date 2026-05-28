@@ -1181,6 +1181,16 @@ body.pointer-active .cursor-glow {
   position: relative;
 }
 
+.social-more-wrap .prv-carousel {
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  background: var(--glass-bg);
+}
+
+.social-more-wrap .prv-carousel-track {
+  grid-auto-columns: max-content;
+}
+
 .social-more-btn {
   display: inline-flex;
   align-items: center;
@@ -1221,6 +1231,12 @@ body.pointer-active .cursor-glow {
   min-width: 180px;
   z-index: 80;
   animation: panel-in 0.3s var(--ease-out-expo);
+}
+
+/* Social "more" is now a slider in footer.js */
+.social-more-btn,
+.social-more-panel {
+  display: none !important;
 }
 
 [dir="rtl"] .social-more-panel {
