@@ -1073,6 +1073,30 @@ body.pointer-active .cursor-glow {
   background: linear-gradient(135deg, #1a1208 0%, #c45c26 40%, #f4a261 70%, #ffe8d6 100%);
 }
 
+.work-5 {
+  background: linear-gradient(135deg, #1c0f1a 0%, #5c2d4a 45%, #d4a574 100%);
+}
+
+.work-6 {
+  background: linear-gradient(135deg, #0a1a14 0%, #1e4d3a 50%, #7ec8a3 100%);
+}
+
+.work-7 {
+  background: linear-gradient(135deg, #1a0f0a 0%, #8b3a1a 40%, #ff6b35 80%, #ffd166 100%);
+}
+
+.work-8 {
+  background: linear-gradient(135deg, #0d1520 0%, #2a4a6b 50%, #a8dadc 100%);
+}
+
+.work-9 {
+  background: linear-gradient(135deg, #12121a 0%, #3d3d5c 50%, #c9b8a8 100%);
+}
+
+.work-10 {
+  background: linear-gradient(135deg, #0f1419 0%, #1f3a5f 55%, #64d2ff 100%);
+}
+
 .section-intro {
   font-size: 1.1rem;
   color: var(--text-secondary);
@@ -1603,6 +1627,30 @@ body.pointer-active .cursor-glow {
 .slide-lumen-1 { background: linear-gradient(135deg, #1a1208, #c45c26, #f4a261); }
 .slide-lumen-2 { background: linear-gradient(135deg, #2d1b0e, #e76f51, #ffe8d6); }
 .slide-lumen-3 { background: linear-gradient(135deg, #ffecd2, #fcb69f, #ff9a9e); }
+
+.slide-velvet-1 { background: linear-gradient(135deg, #1c0f1a, #5c2d4a, #d4a574); }
+.slide-velvet-2 { background: linear-gradient(135deg, #2d1b24, #8b5a6b, #f5e6d3); }
+.slide-velvet-3 { background: linear-gradient(135deg, #f8f0e8, #e8c4a0, #c9a66b); }
+
+.slide-canal-1 { background: linear-gradient(135deg, #0a1a14, #1e4d3a, #7ec8a3); }
+.slide-canal-2 { background: linear-gradient(135deg, #1a2f28, #3d6b5a, #a8e6cf); }
+.slide-canal-3 { background: linear-gradient(135deg, #e8f4f0, #b8d4c8, #6b9080); }
+
+.slide-atlas-1 { background: linear-gradient(135deg, #1a0f0a, #8b3a1a, #ff6b35); }
+.slide-atlas-2 { background: linear-gradient(135deg, #2d1810, #c45c26, #ffd166); }
+.slide-atlas-3 { background: linear-gradient(135deg, #fff5e6, #ffb347, #ffcc70); }
+
+.slide-serene-1 { background: linear-gradient(135deg, #0d1520, #2a4a6b, #a8dadc); }
+.slide-serene-2 { background: linear-gradient(135deg, #1a2a3a, #5c7a8a, #d4e8f0); }
+.slide-serene-3 { background: linear-gradient(135deg, #f0f8ff, #c5e4f7, #89c2d9); }
+
+.slide-studio-1 { background: linear-gradient(135deg, #12121a, #3d3d5c, #c9b8a8); }
+.slide-studio-2 { background: linear-gradient(135deg, #1e1e2e, #6b6b8a, #e8e0d8); }
+.slide-studio-3 { background: linear-gradient(135deg, #faf8f5, #e0d5c8, #b8a99a); }
+
+.slide-harbor-1 { background: linear-gradient(135deg, #0f1419, #1f3a5f, #64d2ff); }
+.slide-harbor-2 { background: linear-gradient(135deg, #152535, #2c5282, #90cdf4); }
+.slide-harbor-3 { background: linear-gradient(135deg, #e8f4fc, #bee3f8, #63b3ed); }
 
 .slider-arrow {
   position: absolute;
