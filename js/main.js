@@ -330,6 +330,47 @@ function initCounters() {
   stats.forEach((s) => observer.observe(s));
 }
 
+// ——— Max-visible carousel (show first N, rest as slider) ———
+function initMaxVisibleCarousels() {
+  document.querySelectorAll("[data-max-visible][data-overflow-mode='carousel']").forEach((grid) => {
+    const max = parseInt(grid.getAttribute("data-max-visible") || "4", 10);
+    const items = Array.from(grid.children);
+    if (items.length <= max) return;
+
+    const overflow = items.slice(max);
+    overflow.forEach((el) => el.remove());
+
+    const host = grid.parentElement?.querySelector("[data-carousel-host]");
+    if (!host) return;
+
+    host.hidden = false;
+    host.innerHTML = `
+      <div class="prv-carousel glass-panel" data-reveal>
+        <div class="prv-carousel-track" data-track></div>
+        <div class="prv-carousel-controls">
+          <button type="button" class="btn btn-glass" data-prev>←</button>
+          <button type="button" class="btn btn-glass" data-next>→</button>
+        </div>
+      </div>
+    `;
+
+    const track = host.querySelector("[data-track]");
+    overflow.forEach((el) => {
+      el.classList.add("glass-panel");
+      track.appendChild(el);
+    });
+
+    function scrollByCard(dir) {
+      const card = track.firstElementChild;
+      const step = card ? card.getBoundingClientRect().width + 16 : 320;
+      track.scrollBy({ left: dir * step, behavior: "smooth" });
+    }
+
+    host.querySelector("[data-prev]")?.addEventListener("click", () => scrollByCard(-1));
+    host.querySelector("[data-next]")?.addEventListener("click", () => scrollByCard(1));
+  });
+}
+
 // ——— Magnetic buttons ———
 function initMagneticButtons() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -409,5 +450,6 @@ initTilt();
 initParallax();
 initNav();
 initCounters();
+initMaxVisibleCarousels();
 initMagneticButtons();
 initForm();

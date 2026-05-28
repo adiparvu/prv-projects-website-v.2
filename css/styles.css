@@ -1975,6 +1975,42 @@ body.pointer-active .cursor-glow {
   gap: 1.25rem;
 }
 
+/* Optional: if there are more than 4 items, JS can move overflow into this carousel */
+.prv-carousel-host[hidden] {
+  display: none !important;
+}
+
+.prv-carousel {
+  position: relative;
+  padding: 1rem;
+}
+
+.prv-carousel-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 1fr);
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0.25rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.prv-carousel-track > * {
+  scroll-snap-align: start;
+}
+
+.prv-carousel-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.prv-carousel-controls .btn {
+  padding: 0.65rem 0.9rem;
+}
+
 @media (max-width: 900px) {
   .team-grid {
     grid-template-columns: repeat(2, 1fr);
