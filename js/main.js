@@ -3,6 +3,8 @@
  * Theme · Motion · Canvas · Text effects
  */
 
+import { initProjectSlider } from "./project-slider.js";
+
 const STORAGE_KEY = "prv-theme";
 
 // ——— Theme system (light / dark / system) ———
@@ -330,6 +332,64 @@ function initCounters() {
   stats.forEach((s) => observer.observe(s));
 }
 
+// ——— Horizontal scroll: swipe on touch (team carousel etc.) ———
+function attachHorizontalSwipeScroll(track) {
+  if (!track || track.dataset.swipeBound === "1") return;
+  track.dataset.swipeBound = "1";
+
+  let startX = 0;
+  let startY = 0;
+  let dx = 0;
+  let dragging = false;
+
+  function onStart(clientX, clientY) {
+    dragging = true;
+    startX = clientX;
+    startY = clientY;
+    dx = 0;
+  }
+
+  function onMove(clientX, clientY) {
+    if (!dragging) return;
+    dx = clientX - startX;
+    const dy = clientY - startY;
+    if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
+      track.classList.add("is-dragging");
+    }
+  }
+
+  function onEnd() {
+    if (!dragging) return;
+    dragging = false;
+    track.classList.remove("is-dragging");
+    const threshold = 48;
+    if (Math.abs(dx) > threshold) {
+      const card = track.firstElementChild;
+      const step = card ? card.getBoundingClientRect().width + 16 : 280;
+      track.scrollBy({ left: dx < 0 ? step : -step, behavior: "smooth" });
+    }
+    dx = 0;
+  }
+
+  track.addEventListener(
+    "touchstart",
+    (e) => {
+      const t = e.changedTouches[0];
+      onStart(t.clientX, t.clientY);
+    },
+    { passive: true }
+  );
+  track.addEventListener(
+    "touchmove",
+    (e) => {
+      const t = e.changedTouches[0];
+      onMove(t.clientX, t.clientY);
+    },
+    { passive: true }
+  );
+  track.addEventListener("touchend", onEnd, { passive: true });
+}
+
 // ——— Max-visible carousel (show first N, rest as slider) ———
 function initMaxVisibleCarousels() {
   document.querySelectorAll("[data-max-visible][data-overflow-mode='carousel']").forEach((grid) => {
@@ -368,7 +428,10 @@ function initMaxVisibleCarousels() {
 
     host.querySelector("[data-prev]")?.addEventListener("click", () => scrollByCard(-1));
     host.querySelector("[data-next]")?.addEventListener("click", () => scrollByCard(1));
+    attachHorizontalSwipeScroll(track);
   });
+
+  document.querySelectorAll(".prv-carousel-track[data-track]").forEach(attachHorizontalSwipeScroll);
 }
 
 // ——— Magnetic buttons ———
@@ -453,3 +516,5 @@ initCounters();
 initMaxVisibleCarousels();
 initMagneticButtons();
 initForm();
+
+if (document.querySelector("[data-slider]")) initProjectSlider();

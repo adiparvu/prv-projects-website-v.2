@@ -2194,6 +2194,13 @@ body.pointer-active .cursor-glow {
   scroll-snap-type: x mandatory;
   padding: 0.25rem;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  cursor: grab;
+}
+
+.prv-carousel-track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
 }
 
 .prv-carousel-track > * {

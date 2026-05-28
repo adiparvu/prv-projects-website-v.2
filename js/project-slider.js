@@ -1,18 +1,20 @@
 /**
- * PRV Projects — Photo slider for project detail pages
+ * PRV Projects — Photo slider for project detail pages (touch swipe + drag)
  */
-export function initProjectSlider() {
-  const root = document.querySelector("[data-slider]");
-  if (!root) return;
 
+function initSingleProjectSlider(root) {
   const track = root.querySelector(".slider-track");
   const viewport = root.querySelector(".slider-viewport") || root;
   const slides = [...root.querySelectorAll(".slider-slide")];
   const dotsWrap = root.querySelector(".slider-dots");
   const prev = root.querySelector("[data-slider-prev]");
   const next = root.querySelector("[data-slider-next]");
+  if (!track || slides.length === 0) return;
+
   let index = 0;
   let autoplayId;
+
+  if (dotsWrap) dotsWrap.innerHTML = "";
 
   slides.forEach((_, i) => {
     const dot = document.createElement("button");
@@ -43,7 +45,6 @@ export function initProjectSlider() {
   prev?.addEventListener("click", prevSlide);
   next?.addEventListener("click", nextSlide);
 
-  // Swipe / drag (touch + mouse)
   let isDragging = false;
   let startX = 0;
   let startY = 0;
@@ -55,13 +56,11 @@ export function initProjectSlider() {
   }
 
   function setDragTransform(deltaPx) {
-    // During drag we use pixel math for better feel.
     track.style.transition = "none";
     track.style.transform = `translate3d(${-index * width + deltaPx}px, 0, 0)`;
   }
 
   function snap() {
-    // Return to the percent-based transform used elsewhere.
     track.style.transition = "transform 0.6s var(--ease-out-expo)";
     track.style.transform = `translateX(-${index * 100}%)`;
   }
@@ -79,10 +78,7 @@ export function initProjectSlider() {
     if (!isDragging) return { prevent: false };
     dx = clientX - startX;
     const dy = clientY - startY;
-
-    // Only hijack when it's clearly a horizontal gesture.
     if (Math.abs(dx) < 6 || Math.abs(dx) < Math.abs(dy) * 1.1) return { prevent: false };
-
     setDragTransform(dx);
     return { prevent: true };
   }
@@ -96,10 +92,8 @@ export function initProjectSlider() {
     startAutoplay();
   }
 
-  // Pointer events (preferred)
   if (window.PointerEvent) {
     viewport.addEventListener("pointerdown", (e) => {
-      // Only primary button for mouse; always for touch/pen.
       if (e.pointerType === "mouse" && e.button !== 0) return;
       viewport.setPointerCapture?.(e.pointerId);
       onStart(e.clientX, e.clientY);
@@ -111,7 +105,6 @@ export function initProjectSlider() {
     viewport.addEventListener("pointerup", onEnd);
     viewport.addEventListener("pointercancel", onEnd);
   } else {
-    // Fallback touch events
     viewport.addEventListener(
       "touchstart",
       (e) => {
@@ -129,13 +122,7 @@ export function initProjectSlider() {
       },
       { passive: false }
     );
-    viewport.addEventListener(
-      "touchend",
-      () => {
-        onEnd();
-      },
-      { passive: true }
-    );
+    viewport.addEventListener("touchend", onEnd, { passive: true });
   }
 
   window.addEventListener("resize", () => {
@@ -145,6 +132,7 @@ export function initProjectSlider() {
 
   function startAutoplay() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    clearInterval(autoplayId);
     autoplayId = setInterval(nextSlide, 5500);
   }
 
@@ -155,4 +143,8 @@ export function initProjectSlider() {
   root.addEventListener("mouseenter", stopAutoplay);
   root.addEventListener("mouseleave", startAutoplay);
   startAutoplay();
+}
+
+export function initProjectSlider() {
+  document.querySelectorAll("[data-slider]").forEach(initSingleProjectSlider);
 }
