@@ -1,6 +1,11 @@
 {
   "lang.label": "Limbă",
   "lang.choose": "Alege limba",
+  "theme.label": "Temă",
+  "theme.choose": "Alege tema",
+  "theme.light": "Luminos",
+  "theme.dark": "Întunecat",
+  "theme.system": "Sistem",
   "nav.services": "Servicii",
   "nav.work": "Proiecte",
   "nav.why": "De ce noi",
