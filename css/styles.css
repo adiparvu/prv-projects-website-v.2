@@ -245,8 +245,9 @@ body.pointer-active .cursor-glow {
 .nav {
   position: fixed;
   top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 50% !important;
+  right: auto !important;
+  transform: translate3d(-50%, 0, 0) !important;
   z-index: 100;
   width: min(calc(100% - 2rem), var(--max-width));
   height: var(--nav-height);
@@ -259,7 +260,7 @@ body.pointer-active .cursor-glow {
 }
 
 .nav.nav-hidden {
-  transform: translateX(-50%) translateY(-120%);
+  transform: translate3d(-50%, -120%, 0) !important;
   opacity: 0;
 }
 
