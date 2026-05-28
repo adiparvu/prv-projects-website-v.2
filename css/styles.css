@@ -1630,7 +1630,11 @@ body.pointer-active .cursor-glow {
 }
 
 .footer-meta {
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   padding-top: 0.25rem;
 }
 
@@ -2671,6 +2675,133 @@ body.pointer-active .cursor-glow {
   .testimonials-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Legal pages (FAQ, privacy) */
+.legal-main {
+  max-width: 820px;
+  margin: 0 auto;
+  padding-bottom: 3rem;
+}
+
+.legal-doc {
+  padding: 1.75rem 1.5rem;
+}
+
+.legal-head {
+  margin-bottom: 1.5rem;
+}
+
+.legal-updated {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0.5rem 0 0;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.faq-item {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.faq-item summary {
+  padding: 1rem 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  color: var(--text-primary);
+  transition: color 0.2s;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  float: right;
+  font-weight: 400;
+  color: var(--accent-1);
+  transition: transform 0.2s var(--ease-out-expo);
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 1.1rem 1rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.privacy-prose .privacy-section {
+  margin-bottom: 1.25rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+}
+
+.privacy-prose .privacy-section:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.privacy-prose h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: var(--text-primary);
+}
+
+.privacy-prose p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.legal-foot {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--glass-border, rgba(255, 255, 255, 0.08));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+
+.legal-link {
+  font-size: 0.85rem;
+  color: var(--accent-1);
+  text-decoration: none;
+}
+
+.legal-link:hover {
+  text-decoration: underline;
+}
+
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-top: 0.35rem;
+}
+
+.footer-legal a {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.footer-legal a:hover {
+  color: var(--text-primary);
 }
 
 /* Floating CTA (mobile) */

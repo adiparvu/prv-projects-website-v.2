@@ -122,6 +122,10 @@
       </div>
       <div class="footer-meta">
         <span class="footer-copy">© <span class="footer-year"></span> PRV Projects · <span data-i18n="footer.craft">Renovări care durează</span></span>
+        <nav class="footer-legal" aria-label="Legal">
+          <a href="${base}/faq.html" data-i18n="footer.faq">FAQ</a>
+          <a href="${base}/confidentialitate.html" data-i18n="footer.privacy">Confidențialitate</a>
+        </nav>
       </div>
     </div>
   `;

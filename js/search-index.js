@@ -8,6 +8,13 @@ window.PRV_SEARCH_INDEX = [
   { url: "de-ce-noi.html", type: "page", i18n: "nav.why", tags: "de ce noi avantaje garanție" },
   { url: "despre-noi.html", type: "page", i18n: "nav.about", tags: "despre echipă istorie" },
   { url: "contact.html", type: "page", i18n: "nav.contact", tags: "contact ofertă email" },
+  { url: "faq.html", type: "page", i18n: "faq.title", tags: "faq întrebări cost garanție termen" },
+  {
+    url: "confidentialitate.html",
+    type: "page",
+    i18n: "privacy.title",
+    tags: "confidențialitate gdpr cookies privacy politică date",
+  },
   {
     url: "projects/aurora-residence.html",
     type: "project",

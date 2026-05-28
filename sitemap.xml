@@ -6,6 +6,8 @@
   <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/proiecte.html</loc></url>
   <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/de-ce-noi.html</loc></url>
   <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/contact.html</loc></url>
+  <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/faq.html</loc><priority>0.7</priority></url>
+  <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/confidentialitate.html</loc><priority>0.5</priority></url>
   <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/search.html</loc></url>
   <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/shop.html</loc></url>
   <url><loc>https://adiparvu.github.io/prv-projects-website-v.2/blog/</loc><priority>0.8</priority></url>
