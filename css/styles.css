@@ -259,6 +259,34 @@ body.pointer-active .cursor-glow {
   transition: transform 0.5s var(--ease-out-expo), opacity 0.5s ease;
 }
 
+/* Make nav glass slightly more opaque for readability */
+.nav.glass-panel {
+  backdrop-filter: blur(calc(var(--blur-strength) * 1.15)) saturate(200%);
+  -webkit-backdrop-filter: blur(calc(var(--blur-strength) * 1.15)) saturate(200%);
+}
+
+.nav.glass-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.12) 100%
+    );
+  mix-blend-mode: normal;
+}
+
+[data-effective-theme="dark"] .nav.glass-panel::after {
+  background: linear-gradient(
+      180deg,
+      rgba(12, 12, 16, 0.55) 0%,
+      rgba(12, 12, 16, 0.38) 100%
+    );
+}
+
 .nav.nav-hidden {
   transform: translate3d(-50%, -120%, 0) !important;
   opacity: 0;
