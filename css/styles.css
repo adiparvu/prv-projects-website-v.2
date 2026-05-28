@@ -1183,6 +1183,17 @@ body.pointer-active .cursor-glow {
   position: relative;
 }
 
+.social-more-panel--inline {
+  position: static;
+  transform: none;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  animation: none;
+}
+
 .social-more-wrap .prv-carousel {
   border: 1px solid var(--glass-border);
   border-radius: 16px;
@@ -1244,9 +1255,22 @@ body.pointer-active .cursor-glow {
   animation: panel-in 0.3s var(--ease-out-expo);
 }
 
-/* Social "more" is now a slider in footer.js */
-.social-more-btn,
-.social-more-panel {
+/* Inline variant used in footer */
+.social-more-panel.social-more-panel--inline {
+  position: static;
+  bottom: auto;
+  left: auto;
+  transform: none;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  animation: none;
+  z-index: auto;
+}
+
+/* Social dropdown/slider removed: show inline icons */
+.social-more-btn {
   display: none !important;
 }
 
