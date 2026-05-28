@@ -1145,6 +1145,7 @@ body.pointer-active .cursor-glow {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 }
 
@@ -1152,6 +1153,7 @@ body.pointer-active .cursor-glow {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .social-icon {
@@ -1191,61 +1193,29 @@ body.pointer-active .cursor-glow {
   grid-auto-columns: max-content;
 }
 
-.social-select {
-  position: relative;
-  height: 42px;
-  border-radius: 14px;
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
-  color: var(--text-secondary);
-  padding: 0 40px 0 14px;
-  display: flex;
-  align-items: center;
-}
-
-.social-select__native {
-  appearance: none;
-  -webkit-appearance: none;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  font-size: 0.86rem;
-  font-weight: 600;
-  outline: none;
-  width: 100%;
-  cursor: pointer;
-  padding: 0;
-}
-
+.social-select,
+.social-select__native,
 .social-select__chev {
-  position: absolute;
-  right: 12px;
-  width: 18px;
-  height: 18px;
-  color: var(--text-muted);
-  pointer-events: none;
-}
-
-.social-select:hover {
-  color: var(--text-primary);
-  border-color: var(--accent-1);
+  display: none !important;
 }
 
 .social-more-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
   height: 42px;
-  padding: 0 14px;
+  width: 42px;
+  padding: 0;
   border: 1px solid var(--glass-border);
   border-radius: 14px;
   background: var(--glass-bg);
   color: var(--text-secondary);
-  font-size: 0.8rem;
-  font-weight: 600;
   cursor: pointer;
   transition: all 0.25s var(--ease-out-expo);
+}
+
+.social-more-btn svg {
+  width: 18px;
+  height: 18px;
 }
 
 .social-more-btn:hover,

@@ -40,16 +40,10 @@
       icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>`,
     },
     {
-      id: "tiktok",
-      label: "TikTok",
-      href: "https://tiktok.com/@prvprojects",
-      icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 1 1-2.89-2.89c.28 0 .55.04.81.12V9.45a6.34 6.34 0 1 0 5.04 6.18V8.68a8.18 8.18 0 0 0 4.26 1.19V6.47a4.85 4.85 0 0 1-1-.78z"/></svg>`,
-    },
-    {
-      id: "behance",
-      label: "Behance",
-      href: "https://behance.net/prvprojects",
-      icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 7h-7V5h7v2zm1.77 8.76c-.36 2.43-2.28 4.09-4.87 4.09-3.28 0-5.5-2.5-5.5-6.1S15.62 7.5 18.7 7.5c2.45 0 4.1 1.17 4.78 3.24h-3.5c-.33-.9-1-1.36-1.95-1.36-1.38 0-2.2 1.12-2.32 3.05h6.4c.05.4.07.8.07 1.23zM0 5h6.5c4 0 6.2 2.1 6.2 5.35 0 2.05-1 3.65-2.75 4.3C11.8 16.5 13.5 19 17 19H24v-2.5h-5.8c-2.5 0-3.9-1.4-4.2-3.9H0V5zm6.2 7.5c-2.1 0-3.2-1.2-3.2-3.3S4.1 6 6.2 6H4.5v6.5h1.7z"/></svg>`,
+      id: "pinterest",
+      label: "Pinterest",
+      href: "https://pinterest.com/prvprojects",
+      icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 0C5.39 0 0 5.39 0 12.04c0 5.1 3.19 9.44 7.68 11.2-.11-.95-.21-2.41.05-3.45.23-.9 1.5-5.73 1.5-5.73s-.38-.76-.38-1.88c0-1.76 1.02-3.07 2.29-3.07 1.08 0 1.6.81 1.6 1.78 0 1.08-.69 2.69-1.04 4.18-.29 1.25.62 2.27 1.85 2.27 2.22 0 3.93-2.34 3.93-5.72 0-2.99-2.15-5.08-5.22-5.08-3.56 0-5.65 2.67-5.65 5.43 0 1.08.42 2.24.94 2.87.1.12.12.23.09.36-.1.4-.33 1.25-.37 1.42-.06.23-.2.28-.46.17-1.71-.8-2.78-3.31-2.78-5.33 0-4.34 3.15-8.33 9.09-8.33 4.77 0 8.48 3.4 8.48 7.95 0 4.74-2.99 8.56-7.14 8.56-1.39 0-2.7-.72-3.15-1.57l-.86 3.28c-.31 1.19-1.15 2.68-1.71 3.59 1.29.4 2.65.62 4.07.62C18.61 24.08 24 18.69 24 12.04 24 5.39 18.69 0 12.04 0z\"/></svg>`,
     },
   ];
 
@@ -106,14 +100,11 @@
           ${
             socialMore.length
               ? `<div class="social-more-wrap">
-                  <div class="social-select glass-inset">
-                    <svg class="social-select__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-                    <select class="social-select__native" data-social-select aria-label="Alege o platformă">
-                      <option value="" selected disabled>Mai multe rețele</option>
-                      ${socialMore
-                        .map((s) => `<option value="${s.href}">${s.label}</option>`)
-                        .join("")}
-                    </select>
+                  <button type="button" class="social-more-btn glass-inset" aria-expanded="false" aria-controls="social-more-panel" title="Mai multe rețele">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                  </button>
+                  <div id="social-more-panel" class="social-more-panel glass-inset" hidden>
+                    ${moreHtml}
                   </div>
                 </div>`
               : ""
@@ -129,12 +120,23 @@
   const yearEl = footer.querySelector(".footer-year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  const socialSelect = footer.querySelector("[data-social-select]");
-  socialSelect?.addEventListener("change", () => {
-    const href = socialSelect.value;
-    if (!href) return;
-    window.open(href, "_blank", "noopener,noreferrer");
-    socialSelect.selectedIndex = 0;
+  const moreBtn = footer.querySelector(".social-more-btn");
+  const morePanel = footer.querySelector(".social-more-panel");
+
+  moreBtn?.addEventListener("click", () => {
+    if (!morePanel) return;
+    const open = morePanel.hidden;
+    morePanel.hidden = !open;
+    moreBtn.setAttribute("aria-expanded", String(open));
+    moreBtn.classList.toggle("is-open", open);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!footer.contains(e.target) && morePanel && !morePanel.hidden) {
+      morePanel.hidden = true;
+      moreBtn?.setAttribute("aria-expanded", "false");
+      moreBtn?.classList.remove("is-open");
+    }
   });
 
   const newsletterForm = footer.querySelector("#footer-newsletter");
