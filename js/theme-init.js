@@ -15,4 +15,8 @@
 
   root.setAttribute("data-effective-theme", effective);
   root.style.colorScheme = effective;
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    root.classList.add("reduced-motion");
+  }
 })();
