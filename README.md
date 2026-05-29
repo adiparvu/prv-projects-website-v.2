@@ -11,7 +11,9 @@ PRV este construit ca **ecosistem unificat web + mobil**, cu intenția de livrar
 | Arhitectură | [`docs/PRODUCT_ECOSYSTEM.md`](docs/PRODUCT_ECOSYSTEM.md) |
 | Platformă (web / PWA / iOS / Android) | `js/prv-platform.js` |
 | API unificat | `js/api/client.js` |
-| Shop | [`shop/`](shop/) |
+| Shop | [`shop/`](shop/) · API [`server/`](server/) |
+| **Unificare cu dashboard** | [`docs/MERGE-DASHBOARD.md`](docs/MERGE-DASHBOARD.md) |
+| Export / alt repo | [`docs/REPO-SNAPSHOT.md`](docs/REPO-SNAPSHOT.md) |
 | App-uri native (viitor) | [`apps/README.md`](apps/README.md) |
 
 ### Limbi suportate
