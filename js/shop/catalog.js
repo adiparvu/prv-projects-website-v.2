@@ -4,8 +4,9 @@ let cache = null;
 
 function catalogPath() {
   const path = window.location.pathname;
-  if (path.includes("/shop/")) {
-    const root = path.slice(0, path.indexOf("/shop/"));
+  const shopIdx = path.indexOf("/shop");
+  if (shopIdx !== -1) {
+    const root = path.slice(0, shopIdx);
     return `${root}/data/shop/catalog.json`;
   }
   return "data/shop/catalog.json";
