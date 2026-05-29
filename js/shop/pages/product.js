@@ -6,6 +6,7 @@ import { ShopStore } from "../store.js";
 import { productMediaActions } from "../media-actions.js";
 import { trackViewItem } from "../analytics.js";
 import { t } from "../i18n.js";
+import { skuCopyRowHtml, wireSkuCopy } from "../copy-sku.js";
 
 const BELL_ICON = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8a6 6 0 10-12 0c0 7-3 7-3 7h18s-3 0-3-7"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>`;
 
@@ -59,7 +60,11 @@ export function renderProduct(main, catalog, slug) {
     <article class="shop-pdp glass-panel" style="margin-top:1rem;padding:1.5rem">
       ${galleryHtml(product)}
       <div class="shop-pdp-info">
-        <p class="shop-pdp-meta">${t("shop.product.sku")} ${escapeHtml(product.sku)} · ${product.stock > 0 ? t("shop.product.inStock", { n: product.stock }) : t("shop.product.outOfStock")}</p>
+        <p class="shop-pdp-meta">
+          ${skuCopyRowHtml(product.sku)}
+          <span class="shop-pdp-meta-sep" aria-hidden="true">·</span>
+          <span class="shop-pdp-stock">${product.stock > 0 ? t("shop.product.inStock", { n: product.stock }) : t("shop.product.outOfStock")}</span>
+        </p>
         <h1>${escapeHtml(product.name)}</h1>
         <div class="shop-pdp-price-block">
           ${onSale ? `<span class="shop-price-rrp">${t("shop.rrp")} ${formatMoney(product.compareAtCents)}</span>` : ""}
@@ -91,6 +96,8 @@ export function renderProduct(main, catalog, slug) {
         : ""
     }
   `;
+
+  wireSkuCopy(main);
 
   main.querySelectorAll(".shop-thumb").forEach((btn) => {
     btn.addEventListener("click", () => {

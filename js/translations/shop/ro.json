@@ -144,5 +144,8 @@
   "shop.empty.product": "Produs negăsit.",
   "shop.empty.order": "Comandă negăsită",
   "shop.breadcrumb.shop": "Shop",
-  "shop.loading": "Se încarcă PRV Shop…"
+  "shop.loading": "Se încarcă PRV Shop…",
+  "shop.product.copySku": "Copiază codul",
+  "shop.product.copySkuDone": "Cod copiat ✓",
+  "shop.product.copySkuFail": "Nu s-a putut copia"
 }

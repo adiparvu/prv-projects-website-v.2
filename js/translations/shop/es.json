@@ -144,5 +144,8 @@
   "shop.empty.product": "Producto no encontrado.",
   "shop.empty.order": "Pedido no encontrado",
   "shop.breadcrumb.shop": "Tienda",
-  "shop.loading": "Cargando PRV Shop…"
+  "shop.loading": "Cargando PRV Shop…",
+  "shop.product.copySku": "Copy code",
+  "shop.product.copySkuDone": "Code copied ✓",
+  "shop.product.copySkuFail": "Could not copy"
 }

@@ -138,5 +138,8 @@
   "shop.empty.product": "Product niet gevonden.",
   "shop.empty.order": "Bestelling niet gevonden",
   "shop.breadcrumb.shop": "Shop",
-  "shop.loading": "PRV Shop laden…"
+  "shop.loading": "PRV Shop laden…",
+  "shop.product.copySku": "Copy code",
+  "shop.product.copySkuDone": "Code copied ✓",
+  "shop.product.copySkuFail": "Could not copy"
 }

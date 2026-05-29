@@ -144,5 +144,8 @@
   "shop.empty.product": "Produit introuvable.",
   "shop.empty.order": "Commande introuvable",
   "shop.breadcrumb.shop": "Boutique",
-  "shop.loading": "Chargement PRV Shop…"
+  "shop.loading": "Chargement PRV Shop…",
+  "shop.product.copySku": "Copy code",
+  "shop.product.copySkuDone": "Code copied ✓",
+  "shop.product.copySkuFail": "Could not copy"
 }
