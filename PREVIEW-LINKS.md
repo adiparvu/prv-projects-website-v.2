@@ -4,8 +4,8 @@
 
 | Pagină | URL |
 |--------|-----|
-| **Shop** | https://substance-civilization-ready-selecting.trycloudflare.com/shop/index.html |
-| **Site** | https://substance-civilization-ready-selecting.trycloudflare.com/ |
+| **Shop** | https://encouraging-awareness-trucks-towers.trycloudflare.com/shop/index.html |
+| **Site** | https://encouraging-awareness-trucks-towers.trycloudflare.com/ |
 
 > Deschide **/shop/index.html** (cu `index.html`). Hard refresh: Ctrl+Shift+R.
 
