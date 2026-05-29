@@ -91,9 +91,22 @@ async function renderPage(page, main, catalog) {
   }
 }
 
+function waitForI18n(timeoutMs = 10000) {
+  return new Promise((resolve, reject) => {
+    const start = Date.now();
+    const check = () => {
+      if (window.PRV_I18N?.applyLang) return resolve();
+      if (Date.now() - start > timeoutMs) return reject(new Error("i18n_timeout"));
+      setTimeout(check, 40);
+    };
+    check();
+  });
+}
+
 export async function bootShop(page) {
   activePage = page;
   try {
+    await waitForI18n();
     initEcosystem();
     initShopAuth();
     await handleMagicLinkFromUrl();
@@ -147,6 +160,12 @@ export async function bootShop(page) {
     }
   } catch (err) {
     console.error("[PRV Shop]", err);
-    showShopFatal("Catalog or scripts failed to load.");
+    const hint =
+      err.message === "catalog_load_failed"
+        ? "Nu s-a putut încărca catalogul. Verifică că deschizi /shop/index.html (nu doar /shop) și că fișierul data/shop/catalog.json există."
+        : err.message === "i18n_timeout"
+          ? "Traducerile nu s-au încărcat. Reîncarcă pagina sau verifică js/translations/."
+          : "Catalog sau scripturi — reîncarcă pagina.";
+    showShopFatal(hint);
   }
 }

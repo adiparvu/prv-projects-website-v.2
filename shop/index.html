@@ -24,13 +24,16 @@
   <div id="shop-root"><p class="shop-loading" style="text-align:center;padding:3rem 1rem;opacity:0.7">Se încarcă PRV Shop…</p></div>
   <script src="../js/site-config.js"></script>
   <script src="../js/i18n-config.js"></script>
-  <script src="../js/i18n.js" defer></script>
+  <script src="../js/i18n.js"></script>
   <script src="../js/footer.js" defer></script>
   <script src="../js/cookies.js" defer></script>
-  <script src="../js/main.js" type="module"></script>
   <script type="module">
     import { bootShop } from "../js/shop/boot.js";
-    bootShop("home").catch((e) => console.error("[PRV Shop boot]", e));
+    bootShop("home").catch((e) => {
+      console.error(e);
+      document.getElementById("shop-root").innerHTML =
+        '<div class="glass-panel" style="max-width:480px;margin:2rem auto;padding:1.25rem"><h1>Shop</h1><p>Eroare la încărcare. Încearcă <a href="index.html">reîncărcare</a> sau link direct: <code>/shop/index.html</code></p></div>';
+    });
   </script>
 </body>
 </html>

@@ -1,33 +1,30 @@
 /** PRV Shop — catalog loader + locale overlays */
 
 import { getApiBase, fetchCatalog as fetchCatalogApi } from "./api.js";
+import { catalogJsonUrl, dataShopRoot } from "./paths.js";
 
 let cache = null;
 let localeCache = {};
 
-function dataRoot() {
-  const path = window.location.pathname;
-  const shopIdx = path.indexOf("/shop");
-  if (shopIdx !== -1) {
-    const root = path.slice(0, shopIdx);
-    return `${root}/data/shop`;
-  }
-  return "data/shop";
-}
-
-function catalogPath() {
-  return `${dataRoot()}/catalog.json`;
-}
-
 function getLang() {
   return window.PRV_I18N?.getLang?.() || "ro";
+}
+
+async function fetchWithTimeout(url, ms = 5000) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), ms);
+  try {
+    return await fetch(url, { signal: ctrl.signal, cache: "no-store" });
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 async function loadLocaleOverlay(lang) {
   if (lang === "ro") return null;
   if (localeCache[lang]) return localeCache[lang];
   try {
-    const res = await fetch(`${dataRoot()}/i18n/${lang}.json`);
+    const res = await fetchWithTimeout(`${dataShopRoot()}/i18n/${lang}.json`);
     if (!res.ok) return null;
     localeCache[lang] = await res.json();
     return localeCache[lang];
@@ -80,8 +77,11 @@ export async function loadCatalog(force = false) {
 
   if (getApiBase()) {
     try {
-      const fromApi = await fetchCatalogApi(lang);
-      if (fromApi) {
+      const fromApi = await Promise.race([
+        fetchCatalogApi(lang),
+        new Promise((_, rej) => setTimeout(() => rej(new Error("api_timeout")), 5000)),
+      ]);
+      if (fromApi?.products?.length) {
         cache = fromApi;
         return cache;
       }
@@ -90,7 +90,7 @@ export async function loadCatalog(force = false) {
     }
   }
 
-  const res = await fetch(catalogPath());
+  const res = await fetchWithTimeout(catalogJsonUrl());
   if (!res.ok) throw new Error("catalog_load_failed");
   const base = await res.json();
   const overlay = await loadLocaleOverlay(lang);

@@ -2,17 +2,15 @@
 
 function shopBase() {
   const path = window.location.pathname;
-  if (path.includes("/shop/")) {
-    const idx = path.indexOf("/shop/");
-    return path.slice(0, idx + "/shop".length);
-  }
+  const m = path.match(/^(.*\/shop)(?:\/|$)/);
+  if (m) return m[1];
   return "/shop";
 }
 
 function rootPrefix() {
   const path = window.location.pathname;
-  const shopIdx = path.indexOf("/shop/");
-  if (shopIdx > 0) return path.slice(0, shopIdx);
+  const m = path.match(/^(.*)\/shop(?:\/|$)/);
+  if (m && m[1]) return m[1];
   return "";
 }
 
