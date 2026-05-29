@@ -3,6 +3,7 @@
 import { formatMoney, escapeHtml } from "./format.js";
 import { ShopRoutes } from "./routes.js";
 import { productMediaActions } from "./media-actions.js";
+import { ShopStore } from "./store.js";
 import { t } from "./i18n.js";
 
 export function productCard(product, catalog) {
