@@ -2,6 +2,8 @@
  * PRV Projects — Micro-interacțiuni & efecte (fx)
  */
 
+import { initThemeTransition } from "./fx-theme-transition.js";
+
 const NAV_OFFSET = 88;
 const STAGGER_BASE_MS = 80;
 const STAGGER_STEP_MS = 10; /* 80, 90, 100, 110, 120 ms */
@@ -210,42 +212,6 @@ function initCtaParticles() {
     btn.addEventListener("mouseenter", spawn);
     btn.addEventListener("focus", spawn);
   });
-}
-
-// ——— 13. Theme crossfade ———
-function ensureThemeOverlay() {
-  let el = document.getElementById("fx-theme-overlay");
-  if (!el) {
-    el = document.createElement("div");
-    el.id = "fx-theme-overlay";
-    el.setAttribute("aria-hidden", "true");
-    document.body.appendChild(el);
-  }
-  return el;
-}
-
-function initThemeTransition() {
-  const overlay = ensureThemeOverlay();
-  let busy = false;
-
-  window.PRV_FX = window.PRV_FX || {};
-  window.PRV_FX.themeTransition = (applyFn, preference) => {
-    if (prefersReduced() || busy) {
-      applyFn(preference);
-      return;
-    }
-    busy = true;
-    overlay.classList.add("is-active");
-    setTimeout(() => {
-      applyFn(preference);
-      requestAnimationFrame(() => {
-        overlay.classList.remove("is-active");
-        setTimeout(() => {
-          busy = false;
-        }, 320);
-      });
-    }, 150);
-  };
 }
 
 // ——— 9. Form success (export for main.js) ———

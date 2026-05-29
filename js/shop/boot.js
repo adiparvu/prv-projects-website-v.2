@@ -25,6 +25,7 @@ import { wireFavoriteButtons } from "./favorites.js";
 import { mountWelcomePromo } from "./welcome-promo.js";
 import { remountShopPickers } from "./picker-mount.js";
 import { initTheme } from "../prv-theme-picker.js";
+import { initThemeTransition } from "../fx-theme-transition.js";
 
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
@@ -110,6 +111,7 @@ export async function bootShop(page) {
   activePage = page;
   try {
     await waitForI18n();
+    initThemeTransition();
     initTheme();
     initEcosystem();
     initShopAuth();
