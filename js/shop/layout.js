@@ -3,9 +3,13 @@
 import { ShopRoutes } from "./routes.js";
 import { cartBadgeHtml, uspStrip } from "./components.js";
 import { ShopStore } from "./store.js";
+import { escapeHtml } from "./format.js";
 import { t } from "./i18n.js";
 
 const SEARCH_ICON = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>`;
+const BACK_ICON = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>`;
+const ACCOUNT_ICON = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21a8 8 0 10-16 0"/><circle cx="12" cy="8" r="4"/></svg>`;
+const CART_ICON = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 2l1.5 6h9L18 2"/><path d="M4 8h16l-1 14H5L4 8z"/></svg>`;
 
 export function mountShopLayout({ active = "shop", catalog = null, searchQuery = "" } = {}) {
   const root = document.getElementById("shop-root");
@@ -21,7 +25,7 @@ export function mountShopLayout({ active = "shop", catalog = null, searchQuery =
   const navCats = categories
     .map((c) => {
       const short = c.name.split(/[\s&]/)[0];
-      return `<a href="${ShopRoutes.category(c.slug)}">${short}</a>`;
+      return `<a href="${ShopRoutes.category(c.slug)}">${escapeHtml(short)}</a>`;
     })
     .join("");
 
@@ -30,28 +34,41 @@ export function mountShopLayout({ active = "shop", catalog = null, searchQuery =
   root.innerHTML = `
     <div class="shop-shell">
       ${uspStrip()}
-      <header class="shop-header glass-panel">
-        <a href="${ShopRoutes.siteHome()}" class="logo logo-animated" aria-label="PRV Projects">
-          <span class="logo-mark">PRV</span>
-          <span class="logo-type">Projects</span>
-          <span class="shop-logo-sub">Shop</span>
-        </a>
-        <nav class="shop-nav" aria-label="Shop">
-          <a href="${ShopRoutes.home()}" class="${active === "shop" ? "is-active" : ""}">${t("shop.nav.home")}</a>
-          ${navCats}
-        </nav>
-        <div class="shop-header-actions">
-          <button type="button" class="shop-icon-btn shop-search-toggle${active === "search" ? " is-active" : ""}" id="shop-search-open" aria-label="${escapeAttr(t("shop.nav.search"))}" aria-expanded="false" aria-controls="shop-search-overlay">
-            ${SEARCH_ICON}
-          </button>
-          <div id="lang-picker" class="lang-picker-host"></div>
-          <a href="${ShopRoutes.account()}" class="btn btn-glass btn-sm">${accountLabel}</a>
-          <a href="${ShopRoutes.cart()}" class="shop-cart-btn" aria-label="${escapeAttr(t("shop.cart.title"))}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2l1.5 6h9L18 2"/><path d="M4 8h16l-1 14H5L4 8z"/></svg>
-            ${cartBadgeHtml()}
+      <div class="shop-header-wrap">
+        <header class="shop-header glass-panel">
+          <div class="shop-header-slot shop-header-slot--start">
+            <a href="${ShopRoutes.siteHome()}" class="shop-icon-btn shop-back-btn" aria-label="${escapeAttr(t("shop.nav.backToSite"))}">
+              ${BACK_ICON}
+            </a>
+          </div>
+          <a href="${ShopRoutes.home()}" class="shop-header-brand logo logo-animated" aria-label="PRV Shop">
+            <span class="shop-header-brand-line">
+              <span class="logo-mark">PRV</span>
+              <span class="logo-type">Projects</span>
+            </span>
+            <span class="shop-logo-sub">Shop</span>
           </a>
-        </div>
-      </header>
+          <div class="shop-header-slot shop-header-slot--end" role="group" aria-label="${escapeAttr(t("shop.nav.actions"))}">
+            <a href="${ShopRoutes.cart()}" class="shop-icon-btn shop-cart-btn" aria-label="${escapeAttr(t("shop.cart.title"))}">
+              ${CART_ICON}
+              ${cartBadgeHtml()}
+            </a>
+            <a href="${ShopRoutes.account()}" class="shop-icon-btn shop-account-btn" aria-label="${escapeAttr(accountLabel)}" title="${escapeAttr(account?.email || t("shop.nav.account"))}">
+              ${ACCOUNT_ICON}
+            </a>
+            <button type="button" class="shop-icon-btn shop-search-toggle${active === "search" ? " is-active" : ""}" id="shop-search-open" aria-label="${escapeAttr(t("shop.nav.search"))}" aria-expanded="false" aria-controls="shop-search-overlay">
+              ${SEARCH_ICON}
+            </button>
+          </div>
+        </header>
+        <nav class="shop-categories-bar glass-inset" aria-label="${escapeAttr(t("shop.nav.categories"))}">
+          <div class="shop-categories-scroll">
+            <a href="${ShopRoutes.home()}" class="${active === "shop" ? "is-active" : ""}">${t("shop.nav.home")}</a>
+            ${navCats}
+          </div>
+          <div id="lang-picker" class="lang-picker-host shop-lang-host"></div>
+        </nav>
+      </div>
       <div class="shop-search-overlay" id="shop-search-overlay" hidden>
         <div class="shop-search-backdrop" data-close-search tabindex="-1"></div>
         <div class="shop-search-panel glass-panel" role="dialog" aria-modal="true" aria-label="${escapeAttr(t("shop.search.title"))}">

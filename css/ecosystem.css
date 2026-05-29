@@ -4,13 +4,13 @@
 @supports (padding: max(0px)) {
   body.prv-native-shell .nav,
   body.prv-platform-pwa .nav,
-  body.shop-body .shop-header {
-    padding-left: max(1rem, env(safe-area-inset-left));
-    padding-right: max(1rem, env(safe-area-inset-right));
+  body.shop-body .shop-header-wrap {
+    padding-left: max(0rem, env(safe-area-inset-left));
+    padding-right: max(0rem, env(safe-area-inset-right));
   }
 
   body.shop-body .shop-header {
-    padding-top: max(0.55rem, env(safe-area-inset-top));
+    padding-top: max(0.45rem, env(safe-area-inset-top));
   }
 
   body.prv-native-shell .shop-shell,
