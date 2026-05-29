@@ -4,8 +4,8 @@
 
 | Pagină | URL |
 |--------|-----|
-| **Shop** | https://powerful-local-ghz-troubleshooting.trycloudflare.com/shop/index.html |
-| **Site** | https://powerful-local-ghz-troubleshooting.trycloudflare.com/ |
+| **Shop** | https://substance-civilization-ready-selecting.trycloudflare.com/shop/index.html |
+| **Site** | https://substance-civilization-ready-selecting.trycloudflare.com/ |
 
 > Deschide **/shop/index.html** (cu `index.html`). Hard refresh: Ctrl+Shift+R.
 
