@@ -44,24 +44,38 @@ export function mountNavShopInActions() {
   let link = actions.querySelector(".nav-shop-link");
   if (!link) {
     link = document.createElement("a");
-    link.className = "nav-shop-link btn btn-primary fx-particles";
+    link.className = "nav-shop-link nav-util-btn nav-shop-glow";
     link.setAttribute("data-prv-shop-link", "");
     link.setAttribute("data-i18n-aria", "nav.shop");
     link.setAttribute("aria-label", "Shop");
-    link.innerHTML = `${NAV_SHOP_SVG}<span data-i18n="nav.shop">Shop</span>`;
+    link.setAttribute("title", "Shop");
+    link.innerHTML = NAV_SHOP_SVG;
 
     const lang = actions.querySelector("#lang-picker");
-    if (lang) actions.insertBefore(link, lang);
-    else actions.prepend(link);
-  } else if (!link.classList.contains("fx-particles")) {
-    link.classList.add("btn", "btn-primary", "fx-particles");
+    if (lang) {
+      lang.classList.add("lang-picker-host--minimal");
+      actions.insertBefore(link, lang);
+    } else {
+      actions.prepend(link);
+    }
+  } else {
+    link.classList.remove("btn", "btn-primary", "fx-particles");
+    link.classList.add("nav-util-btn", "nav-shop-glow");
+    if (!link.querySelector("svg")) link.innerHTML = NAV_SHOP_SVG;
+    const span = link.querySelector("span");
+    span?.remove();
   }
+
+  const langHost = actions.querySelector("#lang-picker");
+  langHost?.classList.add("lang-picker-host--minimal");
 
   wireShopNavLinks();
 
   if (window.PRV_I18N?.applyLang) {
     window.PRV_I18N.applyLang(window.PRV_I18N.getLang?.() || "ro", { save: false });
   }
+
+  window.PRV_I18N?.rebuildLangPicker?.();
 }
 
 /** Meniu site — butonul Shop → magazin */

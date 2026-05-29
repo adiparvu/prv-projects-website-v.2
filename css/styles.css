@@ -418,26 +418,98 @@ body.pointer-active .cursor-glow {
   display: none !important;
 }
 
-.nav-actions .nav-shop-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  height: 36px;
-  min-width: 36px;
-  padding: 0 0.85rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+/* Navbar utility icons (shop, language, theme) — Apple-minimal */
+.nav-util-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
   text-decoration: none;
   flex-shrink: 0;
-  white-space: nowrap;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.nav-util-btn:hover,
+.nav-util-btn:focus-visible {
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--glass-inset) 75%, transparent);
+}
+
+.nav-actions .nav-shop-link {
+  position: relative;
+  isolation: isolate;
+}
+
+.nav-shop-glow::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 55%,
+    rgba(0, 113, 227, 0.42) 0%,
+    rgba(0, 113, 227, 0.12) 45%,
+    transparent 72%
+  );
+  opacity: 0.9;
+  pointer-events: none;
+  filter: blur(2px);
 }
 
 .nav-actions .nav-shop-link svg {
+  width: 22px;
+  height: 22px;
+}
+
+.lang-picker-host--minimal .lang-trigger--minimal,
+.theme-picker-host--minimal .theme-trigger--minimal {
+  width: auto;
+  min-width: 40px;
+  padding: 0 8px;
+  gap: 0.15rem;
+}
+
+.lang-trigger-icon svg,
+.theme-trigger-icon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.lang-picker-host--minimal .lang-trigger-code {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 0;
+  border-radius: 0;
+}
+
+.lang-picker-host--minimal .lang-chevron,
+.theme-picker-host--minimal .theme-chevron {
+  width: 12px;
+  height: 12px;
+  opacity: 0.45;
+}
+
+.theme-picker-host--minimal .theme-trigger-name {
+  display: none;
+}
+
+.theme-option-icon svg {
   width: 18px;
   height: 18px;
-  flex-shrink: 0;
+  display: block;
 }
 
 .nav-links a {
@@ -2989,17 +3061,10 @@ body.pointer-active .cursor-glow {
   }
 
   .nav-actions #lang-picker {
-    display: none;
+    display: block;
   }
 
-  .nav-actions .nav-shop-link {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border-radius: 12px;
-  }
-
-  .nav-actions .nav-shop-link span {
+  .nav-actions .btn-primary:not(.nav-shop-link) {
     display: none;
   }
 

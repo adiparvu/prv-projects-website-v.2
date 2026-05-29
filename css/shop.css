@@ -157,14 +157,39 @@ body.shop-body .liquid-canvas {
   background: var(--shop-accent-soft);
 }
 
-.shop-lang-host {
+.shop-lang-header {
   flex-shrink: 0;
-  margin-left: 0.15rem;
+  margin-right: 0.1rem;
 }
 
-.shop-lang-host .lang-trigger {
-  padding: 0.35rem 0.55rem;
-  font-size: 0.8rem;
+.shop-theme-host {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.shop-theme-host--gallery {
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.shop-theme-host--filters {
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.shop-page-product #shop-theme-slot,
+.shop-page-category #shop-theme-slot {
+  display: none !important;
+}
+
+.shop-categories-bar .shop-theme-host .theme-dropdown,
+.shop-theme-host--gallery .theme-dropdown,
+.shop-theme-host--filters .theme-dropdown {
+  left: 0;
+  right: auto;
 }
 
 .shop-search-form {

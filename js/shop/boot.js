@@ -23,6 +23,7 @@ import { wireShareButtons } from "./share.js";
 import { initShopAuth, handleMagicLinkFromUrl } from "./auth.js";
 import { wireFavoriteButtons } from "./favorites.js";
 import { mountWelcomePromo } from "./welcome-promo.js";
+import { remountThemePickerForShop } from "../prv-theme-picker.js";
 
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
@@ -135,6 +136,12 @@ export async function bootShop(page) {
     wireShareButtons(main);
     wireFavoriteButtons(main);
 
+    [...document.body.classList]
+      .filter((c) => c.startsWith("shop-page-"))
+      .forEach((c) => document.body.classList.remove(c));
+    document.body.classList.add(`shop-page-${page}`);
+    remountThemePickerForShop();
+
     document.body.classList.add("fx-page-ready");
 
     mountWelcomePromo();
@@ -160,6 +167,7 @@ export async function bootShop(page) {
           wireShareButtons(m);
           wireFavoriteButtons(m);
         }
+        remountThemePickerForShop();
         window.dispatchEvent(new CustomEvent("prv:footer-ready"));
       });
     }

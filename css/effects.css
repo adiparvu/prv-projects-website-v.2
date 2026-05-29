@@ -432,8 +432,7 @@ body.fx-page-enter.fx-page-ready > .nav {
 }
 
 /* 14. CTA particles */
-.btn-primary.fx-particles,
-.nav-shop-link.fx-particles {
+.btn-primary.fx-particles {
   position: relative;
   overflow: visible;
 }

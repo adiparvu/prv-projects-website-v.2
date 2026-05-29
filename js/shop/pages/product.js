@@ -31,6 +31,7 @@ function galleryHtml(product) {
         ${productMediaActions(product, { favorite: { id: "shop-fav" }, share: { id: "shop-share" } })}
       </div>
       ${thumbs}
+      <div class="shop-theme-host shop-theme-host--gallery" aria-label="Theme"></div>
     </div>
   `;
 }

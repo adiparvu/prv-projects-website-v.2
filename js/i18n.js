@@ -78,8 +78,10 @@
     const trigger = document.getElementById("lang-trigger");
     const meta = getLangMeta(currentLang);
     if (trigger && meta) {
-      trigger.querySelector(".lang-trigger-code").textContent = meta.flag;
-      trigger.querySelector(".lang-trigger-name").textContent = meta.native;
+      const code = trigger.querySelector(".lang-trigger-code");
+      const name = trigger.querySelector(".lang-trigger-name");
+      if (code) code.textContent = meta.code.toUpperCase();
+      if (name) name.textContent = meta.native;
     }
     document.querySelectorAll(".lang-option").forEach((btn) => {
       const active = btn.dataset.lang === currentLang;
@@ -121,16 +123,29 @@
     window.dispatchEvent(new CustomEvent("prv:langchange", { detail: { lang, strings } }));
   }
 
+  const LANG_GLOBE_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>`;
+
+  function isMinimalLangHost(host) {
+    return (
+      host.classList.contains("lang-picker-host--minimal") ||
+      !!host.closest(".nav-actions, .shop-header-slot--end")
+    );
+  }
+
   function buildLangPicker() {
     const host = document.getElementById("lang-picker");
     if (!host || !window.PRV_LANGUAGES) return;
 
+    const minimal = isMinimalLangHost(host);
+    if (minimal) host.classList.add("lang-picker-host--minimal");
+
     host.innerHTML = `
-      <div class="lang-picker">
-        <button type="button" class="lang-trigger glass-inset" id="lang-trigger" aria-haspopup="listbox" aria-expanded="false">
+      <div class="lang-picker${minimal ? " lang-picker--minimal" : ""}">
+        <button type="button" class="lang-trigger${minimal ? " lang-trigger--minimal nav-util-btn" : " glass-inset"}" id="lang-trigger" aria-haspopup="listbox" aria-expanded="false" data-i18n-aria="lang.choose">
+          ${minimal ? `<span class="lang-trigger-icon">${LANG_GLOBE_SVG}</span>` : ""}
           <span class="lang-trigger-code">RO</span>
-          <span class="lang-trigger-name">Română</span>
-          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          ${minimal ? "" : `<span class="lang-trigger-name">Română</span>`}
+          <svg class="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="lang-dropdown glass-panel" id="lang-dropdown" role="listbox" hidden>
           <p class="lang-dropdown-title" data-i18n="lang.choose">Alege limba</p>
@@ -190,6 +205,7 @@
       return strings;
     },
     loadLocale,
+    rebuildLangPicker: buildLangPicker,
   };
 
   async function init() {

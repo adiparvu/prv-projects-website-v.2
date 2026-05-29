@@ -137,6 +137,7 @@ export function filterSidebar({ minEuro = "", maxEuro = "", inStockOnly = false,
   const maxHint = bounds ? (bounds.max / 100).toFixed(0) : "";
   return `
     <aside class="shop-filters glass-panel" aria-label="${t("shop.filter.title")}">
+      <div class="shop-theme-host shop-theme-host--filters" aria-label="Theme"></div>
       <h2 class="shop-filters-title">${t("shop.filter.title")}</h2>
       <fieldset class="shop-filter-group">
         <legend>${t("shop.filter.price")}</legend>
