@@ -6,8 +6,8 @@ export const COPY_SKU_ICON = `<svg width="16" height="16" viewBox="0 0 24 24" fi
 
 const FEEDBACK_MODES = ["toast", "inline", "spring"];
 
-/** Mod activ: toast (implicit). Test: ?skuCopy=inline sau ?skuCopy=spring */
-const DEFAULT_FEEDBACK = "toast";
+/** Mod activ: spring. Test: ?skuCopy=toast sau ?skuCopy=inline */
+const DEFAULT_FEEDBACK = "spring";
 
 function getFeedbackMode() {
   const fromUrl = new URLSearchParams(window.location.search).get("skuCopy");
@@ -93,18 +93,6 @@ function showToast(anchor, message) {
     window.setTimeout(() => {
       toast.hidden = true;
     }, 280);
-  }, 2000);
-}
-
-function feedbackIcon(btn) {
-  btn.classList.add("is-copied");
-  btn.innerHTML = CHECK_ICON;
-  btn.setAttribute("aria-label", t("shop.product.copySkuDone"));
-  clearTimeout(feedbackIcon._timer);
-  feedbackIcon._timer = window.setTimeout(() => {
-    btn.classList.remove("is-copied");
-    btn.innerHTML = COPY_SKU_ICON;
-    btn.setAttribute("aria-label", t("shop.product.copySku"));
   }, 2000);
 }
 
