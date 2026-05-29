@@ -53,16 +53,63 @@ body.shop-body .liquid-canvas {
   min-height: 2.5rem;
 }
 
-.shop-lang-slot {
-  flex-shrink: 0;
-  margin-left: auto;
-  padding-left: 0.35rem;
-  border-left: 1px solid var(--glass-border);
-}
 
 .shop-header .lang-picker-host,
-.shop-header .theme-picker-host {
+.shop-header .theme-picker-host,
+.shop-subnav .lang-picker-host,
+.shop-subnav .theme-picker-host,
+.shop-header-wrap .lang-picker-host,
+.shop-header-wrap .theme-picker-host {
   display: none !important;
+}
+
+/* Bara fixă jos — temă (stânga) + limbă (dreapta), unde ai marcat */
+.shop-bottom-dock {
+  position: fixed;
+  left: max(1rem, env(safe-area-inset-left));
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 190;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: var(--shop-radius);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.shop-dock-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.shop-dock-item--lang {
+  margin-left: auto;
+}
+
+.shop-dock-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.shop-lang-slot {
+  display: flex;
+  align-items: center;
+}
+
+body.shop-body .shop-main {
+  padding-bottom: 0.5rem;
+}
+
+body.shop-body #site-footer {
+  margin-bottom: 5rem;
 }
 
 .shop-header {
@@ -168,47 +215,18 @@ body.shop-body .liquid-canvas {
   background: var(--shop-accent-soft);
 }
 
-.shop-color-zone-tools {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-  padding-top: 0.65rem;
-  border-top: 1px solid var(--glass-border);
+.shop-bottom-dock .theme-dropdown,
+.shop-bottom-dock .lang-dropdown {
+  bottom: calc(100% + 8px);
+  top: auto !important;
 }
 
-.shop-color-zone-tools--filters {
-  margin-top: 0;
-  margin-bottom: 0.85rem;
-  padding-top: 0;
-  padding-bottom: 0.75rem;
-  border-top: none;
-  border-bottom: 1px solid var(--glass-border);
+.shop-dock-item--theme .theme-dropdown {
+  left: 0;
+  right: auto;
 }
 
-.shop-color-zone-label {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  flex-shrink: 0;
-}
-
-.shop-theme-host {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-}
-
-.shop-theme-host--gallery .theme-dropdown,
-.shop-theme-host--filters .theme-dropdown,
-.shop-lang-slot .lang-dropdown {
-  left: auto;
-  right: 0;
-}
-
-.shop-subnav .lang-dropdown {
+.shop-dock-item--lang .lang-dropdown {
   right: 0;
   left: auto;
 }

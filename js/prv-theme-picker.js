@@ -94,13 +94,16 @@ export function ensureThemePickerHost() {
   }
 
   if (document.body.classList.contains("shop-body")) {
-    const shopHost = document.querySelector(".shop-theme-host");
-    if (shopHost) {
-      shopHost.id = "theme-picker";
-      shopHost.classList.add("theme-picker-host", "theme-picker-host--minimal");
-      return shopHost;
+    const slot = document.getElementById("shop-theme-slot");
+    if (!slot) return null;
+    let host = slot.querySelector("#theme-picker");
+    if (!host) {
+      host = document.createElement("div");
+      host.id = "theme-picker";
+      host.className = "theme-picker-host theme-picker-host--minimal";
+      slot.appendChild(host);
     }
-    return null;
+    return host;
   }
 
   return null;
@@ -204,27 +207,22 @@ export function buildThemePicker() {
   applyTheme(saved);
 }
 
-/** După re-render shop (layout / PDP / categorie) */
+/** După re-render shop — temă în bara fixă de jos (stânga) */
 export function remountThemePickerForShop() {
-  document.querySelectorAll(".shop-theme-host, #theme-picker").forEach((el) => {
-    el.removeAttribute("data-built");
-    if (el.id === "theme-picker") {
-      el.removeAttribute("id");
-      el.innerHTML = "";
-    }
-  });
+  const slot = document.getElementById("shop-theme-slot");
+  if (!slot) return;
 
-  let host = null;
-  if (document.body.classList.contains("shop-page-product")) {
-    host = document.querySelector(".shop-theme-host--gallery");
-  } else if (document.body.classList.contains("shop-page-category")) {
-    host = document.querySelector(".shop-theme-host--filters");
+  let host = slot.querySelector("#theme-picker");
+  if (!host) {
+    host = document.createElement("div");
+    host.id = "theme-picker";
+    host.className = "theme-picker-host theme-picker-host--minimal";
+    slot.appendChild(host);
+  } else {
+    delete host.dataset.built;
+    host.innerHTML = "";
   }
 
-  if (!host) return;
-  host.id = "theme-picker";
-  host.hidden = false;
-  host.classList.add("theme-picker-host", "theme-picker-host--minimal");
   buildThemePicker();
 }
 

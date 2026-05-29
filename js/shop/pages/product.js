@@ -25,16 +25,12 @@ function galleryHtml(product) {
       : "";
 
   return `
-    <div class="shop-gallery shop-color-zone">
+    <div class="shop-gallery">
       <div class="shop-gallery-main">
         <img id="shop-pdp-img" src="${escapeHtml(main.url)}" alt="${escapeHtml(main.alt || product.name)}" />
         ${productMediaActions(product, { favorite: { id: "shop-fav" }, share: { id: "shop-share" } })}
       </div>
       ${thumbs}
-      <div class="shop-color-zone-tools" aria-label="${escapeHtml(t("shop.nav.themeZone"))}">
-        <span class="shop-color-zone-label">${escapeHtml(t("shop.nav.theme"))}</span>
-        <div class="shop-theme-host shop-theme-host--gallery"></div>
-      </div>
     </div>
   `;
 }
