@@ -3,6 +3,7 @@ import { trustList } from "../components.js";
 import { ShopRoutes } from "../routes.js";
 import { ShopStore } from "../store.js";
 import { computeTotals, renderSummaryHtml } from "../checkout.js";
+import { t } from "../i18n.js";
 
 export function renderCart(main, catalog) {
   const cart = ShopStore.getCart();
@@ -10,9 +11,9 @@ export function renderCart(main, catalog) {
   if (!cart.items.length) {
     main.innerHTML = `
       <div class="shop-empty glass-panel">
-        <h2>Coșul tău e gol</h2>
-        <p>Descoperă produsele recomandate pentru șantierul tău.</p>
-        <a href="${ShopRoutes.home()}" class="btn btn-primary" style="margin-top:1rem">Înapoi la shop</a>
+        <h2>${t("shop.cart.empty.title")}</h2>
+        <p>${t("shop.cart.empty.sub")}</p>
+        <a href="${ShopRoutes.home()}" class="btn btn-primary" style="margin-top:1rem">${t("shop.cart.back")}</a>
       </div>`;
     return;
   }
@@ -20,7 +21,7 @@ export function renderCart(main, catalog) {
   const totals = computeTotals(catalog, cart);
 
   main.innerHTML = `
-    <h1 class="section-title" style="margin-bottom:1.25rem">Coș</h1>
+    <h1 class="section-title" style="margin-bottom:1.25rem">${t("shop.cart.title")}</h1>
     <div class="shop-layout-2">
       <div class="glass-panel" style="padding:0 1.25rem">
         ${cart.items
@@ -39,7 +40,7 @@ export function renderCart(main, catalog) {
             </div>
             <div class="shop-line-actions">
               <strong>${formatMoney(item.priceCents * item.qty)}</strong>
-              <button type="button" class="shop-line-remove" data-line-remove aria-label="Elimină">Elimină</button>
+              <button type="button" class="shop-line-remove" data-line-remove aria-label="${t("shop.cart.remove")}">${t("shop.cart.remove")}</button>
             </div>
           </div>`
           )
@@ -48,7 +49,7 @@ export function renderCart(main, catalog) {
       <aside class="shop-summary glass-panel">
         ${renderSummaryHtml(totals)}
         ${trustList()}
-        <a href="${ShopRoutes.checkout()}" class="btn btn-primary btn-lg" style="width:100%;margin-top:1rem">Finalizează</a>
+        <a href="${ShopRoutes.checkout()}" class="btn btn-primary btn-lg" style="width:100%;margin-top:1rem">${t("shop.cart.checkout")}</a>
       </aside>
     </div>
   `;

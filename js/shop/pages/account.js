@@ -1,20 +1,20 @@
 import { formatMoney, formatDate, escapeHtml } from "../format.js";
 import { ShopStore } from "../store.js";
 import { ShopRoutes } from "../routes.js";
-import { getProduct, loadCatalog } from "../catalog.js";
 import { productCard } from "../components.js";
+import { t } from "../i18n.js";
 
 function accountNav(active) {
   const links = [
-    ["overview", "Cont", ShopRoutes.account()],
-    ["orders", "Comenzi", ShopRoutes.orders()],
-    ["invoices", "Facturi", ShopRoutes.invoices()],
-    ["favorites", "Favorite", ShopRoutes.favorites()],
+    ["overview", "shop.account.nav.account", ShopRoutes.account()],
+    ["orders", "shop.account.nav.orders", ShopRoutes.orders()],
+    ["invoices", "shop.account.nav.invoices", ShopRoutes.invoices()],
+    ["favorites", "shop.account.nav.favorites", ShopRoutes.favorites()],
   ];
   return `<nav class="shop-account-nav">${links
     .map(
-      ([key, label, href]) =>
-        `<a href="${href}" class="${active === key ? "is-active" : ""}">${label}</a>`
+      ([key, labelKey, href]) =>
+        `<a href="${href}" class="${active === key ? "is-active" : ""}">${t(labelKey)}</a>`
     )
     .join("")}</nav>`;
 }
@@ -22,16 +22,16 @@ function accountNav(active) {
 export function renderAccountOverview(main) {
   const account = ShopStore.getAccount();
   main.innerHTML = `
-    <h1 class="section-title" style="margin-bottom:0.75rem">Contul meu</h1>
+    <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.account.title")}</h1>
     ${accountNav("overview")}
     <div class="glass-panel" style="padding:1.5rem">
       ${
         account
-          ? `<p>Bun venit, <strong>${escapeHtml(account.email)}</strong></p><button type="button" class="btn btn-glass" id="shop-logout" style="margin-top:1rem">Deconectare</button>`
-          : `<p>Introdu emailul pentru a accesa comenzile și facturile.</p>
+          ? `<p>${t("shop.account.welcome", { email: escapeHtml(account.email) })}</p><button type="button" class="btn btn-glass" id="shop-logout" style="margin-top:1rem">${t("shop.account.logout")}</button>`
+          : `<p>${t("shop.account.loginHint")}</p>
              <form id="shop-login-form" class="shop-checkout-form" style="margin-top:1rem;max-width:360px">
-               <div class="input-wrap glass-inset"><label>Email</label><input type="email" name="email" required /></div>
-               <button type="submit" class="btn btn-primary">Continuă</button>
+               <div class="input-wrap glass-inset"><label>${t("shop.account.email")}</label><input type="email" name="email" required /></div>
+               <button type="submit" class="btn btn-primary">${t("shop.account.continue")}</button>
              </form>`
       }
     </div>
@@ -39,8 +39,7 @@ export function renderAccountOverview(main) {
 
   main.querySelector("#shop-login-form")?.addEventListener("submit", (e) => {
     e.preventDefault();
-    const email = new FormData(e.target).get("email");
-    ShopStore.login(email);
+    ShopStore.login(new FormData(e.target).get("email"));
     renderAccountOverview(main);
   });
   main.querySelector("#shop-logout")?.addEventListener("click", () => {
@@ -52,12 +51,12 @@ export function renderAccountOverview(main) {
 export function renderOrders(main) {
   const orders = ShopStore.getOrders();
   main.innerHTML = `
-    <h1 class="section-title" style="margin-bottom:0.75rem">Comenzile mele</h1>
+    <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.orders.title")}</h1>
     ${accountNav("orders")}
     <div class="glass-panel" style="padding:1rem;overflow-x:auto">
       ${
         orders.length
-          ? `<table class="shop-table"><thead><tr><th>Comandă</th><th>Data</th><th>Total</th><th>Status</th></tr></thead><tbody>
+          ? `<table class="shop-table"><thead><tr><th>${t("shop.orders.colOrder")}</th><th>${t("shop.orders.colDate")}</th><th>${t("shop.orders.colTotal")}</th><th>${t("shop.orders.colStatus")}</th></tr></thead><tbody>
         ${orders
           .map(
             (o) => `<tr>
@@ -69,7 +68,7 @@ export function renderOrders(main) {
           )
           .join("")}
         </tbody></table>`
-          : '<p class="shop-empty">Nu ai comenzi încă.</p>'
+          : `<p class="shop-empty">${t("shop.orders.empty")}</p>`
       }
     </div>
   `;
@@ -78,7 +77,7 @@ export function renderOrders(main) {
 export function renderOrderDetail(main, orderId) {
   const order = ShopStore.getOrder(orderId);
   if (!order) {
-    main.innerHTML = `<div class="shop-empty glass-panel">Comandă negăsită</div>`;
+    main.innerHTML = `<div class="shop-empty glass-panel">${t("shop.empty.order")}</div>`;
     return;
   }
   main.innerHTML = `
@@ -89,7 +88,7 @@ export function renderOrderDetail(main, orderId) {
       <ul style="margin:1rem 0;padding:0;list-style:none">
         ${order.items.map((i) => `<li style="padding:0.35rem 0">${escapeHtml(i.name)} × ${i.qty} — ${formatMoney(i.priceCents * i.qty)}</li>`).join("")}
       </ul>
-      <p><strong>Total: ${formatMoney(order.totalCents)}</strong></p>
+      <p><strong>${t("shop.cart.total")}: ${formatMoney(order.totalCents)}</strong></p>
     </div>
   `;
 }
@@ -97,12 +96,12 @@ export function renderOrderDetail(main, orderId) {
 export function renderInvoices(main) {
   const orders = ShopStore.getOrders().filter((o) => o.status === "paid" || o.payment?.demo);
   main.innerHTML = `
-    <h1 class="section-title" style="margin-bottom:0.75rem">Facturi</h1>
+    <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.invoices.title")}</h1>
     ${accountNav("invoices")}
     <div class="glass-panel" style="padding:1rem">
       ${
         orders.length
-          ? `<table class="shop-table"><thead><tr><th>Factură</th><th>Comandă</th><th>Data</th><th>Sumă</th></tr></thead><tbody>
+          ? `<table class="shop-table"><thead><tr><th>${t("shop.invoices.colInvoice")}</th><th>${t("shop.invoices.colOrder")}</th><th>${t("shop.invoices.colDate")}</th><th>${t("shop.invoices.colAmount")}</th></tr></thead><tbody>
           ${orders
             .map(
               (o) => `<tr>
@@ -114,8 +113,8 @@ export function renderInvoices(main) {
             )
             .join("")}
           </tbody></table>
-          <p class="work-meta" style="margin-top:1rem">PDF-urile vor fi disponibile după conectarea la dashboard.</p>`
-          : '<p class="shop-empty">Nicio factură încă.</p>'
+          <p class="work-meta" style="margin-top:1rem">${t("shop.invoices.pdfHint")}</p>`
+          : `<p class="shop-empty">${t("shop.invoices.empty")}</p>`
       }
     </div>
   `;
@@ -126,10 +125,10 @@ export async function renderFavorites(main, catalog) {
   const products = favIds.map((id) => catalog.products.find((p) => p.id === id)).filter(Boolean);
 
   main.innerHTML = `
-    <h1 class="section-title" style="margin-bottom:0.75rem">Favorite</h1>
+    <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.favorites.title")}</h1>
     ${accountNav("favorites")}
     <div class="shop-grid">
-      ${products.length ? products.map((p) => productCard(p, catalog)).join("") : '<p class="shop-empty glass-panel">Nicio favorită salvată.</p>'}
+      ${products.length ? products.map((p) => productCard(p, catalog)).join("") : `<p class="shop-empty glass-panel">${t("shop.favorites.empty")}</p>`}
     </div>
   `;
 }

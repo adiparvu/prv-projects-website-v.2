@@ -7,7 +7,15 @@
   const cache = {};
 
   function getBasePath() {
-    return /\/projects\//.test(location.pathname) ? ".." : ".";
+    const p = location.pathname;
+    if (/\/shop(\/|$)/.test(p)) {
+      const rest = p.split("/shop")[1] || "";
+      const dirs = rest.split("/").filter((s) => s && !/\.html?$/i.test(s));
+      const levels = dirs.length + 1;
+      return levels <= 1 ? ".." : Array(levels).fill("..").join("/");
+    }
+    if (/\/projects\//.test(p) || /\/blog\//.test(p)) return "..";
+    return ".";
   }
 
   function getLangMeta(code) {
@@ -17,9 +25,16 @@
   async function loadLocale(code) {
     if (cache[code]) return cache[code];
     const base = getBasePath();
-    const res = await fetch(`${base}/js/translations/${code}.json`);
-    if (!res.ok) throw new Error(`Locale ${code} not found`);
-    const data = await res.json();
+    const [mainRes, shopRes] = await Promise.all([
+      fetch(`${base}/js/translations/${code}.json`),
+      fetch(`${base}/js/translations/shop/${code}.json`),
+    ]);
+    if (!mainRes.ok) throw new Error(`Locale ${code} not found`);
+    const data = await mainRes.json();
+    if (shopRes.ok) {
+      const shop = await shopRes.json();
+      Object.assign(data, shop);
+    }
     cache[code] = data;
     return data;
   }
@@ -84,9 +99,12 @@
     const codes = (window.PRV_LANGUAGES || []).map((l) => l.code);
     if (!codes.includes(lang)) lang = DEFAULT_LANG;
 
+    delete cache[lang];
+
     try {
       strings = await loadLocale(lang);
     } catch {
+      delete cache[DEFAULT_LANG];
       strings = await loadLocale(DEFAULT_LANG);
       lang = DEFAULT_LANG;
     }

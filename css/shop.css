@@ -209,6 +209,130 @@ body.shop-body .liquid-canvas {
   color: var(--shop-accent);
 }
 
+/* Toolnation-style USP + catalog filters */
+.shop-usp {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin: 0.75rem 1rem 0;
+  padding: 0.55rem 1rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  border-radius: var(--shop-radius-sm);
+}
+
+.shop-usp span {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.shop-usp span::before {
+  content: "✓";
+  color: var(--shop-accent);
+  font-weight: 700;
+}
+
+.shop-catalog-layout {
+  display: grid;
+  grid-template-columns: minmax(200px, 240px) 1fr;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  align-items: start;
+}
+
+.shop-filters {
+  padding: 1rem;
+  position: sticky;
+  top: calc(var(--shop-header-h) + 4rem);
+}
+
+.shop-filters-title {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+}
+
+.shop-filter-group {
+  border: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+}
+
+.shop-filter-group legend {
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.shop-filter-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.shop-filter-row label {
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.shop-filter-row input {
+  font: inherit;
+  padding: 0.4rem 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  background: transparent;
+  color: inherit;
+}
+
+.shop-filter-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  margin: 0.35rem 0;
+  cursor: pointer;
+}
+
+.shop-filter-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.shop-toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.shop-listing-meta {
+  margin: 0;
+}
+
+.shop-price-block,
+.shop-pdp-price-block {
+  margin: 0.5rem 0;
+}
+
+.shop-price-rrp {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.shop-price-vat {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
 .shop-header .logo-type {
   opacity: 0.72;
 }
@@ -731,6 +855,18 @@ body.shop-body .liquid-canvas {
     order: 3;
     flex: 1 1 100%;
     max-width: none;
+  }
+
+  .shop-usp {
+    display: none;
+  }
+
+  .shop-catalog-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-filters {
+    position: static;
   }
 
   .shop-nav {

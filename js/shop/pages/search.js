@@ -2,6 +2,7 @@ import { searchProducts } from "../catalog.js";
 import { breadcrumb, productCard } from "../components.js";
 import { ShopRoutes } from "../routes.js";
 import { escapeHtml } from "../format.js";
+import { t } from "../i18n.js";
 
 export function renderSearch(main, catalog, query) {
   const q = (query || "").trim();
@@ -9,19 +10,19 @@ export function renderSearch(main, catalog, query) {
 
   main.innerHTML = `
     ${breadcrumb([
-      { label: "Shop", href: ShopRoutes.home() },
-      { label: q ? `Căutare: ${q}` : "Căutare" },
+      { label: t("shop.breadcrumb.shop"), href: ShopRoutes.home() },
+      { label: q ? t("shop.search.results", { q }) : t("shop.search.title") },
     ])}
     <header class="shop-hero glass-panel" style="margin-top:1rem;padding:1.5rem">
-      <h1>${q ? `Rezultate pentru „${escapeHtml(q)}”` : "Caută în shop"}</h1>
-      <p>${results.length ? `${results.length} produse găsite` : q ? "Niciun produs — încearcă alt termen sau explorează categoriile." : "Introdu un termen în bara de căutare din header."}</p>
+      <h1>${q ? t("shop.search.results", { q: escapeHtml(q) }) : t("shop.search.title")}</h1>
+      <p>${results.length ? t("shop.search.found", { n: results.length }) : q ? t("shop.search.none") : t("shop.search.hint")}</p>
     </header>
     <div class="shop-grid" style="margin-top:1.5rem">
       ${results.length ? results.map((p) => productCard(p, catalog)).join("") : ""}
     </div>
     ${
       !results.length && q
-        ? `<p class="shop-empty"><a href="${ShopRoutes.home()}" class="btn btn-primary">Înapoi la shop</a></p>`
+        ? `<p class="shop-empty"><a href="${ShopRoutes.home()}" class="btn btn-primary">${t("shop.cart.back")}</a></p>`
         : ""
     }
   `;

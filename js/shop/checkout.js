@@ -4,6 +4,7 @@ import { uid, formatMoney } from "./format.js";
 import { ShopStore } from "./store.js";
 import { applyDiscount } from "./catalog.js";
 import { createCheckoutSession } from "./api.js";
+import { t } from "./i18n.js";
 
 const SHIPPING_CENTS = 1500;
 
@@ -72,10 +73,10 @@ export async function submitCheckout({ catalog, customer, paymentMethod, discoun
 
 export function renderSummaryHtml(totals, discountCode = "") {
   return `
-    <div class="shop-summary-row"><span>Subtotal</span><span>${formatMoney(totals.subtotalCents)}</span></div>
-    ${totals.discountCents ? `<div class="shop-summary-row"><span>Reducere ${escapeHtml(discountCode)}</span><span>−${formatMoney(totals.discountCents)}</span></div>` : ""}
-    <div class="shop-summary-row"><span>Livrare</span><span>${totals.shippingCents ? formatMoney(totals.shippingCents) : "Gratuită"}</span></div>
-    <div class="shop-summary-row total"><span>Total</span><span>${formatMoney(totals.totalCents)}</span></div>
+    <div class="shop-summary-row"><span>${t("shop.cart.subtotal")}</span><span>${formatMoney(totals.subtotalCents)}</span></div>
+    ${totals.discountCents ? `<div class="shop-summary-row"><span>${t("shop.cart.discount", { code: escapeHtml(discountCode) })}</span><span>−${formatMoney(totals.discountCents)}</span></div>` : ""}
+    <div class="shop-summary-row"><span>${t("shop.cart.shipping")}</span><span>${totals.shippingCents ? formatMoney(totals.shippingCents) : t("shop.cart.freeShipping")}</span></div>
+    <div class="shop-summary-row total"><span>${t("shop.cart.total")}</span><span>${formatMoney(totals.totalCents)}</span></div>
   `;
 }
 

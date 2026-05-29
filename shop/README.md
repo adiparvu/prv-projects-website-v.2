@@ -25,7 +25,8 @@ Legacy `shop.html` redirects to `shop/index.html`.
 
 ## Configuration
 
-In `js/site-config.js`:
+Shop strings live in `js/translations/shop/{lang}.json` (12 languages). Regenerate with `node scripts/generate-shop-i18n.mjs`.
+
 
 ```js
 product: {

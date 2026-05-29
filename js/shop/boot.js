@@ -18,6 +18,7 @@ import {
   renderInvoices,
   renderFavorites,
 } from "./pages/account.js";
+import { onShopLangChange } from "./i18n.js";
 
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
@@ -34,82 +35,106 @@ function showShopFatal(message) {
   if (!root) return;
   root.innerHTML = `
     <div class="glass-panel" style="max-width:520px;margin:2rem auto;padding:1.25rem">
-      <h1 style="font-size:1.15rem;margin:0 0 0.5rem">Shop — eroare încărcare</h1>
+      <h1 style="font-size:1.15rem;margin:0 0 0.5rem">Shop</h1>
       <p style="margin:0 0 1rem;opacity:0.85">${message}</p>
-      <a href="index.html" class="btn btn-primary">Reîncearcă</a>
-      <a href="../index.html" class="btn btn-glass" style="margin-left:0.5rem">Site PRV</a>
+      <a href="index.html" class="btn btn-primary">OK</a>
     </div>
   `;
 }
 
+let activePage = "home";
+let activeCatalog = null;
+
+function renderPage(page, main, catalog) {
+  switch (page) {
+    case "home":
+      renderHome(main, catalog);
+      break;
+    case "category":
+      renderCategory(main, catalog, getParam("slug") || "finisaje");
+      break;
+    case "product":
+      renderProduct(main, catalog, getParam("slug"));
+      break;
+    case "search":
+      renderSearch(main, catalog, getParam("q"));
+      break;
+    case "cart":
+      renderCart(main, catalog);
+      break;
+    case "checkout":
+      renderCheckout(main, catalog);
+      break;
+    case "confirmation":
+      renderConfirmation(main, getParam("orderId"));
+      break;
+    case "account":
+      renderAccountOverview(main);
+      break;
+    case "orders":
+      renderOrders(main);
+      break;
+    case "order":
+      renderOrderDetail(main, getParam("id"));
+      break;
+    case "invoices":
+      renderInvoices(main);
+      break;
+    case "favorites":
+      renderFavorites(main, catalog);
+      break;
+    default:
+      renderHome(main, catalog);
+  }
+}
+
 export async function bootShop(page) {
+  activePage = page;
   try {
     initEcosystem();
     wireShopNavLinks();
     document.body.classList.add("shop-body");
 
-    const catalog = await loadCatalog();
+    if (!window.PRV_I18N?.strings || !Object.keys(window.PRV_I18N.strings).some((k) => k.startsWith("shop."))) {
+      await window.PRV_I18N?.applyLang?.(window.PRV_I18N.getLang?.() || "ro", { save: false });
+    }
+
+    activeCatalog = await loadCatalog();
     mountShopLayout({
       active: layoutActive(page),
-      catalog,
+      catalog: activeCatalog,
       searchQuery: page === "search" ? getParam("q") || "" : "",
     });
 
     const main = getMainEl();
     if (!main) {
-      showShopFatal("Conținutul shop nu s-a putut monta. Reîncarcă pagina.");
+      showShopFatal("Layout error");
       return;
     }
 
-    switch (page) {
-      case "home":
-        renderHome(main, catalog);
-        break;
-      case "category":
-        renderCategory(main, catalog, getParam("slug") || "finisaje");
-        break;
-      case "product":
-        renderProduct(main, catalog, getParam("slug"));
-        break;
-      case "search":
-        renderSearch(main, catalog, getParam("q"));
-        break;
-      case "cart":
-        renderCart(main, catalog);
-        break;
-      case "checkout":
-        renderCheckout(main, catalog);
-        break;
-      case "confirmation":
-        renderConfirmation(main, getParam("orderId"));
-        break;
-      case "account":
-        renderAccountOverview(main);
-        break;
-      case "orders":
-        renderOrders(main);
-        break;
-      case "order":
-        renderOrderDetail(main, getParam("id"));
-        break;
-      case "invoices":
-        renderInvoices(main);
-        break;
-      case "favorites":
-        await renderFavorites(main, catalog);
-        break;
-      default:
-        renderHome(main, catalog);
-    }
+    renderPage(page, main, activeCatalog);
 
     window.dispatchEvent(new CustomEvent("prv:footer-ready"));
     if (window.PRV_I18N?.applyLang) {
       window.PRV_I18N.applyLang(window.PRV_I18N.getLang?.() || "ro");
     }
+
+    if (!window.__prvShopLangBound) {
+      window.__prvShopLangBound = true;
+      onShopLangChange(async () => {
+        if (!document.body.classList.contains("shop-body")) return;
+        mountShopLayout({
+          active: layoutActive(activePage),
+          catalog: activeCatalog,
+          searchQuery: activePage === "search" ? getParam("q") || "" : "",
+        });
+        const m = getMainEl();
+        if (m && activeCatalog) renderPage(activePage, m, activeCatalog);
+        window.dispatchEvent(new CustomEvent("prv:footer-ready"));
+      });
+    }
   } catch (err) {
     console.error("[PRV Shop]", err);
-    showShopFatal(
-      "Catalogul sau scripturile nu s-au încărcat. Reîncarcă pagina sau folosește linkul de preview actualizat."
-    );
+    showShopFatal("Catalog or scripts failed to load.");
   }
 }
