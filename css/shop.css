@@ -581,6 +581,47 @@ body.shop-search-open {
   transition: transform 0.5s var(--ease-out-expo);
 }
 
+.shop-share-btn {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--glass-border) 90%, white);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--prv-surface) 88%, transparent);
+  backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  cursor: pointer;
+  box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.shop-share-btn:hover {
+  transform: scale(1.06);
+  background: var(--shop-accent-soft);
+  color: var(--shop-accent);
+  border-color: color-mix(in srgb, var(--shop-accent) 40%, var(--glass-border));
+}
+
+.shop-share-btn.is-copied {
+  background: color-mix(in srgb, #22c55e 18%, var(--prv-surface));
+  color: #16a34a;
+  border-color: color-mix(in srgb, #22c55e 45%, var(--glass-border));
+}
+
+.shop-product-card:hover .shop-share-btn {
+  opacity: 1;
+}
+
+.shop-product-card .shop-share-btn {
+  opacity: 0.92;
+}
+
 .shop-product-card:hover .shop-product-media img {
   transform: scale(1.04);
 }
@@ -710,6 +751,7 @@ body.shop-search-open {
 .shop-gallery-main {
   aspect-ratio: 1;
   background: color-mix(in srgb, var(--prv-border) 35%, transparent);
+  position: relative;
 }
 
 .shop-gallery-main img {

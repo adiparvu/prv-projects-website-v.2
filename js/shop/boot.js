@@ -19,6 +19,7 @@ import {
   renderFavorites,
 } from "./pages/account.js";
 import { onShopLangChange } from "./i18n.js";
+import { wireShareButtons } from "./share.js";
 
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
@@ -113,6 +114,7 @@ export async function bootShop(page) {
     }
 
     renderPage(page, main, activeCatalog);
+    wireShareButtons(main);
 
     window.dispatchEvent(new CustomEvent("prv:footer-ready"));
     if (window.PRV_I18N?.applyLang) {
@@ -130,7 +132,10 @@ export async function bootShop(page) {
           searchQuery: activePage === "search" ? getParam("q") || "" : "",
         });
         const m = getMainEl();
-        if (m && activeCatalog) renderPage(activePage, m, activeCatalog);
+        if (m && activeCatalog) {
+          renderPage(activePage, m, activeCatalog);
+          wireShareButtons(m);
+        }
         window.dispatchEvent(new CustomEvent("prv:footer-ready"));
       });
     }

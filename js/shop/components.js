@@ -3,6 +3,7 @@
 import { formatMoney, escapeHtml } from "./format.js";
 import { ShopRoutes } from "./routes.js";
 import { ShopStore } from "./store.js";
+import { shareIconButton } from "./share.js";
 import { t } from "./i18n.js";
 
 export function productCard(product, catalog) {
@@ -21,6 +22,7 @@ export function productCard(product, catalog) {
       <div class="shop-product-media">
         ${badge}
         <img src="${escapeHtml(img)}" alt="${escapeHtml(product.images?.[0]?.alt || product.name)}" loading="lazy" width="400" height="300" />
+        ${shareIconButton(product)}
       </div>
       <div class="shop-product-body">
         ${cat ? `<span class="work-meta">${escapeHtml(cat.name)}</span>` : ""}

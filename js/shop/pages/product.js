@@ -3,10 +3,9 @@ import { breadcrumb, productCard, reviewsBlock } from "../components.js";
 import { formatMoney, escapeHtml } from "../format.js";
 import { ShopRoutes } from "../routes.js";
 import { ShopStore } from "../store.js";
-import { shareProduct, shareFeedback } from "../share.js";
+import { shareIconButton } from "../share.js";
 import { t } from "../i18n.js";
 
-const SHARE_ICON = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v14"/></svg>`;
 const BELL_ICON = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8a6 6 0 10-12 0c0 7-3 7-3 7h18s-3 0-3-7"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>`;
 
 function galleryHtml(product) {
@@ -28,6 +27,7 @@ function galleryHtml(product) {
     <div class="shop-gallery">
       <div class="shop-gallery-main">
         <img id="shop-pdp-img" src="${escapeHtml(main.url)}" alt="${escapeHtml(main.alt || product.name)}" />
+        ${shareIconButton(product, { id: "shop-share" })}
       </div>
       ${thumbs}
     </div>
@@ -70,7 +70,6 @@ export function renderProduct(main, catalog, slug) {
           outOfStock
             ? `<div class="shop-pdp-actions shop-pdp-actions--oos">
           <button type="button" class="btn btn-primary" id="shop-reminder" aria-pressed="${hasReminder}">${BELL_ICON} ${hasReminder ? t("shop.product.reminderSet") : t("shop.product.reminder")}</button>
-          <button type="button" class="btn btn-glass" id="shop-share">${SHARE_ICON} ${t("shop.product.share")}</button>
           <button type="button" class="btn btn-glass" id="shop-fav" aria-pressed="${isFav}">${isFav ? t("shop.product.saved") : t("shop.product.favorite")}</button>
         </div>`
             : `<div class="shop-qty-row">
@@ -80,7 +79,6 @@ export function renderProduct(main, catalog, slug) {
             <button type="button" data-qty-plus aria-label="+">+</button>
           </div>
           <button type="button" class="btn btn-primary" id="shop-add-cart">${t("shop.product.addCart")}</button>
-          <button type="button" class="btn btn-glass" id="shop-share">${SHARE_ICON} ${t("shop.product.share")}</button>
           <button type="button" class="btn btn-glass" id="shop-fav" aria-pressed="${isFav}">${isFav ? t("shop.product.saved") : t("shop.product.favorite")}</button>
         </div>`
         }
@@ -129,22 +127,6 @@ export function renderProduct(main, catalog, slug) {
     const on = ShopStore.toggleFavorite(product.id);
     e.currentTarget.setAttribute("aria-pressed", String(on));
     e.currentTarget.textContent = on ? t("shop.product.saved") : t("shop.product.favorite");
-  });
-
-  main.querySelector("#shop-share")?.addEventListener("click", async (e) => {
-    const btn = e.currentTarget;
-    const result = await shareProduct({
-      name: product.name,
-      slug: product.slug,
-      description: product.shortDescription,
-    });
-    if (result.ok && result.method === "clipboard") {
-      const label = `${SHARE_ICON} ${shareFeedback(result.method)}`;
-      btn.innerHTML = label;
-      setTimeout(() => {
-        btn.innerHTML = `${SHARE_ICON} ${t("shop.product.share")}`;
-      }, 2000);
-    }
   });
 
   main.querySelector("#shop-reminder")?.addEventListener("click", (e) => {
