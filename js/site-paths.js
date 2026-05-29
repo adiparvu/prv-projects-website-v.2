@@ -27,6 +27,43 @@ export function getShopUrl() {
   return base === "." ? "shop/index.html" : `${base}/shop/index.html`;
 }
 
+const NAV_SHOP_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 2l1.5 6h9L18 2"/><path d="M4 8h16l-1 14H5L4 8z"/></svg>`;
+
+/** Shop în navbar dreapta (lângă limbă + CTA), cu același efect fx-particles */
+export function mountNavShopInActions() {
+  if (document.body.classList.contains("shop-body")) return;
+
+  const nav = document.querySelector(".nav");
+  if (!nav) return;
+
+  nav.querySelectorAll(".nav-links .nav-shop-link").forEach((el) => el.remove());
+
+  const actions = nav.querySelector(".nav-actions");
+  if (!actions) return;
+
+  let link = actions.querySelector(".nav-shop-link");
+  if (!link) {
+    link = document.createElement("a");
+    link.className = "nav-shop-link btn btn-primary fx-particles";
+    link.setAttribute("data-prv-shop-link", "");
+    link.setAttribute("data-i18n-aria", "nav.shop");
+    link.setAttribute("aria-label", "Shop");
+    link.innerHTML = `${NAV_SHOP_SVG}<span data-i18n="nav.shop">Shop</span>`;
+
+    const lang = actions.querySelector("#lang-picker");
+    if (lang) actions.insertBefore(link, lang);
+    else actions.prepend(link);
+  } else if (!link.classList.contains("fx-particles")) {
+    link.classList.add("btn", "btn-primary", "fx-particles");
+  }
+
+  wireShopNavLinks();
+
+  if (window.PRV_I18N?.applyLang) {
+    window.PRV_I18N.applyLang(window.PRV_I18N.getLang?.() || "ro", { save: false });
+  }
+}
+
 /** Meniu site — butonul Shop → magazin */
 export function wireShopNavLinks() {
   const url = getShopUrl();

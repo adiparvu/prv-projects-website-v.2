@@ -6,7 +6,7 @@
 import { initProjectSlider } from "./project-slider.js";
 import { initEffects, showFormSuccess } from "./effects.js";
 import { initEcosystem } from "./prv-platform.js";
-import { wireShopNavLinks } from "./site-paths.js";
+import { mountNavShopInActions } from "./site-paths.js";
 
 const STORAGE_KEY = "prv-theme";
 const DEFAULT_THEME = "light";
@@ -428,7 +428,7 @@ function initParallax() {
 
 // ——— Nav scroll hide ———
 function initNav() {
-  wireShopNavLinks();
+  mountNavShopInActions();
   const nav = document.querySelector(".nav");
   const toggle = document.querySelector(".nav-toggle");
   let lastY = 0;

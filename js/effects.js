@@ -178,7 +178,7 @@ function initFaqFx() {
 
 // ——— 14. CTA particles ———
 function initCtaParticles() {
-  document.querySelectorAll(".btn-primary.fx-particles").forEach((btn) => {
+  document.querySelectorAll(".btn-primary.fx-particles, .nav-shop-link.fx-particles").forEach((btn) => {
     let layer = btn.querySelector(".fx-particle-layer");
     if (!layer) {
       layer = document.createElement("span");

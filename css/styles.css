@@ -413,26 +413,31 @@ body.pointer-active .cursor-glow {
   border-color: var(--glass-border);
 }
 
-.nav-shop-link {
+/* Shop — doar în .nav-actions (montat din js/site-paths.js) */
+.nav-links .nav-shop-link {
+  display: none !important;
+}
+
+.nav-actions .nav-shop-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 0.75rem;
-  border-radius: 999px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  color: var(--text-secondary);
-  transition: color 0.2s, background 0.2s, transform 0.25s var(--ease-spring);
+  justify-content: center;
+  gap: 0.4rem;
+  height: 36px;
+  min-width: 36px;
+  padding: 0 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
-.nav-shop-link svg {
+.nav-actions .nav-shop-link svg {
   width: 18px;
   height: 18px;
-}
-
-.nav-shop-link:hover {
-  color: var(--text-primary);
-  transform: translateY(-1px);
+  flex-shrink: 0;
 }
 
 .nav-links a {
@@ -2956,7 +2961,7 @@ body.pointer-active .cursor-glow {
   }
 
   .nav-links,
-  .nav-actions .btn-primary {
+  .nav-actions .btn-primary:not(.nav-shop-link) {
     display: none;
   }
 
@@ -2971,8 +2976,30 @@ body.pointer-active .cursor-glow {
     transform: translateX(-50%);
   }
 
-  /* Hide right actions on small screens to avoid shifting center */
+  /* Shop vizibil dreapta (lângă hamburger); ascundem limbă + CTA ofertă */
   .nav-actions {
+    display: flex;
+    position: absolute;
+    right: 52px;
+    top: 50%;
+    transform: translateY(-50%);
+    gap: 0;
+    margin: 0;
+    z-index: 2;
+  }
+
+  .nav-actions #lang-picker {
+    display: none;
+  }
+
+  .nav-actions .nav-shop-link {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 12px;
+  }
+
+  .nav-actions .nav-shop-link span {
     display: none;
   }
 
