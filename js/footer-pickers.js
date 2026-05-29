@@ -29,6 +29,8 @@ function mountFooterLang() {
   if (!slot || !window.PRV_I18N?.rebuildLangPicker) return;
 
   let picker = document.getElementById("lang-picker");
+  if (picker?.dataset.built === "1" && picker.parentElement === slot) return;
+
   if (picker && picker.parentElement !== slot) {
     slot.appendChild(picker);
   }
@@ -42,6 +44,7 @@ function mountFooterLang() {
   picker.className = "lang-picker-host lang-picker-host--minimal footer-lang-picker";
   picker.innerHTML = "";
   window.PRV_I18N.rebuildLangPicker();
+  picker.dataset.built = "1";
 }
 
 function mountFooterTheme() {
@@ -49,6 +52,8 @@ function mountFooterTheme() {
   if (!slot) return;
 
   let host = slot.querySelector("#theme-picker");
+  if (host?.dataset.built === "1") return;
+
   if (!host) {
     host = document.createElement("div");
     host.id = "theme-picker";
@@ -58,8 +63,6 @@ function mountFooterTheme() {
     slot.appendChild(host);
   }
 
-  delete host.dataset.built;
-  host.innerHTML = "";
   buildThemePicker();
 }
 

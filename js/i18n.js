@@ -97,11 +97,13 @@
     document.body.classList.toggle("is-rtl", !!meta?.rtl);
   }
 
-  async function applyLang(lang, { save = true } = {}) {
+  async function applyLang(lang, { save = true, notify = true } = {}) {
     const codes = (window.PRV_LANGUAGES || []).map((l) => l.code);
     if (!codes.includes(lang)) lang = DEFAULT_LANG;
 
-    delete cache[lang];
+    const isSameLang = lang === currentLang && Object.keys(strings).length > 0;
+
+    if (!isSameLang) delete cache[lang];
 
     try {
       strings = await loadLocale(lang);
@@ -120,7 +122,9 @@
     setDocumentDir(lang);
     applyToDOM();
     updatePickerUI();
-    window.dispatchEvent(new CustomEvent("prv:langchange", { detail: { lang, strings } }));
+    if (notify) {
+      window.dispatchEvent(new CustomEvent("prv:langchange", { detail: { lang, strings } }));
+    }
   }
 
   const LANG_GLOBE_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>`;
@@ -139,6 +143,7 @@
     const minimal = isMinimalLangHost(host);
     if (minimal) host.classList.add("lang-picker-host--minimal");
 
+    host.dataset.built = "1";
     host.innerHTML = `
       <div class="lang-picker${minimal ? " lang-picker--minimal" : ""}">
         <button type="button" class="lang-trigger${minimal ? " lang-trigger--minimal nav-util-btn" : " glass-inset"}" id="lang-trigger" aria-haspopup="listbox" aria-expanded="false" data-i18n-aria="lang.choose">
@@ -215,7 +220,8 @@
     };
     document.addEventListener("prv:footer-ready", () => {
       mountLangUi();
-      applyLang(currentLang);
+      applyToDOM();
+      updatePickerUI();
     });
     mountLangUi();
   }

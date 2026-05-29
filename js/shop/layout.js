@@ -87,10 +87,6 @@ export function mountShopLayout({ active = "shop", catalog = null, searchQuery =
 
   wireSearchOverlay(root);
 
-  if (window.PRV_I18N?.applyLang) {
-    window.PRV_I18N.applyLang(window.PRV_I18N.getLang?.() || "ro");
-  }
-
   const refreshBadge = () => {
     const btn = root.querySelector(".shop-cart-btn");
     if (!btn) return;

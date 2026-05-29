@@ -51,6 +51,7 @@ function showShopFatal(message) {
 
 let activePage = "home";
 let activeCatalog = null;
+let shopLangBusy = false;
 
 async function renderPage(page, main, catalog) {
   switch (page) {
@@ -129,7 +130,6 @@ export async function bootShop(page) {
       catalog: activeCatalog,
       searchQuery: page === "search" ? getParam("q") || "" : "",
     });
-    remountShopPickers();
 
     const main = getMainEl();
     if (!main) {
@@ -152,29 +152,31 @@ export async function bootShop(page) {
     mountWelcomePromo();
 
     window.dispatchEvent(new CustomEvent("prv:footer-ready"));
-    if (window.PRV_I18N?.applyLang) {
-      window.PRV_I18N.applyLang(window.PRV_I18N.getLang?.() || "ro");
-    }
 
     if (!window.__prvShopLangBound) {
       window.__prvShopLangBound = true;
       onShopLangChange(async () => {
-        if (!document.body.classList.contains("shop-body")) return;
-        activeCatalog = await loadCatalog(true);
-        mountShopLayout({
-          active: layoutActive(activePage),
-          catalog: activeCatalog,
-          searchQuery: activePage === "search" ? getParam("q") || "" : "",
-        });
-        remountShopPickers();
-        const m = getMainEl();
-        if (m && activeCatalog) {
-          await renderPage(activePage, m, activeCatalog);
-          wireShareButtons(m);
-          wireFavoriteButtons(m);
+        if (!document.body.classList.contains("shop-body") || shopLangBusy) return;
+        shopLangBusy = true;
+        try {
+          activeCatalog = await loadCatalog(true);
+          mountShopLayout({
+            active: layoutActive(activePage),
+            catalog: activeCatalog,
+            searchQuery: activePage === "search" ? getParam("q") || "" : "",
+          });
+          const m = getMainEl();
+          if (m && activeCatalog) {
+            await renderPage(activePage, m, activeCatalog);
+            wireShareButtons(m);
+            wireFavoriteButtons(m);
+          }
+          remountShopPickers();
+          window.PRV_I18N?.applyLang?.(window.PRV_I18N.getLang?.() || "ro", { save: false, notify: false });
+          window.dispatchEvent(new CustomEvent("prv:footer-ready"));
+        } finally {
+          shopLangBusy = false;
         }
-        remountShopPickers();
-        window.dispatchEvent(new CustomEvent("prv:footer-ready"));
       });
     }
   } catch (err) {
