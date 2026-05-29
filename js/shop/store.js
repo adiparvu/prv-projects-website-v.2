@@ -7,6 +7,7 @@ const KEYS = {
   account: "prv_shop_account",
   orders: "prv_shop_orders",
   favorites: "prv_shop_favorites",
+  reminders: "prv_shop_reminders",
 };
 
 function read(key, fallback) {
@@ -109,5 +110,31 @@ export const ShopStore = {
 
   isFavorite(productId) {
     return this.getFavorites().includes(productId);
+  },
+
+  getReminders() {
+    return read(KEYS.reminders, []);
+  },
+
+  hasReminder(productId) {
+    return this.getReminders().some((r) => r.productId === productId);
+  },
+
+  setReminder(productId, email) {
+    const reminders = this.getReminders().filter((r) => r.productId !== productId);
+    reminders.push({
+      productId,
+      email,
+      createdAt: new Date().toISOString(),
+    });
+    write(KEYS.reminders, reminders);
+    window.dispatchEvent(new CustomEvent("prv:reminderschange"));
+    return true;
+  },
+
+  removeReminder(productId) {
+    const reminders = this.getReminders().filter((r) => r.productId !== productId);
+    write(KEYS.reminders, reminders);
+    window.dispatchEvent(new CustomEvent("prv:reminderschange"));
   },
 };
