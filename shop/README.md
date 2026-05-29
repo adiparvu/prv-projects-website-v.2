@@ -40,12 +40,25 @@ shop: {
 }
 ```
 
-- **Demo mode** (no `apiBase` / Stripe key): cart, checkout, orders, and invoices persist in `localStorage`.
-- **Live mode**: set `apiBase` + `stripePublishableKey`, deploy `server/shop-stripe-api.mjs`, then:
-  - **Card**: Stripe Payment Element (embedded) via `POST /v1/shop/checkout/payment-intent`
-  - **Apple Pay / PayPal / Bancontact**: Stripe Checkout redirect via `POST /v1/shop/checkout/session`
+## Live backend
 
-See `server/README.md` for env vars (`STRIPE_SECRET_KEY`, `PORT`).
+Deploy **`server/`** to Railway/Fly/Docker. See **`server/README.md`** for:
+
+- Stripe Checkout + Payment Element + **webhooks**
+- Server-side **price validation**
+- **Magic-link** auth (JWT)
+- **Catalog API** `GET /v1/shop/catalog`
+- **Stock reminders** via Resend
+- Invoice HTML download
+
+```js
+shop: {
+  apiBase: "https://your-api.up.railway.app",
+  stripePublishableKey: "pk_live_...",
+}
+```
+
+Demo mode remains when `apiBase` is empty.
 
 ## Catalog i18n
 

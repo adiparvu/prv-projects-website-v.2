@@ -67,8 +67,8 @@ window.PRV_CONFIG = {
    * @see shop/README.md
    */
   shop: {
-    apiBase: "",
-    stripePublishableKey: "",
+    apiBase: "", // e.g. https://prv-shop-api.up.railway.app
+    stripePublishableKey: "", // pk_live_... or pk_test_...
     currency: "EUR",
     locale: "ro-BE",
   },

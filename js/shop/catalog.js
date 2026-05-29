@@ -1,5 +1,7 @@
 /** PRV Shop — catalog loader + locale overlays */
 
+import { getApiBase, fetchCatalog as fetchCatalogApi } from "./api.js";
+
 let cache = null;
 let localeCache = {};
 
@@ -74,10 +76,23 @@ export function invalidateCatalogCache() {
 export async function loadCatalog(force = false) {
   if (cache && !force) return cache;
 
+  const lang = getLang();
+
+  if (getApiBase()) {
+    try {
+      const fromApi = await fetchCatalogApi(lang);
+      if (fromApi) {
+        cache = fromApi;
+        return cache;
+      }
+    } catch (e) {
+      console.warn("[catalog] API fallback to static", e);
+    }
+  }
+
   const res = await fetch(catalogPath());
   if (!res.ok) throw new Error("catalog_load_failed");
   const base = await res.json();
-  const lang = getLang();
   const overlay = await loadLocaleOverlay(lang);
   cache = applyCatalogLocale(base, overlay);
   return cache;

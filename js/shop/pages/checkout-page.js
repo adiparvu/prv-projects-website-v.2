@@ -2,8 +2,9 @@ import { ShopStore } from "../store.js";
 import { ShopRoutes } from "../routes.js";
 import { trustList } from "../components.js";
 import { computeTotals, renderSummaryHtml, submitCheckout } from "../checkout.js";
-import { getApiBase, createPaymentIntent } from "../api.js";
+import { getApiBase, createPaymentIntent, prepareCheckout } from "../api.js";
 import { isStripeLive, mountPaymentElement, confirmPayment, destroyPaymentElement } from "../stripe.js";
+import { trackBeginCheckout } from "../analytics.js";
 import { t } from "../i18n.js";
 import { uid } from "../format.js";
 
@@ -60,28 +61,64 @@ export function renderCheckout(main, catalog) {
   const summaryEl = main.querySelector("#checkout-summary");
   const discountInput = main.querySelector("#co-discount");
   const stripeMount = main.querySelector("#shop-stripe-mount");
-  let pendingOrderId = uid("ord");
+  let pendingOrderId = null;
 
   const refreshSummary = () => {
     const totals = computeTotals(catalog, ShopStore.getCart(), discountInput.value.trim());
     summaryEl.innerHTML = `${renderSummaryHtml(totals, discountInput.value.trim())}${trustList()}`;
     return totals;
   };
-  refreshSummary();
+  const totals = refreshSummary();
+  trackBeginCheckout(ShopStore.getCart().items, totals.totalCents);
   discountInput?.addEventListener("input", refreshSummary);
+
+  async function ensurePendingOrder() {
+    const fd = new FormData(main.querySelector("#shop-checkout-form"));
+    const cartPayload = {
+      items: ShopStore.getCart().items.map((i) => ({ productId: i.productId, qty: i.qty })),
+      customer: {
+        name: fd.get("name"),
+        email: fd.get("email"),
+        phone: fd.get("phone"),
+        address: fd.get("address"),
+      },
+      discountCode: discountInput.value.trim(),
+      paymentMethod: main.querySelector('input[name="pay"]:checked')?.value || "card",
+      lang: window.PRV_I18N?.getLang?.() || "ro",
+    };
+
+    if (getApiBase()) {
+      const prepared = await prepareCheckout(cartPayload);
+      pendingOrderId = prepared?.order?.id;
+      if (prepared?.order) ShopStore.cacheOrder(prepared.order);
+      return prepared?.order;
+    }
+
+    pendingOrderId = pendingOrderId || uid("ord");
+    return { id: pendingOrderId };
+  }
 
   async function initStripeElement() {
     if (!stripeLive || !stripeMount) return;
     destroyPaymentElement();
-    const fd = new FormData(main.querySelector("#shop-checkout-form"));
-    const totals = computeTotals(catalog, ShopStore.getCart(), discountInput.value.trim());
+    const order = await ensurePendingOrder();
+    if (!order) return;
+
     const intent = await createPaymentIntent({
-      orderId: pendingOrderId,
-      items: ShopStore.getCart().items,
-      discountCents: totals.discountCents,
-      customer: { email: fd.get("email"), name: fd.get("name") },
+      orderId: order.id,
+      items: ShopStore.getCart().items.map((i) => ({ productId: i.productId, qty: i.qty })),
+      customer: {
+        email: main.querySelector("#co-email")?.value,
+        name: main.querySelector("#co-name")?.value,
+        phone: main.querySelector("#co-phone")?.value,
+        address: main.querySelector("#co-address")?.value,
+      },
+      discountCode: discountInput.value.trim(),
+      paymentMethod: "card",
+      lang: window.PRV_I18N?.getLang?.() || "ro",
     });
     if (intent?.clientSecret) {
+      pendingOrderId = intent.orderId || order.id;
       await mountPaymentElement({ mountEl: stripeMount, clientSecret: intent.clientSecret });
     }
   }
@@ -116,7 +153,8 @@ export function renderCheckout(main, catalog) {
 
     try {
       if (stripeLive && paymentMethod === "card") {
-        const returnUrl = `${location.origin}${location.pathname.replace("checkout.html", "confirmation.html")}?orderId=${pendingOrderId}`;
+        const order = await ensurePendingOrder();
+        const returnUrl = `${location.origin}${location.pathname.replace("checkout.html", "confirmation.html")}?orderId=${order?.id || pendingOrderId}`;
         await confirmPayment({ returnUrl });
         return;
       }
@@ -127,6 +165,7 @@ export function renderCheckout(main, catalog) {
         paymentMethod,
         discountCode,
         orderId: pendingOrderId,
+        lang: window.PRV_I18N?.getLang?.() || "ro",
       });
       if (order) location.href = ShopRoutes.confirmation(order.id);
     } catch {

@@ -94,6 +94,18 @@ export const ShopStore = {
     return this.getOrders().find((o) => o.id === id);
   },
 
+  cacheOrder(order) {
+    if (!order) return;
+    const orders = this.getOrders().filter((o) => o.id !== order.id);
+    orders.unshift(order);
+    write(KEYS.orders, orders);
+  },
+
+  syncOrdersFromApi(orders) {
+    if (!orders?.length) return;
+    write(KEYS.orders, orders);
+  },
+
   getFavorites() {
     return read(KEYS.favorites, []);
   },

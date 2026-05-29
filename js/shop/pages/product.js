@@ -4,6 +4,7 @@ import { formatMoney, escapeHtml } from "../format.js";
 import { ShopRoutes } from "../routes.js";
 import { ShopStore } from "../store.js";
 import { productMediaActions } from "../media-actions.js";
+import { trackViewItem } from "../analytics.js";
 import { t } from "../i18n.js";
 
 const BELL_ICON = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8a6 6 0 10-12 0c0 7-3 7-3 7h18s-3 0-3-7"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>`;
@@ -47,6 +48,7 @@ export function renderProduct(main, catalog, slug) {
   const reviews = getReviews(catalog, product.id);
   const related = relatedProducts(catalog, product);
   const onSale = product.compareAtCents && product.compareAtCents > product.priceCents;
+  trackViewItem(product);
 
   main.innerHTML = `
     ${breadcrumb([
@@ -120,9 +122,14 @@ export function renderProduct(main, catalog, slug) {
     });
   }
 
-  main.querySelector("#shop-reminder")?.addEventListener("click", (e) => {
+  main.querySelector("#shop-reminder")?.addEventListener("click", async (e) => {
     const btn = e.currentTarget;
     if (ShopStore.hasReminder(product.id)) {
+      const account = ShopStore.getAccount();
+      const { getApiBase, removeStockReminder } = await import("../api.js");
+      if (getApiBase()) {
+        await removeStockReminder({ productId: product.id, email: account?.email }).catch(() => {});
+      }
       ShopStore.removeReminder(product.id);
       btn.setAttribute("aria-pressed", "false");
       btn.innerHTML = `${BELL_ICON} ${t("shop.product.reminder")}`;
@@ -135,6 +142,20 @@ export function renderProduct(main, catalog, slug) {
       email = window.prompt(t("shop.product.reminderPrompt"), "")?.trim() || "";
     }
     if (!email || !email.includes("@")) return;
+
+    const { getApiBase, addStockReminder } = await import("../api.js");
+    if (getApiBase()) {
+      try {
+        await addStockReminder({
+          productId: product.id,
+          email,
+          lang: window.PRV_I18N?.getLang?.() || "ro",
+        });
+      } catch (err) {
+        console.error(err);
+        return;
+      }
+    }
 
     if (!account) ShopStore.login(email);
     ShopStore.setReminder(product.id, email);

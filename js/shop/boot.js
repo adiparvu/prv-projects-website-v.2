@@ -20,6 +20,7 @@ import {
 } from "./pages/account.js";
 import { onShopLangChange } from "./i18n.js";
 import { wireShareButtons } from "./share.js";
+import { initShopAuth, handleMagicLinkFromUrl } from "./auth.js";
 import { wireFavoriteButtons } from "./favorites.js";
 
 function getParam(name) {
@@ -47,7 +48,7 @@ function showShopFatal(message) {
 let activePage = "home";
 let activeCatalog = null;
 
-function renderPage(page, main, catalog) {
+async function renderPage(page, main, catalog) {
   switch (page) {
     case "home":
       renderHome(main, catalog);
@@ -68,19 +69,19 @@ function renderPage(page, main, catalog) {
       renderCheckout(main, catalog);
       break;
     case "confirmation":
-      renderConfirmation(main, getParam("orderId"));
+      await renderConfirmation(main, getParam("orderId"));
       break;
     case "account":
-      renderAccountOverview(main);
+      await renderAccountOverview(main);
       break;
     case "orders":
-      renderOrders(main);
+      await renderOrders(main);
       break;
     case "order":
-      renderOrderDetail(main, getParam("id"));
+      await renderOrderDetail(main, getParam("id"));
       break;
     case "invoices":
-      renderInvoices(main);
+      await renderInvoices(main);
       break;
     case "favorites":
       renderFavorites(main, catalog);
@@ -94,6 +95,8 @@ export async function bootShop(page) {
   activePage = page;
   try {
     initEcosystem();
+    initShopAuth();
+    await handleMagicLinkFromUrl();
     wireShopNavLinks();
     document.body.classList.add("shop-body");
 
@@ -114,7 +117,7 @@ export async function bootShop(page) {
       return;
     }
 
-    renderPage(page, main, activeCatalog);
+    await renderPage(page, main, activeCatalog);
     wireShareButtons(main);
     wireFavoriteButtons(main);
 
@@ -135,7 +138,7 @@ export async function bootShop(page) {
         });
         const m = getMainEl();
         if (m && activeCatalog) {
-          renderPage(activePage, m, activeCatalog);
+          await renderPage(activePage, m, activeCatalog);
           wireShareButtons(m);
           wireFavoriteButtons(m);
         }
