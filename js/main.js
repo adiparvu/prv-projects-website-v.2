@@ -7,6 +7,7 @@ import { initProjectSlider } from "./project-slider.js";
 import { initEffects, showFormSuccess } from "./effects.js";
 import { initEcosystem } from "./prv-platform.js";
 import { mountNavShopInActions } from "./site-paths.js";
+import { initNavContextMenu } from "./nav-context-menu.js";
 import { initTheme } from "./prv-theme-picker.js";
 
 // ——— Liquid canvas background ———
@@ -230,8 +231,8 @@ function initParallax() {
 // ——— Nav scroll hide ———
 function initNav() {
   mountNavShopInActions();
+  initNavContextMenu();
   const nav = document.querySelector(".nav");
-  const toggle = document.querySelector(".nav-toggle");
   let lastY = 0;
 
   window.addEventListener(
@@ -244,11 +245,6 @@ function initNav() {
     },
     { passive: true }
   );
-
-  toggle?.addEventListener("click", () => {
-    const open = nav?.classList.toggle("nav-open");
-    toggle.setAttribute("aria-expanded", String(open));
-  });
 }
 
 // ——— Count-up stats ———

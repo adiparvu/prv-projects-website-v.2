@@ -1,0 +1,245 @@
+/* PRV — contextual nav menu (material backdrop + spring) */
+
+.nav-ctx {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+}
+
+.nav-ctx[hidden] {
+  display: none !important;
+}
+
+.nav-ctx.is-open {
+  pointer-events: auto;
+}
+
+/* Material backdrop / vibrancy scrim */
+.material-backdrop {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 50% 0%, color-mix(in srgb, var(--accent-1) 8%, transparent), transparent 55%),
+    color-mix(in srgb, var(--bg-base) 42%, transparent);
+  backdrop-filter: blur(18px) saturate(160%) brightness(1.02);
+  -webkit-backdrop-filter: blur(18px) saturate(160%) brightness(1.02);
+  opacity: 0;
+  transition: opacity 0.42s var(--ease-spring);
+}
+
+.nav-ctx.is-open .material-backdrop {
+  opacity: 1;
+}
+
+.nav-ctx.is-closing .material-backdrop {
+  opacity: 0;
+  transition-duration: 0.24s;
+  transition-timing-function: var(--ease-out-expo, ease);
+}
+
+/* Panel — material vibrancy */
+.material-vibrancy.nav-ctx-panel {
+  position: fixed;
+  z-index: 9991;
+  padding: 0.55rem;
+  border-radius: calc(var(--radius-lg) + 2px);
+  background:
+    linear-gradient(
+      155deg,
+      color-mix(in srgb, #fff 22%, var(--glass-bg)) 0%,
+      color-mix(in srgb, var(--glass-bg) 78%, transparent) 42%,
+      color-mix(in srgb, var(--glass-bg) 68%, transparent) 100%
+    );
+  backdrop-filter: blur(42px) saturate(210%) brightness(1.06);
+  -webkit-backdrop-filter: blur(42px) saturate(210%) brightness(1.06);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, #fff 28%, var(--glass-border)) inset,
+    0 28px 60px -18px var(--glass-shadow),
+    0 10px 24px -12px rgba(0, 0, 0, 0.18);
+  transform-origin: top right;
+  opacity: 0;
+  transform: scale(0.86) translateY(-10px);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.nav-ctx.is-open .nav-ctx-panel {
+  pointer-events: auto;
+  animation: nav-ctx-spring-in 0.56s var(--ease-spring) forwards;
+}
+
+.nav-ctx.is-closing .nav-ctx-panel {
+  animation: nav-ctx-spring-out 0.3s var(--ease-out-expo, ease) forwards;
+}
+
+@keyframes nav-ctx-spring-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.86) translateY(-10px);
+  }
+  62% {
+    opacity: 1;
+    transform: scale(1.03) translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes nav-ctx-spring-out {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.92) translateY(-6px);
+  }
+}
+
+.nav-ctx-title {
+  margin: 0.15rem 0.55rem 0.45rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.nav-ctx-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.nav-ctx-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.62rem 0.7rem;
+  border-radius: 12px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(6px) scale(0.98);
+  animation: nav-ctx-item-in 0.46s var(--ease-spring) forwards;
+  animation-delay: calc(40ms + var(--ctx-i, 0) * 34ms);
+  transition: background 0.2s ease, transform 0.22s var(--ease-spring);
+}
+
+.nav-ctx-item:hover,
+.nav-ctx-item:focus-visible {
+  background: color-mix(in srgb, var(--glass-inset) 88%, transparent);
+  transform: translateY(0) scale(1.01);
+  outline: none;
+}
+
+.nav-ctx-icon {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  color: var(--accent-1);
+  flex-shrink: 0;
+}
+
+.nav-ctx-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.nav-ctx-item--primary {
+  margin-top: 0.35rem;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent-1), color-mix(in srgb, var(--accent-1) 70%, #5e5ce6));
+  color: #fff;
+  box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--accent-1) 55%, transparent);
+}
+
+.nav-ctx-item--primary:hover,
+.nav-ctx-item--primary:focus-visible {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-1) 92%, #fff), color-mix(in srgb, var(--accent-1) 65%, #5e5ce6));
+  color: #fff;
+}
+
+/* Toggle — material chip + spring morph */
+.nav-toggle {
+  position: relative;
+  z-index: 3;
+  border-radius: 12px;
+  transition:
+    background 0.28s var(--ease-spring),
+    box-shadow 0.28s var(--ease-spring),
+    transform 0.28s var(--ease-spring);
+}
+
+.nav-toggle.is-active {
+  background: color-mix(in srgb, var(--glass-inset) 82%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, #fff 24%, var(--glass-border)) inset,
+    0 8px 20px -12px var(--glass-shadow);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  transform: scale(1.04);
+}
+
+.nav-toggle span {
+  transition: transform 0.34s var(--ease-spring), opacity 0.2s ease;
+}
+
+.nav-toggle.is-active span:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.nav-toggle.is-active span:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+body.nav-ctx-open {
+  overflow: hidden;
+}
+
+@keyframes nav-ctx-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .material-backdrop,
+  .nav-ctx-panel,
+  .nav-ctx-item,
+  .nav-toggle,
+  .nav-toggle span {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .nav-ctx.is-open .material-backdrop {
+    opacity: 1;
+  }
+
+  .nav-ctx.is-open .nav-ctx-panel {
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav-ctx-item {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .nav-ctx {
+    display: none !important;
+  }
+}
