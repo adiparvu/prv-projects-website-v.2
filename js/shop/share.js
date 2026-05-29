@@ -12,7 +12,7 @@ function escapeAttr(str) {
 }
 
 export function shareIconButton(product, { id = "", extraClass = "" } = {}) {
-  const cls = ["shop-share-btn", extraClass].filter(Boolean).join(" ");
+  const cls = ["shop-media-btn", "shop-share-btn", extraClass].filter(Boolean).join(" ");
   const idAttr = id ? ` id="${escapeAttr(id)}"` : "";
   return `<button type="button" class="${cls}"${idAttr}
     data-share-slug="${escapeAttr(product.slug)}"

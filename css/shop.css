@@ -581,11 +581,17 @@ body.shop-search-open {
   transition: transform 0.5s var(--ease-out-expo);
 }
 
-.shop-share-btn {
+.shop-media-actions {
   position: absolute;
   top: 0.65rem;
   right: 0.65rem;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.shop-media-btn {
   display: grid;
   place-items: center;
   width: 38px;
@@ -601,11 +607,21 @@ body.shop-search-open {
   transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.shop-share-btn:hover {
+.shop-media-btn:hover {
   transform: scale(1.06);
   background: var(--shop-accent-soft);
   color: var(--shop-accent);
   border-color: color-mix(in srgb, var(--shop-accent) 40%, var(--glass-border));
+}
+
+.shop-fav-btn.is-active {
+  background: color-mix(in srgb, #e11d48 16%, var(--prv-surface));
+  color: #e11d48;
+  border-color: color-mix(in srgb, #e11d48 45%, var(--glass-border));
+}
+
+.shop-fav-btn.is-active svg {
+  fill: currentColor;
 }
 
 .shop-share-btn.is-copied {
@@ -614,12 +630,12 @@ body.shop-search-open {
   border-color: color-mix(in srgb, #22c55e 45%, var(--glass-border));
 }
 
-.shop-product-card:hover .shop-share-btn {
-  opacity: 1;
+.shop-product-card .shop-media-actions {
+  opacity: 0.92;
 }
 
-.shop-product-card .shop-share-btn {
-  opacity: 0.92;
+.shop-product-card:hover .shop-media-actions {
+  opacity: 1;
 }
 
 .shop-product-card:hover .shop-product-media img {

@@ -20,6 +20,7 @@ import {
 } from "./pages/account.js";
 import { onShopLangChange } from "./i18n.js";
 import { wireShareButtons } from "./share.js";
+import { wireFavoriteButtons } from "./favorites.js";
 
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
@@ -115,6 +116,7 @@ export async function bootShop(page) {
 
     renderPage(page, main, activeCatalog);
     wireShareButtons(main);
+    wireFavoriteButtons(main);
 
     window.dispatchEvent(new CustomEvent("prv:footer-ready"));
     if (window.PRV_I18N?.applyLang) {
@@ -135,6 +137,7 @@ export async function bootShop(page) {
         if (m && activeCatalog) {
           renderPage(activePage, m, activeCatalog);
           wireShareButtons(m);
+          wireFavoriteButtons(m);
         }
         window.dispatchEvent(new CustomEvent("prv:footer-ready"));
       });
