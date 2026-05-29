@@ -1,5 +1,5 @@
 import { featuredProducts } from "../catalog.js";
-import { categoryStrip, productCard, promoBanner } from "../components.js";
+import { categoryStrip, productCard } from "../components.js";
 import { ShopRoutes } from "../routes.js";
 import { t } from "../i18n.js";
 
@@ -16,8 +16,6 @@ export function renderHome(main, catalog) {
         <a href="${ShopRoutes.category("pachete")}" class="btn btn-glass">${t("shop.home.ctaPackages")}</a>
       </div>
     </section>
-
-    ${promoBanner()}
 
     <div class="shop-section-head">
       <h2>${t("shop.home.categories")}</h2>

@@ -22,6 +22,7 @@ import { onShopLangChange } from "./i18n.js";
 import { wireShareButtons } from "./share.js";
 import { initShopAuth, handleMagicLinkFromUrl } from "./auth.js";
 import { wireFavoriteButtons } from "./favorites.js";
+import { mountWelcomePromo } from "./welcome-promo.js";
 
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
@@ -135,6 +136,8 @@ export async function bootShop(page) {
     wireFavoriteButtons(main);
 
     document.body.classList.add("fx-page-ready");
+
+    mountWelcomePromo();
 
     window.dispatchEvent(new CustomEvent("prv:footer-ready"));
     if (window.PRV_I18N?.applyLang) {

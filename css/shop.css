@@ -536,6 +536,95 @@ body.shop-search-open {
   overflow: hidden;
 }
 
+/* Welcome promo popup (account signup offer) */
+.shop-promo-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+
+.shop-promo-overlay[hidden] {
+  display: none;
+}
+
+.shop-promo-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(6px);
+}
+
+.shop-promo-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(420px, 100%);
+  padding: 1.35rem 1.25rem 1.25rem;
+  border-radius: var(--shop-radius);
+  text-align: center;
+  outline: none;
+}
+
+.shop-promo-close {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  background: var(--glass-inset);
+  color: var(--text-secondary);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.shop-promo-close:hover {
+  color: var(--text-primary);
+  background: var(--shop-accent-soft);
+}
+
+.shop-promo-eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--shop-accent);
+}
+
+.shop-promo-title {
+  margin: 0 0 0.65rem;
+  font-size: clamp(1.15rem, 4vw, 1.35rem);
+  line-height: 1.25;
+}
+
+.shop-promo-body {
+  margin: 0 0 1.15rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.shop-promo-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.shop-promo-actions .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+body.shop-promo-open {
+  overflow: hidden;
+}
+
 .shop-pdp-actions {
   display: flex;
   flex-wrap: wrap;

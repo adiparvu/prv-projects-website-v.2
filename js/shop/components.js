@@ -118,18 +118,6 @@ export function reviewsBlock(reviews) {
   `;
 }
 
-export function promoBanner() {
-  return `
-    <aside class="shop-promo glass-inset" role="note">
-      ${t("shop.home.promo", {
-        code: t("shop.promo.code"),
-        pct: t("shop.promo.pct"),
-        min: t("shop.promo.min"),
-      })}
-    </aside>
-  `;
-}
-
 export function sortToolbar(current = "featured") {
   return `
     <div class="shop-toolbar glass-inset">
