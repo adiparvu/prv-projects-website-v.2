@@ -377,15 +377,3 @@ export const shopI18n = {
   },
 };
 
-// Extend remaining langs from EN with localized overrides via script
-export const langOverrides = {
-  fr: { "shop.sort.priceAsc": "Prix : croissant", "shop.sort.priceDesc": "Prix : décroissant", "shop.nav.account": "Compte", "shop.cart.checkout": "Commander", "shop.filter.inStock": "En stock uniquement", "shop.usp.prices": "Prix compétitifs & promos", "shop.search.placeholder": "Rechercher finitions, sanitaires…" },
-  de: { "shop.sort.priceAsc": "Preis: aufsteigend", "shop.sort.priceDesc": "Preis: absteigend", "shop.nav.account": "Konto", "shop.cart.checkout": "Zur Kasse", "shop.filter.inStock": "Nur auf Lager", "shop.search.placeholder": "Finishes, Sanitär suchen…" },
-  pl: { "shop.nav.account": "Konto", "shop.cart.checkout": "Do kasy", "shop.sort.priceAsc": "Cena: rosnąco", "shop.sort.priceDesc": "Cena: malejąco" },
-  es: { "shop.nav.account": "Cuenta", "shop.cart.checkout": "Finalizar compra", "shop.sort.priceAsc": "Precio: menor a mayor", "shop.sort.priceDesc": "Precio: mayor a menor" },
-  it: { "shop.nav.account": "Account", "shop.cart.checkout": "Checkout", "shop.sort.priceAsc": "Prezzo: crescente", "shop.sort.priceDesc": "Prezzo: decrescente" },
-  tr: { "shop.nav.account": "Hesap", "shop.cart.checkout": "Ödeme", "shop.sort.priceAsc": "Fiyat: artan", "shop.sort.priceDesc": "Fiyat: azalan" },
-  ar: { "shop.nav.home": "الرئيسية", "shop.nav.account": "الحساب", "shop.cart.checkout": "إتمام الشراء", "shop.sort.priceAsc": "السعر: تصاعدي", "shop.sort.priceDesc": "السعر: تنازلي", "shop.search.placeholder": "ابحث عن تشطيبات…" },
-  ru: { "shop.nav.account": "Аккаунт", "shop.cart.checkout": "Оформить", "shop.sort.priceAsc": "Цена: по возрастанию", "shop.sort.priceDesc": "Цена: по убыванию" },
-  uk: { "shop.nav.account": "Обліковий запис", "shop.cart.checkout": "Оформити", "shop.sort.priceAsc": "Ціна: зростання", "shop.sort.priceDesc": "Ціна: спадання" },
-};

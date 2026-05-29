@@ -1,0 +1,121 @@
+{
+  "categories": {
+    "cat-finisaje": {
+      "name": "Acabados premium",
+      "description": "Baldosas, pinturas, perfiles y accesorios para acabados impecables."
+    },
+    "cat-bai": {
+      "name": "Baños y cocinas",
+      "description": "Sanitarios, grifería, encimeras y soluciones wet-room."
+    },
+    "cat-iluminat": {
+      "name": "Iluminación",
+      "description": "Luminarias arquitectónicas, riel LED y control de escenas."
+    },
+    "cat-unelte": {
+      "name": "Herramientas de obra",
+      "description": "Consumibles y equipamiento para equipos PRV."
+    },
+    "cat-pachete": {
+      "name": "Paquetes y consultoría",
+      "description": "Bundles de proyecto y horas de consultoría técnica."
+    }
+  },
+  "products": {
+    "prd-quartz-blanc": {
+      "name": "Encimera cuarzo Alpine White",
+      "shortDescription": "Inspirada en Calacatta, acabado cepillado, 20 mm.",
+      "description": "Encimera de cuarzo premium para cocinas y baños. Resistente a arañazos y manchas. Corte CNC a medida — consultoría incluida en pedidos superiores a 3 m².",
+      "imageAlts": [
+        "Encimera cuarzo blanca",
+        "Detalle encimera cocina"
+      ]
+    },
+    "prd-faucet-matte": {
+      "name": "Grifo lavabo Matte Black",
+      "shortDescription": "Monomando, ahorrador de agua, acabado negro mate.",
+      "description": "Grifo premium para lavabo o fregadero. Cartucho cerámico 35 mm, flexo incluido. Garantía del fabricante 5 años.",
+      "imageAlts": [
+        "Grifo negro mate"
+      ]
+    },
+    "prd-tile-large": {
+      "name": "Baldosa porcelánica 120×60 cm",
+      "shortDescription": "Efecto hormigón claro, rectificada, 10 mm.",
+      "description": "Gran formato para salón, baño o cocina. Entrega en palé en Bélgica. Recomendamos adhesivo flexible PRV-S1.",
+      "imageAlts": [
+        "Baldosa porcelánica"
+      ]
+    },
+    "prd-paint-premium": {
+      "name": "Pintura interior premium 15 L",
+      "shortDescription": "Mate aterciopelado, lavable, cero COV en aplicación.",
+      "description": "Pintura decorativa para paredes interiores. Rendimiento ~12 m²/L. Tonos bajo pedido (RAL).",
+      "imageAlts": [
+        "Pintura interior"
+      ]
+    },
+    "prd-led-profile": {
+      "name": "Perfil aluminio LED 2 m",
+      "shortDescription": "Empotrado, difusor opal, para tira 12 mm.",
+      "description": "Perfil para iluminación indirecta. Tapas finales incluidas. Compatible con drivers regulables PRV.",
+      "imageAlts": [
+        "Perfil LED"
+      ]
+    },
+    "prd-pendant": {
+      "name": "Colgante Glass Orbit",
+      "shortDescription": "Cristal ahumado, LED 2700K, regulable.",
+      "description": "Luminaria suspendida para mesa comedor o isla de cocina. Cable regulable 1,5 m.",
+      "imageAlts": [
+        "Colgante de cristal"
+      ]
+    },
+    "prd-level-laser": {
+      "name": "Nivel láser verde 360°",
+      "shortDescription": "Autonivelante, trípode incluido, diana magnética.",
+      "description": "Para obra y montaje de acabados. Autonomía 8 h, carcasa resistente IP54.",
+      "imageAlts": [
+        "Nivel láser"
+      ]
+    },
+    "prd-masking-kit": {
+      "name": "Kit enmascarado premium",
+      "shortDescription": "Cinta + plástico + cutter para obra limpia.",
+      "description": "Set de consumibles para protección durante acabados. 2 rollos de cinta, plástico 4×5 m, cutter.",
+      "imageAlts": [
+        "Kit enmascarado"
+      ]
+    },
+    "prd-consult-2h": {
+      "name": "Consultoría técnica 2 horas",
+      "shortDescription": "Videollamada o in situ en Bruselas y 30 km.",
+      "description": "Sesión con especialista PRV: materiales, detalles constructivos, optimización de presupuesto. Vale digital por email.",
+      "imageAlts": [
+        "Consultoría reforma"
+      ]
+    },
+    "prd-bundle-bath": {
+      "name": "Pack baño Essential",
+      "shortDescription": "Baldosa + junta + impermeabilización — pack inicial.",
+      "description": "Bundle para reforma de baño estándar (5–8 m²). Incluye 30 min de consultoría telefónica.",
+      "imageAlts": [
+        "Pack baño"
+      ]
+    }
+  },
+  "reviews": {
+    "prd-quartz-blanc|2026-02-10": {
+      "text": "Acabado impecable, el equipo PRV coordinó el corte en obra sin problemas."
+    },
+    "prd-quartz-blanc|2026-01-18": {
+      "text": "Calidad premium, entrega puntual. Recomendado para cocinas exigentes."
+    },
+    "prd-faucet-matte|2026-03-02": {
+      "text": "Aspecto muy limpio, montaje sencillo. Combina perfectamente con acabados negros."
+    },
+    "prd-bundle-bath|2026-02-22": {
+      "text": "Paquete completo para baño pequeño — presupuesto claro desde el principio."
+    }
+  }
+}

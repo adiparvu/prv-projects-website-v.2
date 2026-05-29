@@ -1,0 +1,121 @@
+{
+  "categories": {
+    "cat-finisaje": {
+      "name": "Premium afwerkingen",
+      "description": "Tegels, verf, profielen en accessoires voor een perfecte afwerking."
+    },
+    "cat-bai": {
+      "name": "Badkamers & keukens",
+      "description": "Sanitair, kranen, werkbladen en wet-room oplossingen."
+    },
+    "cat-iluminat": {
+      "name": "Verlichting",
+      "description": "Architecturale armaturen, LED-rails en sceneregeling."
+    },
+    "cat-unelte": {
+      "name": "Werfgereedschap",
+      "description": "Verbruiksartikelen en uitrusting voor PRV-teams."
+    },
+    "cat-pachete": {
+      "name": "Pakketten & advies",
+      "description": "Projectbundels en uren technisch advies."
+    }
+  },
+  "products": {
+    "prd-quartz-blanc": {
+      "name": "Alpine White quartz werkblad",
+      "shortDescription": "Calacatta-geïnspireerd, geborstelde afwerking, 20 mm.",
+      "description": "Premium quartz werkblad voor keukens en badkamers. Kras- en vlekbestendig. CNC op maat gezaagd — advies inbegrepen bij bestellingen boven 3 m².",
+      "imageAlts": [
+        "Wit quartz werkblad",
+        "Detail keukenblad"
+      ]
+    },
+    "prd-faucet-matte": {
+      "name": "Matte Black wastafelkraan",
+      "shortDescription": "Eengreeps, waterbesparend, matzwarte afwerking.",
+      "description": "Premium kraan voor wastafel of spoelbak. 35 mm keramische cartridge, flexibele slang inbegrepen. 5 jaar fabrieksgarantie.",
+      "imageAlts": [
+        "Matzwarte kraan"
+      ]
+    },
+    "prd-tile-large": {
+      "name": "Porselein tegel 120×60 cm",
+      "shortDescription": "Licht betoneffect, rectificatie, 10 mm.",
+      "description": "Grote tegel voor woonkamer, badkamer of keuken. Levering per pallet in België. Wij raden PRV-S1 flexibele lijm aan.",
+      "imageAlts": [
+        "Porselein tegel"
+      ]
+    },
+    "prd-paint-premium": {
+      "name": "Premium binnenverf 15 L",
+      "shortDescription": "Fluweelmat, afwasbaar, nul VOC bij aanbreng.",
+      "description": "Decoratieve verf voor binnenmuren. Dekking ~12 m²/L. Op aanvraag verkrijgbaar in gewenste tinten (RAL).",
+      "imageAlts": [
+        "Binnenverf"
+      ]
+    },
+    "prd-led-profile": {
+      "name": "Aluminium LED-profiel 2 m",
+      "shortDescription": "Inbouw, opaal diffusor, voor 12 mm strip.",
+      "description": "Profiel voor indirecte verlichting. Eindkappen inbegrepen. Compatibel met PRV dimbare drivers.",
+      "imageAlts": [
+        "LED-profiel"
+      ]
+    },
+    "prd-pendant": {
+      "name": "Glass Orbit hanglamp",
+      "shortDescription": "Rookglas, 2700K LED, dimbaar.",
+      "description": "Hangarmatuur voor eettafel of keukeneiland. Verstelbare kabel 1,5 m.",
+      "imageAlts": [
+        "Glazen hanglamp"
+      ]
+    },
+    "prd-level-laser": {
+      "name": "360° groene laserwaterpas",
+      "shortDescription": "Zelfnivellerend, statief inbegrepen, magnetisch doel.",
+      "description": "Voor werf en montage van afwerkingen. 8 u autonomie, robuuste behuizing IP54.",
+      "imageAlts": [
+        "Laserwaterpas"
+      ]
+    },
+    "prd-masking-kit": {
+      "name": "Premium masking kit",
+      "shortDescription": "Tape + folie + cutter voor een schone werf.",
+      "description": "Verbruiksset voor bescherming tijdens afwerkingswerken. 2 rollen tape, folie 4×5 m, cutter.",
+      "imageAlts": [
+        "Masking kit"
+      ]
+    },
+    "prd-consult-2h": {
+      "name": "Technisch advies 2 uur",
+      "shortDescription": "Video of op locatie in Brussel & 30 km.",
+      "description": "Sessie met PRV-specialist: materialen, bouwdetails, budgetoptimalisatie. Digitale voucher per e-mail.",
+      "imageAlts": [
+        "Renovatieadvies"
+      ]
+    },
+    "prd-bundle-bath": {
+      "name": "Essential badkamerpakket",
+      "shortDescription": "Tegel + voeg + waterdichting — starterspakket.",
+      "description": "Bundel voor standaard badkamerrenovatie (5–8 m²). Inclusief 30 min telefonisch advies.",
+      "imageAlts": [
+        "Badkamerpakket"
+      ]
+    }
+  },
+  "reviews": {
+    "prd-quartz-blanc|2026-02-10": {
+      "text": "Perfecte afwerking, het PRV-team coördineerde het zagen op de werf zonder problemen."
+    },
+    "prd-quartz-blanc|2026-01-18": {
+      "text": "Premium kwaliteit, tijdig geleverd. Aanbevolen voor veeleisende keukens."
+    },
+    "prd-faucet-matte|2026-03-02": {
+      "text": "Zeer strak uiterlijk, eenvoudige montage. Past perfect bij zwarte afwerkingen."
+    },
+    "prd-bundle-bath|2026-02-22": {
+      "text": "Compleet pakket voor een kleine badkamer — duidelijk budget vanaf het begin."
+    }
+  }
+}

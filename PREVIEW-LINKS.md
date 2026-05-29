@@ -6,10 +6,10 @@ Deschide direct în browser — **nu** folosi Localtunnel dacă apare pagină al
 
 | Pagină | URL |
 |--------|-----|
-| Site | `https://checking-plots-resistance-certificate.trycloudflare.com/` |
-| Shop | `https://checking-plots-resistance-certificate.trycloudflare.com/shop/index.html` |
+| Site | `https://electoral-drums-glory-underwear.trycloudflare.com/` |
+| Shop | `https://electoral-drums-glory-underwear.trycloudflare.com/shop/index.html` |
 
-> Linkul Cloudflare expiră când se oprește serverul. Cere un link nou în chat.
+> Linkul Cloudflare expiră când se oprește serverul/tunnel-ul. Cere un link nou în chat.
 
 ## Localtunnel (nesigur)
 
@@ -20,3 +20,9 @@ Deschide direct în browser — **nu** folosi Localtunnel dacă apare pagină al
 
 https://adiparvu.github.io/prv-projects-website-v.2/shop/index.html  
 (activează GitHub Pages: branch `gh-pages`)
+
+## Stripe live (local)
+
+1. `cd server && npm install && STRIPE_SECRET_KEY=sk_test_... npm start`
+2. Setează în `js/site-config.js`: `shop.apiBase` + `shop.stripePublishableKey`
+3. Reîncarcă checkout — Payment Element activ pentru card

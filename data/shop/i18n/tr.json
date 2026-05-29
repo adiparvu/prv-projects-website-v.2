@@ -1,0 +1,121 @@
+{
+  "categories": {
+    "cat-finisaje": {
+      "name": "Premium kaplamalar",
+      "description": "Kusursuz kaplamalar için fayans, boya, profil ve aksesuarlar."
+    },
+    "cat-bai": {
+      "name": "Banyolar ve mutfaklar",
+      "description": "Sıhhi tesisat, musluklar, tezgahlar ve wet-room çözümleri."
+    },
+    "cat-iluminat": {
+      "name": "Aydınlatma",
+      "description": "Mimari armatürler, LED raylar ve sahne kontrolü."
+    },
+    "cat-unelte": {
+      "name": "Şantiye aletleri",
+      "description": "PRV ekipleri için sarf malzemeleri ve ekipman."
+    },
+    "cat-pachete": {
+      "name": "Paketler ve danışmanlık",
+      "description": "Proje paketleri ve teknik danışmanlık saatleri."
+    }
+  },
+  "products": {
+    "prd-quartz-blanc": {
+      "name": "Alpine White kuvars tezgah",
+      "shortDescription": "Calacatta esintili, fırçalı yüzey, 20 mm.",
+      "description": "Mutfak ve banyolar için premium kuvars tezgah. Çizilme ve lekeye dayanıklı. CNC ölçü kesim — 3 m² üzeri siparişlerde danışmanlık dahil.",
+      "imageAlts": [
+        "Beyaz kuvars tezgah",
+        "Mutfak tezgah detayı"
+      ]
+    },
+    "prd-faucet-matte": {
+      "name": "Matte Black lavabo bataryası",
+      "shortDescription": "Tek kollu, su tasarruflu, mat siyah kaplama.",
+      "description": "Lavabo veya evye için premium batarya. 35 mm seramik kartuş, esnek hortum dahil. 5 yıl üretici garantisi.",
+      "imageAlts": [
+        "Mat siyah batarya"
+      ]
+    },
+    "prd-tile-large": {
+      "name": "120×60 cm porselen fayans",
+      "shortDescription": "Açık beton efekti, rectified, 10 mm.",
+      "description": "Oturma odası, banyo veya mutfak için büyük format. Belçika'da palet teslimat. PRV-S1 esnek yapıştırıcı öneriyoruz.",
+      "imageAlts": [
+        "Porselen fayans"
+      ]
+    },
+    "prd-paint-premium": {
+      "name": "Premium iç mekân boyası 15 L",
+      "shortDescription": "Kadife mat, yıkanabilir, uygulamada sıfır VOC.",
+      "description": "İç duvarlar için dekoratif boya. Kaplama ~12 m²/L. Talep üzerine ton seçenekleri (RAL).",
+      "imageAlts": [
+        "İç mekân boyası"
+      ]
+    },
+    "prd-led-profile": {
+      "name": "2 m alüminyum LED profil",
+      "shortDescription": "Gömme, opal difüzör, 12 mm şerit için.",
+      "description": "Dolaylı aydınlatma profili. Uç kapakları dahil. PRV dim edilebilir sürücülerle uyumlu.",
+      "imageAlts": [
+        "LED profil"
+      ]
+    },
+    "prd-pendant": {
+      "name": "Glass Orbit sarkıt",
+      "shortDescription": "Dumanlı cam, 2700K LED, dim edilebilir.",
+      "description": "Yemek masası veya mutfak adası için sarkıt armatür. Ayarlanabilir 1,5 m kablo.",
+      "imageAlts": [
+        "Cam sarkıt"
+      ]
+    },
+    "prd-level-laser": {
+      "name": "360° yeşil lazer terazi",
+      "shortDescription": "Otomatik terazi, tripod dahil, manyetik hedef.",
+      "description": "Şantiye ve kaplama montajı için. 8 saat pil ömrü, IP54 dayanıklı gövde.",
+      "imageAlts": [
+        "Lazer terazi"
+      ]
+    },
+    "prd-masking-kit": {
+      "name": "Premium maskeleme seti",
+      "shortDescription": "Bant + örtü + kesici temiz şantiye için.",
+      "description": "Kaplama sırasında koruma için sarf seti. 2 bant rulosu, 4×5 m örtü, kesici.",
+      "imageAlts": [
+        "Maskeleme seti"
+      ]
+    },
+    "prd-consult-2h": {
+      "name": "2 saatlik teknik danışmanlık",
+      "shortDescription": "Video veya Brüksel ve 30 km saha ziyareti.",
+      "description": "PRV uzmanıyla oturum: malzemeler, yapı detayları, bütçe optimizasyonu. Dijital kupon e-posta ile.",
+      "imageAlts": [
+        "Renovasyon danışmanlığı"
+      ]
+    },
+    "prd-bundle-bath": {
+      "name": "Essential banyo paketi",
+      "shortDescription": "Fayans + derz + su yalıtımı — başlangıç paketi.",
+      "description": "Standart banyo yenilemesi için paket (5–8 m²). 30 dk telefon danışmanlığı dahil.",
+      "imageAlts": [
+        "Banyo paketi"
+      ]
+    }
+  },
+  "reviews": {
+    "prd-quartz-blanc|2026-02-10": {
+      "text": "Kusursuz kaplama, PRV ekibi şantiyede kesimi sorunsuz koordine etti."
+    },
+    "prd-quartz-blanc|2026-01-18": {
+      "text": "Premium kalite, zamanında teslimat. Titiz mutfaklar için tavsiye ederim."
+    },
+    "prd-faucet-matte|2026-03-02": {
+      "text": "Çok temiz görünüm, kolay montaj. Siyah kaplamalarla mükemmel uyum."
+    },
+    "prd-bundle-bath|2026-02-22": {
+      "text": "Küçük banyo için eksiksiz paket — baştan net bütçe."
+    }
+  }
+}

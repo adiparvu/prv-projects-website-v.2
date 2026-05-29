@@ -16,12 +16,12 @@ export function computeTotals(catalog, cart, discountCode = "") {
   return { subtotalCents, discountCents, shippingCents, totalCents };
 }
 
-export async function submitCheckout({ catalog, customer, paymentMethod, discountCode }) {
+export async function submitCheckout({ catalog, customer, paymentMethod, discountCode, orderId: externalOrderId }) {
   const cart = ShopStore.getCart();
   if (!cart.items.length) throw new Error("empty_cart");
 
   const totals = computeTotals(catalog, cart, discountCode);
-  const orderId = uid("ord");
+  const orderId = externalOrderId || uid("ord");
 
   const order = {
     id: orderId,

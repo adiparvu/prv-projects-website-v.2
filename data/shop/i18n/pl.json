@@ -1,0 +1,121 @@
+{
+  "categories": {
+    "cat-finisaje": {
+      "name": "Wykończenia premium",
+      "description": "Płytki, farby, profile i akcesoria do nienagannego wykończenia."
+    },
+    "cat-bai": {
+      "name": "Łazienki i kuchnie",
+      "description": "Armatura, baterie, blaty i rozwiązania wet-room."
+    },
+    "cat-iluminat": {
+      "name": "Oświetlenie",
+      "description": "Oprawy architektoniczne, szyny LED i sterowanie scenami."
+    },
+    "cat-unelte": {
+      "name": "Narzędzia budowlane",
+      "description": "Materiały eksploatacyjne i sprzęt dla zespołów PRV."
+    },
+    "cat-pachete": {
+      "name": "Pakiety i doradztwo",
+      "description": "Zestawy projektowe i godziny konsultacji technicznej."
+    }
+  },
+  "products": {
+    "prd-quartz-blanc": {
+      "name": "Blat kwarcowy Alpine White",
+      "shortDescription": "Inspirowany Calacattą, wykończenie szczotkowane, 20 mm.",
+      "description": "Premium blat kwarcowy do kuchni i łazienek. Odporny na zarysowania i plamy. Cięcie CNC na wymiar — konsultacja w cenie przy zamówieniu powyżej 3 m².",
+      "imageAlts": [
+        "Biały blat kwarcowy",
+        "Detal blatu kuchennego"
+      ]
+    },
+    "prd-faucet-matte": {
+      "name": "Bateria umywalkowa Matte Black",
+      "shortDescription": "Jednouchwytowa, oszczędzająca wodę, matowa czerń.",
+      "description": "Premium bateria do umywalki lub zlewu. Głowica ceramiczna 35 mm, wąż elastyczny w zestawie. 5 lat gwarancji producenta.",
+      "imageAlts": [
+        "Matowa czarna bateria"
+      ]
+    },
+    "prd-tile-large": {
+      "name": "Płytka porcelanowa 120×60 cm",
+      "shortDescription": "Efekt jasnego betonu, rektyfikowana, 10 mm.",
+      "description": "Duży format do salonu, łazienki lub kuchni. Dostawa paletowa w Belgii. Polecamy klej elastyczny PRV-S1.",
+      "imageAlts": [
+        "Płytka porcelanowa"
+      ]
+    },
+    "prd-paint-premium": {
+      "name": "Farba wewnętrzna premium 15 L",
+      "shortDescription": "Mat aksamitny, zmywalny, zero VOC przy aplikacji.",
+      "description": "Farba dekoracyjna do ścian wewnętrznych. Wydajność ~12 m²/L. Odcienie na zamówienie (RAL).",
+      "imageAlts": [
+        "Farba wewnętrzna"
+      ]
+    },
+    "prd-led-profile": {
+      "name": "Profil aluminiowy LED 2 m",
+      "shortDescription": "Wpust, dyfuzor opal, na taśmę 12 mm.",
+      "description": "Profil do oświetlenia pośredniego. Zaślepki w zestawie. Kompatybilny ze sterownikami PRV z możliwością ściemniania.",
+      "imageAlts": [
+        "Profil LED"
+      ]
+    },
+    "prd-pendant": {
+      "name": "Lampa wisząca Glass Orbit",
+      "shortDescription": "Dymione szkło, LED 2700K, ściemnialna.",
+      "description": "Oprawa wisząca nad stołem jadalnym lub wyspą kuchenną. Regulowany przewód 1,5 m.",
+      "imageAlts": [
+        "Szklana lampa wisząca"
+      ]
+    },
+    "prd-level-laser": {
+      "name": "Poziomnica laserowa zielona 360°",
+      "shortDescription": "Samopoziomująca, statyw w zestawie, celownik magnetyczny.",
+      "description": "Do placu budowy i montażu wykończeń. 8 h pracy na baterii, obudowa IP54.",
+      "imageAlts": [
+        "Poziomnica laserowa"
+      ]
+    },
+    "prd-masking-kit": {
+      "name": "Premium zestaw maskujący",
+      "shortDescription": "Taśma + folia + nóż do czystego placu budowy.",
+      "description": "Zestaw materiałów do ochrony podczas prac wykończeniowych. 2 rolki taśmy, folia 4×5 m, nóż.",
+      "imageAlts": [
+        "Zestaw maskujący"
+      ]
+    },
+    "prd-consult-2h": {
+      "name": "Konsultacja techniczna 2 godziny",
+      "shortDescription": "Wideo lub na miejscu w Brukseli i 30 km.",
+      "description": "Sesja ze specjalistą PRV: materiały, detale konstrukcyjne, optymalizacja budżetu. Voucher cyfrowy na e-mail.",
+      "imageAlts": [
+        "Konsultacja remontowa"
+      ]
+    },
+    "prd-bundle-bath": {
+      "name": "Pakiet łazienkowy Essential",
+      "shortDescription": "Płytka + fuga + hydroizolacja — pakiet startowy.",
+      "description": "Zestaw do standardowej renowacji łazienki (5–8 m²). W cenie 30 min konsultacji telefonicznej.",
+      "imageAlts": [
+        "Pakiet łazienkowy"
+      ]
+    }
+  },
+  "reviews": {
+    "prd-quartz-blanc|2026-02-10": {
+      "text": "Nienaganne wykończenie, zespół PRV bez problemu skoordynował cięcie na budowie."
+    },
+    "prd-quartz-blanc|2026-01-18": {
+      "text": "Jakość premium, terminowa dostawa. Polecam do wymagających kuchni."
+    },
+    "prd-faucet-matte|2026-03-02": {
+      "text": "Bardzo czysty wygląd, prosty montaż. Idealnie pasuje do czarnych wykończeń."
+    },
+    "prd-bundle-bath|2026-02-22": {
+      "text": "Kompletny pakiet do małej łazienki — jasny budżet od początku."
+    }
+  }
+}

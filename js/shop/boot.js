@@ -123,6 +123,7 @@ export async function bootShop(page) {
       window.__prvShopLangBound = true;
       onShopLangChange(async () => {
         if (!document.body.classList.contains("shop-body")) return;
+        activeCatalog = await loadCatalog(true);
         mountShopLayout({
           active: layoutActive(activePage),
           catalog: activeCatalog,

@@ -41,7 +41,17 @@ shop: {
 ```
 
 - **Demo mode** (no `apiBase` / Stripe key): cart, checkout, orders, and invoices persist in `localStorage`.
-- **Live mode**: implement `POST {apiBase}/checkout/session` (Stripe Checkout Session) and redirect to `session.url`.
+- **Live mode**: set `apiBase` + `stripePublishableKey`, deploy `server/shop-stripe-api.mjs`, then:
+  - **Card**: Stripe Payment Element (embedded) via `POST /v1/shop/checkout/payment-intent`
+  - **Apple Pay / PayPal / Bancontact**: Stripe Checkout redirect via `POST /v1/shop/checkout/session`
+
+See `server/README.md` for env vars (`STRIPE_SECRET_KEY`, `PORT`).
+
+## Catalog i18n
+
+- Base catalog: `data/shop/catalog.json` (Romanian)
+- Locale overlays: `data/shop/i18n/{lang}.json` — regenerate with `node scripts/generate-catalog-i18n.mjs`
+- Applied automatically in `js/shop/catalog.js` on load and language change
 
 Payment methods in checkout UI: Card, Apple Pay, PayPal, Bancontact — enabled on the Stripe account and session when backend is connected.
 

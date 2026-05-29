@@ -17,6 +17,19 @@ export async function createCheckoutSession(payload) {
   }
 }
 
+/** Create PaymentIntent for embedded Payment Element */
+export async function createPaymentIntent(payload) {
+  const base = getApiBase();
+  if (!base) return { demo: true };
+
+  try {
+    return await postJson("/shop/checkout/payment-intent", payload);
+  } catch (e) {
+    if (e.code === "API_DEMO") return { demo: true };
+    throw e;
+  }
+}
+
 /** Admin API stubs — used by dashboard/shop later */
 export const AdminShopApi = {
   products: () => `${getApiBase()}/admin/shop/products`,

@@ -1,0 +1,121 @@
+{
+  "categories": {
+    "cat-finisaje": {
+      "name": "Finitions premium",
+      "description": "Carrelages, peintures, profilés et accessoires pour des finitions impeccables."
+    },
+    "cat-bai": {
+      "name": "Salles de bain & cuisines",
+      "description": "Sanitaires, robinetterie, plans de travail et solutions wet-room."
+    },
+    "cat-iluminat": {
+      "name": "Éclairage",
+      "description": "Luminaires architecturaux, rails LED et gestion de scénarios."
+    },
+    "cat-unelte": {
+      "name": "Outillage chantier",
+      "description": "Consommables et équipements pour les équipes PRV."
+    },
+    "cat-pachete": {
+      "name": "Packs & conseil",
+      "description": "Bundles projet et heures de conseil technique."
+    }
+  },
+  "products": {
+    "prd-quartz-blanc": {
+      "name": "Plan quartz Alpine White",
+      "shortDescription": "Inspiré Calacatta, finition brossée, 20 mm.",
+      "description": "Plan quartz premium pour cuisines et salles de bain. Résistant aux rayures et taches. Découpe CNC sur mesure — conseil inclus pour commandes supérieures à 3 m².",
+      "imageAlts": [
+        "Plan quartz blanc",
+        "Détail plan cuisine"
+      ]
+    },
+    "prd-faucet-matte": {
+      "name": "Mitigeur lavabo Matte Black",
+      "shortDescription": "Monocommande, économiseur d'eau, finition noir mat.",
+      "description": "Mitigeur premium pour lavabo ou évier. Cartouche céramique 35 mm, flexible inclus. Garantie fabricant 5 ans.",
+      "imageAlts": [
+        "Mitigeur noir mat"
+      ]
+    },
+    "prd-tile-large": {
+      "name": "Carreau porcelaine 120×60 cm",
+      "shortDescription": "Effet béton clair, rectifié, 10 mm.",
+      "description": "Grand format pour salon, salle de bain ou cuisine. Livraison palette en Belgique. Nous recommandons l'adhésif flexible PRV-S1.",
+      "imageAlts": [
+        "Carreau porcelaine"
+      ]
+    },
+    "prd-paint-premium": {
+      "name": "Peinture intérieure premium 15 L",
+      "shortDescription": "Mat velours, lessivable, zéro COV à l'application.",
+      "description": "Peinture décorative pour murs intérieurs. Rendement ~12 m²/L. Teintes sur demande (RAL).",
+      "imageAlts": [
+        "Peinture intérieure"
+      ]
+    },
+    "prd-led-profile": {
+      "name": "Profilé aluminium LED 2 m",
+      "shortDescription": "Encastré, diffuseur opale, pour bandeau 12 mm.",
+      "description": "Profilé pour éclairage indirect. Embouts inclus. Compatible avec drivers dimmables PRV.",
+      "imageAlts": [
+        "Profilé LED"
+      ]
+    },
+    "prd-pendant": {
+      "name": "Suspension Glass Orbit",
+      "shortDescription": "Verre fumé, LED 2700K, dimmable.",
+      "description": "Luminaire suspendu pour table à manger ou îlot cuisine. Câble réglable 1,5 m.",
+      "imageAlts": [
+        "Suspension en verre"
+      ]
+    },
+    "prd-level-laser": {
+      "name": "Niveau laser vert 360°",
+      "shortDescription": "Autonivelant, trépied inclus, cible magnétique.",
+      "description": "Pour chantiers et pose de finitions. Autonomie 8 h, boîtier robuste IP54.",
+      "imageAlts": [
+        "Niveau laser"
+      ]
+    },
+    "prd-masking-kit": {
+      "name": "Kit masquage premium",
+      "shortDescription": "Ruban + film + cutter pour un chantier propre.",
+      "description": "Set consommables pour protection pendant les finitions. 2 rouleaux de ruban, film 4×5 m, cutter.",
+      "imageAlts": [
+        "Kit masquage"
+      ]
+    },
+    "prd-consult-2h": {
+      "name": "Conseil technique 2 heures",
+      "shortDescription": "Visio ou sur site à Bruxelles & 30 km.",
+      "description": "Session avec un spécialiste PRV : matériaux, détails constructifs, optimisation budget. Bon numérique par e-mail.",
+      "imageAlts": [
+        "Conseil rénovation"
+      ]
+    },
+    "prd-bundle-bath": {
+      "name": "Pack salle de bain Essential",
+      "shortDescription": "Carreau + joint + étanchéité — pack de démarrage.",
+      "description": "Bundle pour rénovation salle de bain standard (5–8 m²). Inclut 30 min de conseil téléphonique.",
+      "imageAlts": [
+        "Pack salle de bain"
+      ]
+    }
+  },
+  "reviews": {
+    "prd-quartz-blanc|2026-02-10": {
+      "text": "Finition impeccable, l'équipe PRV a coordonné la découpe sur chantier sans problème."
+    },
+    "prd-quartz-blanc|2026-01-18": {
+      "text": "Qualité premium, livraison à l'heure. Je recommande pour les cuisines exigeantes."
+    },
+    "prd-faucet-matte|2026-03-02": {
+      "text": "Aspect très épuré, pose simple. S'accorde parfaitement avec les finitions noires."
+    },
+    "prd-bundle-bath|2026-02-22": {
+      "text": "Pack complet pour une petite salle de bain — budget clair dès le départ."
+    }
+  }
+}

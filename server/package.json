@@ -1,0 +1,11 @@
+{
+  "name": "prv-shop-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node shop-stripe-api.mjs"
+  },
+  "dependencies": {
+    "stripe": "^17.7.0"
+  }
+}

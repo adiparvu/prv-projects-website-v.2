@@ -1,22 +1,85 @@
-/** PRV Shop — catalog loader */
+/** PRV Shop — catalog loader + locale overlays */
 
 let cache = null;
+let localeCache = {};
 
-function catalogPath() {
+function dataRoot() {
   const path = window.location.pathname;
   const shopIdx = path.indexOf("/shop");
   if (shopIdx !== -1) {
     const root = path.slice(0, shopIdx);
-    return `${root}/data/shop/catalog.json`;
+    return `${root}/data/shop`;
   }
-  return "data/shop/catalog.json";
+  return "data/shop";
 }
 
-export async function loadCatalog() {
-  if (cache) return cache;
+function catalogPath() {
+  return `${dataRoot()}/catalog.json`;
+}
+
+function getLang() {
+  return window.PRV_I18N?.getLang?.() || "ro";
+}
+
+async function loadLocaleOverlay(lang) {
+  if (lang === "ro") return null;
+  if (localeCache[lang]) return localeCache[lang];
+  try {
+    const res = await fetch(`${dataRoot()}/i18n/${lang}.json`);
+    if (!res.ok) return null;
+    localeCache[lang] = await res.json();
+    return localeCache[lang];
+  } catch {
+    return null;
+  }
+}
+
+export function applyCatalogLocale(catalog, overlay) {
+  if (!overlay) return catalog;
+  const out = {
+    ...catalog,
+    categories: catalog.categories.map((c) => {
+      const loc = overlay.categories?.[c.id];
+      return loc ? { ...c, name: loc.name ?? c.name, description: loc.description ?? c.description } : c;
+    }),
+    products: catalog.products.map((p) => {
+      const loc = overlay.products?.[p.id];
+      if (!loc) return p;
+      const images = (p.images || []).map((img, i) => ({
+        ...img,
+        alt: loc.imageAlts?.[i] ?? img.alt,
+      }));
+      return {
+        ...p,
+        name: loc.name ?? p.name,
+        shortDescription: loc.shortDescription ?? p.shortDescription,
+        description: loc.description ?? p.description,
+        images,
+      };
+    }),
+    reviews: (catalog.reviews || []).map((r) => {
+      const key = `${r.productId}|${r.date}`;
+      const loc = overlay.reviews?.[key];
+      return loc?.text ? { ...r, text: loc.text } : r;
+    }),
+  };
+  return out;
+}
+
+export function invalidateCatalogCache() {
+  cache = null;
+  localeCache = {};
+}
+
+export async function loadCatalog(force = false) {
+  if (cache && !force) return cache;
+
   const res = await fetch(catalogPath());
   if (!res.ok) throw new Error("catalog_load_failed");
-  cache = await res.json();
+  const base = await res.json();
+  const lang = getLang();
+  const overlay = await loadLocaleOverlay(lang);
+  cache = applyCatalogLocale(base, overlay);
   return cache;
 }
 
@@ -67,6 +130,7 @@ export function relatedProducts(catalog, product, limit = 4) {
 }
 
 export function sortProducts(products, sortKey = "featured") {
+  const lang = getLang();
   const list = [...products];
   switch (sortKey) {
     case "price-asc":
@@ -74,7 +138,7 @@ export function sortProducts(products, sortKey = "featured") {
     case "price-desc":
       return list.sort((a, b) => b.priceCents - a.priceCents);
     case "name":
-      return list.sort((a, b) => a.name.localeCompare(b.name, "ro"));
+      return list.sort((a, b) => a.name.localeCompare(b.name, lang));
     case "stock":
       return list.sort((a, b) => b.stock - a.stock);
     default:
