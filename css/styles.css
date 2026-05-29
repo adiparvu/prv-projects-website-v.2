@@ -1463,14 +1463,59 @@ body.pointer-active .cursor-glow {
 }
 
 .footer-social-row {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: minmax(100px, auto) 1fr minmax(100px, auto);
   align-items: center;
-  justify-content: center;
   gap: 1rem 1.5rem;
   padding: 1.25rem 1rem;
   border-top: 1px solid var(--glass-border);
   background: linear-gradient(180deg, transparent, var(--glass-inset));
+}
+
+.footer-social-row-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.footer-picker-slot {
+  display: flex;
+  align-items: center;
+  z-index: 130;
+}
+
+.footer-picker-slot--lang {
+  justify-self: start;
+}
+
+.footer-picker-slot--theme {
+  justify-self: end;
+}
+
+.footer-social-row .lang-dropdown,
+.footer-social-row .theme-dropdown {
+  bottom: calc(100% + 8px);
+  top: auto !important;
+}
+
+.footer-picker-slot--lang .lang-dropdown {
+  left: 0;
+  right: auto;
+}
+
+.footer-picker-slot--theme .theme-dropdown {
+  right: 0;
+  left: auto;
+}
+
+.nav-actions #lang-picker,
+.nav-actions .lang-picker-host,
+.nav-actions #theme-picker,
+.nav-actions .theme-picker-host {
+  display: none !important;
 }
 
 .footer-social {
@@ -1745,8 +1790,22 @@ body.pointer-active .cursor-glow {
   }
 
   .footer-social-row {
-    flex-direction: column;
-    text-align: center;
+    grid-template-columns: minmax(72px, auto) 1fr minmax(72px, auto);
+    gap: 0.65rem 0.75rem;
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+  }
+
+  .footer-picker-slot--lang {
+    justify-self: start;
+  }
+
+  .footer-picker-slot--theme {
+    justify-self: end;
+  }
+
+  .footer-social-row-main {
+    order: 0;
   }
 }
 
@@ -3060,8 +3119,11 @@ body.pointer-active .cursor-glow {
     z-index: 2;
   }
 
-  .nav-actions #lang-picker {
-    display: block;
+  .nav-actions #lang-picker,
+  .nav-actions .lang-picker-host,
+  .nav-actions #theme-picker,
+  .nav-actions .theme-picker-host {
+    display: none !important;
   }
 
   .nav-actions .btn-primary:not(.nav-shop-link) {

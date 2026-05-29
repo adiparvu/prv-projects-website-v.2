@@ -128,7 +128,7 @@
   function isMinimalLangHost(host) {
     return (
       host.classList.contains("lang-picker-host--minimal") ||
-      !!host.closest(".nav-actions, .shop-bottom-dock, .shop-lang-slot, #shop-lang-slot")
+      !!host.closest(".footer-picker-slot, .footer-social-row, #footer-lang-slot")
     );
   }
 
@@ -209,9 +209,15 @@
   };
 
   async function init() {
-    buildLangPicker();
     await applyLang(currentLang, { save: false });
-    document.addEventListener("prv:footer-ready", () => applyLang(currentLang));
+    const mountLangUi = () => {
+      if (document.getElementById("footer-lang-slot")) buildLangPicker();
+    };
+    document.addEventListener("prv:footer-ready", () => {
+      mountLangUi();
+      applyLang(currentLang);
+    });
+    mountLangUi();
   }
 
   if (document.readyState === "loading") {

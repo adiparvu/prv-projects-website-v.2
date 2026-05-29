@@ -82,17 +82,6 @@ export function mountShopLayout({ active = "shop", catalog = null, searchQuery =
         </div>
       </div>
       <main class="shop-main" id="shop-main"></main>
-      <div class="shop-bottom-dock glass-panel" role="region" aria-label="${escapeAttr(t("shop.nav.pageTools"))}">
-        <div class="shop-dock-item shop-dock-item--theme">
-          <span class="shop-dock-label">${escapeHtml(t("shop.nav.theme"))}</span>
-          <div id="shop-theme-slot" class="shop-theme-host"></div>
-        </div>
-        <div class="shop-dock-item shop-dock-item--lang">
-          <span class="shop-dock-label">${escapeHtml(t("shop.nav.language"))}</span>
-          <div id="shop-lang-slot" class="shop-lang-slot"></div>
-        </div>
-      </div>
-      <footer id="site-footer"></footer>
     </div>
   `;
 

@@ -34,7 +34,7 @@ function isMinimalHost(host) {
   return (
     host?.classList.contains("theme-picker-host--minimal") ||
     host?.classList.contains("shop-theme-host") ||
-    host?.closest(".shop-gallery, .shop-filters, .shop-color-zone")
+    host?.closest(".footer-picker-slot, .footer-social-row")
   );
 }
 
@@ -93,15 +93,14 @@ export function ensureThemePickerHost() {
     return host;
   }
 
-  if (document.body.classList.contains("shop-body")) {
-    const slot = document.getElementById("shop-theme-slot");
-    if (!slot) return null;
-    let host = slot.querySelector("#theme-picker");
+  const footerSlot = document.getElementById("footer-theme-slot");
+  if (footerSlot) {
+    let host = footerSlot.querySelector("#theme-picker");
     if (!host) {
       host = document.createElement("div");
       host.id = "theme-picker";
-      host.className = "theme-picker-host theme-picker-host--minimal";
-      slot.appendChild(host);
+      host.className = "theme-picker-host theme-picker-host--minimal footer-theme-picker";
+      footerSlot.appendChild(host);
     }
     return host;
   }
@@ -207,29 +206,16 @@ export function buildThemePicker() {
   applyTheme(saved);
 }
 
-/** După re-render shop — temă în bara fixă de jos (stânga) */
-export function remountThemePickerForShop() {
-  const slot = document.getElementById("shop-theme-slot");
-  if (!slot) return;
-
-  let host = slot.querySelector("#theme-picker");
-  if (!host) {
-    host = document.createElement("div");
-    host.id = "theme-picker";
-    host.className = "theme-picker-host theme-picker-host--minimal";
-    slot.appendChild(host);
-  } else {
-    delete host.dataset.built;
-    host.innerHTML = "";
-  }
-
-  buildThemePicker();
-}
 
 export function initTheme() {
-  buildThemePicker();
   const saved = localStorage.getItem(STORAGE_KEY) || DEFAULT_THEME;
   applyTheme(saved);
+
+  const tryBuild = () => {
+    if (document.getElementById("footer-theme-slot")) buildThemePicker();
+  };
+  document.addEventListener("prv:footer-ready", tryBuild);
+  tryBuild();
 
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
     const current = localStorage.getItem(STORAGE_KEY) || DEFAULT_THEME;

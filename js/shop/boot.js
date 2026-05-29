@@ -24,6 +24,7 @@ import { initShopAuth, handleMagicLinkFromUrl } from "./auth.js";
 import { wireFavoriteButtons } from "./favorites.js";
 import { mountWelcomePromo } from "./welcome-promo.js";
 import { remountShopPickers } from "./picker-mount.js";
+import { initTheme } from "../prv-theme-picker.js";
 
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
@@ -109,6 +110,7 @@ export async function bootShop(page) {
   activePage = page;
   try {
     await waitForI18n();
+    initTheme();
     initEcosystem();
     initShopAuth();
     await handleMagicLinkFromUrl();

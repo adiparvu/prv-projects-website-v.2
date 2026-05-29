@@ -63,55 +63,6 @@ body.shop-body .liquid-canvas {
   display: none !important;
 }
 
-/* Bara fixă jos — temă (stânga) + limbă (dreapta), unde ai marcat */
-.shop-bottom-dock {
-  position: fixed;
-  left: max(1rem, env(safe-area-inset-left));
-  right: max(1rem, env(safe-area-inset-right));
-  bottom: max(1rem, env(safe-area-inset-bottom));
-  z-index: 190;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.55rem 0.85rem;
-  border-radius: var(--shop-radius);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-}
-
-.shop-dock-item {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  min-width: 0;
-}
-
-.shop-dock-item--lang {
-  margin-left: auto;
-}
-
-.shop-dock-label {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  flex-shrink: 0;
-}
-
-.shop-lang-slot {
-  display: flex;
-  align-items: center;
-}
-
-body.shop-body .shop-main {
-  padding-bottom: 0.5rem;
-}
-
-body.shop-body #site-footer {
-  margin-bottom: 5rem;
-}
-
 .shop-header {
   position: relative;
   margin: 0;
@@ -213,22 +164,6 @@ body.shop-body #site-footer {
 .shop-categories-scroll a.is-active {
   color: var(--text-primary);
   background: var(--shop-accent-soft);
-}
-
-.shop-bottom-dock .theme-dropdown,
-.shop-bottom-dock .lang-dropdown {
-  bottom: calc(100% + 8px);
-  top: auto !important;
-}
-
-.shop-dock-item--theme .theme-dropdown {
-  left: 0;
-  right: auto;
-}
-
-.shop-dock-item--lang .lang-dropdown {
-  right: 0;
-  left: auto;
 }
 
 .shop-search-form {

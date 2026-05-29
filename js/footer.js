@@ -117,19 +117,23 @@
         </div>
       </div>
       <div class="footer-social-row">
-        <span class="footer-heading" data-i18n="footer.follow">Urmărește-ne</span>
-        <div class="footer-social" data-social-root>
-          <div class="social-primary">${primaryHtml}</div>
-          ${
-            socialMore.length
-              ? `<div class="social-more-wrap">
-                  <div class="social-more-panel social-more-panel--inline glass-inset">
-                    ${moreHtml}
-                  </div>
-                </div>`
-              : ""
-          }
+        <div id="footer-lang-slot" class="footer-picker-slot footer-picker-slot--lang" aria-label="Language"></div>
+        <div class="footer-social-row-main">
+          <span class="footer-heading" data-i18n="footer.follow">Urmărește-ne</span>
+          <div class="footer-social" data-social-root>
+            <div class="social-primary">${primaryHtml}</div>
+            ${
+              socialMore.length
+                ? `<div class="social-more-wrap">
+                    <div class="social-more-panel social-more-panel--inline glass-inset">
+                      ${moreHtml}
+                    </div>
+                  </div>`
+                : ""
+            }
+          </div>
         </div>
+        <div id="footer-theme-slot" class="footer-picker-slot footer-picker-slot--theme" aria-label="Theme"></div>
       </div>
       <div class="footer-meta">
         <span class="footer-copy">© <span class="footer-year"></span> PRV Projects · <span data-i18n="footer.craft">Renovări care durează</span></span>
@@ -191,5 +195,22 @@
         : strings["footer.newsletter.error"] || "Introdu un email valid.";
   }
 
-  window.dispatchEvent(new CustomEvent("prv:footer-ready"));
+  const dispatchFooterReady = () => window.dispatchEvent(new CustomEvent("prv:footer-ready"));
+  const pickersSrc = `${base === "." ? "js" : `${base}/js`}/footer-pickers.js`;
+
+  if (window.__prvFooterPickersLoaded) {
+    dispatchFooterReady();
+  } else if (!document.querySelector("script[data-prv-footer-pickers]")) {
+    const s = document.createElement("script");
+    s.type = "module";
+    s.src = pickersSrc;
+    s.dataset.prvFooterPickers = "1";
+    s.addEventListener("load", () => {
+      window.__prvFooterPickersLoaded = true;
+      dispatchFooterReady();
+    });
+    document.head.appendChild(s);
+  } else {
+    dispatchFooterReady();
+  }
 })();

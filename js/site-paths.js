@@ -51,31 +51,24 @@ export function mountNavShopInActions() {
     link.setAttribute("title", "Shop");
     link.innerHTML = NAV_SHOP_SVG;
 
-    const lang = actions.querySelector("#lang-picker");
-    if (lang) {
-      lang.classList.add("lang-picker-host--minimal");
-      actions.insertBefore(link, lang);
-    } else {
-      actions.prepend(link);
-    }
+    actions.querySelector("#lang-picker")?.remove();
+    const cta = actions.querySelector(".btn-primary");
+    if (cta) actions.insertBefore(link, cta);
+    else actions.appendChild(link);
   } else {
     link.classList.remove("btn", "btn-primary", "fx-particles");
     link.classList.add("nav-util-btn", "nav-shop-glow");
     if (!link.querySelector("svg")) link.innerHTML = NAV_SHOP_SVG;
-    const span = link.querySelector("span");
-    span?.remove();
+    link.querySelector("span")?.remove();
   }
 
-  const langHost = actions.querySelector("#lang-picker");
-  langHost?.classList.add("lang-picker-host--minimal");
+  actions.querySelector("#lang-picker")?.remove();
 
   wireShopNavLinks();
 
   if (window.PRV_I18N?.applyLang) {
     window.PRV_I18N.applyLang(window.PRV_I18N.getLang?.() || "ro", { save: false });
   }
-
-  window.PRV_I18N?.rebuildLangPicker?.();
 }
 
 /** Meniu site — butonul Shop → magazin */
