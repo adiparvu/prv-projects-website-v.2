@@ -134,6 +134,8 @@ export async function bootShop(page) {
     wireShareButtons(main);
     wireFavoriteButtons(main);
 
+    document.body.classList.add("fx-page-ready");
+
     window.dispatchEvent(new CustomEvent("prv:footer-ready"));
     if (window.PRV_I18N?.applyLang) {
       window.PRV_I18N.applyLang(window.PRV_I18N.getLang?.() || "ro");
