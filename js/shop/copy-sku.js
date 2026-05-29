@@ -4,9 +4,24 @@ import { t } from "./i18n.js";
 
 export const COPY_SKU_ICON = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>`;
 
-const CHECK_ICON = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>`;
+const FEEDBACK_MODES = ["toast", "inline", "spring"];
 
-const FEEDBACK_MODES = ["icon", "toast", "inline", "spring"];
+/** Mod activ: toast (implicit). Test: ?skuCopy=inline sau ?skuCopy=spring */
+const DEFAULT_FEEDBACK = "toast";
+
+function getFeedbackMode() {
+  const fromUrl = new URLSearchParams(window.location.search).get("skuCopy");
+  if (fromUrl && FEEDBACK_MODES.includes(fromUrl)) return fromUrl;
+  const stored = sessionStorage.getItem("prv-sku-copy-mode");
+  if (stored && FEEDBACK_MODES.includes(stored)) return stored;
+  return DEFAULT_FEEDBACK;
+}
+
+/** Schimbă modul confirmare (toast | inline | spring) */
+export function setSkuCopyFeedback(mode) {
+  if (!FEEDBACK_MODES.includes(mode)) return;
+  sessionStorage.setItem("prv-sku-copy-mode", mode);
+}
 
 function escapeAttr(str) {
   return String(str ?? "")
@@ -15,22 +30,12 @@ function escapeAttr(str) {
     .replace(/</g, "&lt;");
 }
 
-function getFeedbackMode() {
-  const idx = parseInt(sessionStorage.getItem("prv-sku-copy-feedback") || "0", 10) % FEEDBACK_MODES.length;
-  return FEEDBACK_MODES[idx];
-}
-
-function advanceFeedbackMode() {
-  const next = (parseInt(sessionStorage.getItem("prv-sku-copy-feedback") || "0", 10) + 1) % FEEDBACK_MODES.length;
-  sessionStorage.setItem("prv-sku-copy-feedback", String(next));
-}
-
 export function skuCopyRowHtml(sku) {
   const code = escapeAttr(sku);
   return `
     <span class="shop-sku-row">
       <span class="shop-sku-label">${t("shop.product.sku")}</span>
-      <code class="shop-sku-code" id="shop-sku-value">${code}</code>
+      <span class="shop-sku-code" id="shop-sku-value">${code}</span>
       <button
         type="button"
         class="shop-sku-copy-btn"
@@ -119,10 +124,11 @@ function feedbackInline(inlineEl, message) {
 }
 
 function feedbackSpring(btn) {
-  btn.classList.add("is-spring");
-  feedbackIcon(btn);
+  btn.classList.add("is-spring", "is-copied");
   clearTimeout(feedbackSpring._timer);
-  feedbackSpring._timer = window.setTimeout(() => btn.classList.remove("is-spring"), 520);
+  feedbackSpring._timer = window.setTimeout(() => {
+    btn.classList.remove("is-spring", "is-copied");
+  }, 520);
 }
 
 function runFeedback(mode, btn, inlineEl, message) {
@@ -136,9 +142,8 @@ function runFeedback(mode, btn, inlineEl, message) {
     case "spring":
       feedbackSpring(btn);
       break;
-    case "icon":
     default:
-      feedbackIcon(btn);
+      showToast(btn, message);
       break;
   }
 }
@@ -162,7 +167,6 @@ export function wireSkuCopy(root) {
 
     if (ok) {
       runFeedback(mode, btn, inlineEl, message);
-      advanceFeedbackMode();
     } else {
       feedbackInline(inlineEl, message);
     }
