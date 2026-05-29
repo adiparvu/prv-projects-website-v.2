@@ -36,6 +36,52 @@ export function featuredProducts(catalog, limit = 8) {
   return catalog.products.filter((p) => p.featured).slice(0, limit);
 }
 
+export function searchProducts(catalog, query) {
+  const q = String(query || "")
+    .trim()
+    .toLowerCase();
+  if (!q) return [];
+  return catalog.products.filter((p) => {
+    const hay = [
+      p.name,
+      p.shortDescription,
+      p.description,
+      p.sku,
+      ...(p.tags || []),
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+    return hay.includes(q);
+  });
+}
+
+export function getReviews(catalog, productId) {
+  return (catalog.reviews || []).filter((r) => r.productId === productId);
+}
+
+export function relatedProducts(catalog, product, limit = 4) {
+  return catalog.products
+    .filter((p) => p.id !== product.id && p.categorySlug === product.categorySlug)
+    .slice(0, limit);
+}
+
+export function sortProducts(products, sortKey = "featured") {
+  const list = [...products];
+  switch (sortKey) {
+    case "price-asc":
+      return list.sort((a, b) => a.priceCents - b.priceCents);
+    case "price-desc":
+      return list.sort((a, b) => b.priceCents - a.priceCents);
+    case "name":
+      return list.sort((a, b) => a.name.localeCompare(b.name, "ro"));
+    case "stock":
+      return list.sort((a, b) => b.stock - a.stock);
+    default:
+      return list.sort((a, b) => Number(b.featured) - Number(a.featured));
+  }
+}
+
 export function applyDiscount(catalog, code, subtotalCents) {
   const disc = catalog.discounts?.find((d) => d.active && d.code.toUpperCase() === code.toUpperCase());
   if (!disc) return { discountCents: 0, discount: null };

@@ -73,3 +73,54 @@ export function cartBadgeHtml() {
   const n = ShopStore.cartCount();
   return n > 0 ? `<span class="shop-cart-badge">${n > 99 ? "99+" : n}</span>` : "";
 }
+
+export function starRating(rating, max = 5) {
+  const r = Math.min(max, Math.max(0, Math.round(rating)));
+  return `<span class="shop-stars" aria-label="${r} din ${max} stele">${"★".repeat(r)}<span class="shop-stars-dim">${"★".repeat(max - r)}</span></span>`;
+}
+
+export function reviewsBlock(reviews) {
+  if (!reviews?.length) return "";
+  const avg = reviews.reduce((s, r) => s + r.rating, 0) / reviews.length;
+  return `
+    <section class="shop-reviews glass-panel">
+      <div class="shop-reviews-head">
+        <h2>Recenzii clienți</h2>
+        ${starRating(avg)} <span class="work-meta">(${reviews.length})</span>
+      </div>
+      <ul class="shop-reviews-list">
+        ${reviews
+          .map(
+            (r) => `
+          <li>
+            <div class="shop-review-meta">${starRating(r.rating)} <strong>${escapeHtml(r.author)}</strong> · ${escapeHtml(r.date)}</div>
+            <p>${escapeHtml(r.text)}</p>
+          </li>`
+          )
+          .join("")}
+      </ul>
+    </section>
+  `;
+}
+
+export function promoBanner() {
+  return `
+    <aside class="shop-promo glass-inset" role="note">
+      <strong>PRV10</strong> — 10% reducere la prima comandă peste €100 · <span class="work-meta">Introdu codul la checkout</span>
+    </aside>
+  `;
+}
+
+export function sortToolbar(current = "featured") {
+  return `
+    <div class="shop-toolbar glass-inset">
+      <label for="shop-sort">Sortează</label>
+      <select id="shop-sort" aria-label="Sortează produse">
+        <option value="featured" ${current === "featured" ? "selected" : ""}>Recomandate</option>
+        <option value="price-asc" ${current === "price-asc" ? "selected" : ""}>Preț: crescător</option>
+        <option value="price-desc" ${current === "price-desc" ? "selected" : ""}>Preț: descrescător</option>
+        <option value="name" ${current === "name" ? "selected" : ""}>Nume A–Z</option>
+      </select>
+    </div>
+  `;
+}

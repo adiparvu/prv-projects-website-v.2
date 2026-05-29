@@ -4,17 +4,25 @@ import { ShopRoutes } from "./routes.js";
 import { cartBadgeHtml } from "./components.js";
 import { ShopStore } from "./store.js";
 
-function activeClass(href) {
-  const path = window.location.pathname + window.location.search;
-  return path.includes(href.split("?")[0].split("/").pop()) ? "is-active" : "";
-}
-
-export function mountShopLayout({ active = "shop" } = {}) {
+export function mountShopLayout({ active = "shop", catalog = null, searchQuery = "" } = {}) {
   const root = document.getElementById("shop-root");
   if (!root) return;
 
   const account = ShopStore.getAccount();
   const accountLabel = account ? account.email.split("@")[0] : "Cont";
+
+  const categories = (catalog?.categories || [])
+    .slice()
+    .sort((a, b) => (a.sort || 0) - (b.sort || 0));
+
+  const navCats = categories
+    .map((c) => {
+      const short = c.name.split(/[\s&]/)[0];
+      return `<a href="${ShopRoutes.category(c.slug)}">${short}</a>`;
+    })
+    .join("");
+
+  const q = escapeAttr(searchQuery);
 
   root.innerHTML = `
     <div class="shop-shell">
@@ -24,11 +32,16 @@ export function mountShopLayout({ active = "shop" } = {}) {
           <span class="logo-type">Projects</span>
           <span class="shop-logo-sub">Shop</span>
         </a>
+        <form class="shop-search-form" action="${ShopRoutes.base()}/search.html" method="get" role="search">
+          <label class="visually-hidden" for="shop-search-q">Caută produse</label>
+          <input id="shop-search-q" type="search" name="q" value="${q}" placeholder="Caută finisaje, sanitare…" autocomplete="off" />
+          <button type="submit" class="shop-search-btn" aria-label="Caută">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          </button>
+        </form>
         <nav class="shop-nav" aria-label="Shop">
           <a href="${ShopRoutes.home()}" class="${active === "shop" ? "is-active" : ""}">Acasă</a>
-          <a href="${ShopRoutes.category("finisaje")}">Finisaje</a>
-          <a href="${ShopRoutes.category("bai-bucatarii")}">Băi</a>
-          <a href="${ShopRoutes.category("pachete")}">Pachete</a>
+          ${navCats}
         </nav>
         <div class="shop-header-actions">
           <div id="lang-picker" class="lang-picker-host"></div>
@@ -54,6 +67,13 @@ export function mountShopLayout({ active = "shop" } = {}) {
   };
 
   window.addEventListener("prv:cartchange", refreshBadge);
+}
+
+function escapeAttr(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;");
 }
 
 export function getMainEl() {

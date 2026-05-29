@@ -11,6 +11,7 @@ Part of the **unified web + mobile ecosystem** (App Store / Google Play intent).
 | `/shop/` | `shop/index.html` |
 | `/shop/category/:slug` | `shop/category.html?slug=` |
 | `/shop/product/:slug` | `shop/product.html?slug=` |
+| `/shop/search?q=` | `shop/search.html?q=` |
 | `/shop/cart` | `shop/cart.html` |
 | `/shop/checkout` | `shop/checkout.html` |
 | `/shop/confirmation/:orderId` | `shop/confirmation.html?orderId=` |

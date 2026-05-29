@@ -1,5 +1,5 @@
 import { featuredProducts } from "../catalog.js";
-import { categoryStrip, productCard } from "../components.js";
+import { categoryStrip, productCard, promoBanner } from "../components.js";
 import { ShopRoutes } from "../routes.js";
 
 export function renderHome(main, catalog) {
@@ -15,6 +15,8 @@ export function renderHome(main, catalog) {
         <a href="${ShopRoutes.category("pachete")}" class="btn btn-glass">Pachete & consultanță</a>
       </div>
     </section>
+
+    ${promoBanner()}
 
     <div class="shop-section-head">
       <h2>Categorii</h2>

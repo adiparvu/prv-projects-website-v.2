@@ -37,7 +37,10 @@ export function renderCart(main, catalog) {
                 <button type="button" data-line-plus>+</button>
               </div>
             </div>
-            <div><strong>${formatMoney(item.priceCents * item.qty)}</strong></div>
+            <div class="shop-line-actions">
+              <strong>${formatMoney(item.priceCents * item.qty)}</strong>
+              <button type="button" class="shop-line-remove" data-line-remove aria-label="Elimină">Elimină</button>
+            </div>
           </div>`
           )
           .join("")}
@@ -64,6 +67,10 @@ export function renderCart(main, catalog) {
     });
     row.querySelector("[data-line-qty]")?.addEventListener("change", (e) => {
       ShopStore.updateQty(id, parseInt(e.target.value, 10) || 1);
+      renderCart(main, catalog);
+    });
+    row.querySelector("[data-line-remove]")?.addEventListener("click", () => {
+      ShopStore.updateQty(id, 0);
       renderCart(main, catalog);
     });
   });

@@ -56,7 +56,8 @@
       "stock": 12,
       "featured": true,
       "images": [
-        { "url": "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=900&q=80&auto=format&fit=crop", "alt": "Blat quartz alb" }
+        { "url": "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=900&q=80&auto=format&fit=crop", "alt": "Blat quartz alb" },
+        { "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80&auto=format&fit=crop", "alt": "Detaliu blat bucătărie" }
       ],
       "tags": ["quartz", "bucătărie"]
     },
@@ -212,6 +213,36 @@
         { "url": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=900&q=80&auto=format&fit=crop", "alt": "Pachet baie" }
       ],
       "tags": ["bundle"]
+    }
+  ],
+  "reviews": [
+    {
+      "productId": "prd-quartz-blanc",
+      "author": "Andrei M.",
+      "rating": 5,
+      "text": "Finisaj impecabil, echipa PRV a coordonat tăierea la șantier fără probleme.",
+      "date": "2026-02-10"
+    },
+    {
+      "productId": "prd-quartz-blanc",
+      "author": "Elena V.",
+      "rating": 4,
+      "text": "Calitate premium, livrare la timp. Recomand pentru bucătării exigente.",
+      "date": "2026-01-18"
+    },
+    {
+      "productId": "prd-faucet-matte",
+      "author": "Thomas K.",
+      "rating": 5,
+      "text": "Aspect foarte curat, montaj simplu. Se potrivește perfect cu finisajele negre.",
+      "date": "2026-03-02"
+    },
+    {
+      "productId": "prd-bundle-bath",
+      "author": "Ioana P.",
+      "rating": 5,
+      "text": "Pachet complet pentru baie mică — buget clar de la început.",
+      "date": "2026-02-22"
     }
   ],
   "discounts": [
