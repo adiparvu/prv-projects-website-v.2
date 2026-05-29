@@ -128,7 +128,7 @@
   function isMinimalLangHost(host) {
     return (
       host.classList.contains("lang-picker-host--minimal") ||
-      !!host.closest(".nav-actions, .shop-header-slot--end")
+      !!host.closest(".nav-actions, .shop-subnav, .shop-lang-slot, #shop-lang-slot")
     );
   }
 

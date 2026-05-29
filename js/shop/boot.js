@@ -23,7 +23,7 @@ import { wireShareButtons } from "./share.js";
 import { initShopAuth, handleMagicLinkFromUrl } from "./auth.js";
 import { wireFavoriteButtons } from "./favorites.js";
 import { mountWelcomePromo } from "./welcome-promo.js";
-import { remountThemePickerForShop } from "../prv-theme-picker.js";
+import { remountShopPickers } from "./picker-mount.js";
 
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
@@ -125,6 +125,7 @@ export async function bootShop(page) {
       catalog: activeCatalog,
       searchQuery: page === "search" ? getParam("q") || "" : "",
     });
+    remountShopPickers();
 
     const main = getMainEl();
     if (!main) {
@@ -140,7 +141,7 @@ export async function bootShop(page) {
       .filter((c) => c.startsWith("shop-page-"))
       .forEach((c) => document.body.classList.remove(c));
     document.body.classList.add(`shop-page-${page}`);
-    remountThemePickerForShop();
+    remountShopPickers();
 
     document.body.classList.add("fx-page-ready");
 
@@ -161,13 +162,14 @@ export async function bootShop(page) {
           catalog: activeCatalog,
           searchQuery: activePage === "search" ? getParam("q") || "" : "",
         });
+        remountShopPickers();
         const m = getMainEl();
         if (m && activeCatalog) {
           await renderPage(activePage, m, activeCatalog);
           wireShareButtons(m);
           wireFavoriteButtons(m);
         }
-        remountThemePickerForShop();
+        remountShopPickers();
         window.dispatchEvent(new CustomEvent("prv:footer-ready"));
       });
     }

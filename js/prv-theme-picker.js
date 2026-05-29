@@ -34,7 +34,7 @@ function isMinimalHost(host) {
   return (
     host?.classList.contains("theme-picker-host--minimal") ||
     host?.classList.contains("shop-theme-host") ||
-    host?.closest(".shop-gallery, .shop-filters, .shop-categories-bar")
+    host?.closest(".shop-gallery, .shop-filters, .shop-color-zone")
   );
 }
 
@@ -219,9 +219,6 @@ export function remountThemePickerForShop() {
     host = document.querySelector(".shop-theme-host--gallery");
   } else if (document.body.classList.contains("shop-page-category")) {
     host = document.querySelector(".shop-theme-host--filters");
-  } else {
-    host = document.getElementById("shop-theme-slot");
-    if (host) host.hidden = false;
   }
 
   if (!host) return;

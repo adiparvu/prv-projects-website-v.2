@@ -49,7 +49,6 @@ export function mountShopLayout({ active = "shop", catalog = null, searchQuery =
             <span class="shop-logo-sub">Shop</span>
           </a>
           <div class="shop-header-slot shop-header-slot--end" role="group" aria-label="${escapeAttr(t("shop.nav.actions"))}">
-            <div id="lang-picker" class="lang-picker-host lang-picker-host--minimal shop-lang-header"></div>
             <a href="${ShopRoutes.cart()}" class="shop-icon-btn shop-cart-btn" aria-label="${escapeAttr(t("shop.cart.title"))}">
               ${CART_ICON}
               ${cartBadgeHtml()}
@@ -62,14 +61,14 @@ export function mountShopLayout({ active = "shop", catalog = null, searchQuery =
             </button>
           </div>
         </header>
-        <nav class="shop-categories-bar glass-inset" aria-label="${escapeAttr(t("shop.nav.categories"))}">
-          <div class="shop-theme-host" id="shop-theme-slot" hidden></div>
-          <div class="shop-categories-scroll">
-            <a href="${ShopRoutes.home()}" class="${active === "shop" ? "is-active" : ""}">${t("shop.nav.home")}</a>
-            ${navCats}
-          </div>
-        </nav>
       </div>
+      <nav class="shop-subnav glass-inset" aria-label="${escapeAttr(t("shop.nav.categories"))}">
+        <div class="shop-categories-scroll">
+          <a href="${ShopRoutes.home()}" class="${active === "shop" ? "is-active" : ""}">${t("shop.nav.home")}</a>
+          ${navCats}
+        </div>
+        <div id="shop-lang-slot" class="shop-lang-slot"></div>
+      </nav>
       <div class="shop-search-overlay" id="shop-search-overlay" hidden>
         <div class="shop-search-backdrop" data-close-search tabindex="-1"></div>
         <div class="shop-search-panel glass-panel" role="dialog" aria-modal="true" aria-label="${escapeAttr(t("shop.search.title"))}">
@@ -93,7 +92,6 @@ export function mountShopLayout({ active = "shop", catalog = null, searchQuery =
   if (window.PRV_I18N?.applyLang) {
     window.PRV_I18N.applyLang(window.PRV_I18N.getLang?.() || "ro");
   }
-  window.PRV_I18N?.rebuildLangPicker?.();
 
   const refreshBadge = () => {
     const btn = root.querySelector(".shop-cart-btn");

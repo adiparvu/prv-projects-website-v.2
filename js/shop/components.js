@@ -136,8 +136,11 @@ export function filterSidebar({ minEuro = "", maxEuro = "", inStockOnly = false,
   const minHint = bounds ? (bounds.min / 100).toFixed(0) : "";
   const maxHint = bounds ? (bounds.max / 100).toFixed(0) : "";
   return `
-    <aside class="shop-filters glass-panel" aria-label="${t("shop.filter.title")}">
-      <div class="shop-theme-host shop-theme-host--filters" aria-label="Theme"></div>
+    <aside class="shop-filters glass-panel shop-color-zone" aria-label="${t("shop.filter.title")}">
+      <div class="shop-color-zone-tools shop-color-zone-tools--filters" aria-label="${escapeHtml(t("shop.nav.themeZone"))}">
+        <span class="shop-color-zone-label">${escapeHtml(t("shop.nav.theme"))}</span>
+        <div class="shop-theme-host shop-theme-host--filters"></div>
+      </div>
       <h2 class="shop-filters-title">${t("shop.filter.title")}</h2>
       <fieldset class="shop-filter-group">
         <legend>${t("shop.filter.price")}</legend>
