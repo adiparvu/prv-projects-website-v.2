@@ -19,9 +19,16 @@
   --accent-2: var(--prv-text-muted);
   --accent-3: var(--prv-text);
   --gradient-hero: linear-gradient(180deg, var(--prv-text), var(--prv-text-muted));
-  --gradient-mesh-1: color-mix(in srgb, var(--prv-text) 18%, transparent);
-  --gradient-mesh-2: color-mix(in srgb, var(--prv-text-muted) 16%, transparent);
-  --gradient-mesh-3: color-mix(in srgb, var(--prv-text) 10%, transparent);
+  --gradient-mesh-1: rgba(0, 113, 227, 0.11);
+  --gradient-mesh-2: rgba(94, 92, 230, 0.09);
+  --gradient-mesh-3: rgba(191, 90, 242, 0.07);
+}
+
+:root[data-theme="dark"],
+:root[data-effective-theme="dark"] {
+  --gradient-mesh-1: rgba(0, 113, 227, 0.2);
+  --gradient-mesh-2: rgba(94, 92, 230, 0.14);
+  --gradient-mesh-3: rgba(191, 90, 242, 0.1);
 }
 
 /* Dacă tema dark e activă manual, păstrează monocrom + contrast */

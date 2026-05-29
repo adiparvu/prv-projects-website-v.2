@@ -31,9 +31,10 @@
   --accent-2: #8a8a8e;
   --accent-3: var(--text-primary);
   --gradient-hero: linear-gradient(180deg, var(--text-primary), var(--accent-2));
-  --gradient-mesh-1: rgba(15, 15, 15, 0.14);
-  --gradient-mesh-2: rgba(138, 138, 142, 0.12);
-  --gradient-mesh-3: rgba(15, 15, 15, 0.08);
+  /* Orbi ambient — accente (nu negru/alb invertit pe teme) */
+  --gradient-mesh-1: rgba(0, 113, 227, 0.11);
+  --gradient-mesh-2: rgba(94, 92, 230, 0.09);
+  --gradient-mesh-3: rgba(191, 90, 242, 0.07);
 
   --nav-height: 72px;
   --radius-sm: 12px;
@@ -57,9 +58,9 @@
   --text-secondary: rgba(246, 246, 244, 0.72);
   --text-muted: rgba(246, 246, 244, 0.45);
 
-  --gradient-mesh-1: rgba(255, 255, 255, 0.14);
-  --gradient-mesh-2: rgba(255, 255, 255, 0.1);
-  --gradient-mesh-3: rgba(255, 255, 255, 0.06);
+  --gradient-mesh-1: rgba(0, 113, 227, 0.2);
+  --gradient-mesh-2: rgba(94, 92, 230, 0.14);
+  --gradient-mesh-3: rgba(191, 90, 242, 0.1);
 }
 
 *,
@@ -73,6 +74,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-base);
 }
 
 body {
@@ -151,9 +153,10 @@ img {
   width: min(45vw, 380px);
   height: min(45vw, 380px);
   background: var(--gradient-mesh-3);
-  bottom: -5%;
-  left: 30%;
+  bottom: 0;
+  left: 25%;
   animation-delay: -12s;
+  opacity: 0.32;
 }
 
 @keyframes float-orb {
@@ -1469,7 +1472,7 @@ body.pointer-active .cursor-glow {
   gap: 1rem 1.5rem;
   padding: 1.25rem 1rem;
   border-top: 1px solid var(--glass-border);
-  background: linear-gradient(180deg, transparent, var(--glass-inset));
+  background: color-mix(in srgb, var(--glass-bg) 48%, transparent);
 }
 
 .footer-social-row-main {
@@ -2302,10 +2305,20 @@ body.pointer-active .cursor-glow {
 [data-effective-theme="dark"] .glass-panel::before {
   background: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.1) 0%,
+    color-mix(in srgb, var(--glass-highlight) 85%, transparent) 0%,
     transparent 45%,
     transparent 55%,
-    rgba(255, 255, 255, 0.04) 100%
+    color-mix(in srgb, var(--glass-highlight) 45%, transparent) 100%
+  );
+}
+
+.footer.glass-panel::before {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--glass-highlight) 55%, transparent) 0%,
+    transparent 44%,
+    transparent 56%,
+    color-mix(in srgb, var(--glass-highlight) 28%, transparent) 100%
   );
 }
 
