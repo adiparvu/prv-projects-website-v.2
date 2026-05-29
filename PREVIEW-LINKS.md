@@ -4,8 +4,8 @@
 
 | Pagină | URL |
 |--------|-----|
-| **Shop** | https://wildlife-peripherals-representing-indianapolis.trycloudflare.com/shop/index.html |
-| **Site** | https://wildlife-peripherals-representing-indianapolis.trycloudflare.com/ |
+| **Shop** | https://powerful-local-ghz-troubleshooting.trycloudflare.com/shop/index.html |
+| **Site** | https://powerful-local-ghz-troubleshooting.trycloudflare.com/ |
 
 > Deschide **/shop/index.html** (cu `index.html`). Hard refresh: Ctrl+Shift+R.
 
