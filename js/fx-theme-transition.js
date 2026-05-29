@@ -2,8 +2,10 @@
  * PRV — crossfade light/dark (site + shop)
  */
 
-function prefersReduced() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+
+export function prefersReducedMotion() {
+  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
 }
 
 function isFxEnabled() {
@@ -11,6 +13,10 @@ function isFxEnabled() {
   if (cfg.effectsEnabled === false) return false;
   if (document.body?.dataset.fxOff === "true") return false;
   return true;
+}
+
+function syncReducedMotionState() {
+  document.documentElement.classList.toggle("reduced-motion", prefersReducedMotion());
 }
 
 function ensureThemeOverlay() {
@@ -26,6 +32,15 @@ function ensureThemeOverlay() {
 
 /** Înregistrează PRV_FX.themeTransition (idempotent) */
 export function initThemeTransition() {
+  syncReducedMotionState();
+
+  const motionMq = window.matchMedia(REDUCED_MOTION_QUERY);
+  if (typeof motionMq.addEventListener === "function") {
+    motionMq.addEventListener("change", syncReducedMotionState);
+  } else if (typeof motionMq.addListener === "function") {
+    motionMq.addListener(syncReducedMotionState);
+  }
+
   if (window.PRV_FX?.themeTransition) return;
 
   const overlay = ensureThemeOverlay();
@@ -33,20 +48,25 @@ export function initThemeTransition() {
 
   window.PRV_FX = window.PRV_FX || {};
   window.PRV_FX.themeTransition = (applyFn, preference) => {
-    if (!isFxEnabled() || prefersReduced() || busy) {
+    if (!isFxEnabled() || prefersReducedMotion() || busy) {
       applyFn(preference);
       return;
     }
     busy = true;
     overlay.classList.add("is-active");
-    setTimeout(() => {
+    window.setTimeout(() => {
       applyFn(preference);
       requestAnimationFrame(() => {
         overlay.classList.remove("is-active");
-        setTimeout(() => {
+        window.setTimeout(() => {
           busy = false;
         }, 320);
       });
     }, 150);
   };
+}
+
+/** Crossfade doar dacă animația e permisă (user toggle + motion OK) */
+export function shouldAnimateThemeChange() {
+  return isFxEnabled() && !prefersReducedMotion() && typeof window.PRV_FX?.themeTransition === "function";
 }

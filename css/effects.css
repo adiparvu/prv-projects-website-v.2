@@ -431,6 +431,26 @@ body.fx-page-enter.fx-page-ready > .nav {
   opacity: 0.85;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  #fx-theme-overlay {
+    transition: none !important;
+    opacity: 0 !important;
+  }
+
+  #fx-theme-overlay.is-active {
+    opacity: 0 !important;
+  }
+}
+
+html.reduced-motion #fx-theme-overlay {
+  transition: none !important;
+  opacity: 0 !important;
+}
+
+html.reduced-motion #fx-theme-overlay.is-active {
+  opacity: 0 !important;
+}
+
 /* 14. CTA particles */
 .btn-primary.fx-particles {
   position: relative;

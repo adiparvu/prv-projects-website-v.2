@@ -84,5 +84,5 @@ if (document.readyState === "loading") {
 
 export function initThemeFromStorage() {
   const saved = localStorage.getItem(STORAGE_THEME) || "light";
-  applyTheme(saved);
+  applyTheme(saved, { animate: false });
 }

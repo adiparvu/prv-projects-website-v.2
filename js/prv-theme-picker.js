@@ -60,8 +60,9 @@ export function applyThemeCore(preference) {
   updateThemePickerTrigger(preference);
 }
 
-export function applyTheme(preference) {
-  if (window.PRV_FX?.themeTransition) {
+export function applyTheme(preference, { animate = true } = {}) {
+  const useTransition = animate && window.PRV_FX?.themeTransition;
+  if (useTransition) {
     window.PRV_FX.themeTransition(applyThemeCore, preference);
   } else {
     applyThemeCore(preference);
@@ -203,13 +204,13 @@ export function buildThemePicker() {
     updateThemePickerTrigger(localStorage.getItem(STORAGE_KEY) || DEFAULT_THEME);
   });
 
-  applyTheme(saved);
+  applyTheme(saved, { animate: false });
 }
 
 
 export function initTheme() {
   const saved = localStorage.getItem(STORAGE_KEY) || DEFAULT_THEME;
-  applyTheme(saved);
+  applyTheme(saved, { animate: false });
 
   const tryBuild = () => {
     if (document.getElementById("footer-theme-slot")) buildThemePicker();
@@ -219,6 +220,6 @@ export function initTheme() {
 
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
     const current = localStorage.getItem(STORAGE_KEY) || DEFAULT_THEME;
-    if (current === "system") applyTheme("system");
+    if (current === "system") applyTheme("system", { animate: false });
   });
 }
