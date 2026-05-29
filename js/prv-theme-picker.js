@@ -3,6 +3,8 @@
  * Mount: shop color zones (.shop-theme-host), not main navbar.
  */
 
+import { shouldAnimateThemeChange } from "./fx-theme-transition.js";
+
 const STORAGE_KEY = "prv-theme";
 const DEFAULT_THEME = "light";
 const THEME_OPTIONS = ["light", "dark", "system"];
