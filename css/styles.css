@@ -1834,59 +1834,7 @@ body.pointer-active .cursor-glow {
   color: var(--accent-1);
 }
 
-/* Back nav — aceeași săgeată ca în shop header */
-.nav-back-slot {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  margin-right: 0.15rem;
-}
-
-.nav-back-btn,
-.prv-back-btn {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  padding: 0;
-  border: none;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--text-primary);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  appearance: none;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.nav-back-btn:hover,
-.nav-back-btn:focus-visible,
-.prv-back-btn:hover,
-.prv-back-btn:focus-visible {
-  color: var(--accent-1);
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  outline: none;
-}
-
-.nav-back-btn:focus,
-.nav-back-btn:active,
-.prv-back-btn:focus,
-.prv-back-btn:active {
-  outline: none;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-[dir="rtl"] .nav-back-btn svg,
-[dir="rtl"] .prv-back-btn svg {
-  transform: scaleX(-1);
-}
-
+/* Back nav — săgeată + text în breadcrumb / conținut (nu în header) */
 .prv-back-link {
   display: inline-flex;
   align-items: center;

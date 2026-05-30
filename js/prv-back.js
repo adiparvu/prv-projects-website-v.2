@@ -42,17 +42,6 @@ export function backLinkHtml({ href, label = "", ariaLabel = "", className = "",
   return `<a href="${escapeAttr(href)}" class="${cls}" aria-label="${aria}" data-prv-back-smart>${BACK_ARROW_SVG}${labelHtml}</a>`;
 }
 
-/** Buton back (icon only) — ca în header shop */
-export function backButtonHtml({ href = "", ariaLabel = "", className = "", id = "" } = {}) {
-  const cls = ["prv-back-btn", "nav-back-btn", className].filter(Boolean).join(" ");
-  const idAttr = id ? ` id="${escapeAttr(id)}"` : "";
-  const aria = escapeAttr(ariaLabel || backAriaLabel());
-  if (href) {
-    return `<a href="${escapeAttr(href)}" class="${cls}"${idAttr} aria-label="${aria}" data-i18n-aria="nav.back" data-prv-back-smart>${BACK_ARROW_SVG}</a>`;
-  }
-  return `<button type="button" class="${cls}"${idAttr} aria-label="${aria}" data-i18n-aria="nav.back" data-prv-back-history>${BACK_ARROW_SVG}</button>`;
-}
-
 function syncBackLabel(anchor) {
   const labelEl = anchor.querySelector(".prv-back-link__label");
   if (!labelEl) return;
@@ -101,13 +90,6 @@ function canGoBackInSite() {
   }
 }
 
-function isSiteHome() {
-  const path = location.pathname;
-  if (/\/(shop|projects|blog)(\/|$)/.test(path)) return false;
-  const file = path.split("/").filter(Boolean).pop() || "index.html";
-  return file === "index.html" || file === "";
-}
-
 function isShopHome() {
   const path = location.pathname;
   if (!path.includes("/shop")) return false;
@@ -140,14 +122,6 @@ function getSmartBackFallback() {
   return siteHome;
 }
 
-function shouldShowNavBack() {
-  if (canGoBackInSite()) return true;
-  if (document.body.classList.contains("shop-body")) {
-    return !isShopHome() || !!document.referrer;
-  }
-  return !isSiteHome();
-}
-
 /** history.back dacă e posibil, altfel href fallback */
 export function wireSmartBack(el, { fallbackHref } = {}) {
   if (!el || el.dataset.prvBackSmartWired === "1") return;
@@ -172,27 +146,7 @@ function wireSmartBackLinks(root = document) {
   });
 }
 
-/** Săgeată în header site (ca shop) */
-export function mountSiteNavBack(root = document) {
-  if (document.body.classList.contains("shop-body")) return;
-
-  root.querySelectorAll("header.nav, .nav.glass-panel").forEach((nav) => {
-    if (nav.closest(".shop-shell") || nav.querySelector(".nav-back-slot")) return;
-
-    if (!shouldShowNavBack()) return;
-
-    const fallback = getSmartBackFallback();
-    const slot = document.createElement("div");
-    slot.className = "nav-back-slot";
-    slot.innerHTML = backButtonHtml({ href: fallback, className: "nav-back-btn--site" });
-    nav.insertBefore(slot, nav.firstChild);
-    wireSmartBack(slot.querySelector("[data-prv-back-smart], .prv-back-btn, a"));
-  });
-
-  window.PRV_I18N?.applyToDOM?.(root);
-}
-
-/** Montează săgeata pe breadcrumb-uri, header site și linkuri marcate */
+/** Montează săgeata pe breadcrumb-uri și linkuri back din conținut */
 export function initBackNav(root = document) {
   root.querySelectorAll(".breadcrumb > a[href]").forEach((a, i, list) => {
     if (a === list[0]) enhanceBackLink(a);
@@ -218,7 +172,6 @@ export function initBackNav(root = document) {
     });
   });
 
-  mountSiteNavBack(root);
   wireSmartBackLinks(root);
 }
 
