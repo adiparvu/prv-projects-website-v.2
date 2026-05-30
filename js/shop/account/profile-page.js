@@ -20,11 +20,7 @@ import { appSettingsBodyHtml, wireAppSettingsSection } from "./components/app-se
 import { profileDetailsBodyHtml } from "./components/profile-details-section.js";
 import { ordersBodyHtml } from "./components/orders-section.js";
 import { returnsBodyHtml } from "./components/returns-section.js";
-import {
-  scrollAccountViewToTop,
-  withStableAccountScroll,
-  bindAccountScrollStabilizers,
-} from "./account-scroll.js";
+import { scrollAccountViewToTop } from "./account-scroll.js";
 import { accountLoadingHtml, accountErrorBannerHtml, showAccountToast } from "./components/states.js";
 import { ICONS } from "./icons.js";
 
@@ -88,23 +84,23 @@ function initProfileNavigation(main, bundle, orders, opts) {
   const viewport = main.querySelector("[data-acct-stack-viewport]");
   if (!viewport) return;
 
-  bindAccountScrollStabilizers(main);
-
   const render = () => {
     const direction = navStack.consumeDirection();
     const screen = navStack.current();
     const animClass = stackScreenClass(direction);
 
-    withStableAccountScroll(main, () => {
-      viewport.innerHTML =
-        screen === "root"
-          ? renderRootScreen(ctx, animClass)
-          : renderDetailScreen(screen, ctx, animClass);
+    viewport.innerHTML =
+      screen === "root"
+        ? renderRootScreen(ctx, animClass)
+        : renderDetailScreen(screen, ctx, animClass);
 
-      wireCurrentScreen(main, ctx, navStack);
-      syncAccountHeaderBack(navStack, render);
-      updateAccountPageTitle(ctx, navStack.current());
-    });
+    wireCurrentScreen(main, ctx, navStack);
+    syncAccountHeaderBack(navStack, render);
+    updateAccountPageTitle(ctx, navStack.current());
+
+    if (screen !== "root") {
+      scrollAccountViewToTop(main);
+    }
   };
 
   viewport.addEventListener("click", (e) => {

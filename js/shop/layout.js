@@ -6,6 +6,7 @@ import { ShopStore } from "./store.js";
 import { escapeHtml } from "./format.js";
 import { t } from "./i18n.js";
 import { BACK_ARROW_SVG, wireShopHeaderBack } from "../prv-back.js";
+import { isShopStorefrontHome } from "./page-kind.js";
 
 const SEARCH_ICON = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>`;
 const BACK_ICON = BACK_ARROW_SVG;
@@ -14,9 +15,11 @@ const CART_ICON = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" s
 
 const LOGO_ICON = `<svg viewBox="0 0 100 100" role="img" aria-label="PRV"><g fill="currentColor"><rect x="22" y="18" width="15" height="64" rx="5"/><rect x="22" y="67" width="56" height="15" rx="5"/></g></svg>`;
 
-export function mountShopLayout({ active = "shop", catalog = null, searchQuery = "" } = {}) {
+export function mountShopLayout({ active = "shop", catalog = null, searchQuery = "", page = "home" } = {}) {
   const root = document.getElementById("shop-root");
   if (!root) return;
+
+  const storefrontHome = isShopStorefrontHome(page);
 
   const account = ShopStore.getAccount();
   const accountLabel = account ? account.email.split("@")[0] : t("shop.nav.account");
@@ -35,7 +38,7 @@ export function mountShopLayout({ active = "shop", catalog = null, searchQuery =
   const q = escapeAttr(searchQuery);
 
   root.innerHTML = `
-    <div class="shop-shell">
+    <div class="shop-shell${storefrontHome ? "" : " shop-shell--utility"}">
       <header class="nav glass-panel shop-top-nav nav--has-back" id="shop-top-nav">
         <div class="nav-header-slot nav-header-slot--start">
           <a href="${ShopRoutes.siteHome()}" class="nav-icon-btn nav-back-btn shop-back-btn" aria-label="${escapeAttr(t("shop.nav.backToSite"))}" data-i18n-aria="nav.back">
@@ -61,13 +64,17 @@ export function mountShopLayout({ active = "shop", catalog = null, searchQuery =
           </button>
         </div>
       </header>
-      ${uspStrip()}
-      <nav class="shop-subnav glass-inset" aria-label="${escapeAttr(t("shop.nav.categories"))}">
+      ${storefrontHome ? uspStrip() : ""}
+      ${
+        storefrontHome
+          ? `<nav class="shop-subnav glass-inset" aria-label="${escapeAttr(t("shop.nav.categories"))}">
         <div class="shop-categories-scroll">
           <a href="${ShopRoutes.home()}" class="${active === "shop" ? "is-active" : ""}">${t("shop.nav.home")}</a>
           ${navCats}
         </div>
-      </nav>
+      </nav>`
+          : ""
+      }
       <div class="shop-search-overlay" id="shop-search-overlay" hidden>
         <div class="shop-search-backdrop" data-close-search tabindex="-1"></div>
         <div class="shop-search-panel glass-panel" role="dialog" aria-modal="true" aria-label="${escapeAttr(t("shop.search.title"))}">

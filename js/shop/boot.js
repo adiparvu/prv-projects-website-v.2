@@ -29,7 +29,7 @@ import { initThemeTransition } from "../fx-theme-transition.js";
 import { initAmbientFx } from "../fx-ambient.js";
 import { initShopNav } from "./nav.js";
 import { initBackNav, wireShopHeaderBack, mountGlassHeaderBack, updateShopHeaderBackContext } from "../prv-back.js";
-import { scrollAccountViewToTop } from "./account/account-scroll.js";
+import { isShopStorefrontHome } from "./page-kind.js";
 
 if (typeof window !== "undefined") {
   window.PRV_BACK = { initBackNav, wireShopHeaderBack, mountGlassHeaderBack, updateShopHeaderBackContext };
@@ -55,29 +55,29 @@ function showShopFatal(message) {
       <a href="index.html" class="btn btn-primary">OK</a>
     </div>
   `;
-  revealShopChrome();
+  revealShopChrome("home");
 }
 
-function revealShopChrome() {
-  if (!document.body.classList.contains("shop-acct-stack-deep")) {
-    window.scrollTo(0, 0);
-  }
-
+function revealShopChrome(page = activePage) {
   const show = () => {
     document.documentElement.classList.remove("shop-entering");
     document.body.classList.add("shop-boot-ready");
 
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (
+      isShopStorefrontHome(page) &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       document.body.classList.add("fx-scroll-driven");
-    }
-
-    if (document.body.classList.contains("shop-acct-stack-deep")) {
-      const host = document.querySelector(".shop-acct-profile-host");
-      if (host) scrollAccountViewToTop(host);
     }
   };
 
-  requestAnimationFrame(() => requestAnimationFrame(show));
+  if (isShopStorefrontHome(page)) {
+    window.scrollTo(0, 0);
+    requestAnimationFrame(() => requestAnimationFrame(show));
+    return;
+  }
+
+  show();
 }
 
 function hasShopStrings() {
@@ -143,7 +143,7 @@ function finishPage(page, main, catalog) {
   wireShareButtons(main);
   wireFavoriteButtons(main);
   initBackNav(main);
-  revealShopChrome();
+  revealShopChrome(page);
   initShopNav();
 
   [...document.body.classList]
@@ -160,6 +160,8 @@ function finishPage(page, main, catalog) {
 export async function bootShop(page) {
   activePage = page;
   document.body.classList.add("shop-body", "fx-page-ready");
+  document.body.classList.toggle("shop-mode-storefront", isShopStorefrontHome(page));
+  document.body.classList.toggle("shop-mode-utility", !isShopStorefrontHome(page));
 
   if (!window.PRV_I18N?.applyLang) {
     showShopFatal("Traducerile nu s-au încărcat.");
@@ -178,6 +180,7 @@ export async function bootShop(page) {
     active: layoutActive(page),
     catalog: instant,
     searchQuery: page === "search" ? getParam("q") || "" : "",
+    page,
   };
 
   mountShopLayout(layoutOpts);
@@ -228,6 +231,7 @@ export async function bootShop(page) {
             active: layoutActive(activePage),
             catalog: activeCatalog,
             searchQuery: activePage === "search" ? getParam("q") || "" : "",
+            page: activePage,
           });
           const m = getMainEl();
           if (m && activeCatalog) {
