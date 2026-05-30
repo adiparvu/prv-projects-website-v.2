@@ -3038,6 +3038,53 @@ body.pointer-active .cursor-glow {
   }
 }
 
+/* Footer — PRV dashboard link (bottom-right, replaces legacy phone/WhatsApp floater) */
+.footer-dashboard-fab {
+  position: fixed;
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  right: max(1.25rem, env(safe-area-inset-right));
+  z-index: 160;
+}
+
+.footer-dashboard-link {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 28px var(--glass-shadow);
+  backdrop-filter: blur(var(--prv-ui-blur)) saturate(var(--prv-ui-saturate));
+  -webkit-backdrop-filter: blur(var(--prv-ui-blur)) saturate(var(--prv-ui-saturate));
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: transform 0.25s var(--ease-spring), box-shadow 0.25s ease, color 0.2s ease;
+}
+
+.footer-dashboard-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px var(--glass-shadow);
+  color: var(--accent-1);
+}
+
+.footer-dashboard-link .logo-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.footer-dashboard-link .logo-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 768px) {
+  .footer-dashboard-fab {
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,

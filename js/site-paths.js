@@ -83,3 +83,9 @@ export function getFooterBasePrefix() {
   const b = getSiteBase();
   return b === "." ? "" : b;
 }
+
+/** URL către dashboard de pe orice pagină site / shop */
+export function getDashboardUrl() {
+  const base = getSiteBase();
+  return base === "." ? "dashboard/index.html" : `${base}/dashboard/index.html`;
+}

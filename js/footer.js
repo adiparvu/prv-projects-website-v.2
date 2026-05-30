@@ -15,6 +15,41 @@
   }
   const base = footerBase();
 
+  function dashboardHref() {
+    return base === "." ? "dashboard/index.html" : `${base}/dashboard/index.html`;
+  }
+
+  const LOGO_ICON = `<svg viewBox="0 0 100 100" role="img" aria-hidden="true"><g fill="currentColor"><rect x="22" y="18" width="15" height="64" rx="5"/><rect x="22" y="67" width="56" height="15" rx="5"/></g></svg>`;
+
+  function mountFooterDashboardLink() {
+    if (document.querySelector(".footer-dashboard-fab")) return;
+    if (/\/dashboard\//.test(location.pathname)) return;
+
+    document.querySelector(".floating-cta")?.remove();
+
+    const fab = document.createElement("div");
+    fab.className = "footer-dashboard-fab";
+    fab.innerHTML = `
+      <a href="${dashboardHref()}" class="footer-dashboard-link logo" aria-label="PRV Dashboard">
+        <span class="logo-icon">${LOGO_ICON}</span>
+      </a>
+    `;
+
+    if (document.body.classList.contains("shop-body") && !document.body.classList.contains("shop-boot-ready")) {
+      fab.hidden = true;
+      const reveal = () => {
+        if (document.body.classList.contains("shop-boot-ready")) {
+          fab.hidden = false;
+          observer.disconnect();
+        }
+      };
+      const observer = new MutationObserver(reveal);
+      observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+    }
+
+    document.body.appendChild(fab);
+  }
+
   const socialPrimary = [
     {
       id: "instagram",
@@ -213,4 +248,6 @@
   } else {
     dispatchFooterReady();
   }
+
+  mountFooterDashboardLink();
 })();
