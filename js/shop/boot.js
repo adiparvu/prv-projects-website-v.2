@@ -29,6 +29,7 @@ import { initThemeTransition } from "../fx-theme-transition.js";
 import { initAmbientFx } from "../fx-ambient.js";
 import { initShopNav } from "./nav.js";
 import { initBackNav, wireShopHeaderBack, mountGlassHeaderBack, updateShopHeaderBackContext } from "../prv-back.js";
+import { scrollAccountViewToTop } from "./account/account-scroll.js";
 
 if (typeof window !== "undefined") {
   window.PRV_BACK = { initBackNav, wireShopHeaderBack, mountGlassHeaderBack, updateShopHeaderBackContext };
@@ -58,7 +59,9 @@ function showShopFatal(message) {
 }
 
 function revealShopChrome() {
-  window.scrollTo(0, 0);
+  if (!document.body.classList.contains("shop-acct-stack-deep")) {
+    window.scrollTo(0, 0);
+  }
 
   const show = () => {
     document.documentElement.classList.remove("shop-entering");
@@ -66,6 +69,11 @@ function revealShopChrome() {
 
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       document.body.classList.add("fx-scroll-driven");
+    }
+
+    if (document.body.classList.contains("shop-acct-stack-deep")) {
+      const host = document.querySelector(".shop-acct-profile-host");
+      if (host) scrollAccountViewToTop(host);
     }
   };
 
@@ -195,11 +203,18 @@ export async function bootShop(page) {
     activeCatalog = catalog;
 
     if (!instant) {
-      mountShopLayout({ ...layoutOpts, catalog });
-      const m = getMainEl();
-      if (!m) return;
-      await renderPage(page, m, catalog);
-      finishPage(page, m, catalog);
+      const existingMain = getMainEl();
+      const accountProfileMounted = page === "account" && existingMain?.querySelector("[data-profile-root]");
+
+      if (accountProfileMounted) {
+        /* Keep in-page account stack — catalog refresh only */
+      } else {
+        mountShopLayout({ ...layoutOpts, catalog });
+        const m = getMainEl();
+        if (!m) return;
+        await renderPage(page, m, catalog);
+        finishPage(page, m, catalog);
+      }
     }
 
     if (!window.__prvShopLangBound) {

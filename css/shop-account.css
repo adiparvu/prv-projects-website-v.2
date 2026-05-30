@@ -57,6 +57,7 @@
 
 .shop-acct-page-title {
   margin-bottom: 0.75rem;
+  scroll-margin-top: calc(var(--nav-height, 80px) + 12px);
 }
 
 .shop-main .shop-account-nav {
@@ -369,12 +370,18 @@
 .shop-acct-stack-viewport {
   position: relative;
   overflow: hidden;
+  overflow-anchor: none;
+}
+
+.shop-main {
+  overflow-anchor: none;
 }
 
 .shop-acct-stack-screen {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  overflow-anchor: none;
 }
 
 .shop-acct-detail-page-title {
@@ -382,6 +389,7 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   margin: 0;
+  scroll-margin-top: calc(var(--nav-height, 80px) + 12px);
 }
 
 .shop-acct-stack-screen--enter-forward {
