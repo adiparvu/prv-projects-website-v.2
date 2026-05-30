@@ -12,21 +12,14 @@
 
 /* Shop inherits website glass tokens — no color overrides on body */
 
-/* ——— Boot: fără flash scroll / footer (doar homepage shop) ——— */
+/* ——— Boot: fără flash scroll / footer (toate paginile shop) ——— */
 html.shop-entering body.shop-body {
   overflow: hidden;
 }
 
-html.shop-entering body.shop-body > #shop-root,
-html.shop-entering body.shop-body > footer {
+body.shop-body:not(.shop-boot-ready) > #shop-root,
+body.shop-body:not(.shop-boot-ready) > footer {
   visibility: hidden;
-}
-
-html.shop-utility-page body.shop-body > #shop-root,
-html.shop-utility-page body.shop-body > footer,
-body.shop-body.shop-mode-utility > #shop-root,
-body.shop-body.shop-mode-utility > footer {
-  visibility: visible;
 }
 
 body.shop-body.shop-boot-ready > #shop-root,

@@ -1,5 +1,5 @@
 /**
- * PRV Shop — boot scroll guard doar pe homepage shop (nu account / coș / etc.)
+ * PRV Shop — boot scroll guard (toate paginile shop)
  */
 (function () {
   if (typeof history !== "undefined" && "scrollRestoration" in history) {
@@ -16,13 +16,14 @@
     return "utility";
   })();
 
-  if (page !== "home") {
-    document.documentElement.classList.add("shop-utility-page");
-    return;
-  }
+  if (page === null) return;
 
   window.scrollTo(0, 0);
   document.documentElement.classList.add("shop-entering");
+
+  if (page !== "home") {
+    document.documentElement.classList.add("shop-utility-page");
+  }
 
   window.addEventListener(
     "pageshow",

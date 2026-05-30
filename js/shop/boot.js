@@ -71,13 +71,8 @@ function revealShopChrome(page = activePage) {
     }
   };
 
-  if (isShopStorefrontHome(page)) {
-    window.scrollTo(0, 0);
-    requestAnimationFrame(() => requestAnimationFrame(show));
-    return;
-  }
-
-  show();
+  window.scrollTo(0, 0);
+  requestAnimationFrame(() => requestAnimationFrame(show));
 }
 
 function hasShopStrings() {
