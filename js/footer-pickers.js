@@ -17,7 +17,7 @@ function purgeChromePickers() {
 
   document.querySelector(".shop-bottom-dock")?.remove();
 
-  document.querySelectorAll(".shop-header, .shop-header-wrap, .shop-subnav").forEach((zone) => {
+  document.querySelectorAll(".shop-top-nav, .shop-subnav").forEach((zone) => {
     zone.querySelectorAll(".lang-picker-host, .theme-picker-host, #lang-picker, #theme-picker").forEach((el) => {
       el.remove();
     });

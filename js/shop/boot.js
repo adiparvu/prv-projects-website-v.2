@@ -25,6 +25,7 @@ import { wireFavoriteButtons } from "./favorites.js";
 import { remountShopPickers } from "./picker-mount.js";
 import { initTheme } from "../prv-theme-picker.js";
 import { initThemeTransition } from "../fx-theme-transition.js";
+import { initShopNav } from "./nav.js";
 import { initBackNav, wireShopHeaderBack, mountGlassHeaderBack } from "../prv-back.js";
 
 if (typeof window !== "undefined") {
@@ -113,6 +114,7 @@ function finishPage(page, main, catalog) {
   wireShareButtons(main);
   wireFavoriteButtons(main);
   initBackNav(main);
+  initShopNav();
 
   [...document.body.classList]
     .filter((c) => c.startsWith("shop-page-"))
