@@ -147,6 +147,29 @@ body.shop-body .liquid-canvas {
   color: var(--shop-accent);
 }
 
+/* ——— Shop instant (zero delay intrare) ——— */
+body.shop-body {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+body.shop-body > #shop-root,
+body.shop-body > footer {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+.shop-loading {
+  display: none !important;
+}
+
+.shop-empty .prv-back-link--cta {
+  margin-top: 0.75rem;
+}
+
 body.fx-page-enter.shop-body,
 body.fx-page-enter.shop-body > #shop-root,
 body.fx-page-enter.shop-body > footer {

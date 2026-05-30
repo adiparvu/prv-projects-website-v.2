@@ -1,9 +1,9 @@
-/** PRV Shop — bootstrap (intrare rapidă, fără așteptări inutile) */
+/** PRV Shop — bootstrap instant (fără delay, fără overlay promo) */
 
 import { initEcosystem } from "../prv-platform.js";
 import { wireShopNavLinks } from "../site-paths.js";
 import { mountShopLayout, getMainEl } from "./layout.js";
-import { loadCatalog } from "./catalog.js";
+import { loadCatalog, getInstantCatalog } from "./catalog.js";
 import { renderHome } from "./pages/home.js";
 import { renderCategory } from "./pages/category.js";
 import { renderProduct } from "./pages/product.js";
@@ -22,7 +22,6 @@ import { onShopLangChange } from "./i18n.js";
 import { wireShareButtons } from "./share.js";
 import { initShopAuth, handleMagicLinkFromUrl } from "./auth.js";
 import { wireFavoriteButtons } from "./favorites.js";
-import { mountWelcomePromo } from "./welcome-promo.js";
 import { remountShopPickers } from "./picker-mount.js";
 import { initTheme } from "../prv-theme-picker.js";
 import { initThemeTransition } from "../fx-theme-transition.js";
@@ -54,15 +53,13 @@ function showShopFatal(message) {
   `;
 }
 
-function shopPromoEnabled() {
-  return window.PRV_CONFIG?.shop?.welcomePromo !== false;
+function hasShopStrings() {
+  return Object.keys(window.PRV_I18N?.strings || {}).some((k) => k.startsWith("shop."));
 }
 
-async function ensureShopI18n() {
-  if (!window.PRV_I18N?.applyLang) throw new Error("i18n_missing");
-  const strings = window.PRV_I18N.strings || {};
-  if (Object.keys(strings).some((k) => k.startsWith("shop."))) return;
-  await window.PRV_I18N.applyLang(window.PRV_I18N.getLang?.() || "ro", { save: false });
+function kickShopI18n() {
+  if (!window.PRV_I18N?.applyLang || hasShopStrings()) return;
+  window.PRV_I18N.applyLang(window.PRV_I18N.getLang?.() || "ro", { save: false }).catch(() => {});
 }
 
 let activePage = "home";
@@ -112,54 +109,72 @@ async function renderPage(page, main, catalog) {
   }
 }
 
+function finishPage(page, main, catalog) {
+  wireShareButtons(main);
+  wireFavoriteButtons(main);
+  initBackNav(main);
+
+  [...document.body.classList]
+    .filter((c) => c.startsWith("shop-page-"))
+    .forEach((c) => document.body.classList.remove(c));
+  document.body.classList.add(`shop-page-${page}`);
+
+  queueMicrotask(() => {
+    remountShopPickers();
+    window.dispatchEvent(new CustomEvent("prv:footer-ready"));
+  });
+}
+
 export async function bootShop(page) {
   activePage = page;
   document.body.classList.add("shop-body", "fx-page-ready");
 
+  if (!window.PRV_I18N?.applyLang) {
+    showShopFatal("Traducerile nu s-au încărcat.");
+    return;
+  }
+
+  initThemeTransition();
+  initTheme();
+  initShopAuth();
+  wireShopNavLinks();
+  kickShopI18n();
+
+  const instant = getInstantCatalog();
+  const layoutOpts = {
+    active: layoutActive(page),
+    catalog: instant,
+    searchQuery: page === "search" ? getParam("q") || "" : "",
+  };
+
+  mountShopLayout(layoutOpts);
+
+  const main = getMainEl();
+  if (!main) {
+    showShopFatal("Layout error");
+    return;
+  }
+
+  if (instant) {
+    activeCatalog = instant;
+    await renderPage(page, main, instant);
+    finishPage(page, main, instant);
+  }
+
+  queueMicrotask(() => initEcosystem());
+
   try {
-    if (!window.PRV_I18N?.applyLang) throw new Error("i18n_missing");
-
-    initThemeTransition();
-    initTheme();
-    initEcosystem();
-    initShopAuth();
-    wireShopNavLinks();
-
-    const catalogPromise = loadCatalog();
-    const i18nPromise = ensureShopI18n();
-
     if (getParam("magic")) await handleMagicLinkFromUrl();
 
-    const [catalog] = await Promise.all([catalogPromise, i18nPromise]);
+    const catalog = await loadCatalog(false);
     activeCatalog = catalog;
 
-    mountShopLayout({
-      active: layoutActive(page),
-      catalog: activeCatalog,
-      searchQuery: page === "search" ? getParam("q") || "" : "",
-    });
-
-    const main = getMainEl();
-    if (!main) {
-      showShopFatal("Layout error");
-      return;
-    }
-
-    await renderPage(page, main, activeCatalog);
-    wireShareButtons(main);
-    wireFavoriteButtons(main);
-    initBackNav(main);
-
-    [...document.body.classList]
-      .filter((c) => c.startsWith("shop-page-"))
-      .forEach((c) => document.body.classList.remove(c));
-    document.body.classList.add(`shop-page-${page}`);
-    remountShopPickers();
-
-    window.dispatchEvent(new CustomEvent("prv:footer-ready"));
-
-    if (shopPromoEnabled()) {
-      requestAnimationFrame(() => mountWelcomePromo());
+    if (!instant) {
+      mountShopLayout({ ...layoutOpts, catalog });
+      const m = getMainEl();
+      if (!m) return;
+      await renderPage(page, m, catalog);
+      finishPage(page, m, catalog);
     }
 
     if (!window.__prvShopLangBound) {
@@ -177,13 +192,9 @@ export async function bootShop(page) {
           const m = getMainEl();
           if (m && activeCatalog) {
             await renderPage(activePage, m, activeCatalog);
-            wireShareButtons(m);
-            wireFavoriteButtons(m);
-            initBackNav(m);
+            finishPage(activePage, m, activeCatalog);
           }
-          remountShopPickers();
           window.PRV_I18N?.applyLang?.(window.PRV_I18N.getLang?.() || "ro", { save: false, notify: false });
-          window.dispatchEvent(new CustomEvent("prv:footer-ready"));
         } finally {
           shopLangBusy = false;
         }
@@ -191,12 +202,11 @@ export async function bootShop(page) {
     }
   } catch (err) {
     console.error("[PRV Shop]", err);
+    if (instant) return;
     const hint =
       err.message === "catalog_load_failed"
-        ? "Nu s-a putut încărca catalogul. Verifică că deschizi /shop/index.html (nu doar /shop) și că fișierul data/shop/catalog.json există."
-        : err.message === "i18n_missing"
-          ? "Traducerile nu s-au încărcat. Reîncarcă pagina sau verifică js/translations/."
-          : "Catalog sau scripturi — reîncarcă pagina.";
+        ? "Nu s-a putut încărca catalogul. Deschide /shop/index.html și verifică data/shop/catalog.json."
+        : "Reîncarcă pagina.";
     showShopFatal(hint);
   }
 }

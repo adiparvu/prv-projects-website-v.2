@@ -5,16 +5,52 @@ import { catalogJsonUrl, dataShopRoot } from "./paths.js";
 
 let cache = null;
 let localeCache = {};
+const SESSION_KEY = "prv_shop_catalog_v1";
 
 function getLang() {
   return window.PRV_I18N?.getLang?.() || "ro";
 }
 
-async function fetchWithTimeout(url, ms = 2500) {
+function persistCatalogBase(base) {
+  try {
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(base));
+  } catch {
+    /* ignore */
+  }
+}
+
+function readSessionCatalogBase() {
+  try {
+    const raw = sessionStorage.getItem(SESSION_KEY);
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    return data?.products?.length ? data : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Catalog disponibil sincron (prefetch / session) — pentru primul frame */
+export function getInstantCatalog() {
+  if (cache?.products?.length) return cache;
+  const prefetched = window.__PRV_CATALOG_PREFETCH;
+  if (prefetched?.products?.length) {
+    cache = applyCatalogLocale(prefetched, null);
+    return cache;
+  }
+  const stored = readSessionCatalogBase();
+  if (stored) {
+    cache = applyCatalogLocale(stored, null);
+    return cache;
+  }
+  return null;
+}
+
+async function fetchWithTimeout(url, ms = 1200) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), ms);
   try {
-    return await fetch(url, { signal: ctrl.signal, cache: "no-store" });
+    return await fetch(url, { signal: ctrl.signal, cache: "force-cache" });
   } finally {
     clearTimeout(timer);
   }
@@ -68,21 +104,50 @@ export function applyCatalogLocale(catalog, overlay) {
 export function invalidateCatalogCache() {
   cache = null;
   localeCache = {};
+  try {
+    sessionStorage.removeItem(SESSION_KEY);
+  } catch {
+    /* ignore */
+  }
 }
 
 export async function loadCatalog(force = false) {
-  if (cache && !force) return cache;
+  if (cache && !force) {
+    refreshLocaleOverlay();
+    return cache;
+  }
 
+  const instant = !force ? getInstantCatalog() : null;
+  if (instant && !force) {
+    cache = instant;
+    refreshLocaleOverlay();
+    fetchFreshCatalog().catch(() => {});
+    return cache;
+  }
+
+  return fetchFreshCatalog(force);
+}
+
+async function refreshLocaleOverlay() {
+  const lang = getLang();
+  if (lang === "ro" || !cache) return;
+  const base = readSessionCatalogBase() || cache;
+  const overlay = await loadLocaleOverlay(lang);
+  if (overlay) cache = applyCatalogLocale(base, overlay);
+}
+
+async function fetchFreshCatalog() {
   const lang = getLang();
 
   if (getApiBase()) {
     try {
       const fromApi = await Promise.race([
         fetchCatalogApi(lang),
-        new Promise((_, rej) => setTimeout(() => rej(new Error("api_timeout")), 5000)),
+        new Promise((_, rej) => setTimeout(() => rej(new Error("api_timeout")), 800)),
       ]);
       if (fromApi?.products?.length) {
         cache = fromApi;
+        persistCatalogBase(fromApi);
         return cache;
       }
     } catch (e) {
@@ -93,7 +158,9 @@ export async function loadCatalog(force = false) {
   const res = await fetchWithTimeout(catalogJsonUrl());
   if (!res.ok) throw new Error("catalog_load_failed");
   const base = await res.json();
-  const overlay = await loadLocaleOverlay(lang);
+  persistCatalogBase(base);
+  window.__PRV_CATALOG_PREFETCH = base;
+  const overlay = lang === "ro" ? null : await loadLocaleOverlay(lang);
   cache = applyCatalogLocale(base, overlay);
   return cache;
 }
