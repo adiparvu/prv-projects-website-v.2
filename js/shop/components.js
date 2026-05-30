@@ -7,6 +7,8 @@ import { ShopStore } from "./store.js";
 import { t } from "./i18n.js";
 import { backLinkHtml } from "../prv-back.js";
 
+export { backLinkHtml };
+
 export function productCard(product, catalog) {
   const cat = catalog.categories.find((c) => c.slug === product.categorySlug);
   const img = product.images?.[0]?.url || "";

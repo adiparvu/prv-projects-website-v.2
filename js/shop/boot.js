@@ -1,4 +1,4 @@
-/** PRV Shop — bootstrap */
+/** PRV Shop — bootstrap (intrare rapidă, fără așteptări inutile) */
 
 import { initEcosystem } from "../prv-platform.js";
 import { wireShopNavLinks } from "../site-paths.js";
@@ -54,6 +54,17 @@ function showShopFatal(message) {
   `;
 }
 
+function shopPromoEnabled() {
+  return window.PRV_CONFIG?.shop?.welcomePromo !== false;
+}
+
+async function ensureShopI18n() {
+  if (!window.PRV_I18N?.applyLang) throw new Error("i18n_missing");
+  const strings = window.PRV_I18N.strings || {};
+  if (Object.keys(strings).some((k) => k.startsWith("shop."))) return;
+  await window.PRV_I18N.applyLang(window.PRV_I18N.getLang?.() || "ro", { save: false });
+}
+
 let activePage = "home";
 let activeCatalog = null;
 let shopLangBusy = false;
@@ -101,35 +112,27 @@ async function renderPage(page, main, catalog) {
   }
 }
 
-function waitForI18n(timeoutMs = 10000) {
-  return new Promise((resolve, reject) => {
-    const start = Date.now();
-    const check = () => {
-      if (window.PRV_I18N?.applyLang) return resolve();
-      if (Date.now() - start > timeoutMs) return reject(new Error("i18n_timeout"));
-      setTimeout(check, 40);
-    };
-    check();
-  });
-}
-
 export async function bootShop(page) {
   activePage = page;
+  document.body.classList.add("shop-body", "fx-page-ready");
+
   try {
-    await waitForI18n();
+    if (!window.PRV_I18N?.applyLang) throw new Error("i18n_missing");
+
     initThemeTransition();
     initTheme();
     initEcosystem();
     initShopAuth();
-    await handleMagicLinkFromUrl();
     wireShopNavLinks();
-    document.body.classList.add("shop-body");
 
-    if (!window.PRV_I18N?.strings || !Object.keys(window.PRV_I18N.strings).some((k) => k.startsWith("shop."))) {
-      await window.PRV_I18N?.applyLang?.(window.PRV_I18N.getLang?.() || "ro", { save: false });
-    }
+    const catalogPromise = loadCatalog();
+    const i18nPromise = ensureShopI18n();
 
-    activeCatalog = await loadCatalog();
+    if (getParam("magic")) await handleMagicLinkFromUrl();
+
+    const [catalog] = await Promise.all([catalogPromise, i18nPromise]);
+    activeCatalog = catalog;
+
     mountShopLayout({
       active: layoutActive(page),
       catalog: activeCatalog,
@@ -153,11 +156,11 @@ export async function bootShop(page) {
     document.body.classList.add(`shop-page-${page}`);
     remountShopPickers();
 
-    document.body.classList.add("fx-page-ready");
-
-    mountWelcomePromo();
-
     window.dispatchEvent(new CustomEvent("prv:footer-ready"));
+
+    if (shopPromoEnabled()) {
+      requestAnimationFrame(() => mountWelcomePromo());
+    }
 
     if (!window.__prvShopLangBound) {
       window.__prvShopLangBound = true;
@@ -191,7 +194,7 @@ export async function bootShop(page) {
     const hint =
       err.message === "catalog_load_failed"
         ? "Nu s-a putut încărca catalogul. Verifică că deschizi /shop/index.html (nu doar /shop) și că fișierul data/shop/catalog.json există."
-        : err.message === "i18n_timeout"
+        : err.message === "i18n_missing"
           ? "Traducerile nu s-au încărcat. Reîncarcă pagina sau verifică js/translations/."
           : "Catalog sau scripturi — reîncarcă pagina.";
     showShopFatal(hint);

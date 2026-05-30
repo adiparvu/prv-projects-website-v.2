@@ -57,7 +57,7 @@ window.PRV_CONFIG = {
     },
     pwa: {
       enabled: true,
-      installPrompt: true,
+      installPrompt: false,
     },
   },
 
@@ -71,5 +71,7 @@ window.PRV_CONFIG = {
     stripePublishableKey: "", // pk_live_... or pk_test_...
     currency: "EUR",
     locale: "ro-BE",
+    /** Popup 10% la primul login — false = shop instant, fără overlay */
+    welcomePromo: false,
   },
 };

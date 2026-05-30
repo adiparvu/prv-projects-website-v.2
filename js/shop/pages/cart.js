@@ -1,6 +1,5 @@
 import { formatMoney, escapeHtml } from "../format.js";
-import { trustList, pageBackNav } from "../components.js";
-import { backLinkHtml } from "../prv-back.js";
+import { trustList, pageBackNav, backLinkHtml } from "../components.js";
 import { ShopRoutes } from "../routes.js";
 import { ShopStore } from "../store.js";
 import { computeTotals, renderSummaryHtml } from "../checkout.js";

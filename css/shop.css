@@ -147,8 +147,12 @@ body.shop-body .liquid-canvas {
   color: var(--shop-accent);
 }
 
-.shop-empty .prv-back-link--cta {
-  margin-top: 0.75rem;
+body.fx-page-enter.shop-body,
+body.fx-page-enter.shop-body > #shop-root,
+body.fx-page-enter.shop-body > footer {
+  opacity: 1;
+  filter: none;
+  transform: none;
 }
 
 .shop-categories-scroll {

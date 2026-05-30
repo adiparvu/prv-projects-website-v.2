@@ -10,7 +10,7 @@ function getLang() {
   return window.PRV_I18N?.getLang?.() || "ro";
 }
 
-async function fetchWithTimeout(url, ms = 5000) {
+async function fetchWithTimeout(url, ms = 2500) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), ms);
   try {

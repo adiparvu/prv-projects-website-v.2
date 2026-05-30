@@ -1,7 +1,6 @@
 import { searchProducts } from "../catalog.js";
-import { breadcrumb, productCard } from "../components.js";
+import { breadcrumb, productCard, backLinkHtml } from "../components.js";
 import { ShopRoutes } from "../routes.js";
-import { backLinkHtml } from "../prv-back.js";
 import { escapeHtml } from "../format.js";
 import { t } from "../i18n.js";
 
