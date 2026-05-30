@@ -59,7 +59,7 @@ function hasShopStrings() {
 
 function kickShopI18n() {
   if (!window.PRV_I18N?.applyLang || hasShopStrings()) return;
-  window.PRV_I18N.applyLang(window.PRV_I18N.getLang?.() || "ro", { save: false }).catch(() => {});
+  window.PRV_I18N.applyLang(window.PRV_I18N.getLang?.() || "nl", { save: false, notify: false }).catch(() => {});
 }
 
 let activePage = "home";
@@ -194,7 +194,6 @@ export async function bootShop(page) {
             await renderPage(activePage, m, activeCatalog);
             finishPage(activePage, m, activeCatalog);
           }
-          window.PRV_I18N?.applyLang?.(window.PRV_I18N.getLang?.() || "ro", { save: false, notify: false });
         } finally {
           shopLangBusy = false;
         }

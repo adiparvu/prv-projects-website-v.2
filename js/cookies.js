@@ -24,9 +24,8 @@
       new CustomEvent("prv:cookies-accepted", { detail: data })
     );
     if (window.PRV_ANALYTICS) window.PRV_ANALYTICS.tryInit();
-    if (window.PRV_I18N?.applyLang) {
-      window.PRV_I18N.applyLang(window.PRV_I18N.getLang());
-    }
+    window.PRV_I18N?.applyToDOM?.();
+    window.PRV_I18N?.updatePickerUI?.();
   }
 
   function privacyPolicyHref() {

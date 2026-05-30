@@ -7,6 +7,8 @@
   "shop.nav.actions": "Shop actions",
   "shop.nav.theme": "Theme",
   "shop.nav.themeZone": "Display theme",
+  "shop.nav.language": "Language",
+  "shop.nav.pageTools": "Page settings",
   "shop.search.placeholder": "Kaplama, sıhhi tesisat ara…",
   "shop.search.aria": "Ürün ara",
   "shop.search.title": "Mağazada ara",
@@ -144,8 +146,5 @@
   "shop.empty.product": "Ürün bulunamadı.",
   "shop.empty.order": "Sipariş bulunamadı",
   "shop.breadcrumb.shop": "Mağaza",
-  "shop.loading": "PRV Shop yükleniyor…",
-  "shop.product.copySku": "Copy code",
-  "shop.product.copySkuDone": "Code copied ✓",
-  "shop.product.copySkuFail": "Could not copy"
+  "shop.loading": "PRV Shop yükleniyor…"
 }

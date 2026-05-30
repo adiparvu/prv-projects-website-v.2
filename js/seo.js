@@ -56,7 +56,7 @@
       addressCountry: "BE",
       addressRegion: "Brussels-Capital",
     },
-    knowsLanguage: ["ro", "en", "fr", "nl", "de"],
+    knowsLanguage: ["nl", "en", "ro", "fr", "de", "pl", "es", "it", "tr", "ar", "ru", "uk"],
     priceRange: "€€€",
   };
 

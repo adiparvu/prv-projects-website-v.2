@@ -486,9 +486,8 @@ document.getElementById("year") &&
   (document.getElementById("year").textContent = new Date().getFullYear());
 
 document.addEventListener("prv:footer-ready", () => {
-  if (window.PRV_I18N?.applyLang) {
-    window.PRV_I18N.applyLang(window.PRV_I18N.getLang());
-  }
+  window.PRV_I18N?.applyToDOM?.();
+  window.PRV_I18N?.updatePickerUI?.();
   document.querySelectorAll("[data-reveal]").forEach((el) => {
     if (!el.classList.contains("revealed")) {
       const observer = new IntersectionObserver(

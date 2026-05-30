@@ -85,7 +85,7 @@ export function renderCheckout(main, catalog) {
       },
       discountCode: discountInput.value.trim(),
       paymentMethod: main.querySelector('input[name="pay"]:checked')?.value || "card",
-      lang: window.PRV_I18N?.getLang?.() || "ro",
+      lang: window.PRV_I18N?.getLang?.() || "nl",
     };
 
     if (getApiBase()) {
@@ -116,7 +116,7 @@ export function renderCheckout(main, catalog) {
       },
       discountCode: discountInput.value.trim(),
       paymentMethod: "card",
-      lang: window.PRV_I18N?.getLang?.() || "ro",
+      lang: window.PRV_I18N?.getLang?.() || "nl",
     });
     if (intent?.clientSecret) {
       pendingOrderId = intent.orderId || order.id;
@@ -166,7 +166,7 @@ export function renderCheckout(main, catalog) {
         paymentMethod,
         discountCode,
         orderId: pendingOrderId,
-        lang: window.PRV_I18N?.getLang?.() || "ro",
+        lang: window.PRV_I18N?.getLang?.() || "nl",
       });
       if (order) location.href = ShopRoutes.confirmation(order.id);
     } catch {

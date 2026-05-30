@@ -7,7 +7,7 @@ window.PRV_QUOTE = {
     const to = root.formsubmitEmail || root.contactEmail;
     if (!to) throw new Error("no-email");
 
-    const lang = window.PRV_I18N?.getLang?.() || document.documentElement.lang || "ro";
+    const lang = window.PRV_I18N?.getLang?.() || document.documentElement.lang || "nl";
     const page = location.pathname + location.search;
 
     const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(to)}`, {

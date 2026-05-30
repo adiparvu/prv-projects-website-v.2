@@ -10,7 +10,7 @@ export function t(key, vars = {}) {
 }
 
 export function getLang() {
-  return window.PRV_I18N?.getLang?.() || "ro";
+  return window.PRV_I18N?.getLang?.() || "nl";
 }
 
 export function onShopLangChange(callback) {

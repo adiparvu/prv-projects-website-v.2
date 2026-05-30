@@ -27,7 +27,7 @@ export async function submitCheckout({ catalog, customer, paymentMethod, discoun
     customer,
     paymentMethod,
     discountCode,
-    lang: lang || window.PRV_I18N?.getLang?.() || "ro",
+    lang: lang || window.PRV_I18N?.getLang?.() || "nl",
   };
 
   if (getApiBase()) {

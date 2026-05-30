@@ -12,14 +12,10 @@ const codes = ["ro", "en", "nl", "fr", "de", "pl", "es", "it", "tr", "ar", "ru",
 fs.mkdirSync(outDir, { recursive: true });
 
 for (const code of codes) {
-  let strings;
-  if (shopI18n[code]) {
-    strings = shopI18n[code];
-  } else if (shopLocales[code]) {
-    strings = { ...shopI18n.en, ...shopLocales[code] };
-  } else {
-    strings = shopI18n.en;
-  }
+  const base = shopI18n.en;
+  const native = shopI18n[code] || {};
+  const overlay = shopLocales[code] || {};
+  const strings = { ...base, ...native, ...overlay };
   fs.writeFileSync(path.join(outDir, `${code}.json`), JSON.stringify(strings, null, 2) + "\n");
   console.log("wrote", code, Object.keys(strings).length, "keys");
 }

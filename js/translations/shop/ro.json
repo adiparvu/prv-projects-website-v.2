@@ -7,6 +7,8 @@
   "shop.nav.actions": "Acțiuni shop",
   "shop.nav.theme": "Temă",
   "shop.nav.themeZone": "Temă display",
+  "shop.nav.language": "Limbă",
+  "shop.nav.pageTools": "Setări pagină",
   "shop.search.placeholder": "Caută finisaje, sanitare…",
   "shop.search.aria": "Caută produse",
   "shop.search.title": "Caută în shop",
@@ -144,8 +146,5 @@
   "shop.empty.product": "Produs negăsit.",
   "shop.empty.order": "Comandă negăsită",
   "shop.breadcrumb.shop": "Shop",
-  "shop.loading": "Se încarcă PRV Shop…",
-  "shop.product.copySku": "Copiază codul",
-  "shop.product.copySkuDone": "Cod copiat ✓",
-  "shop.product.copySkuFail": "Nu s-a putut copia"
+  "shop.loading": "Se încarcă PRV Shop…"
 }

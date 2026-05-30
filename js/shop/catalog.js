@@ -8,7 +8,7 @@ let localeCache = {};
 const SESSION_KEY = "prv_shop_catalog_v1";
 
 function getLang() {
-  return window.PRV_I18N?.getLang?.() || "ro";
+  return window.PRV_I18N?.getLang?.() || "nl";
 }
 
 function persistCatalogBase(base) {

@@ -7,6 +7,8 @@
   "shop.nav.actions": "Shop actions",
   "shop.nav.theme": "Theme",
   "shop.nav.themeZone": "Display theme",
+  "shop.nav.language": "Language",
+  "shop.nav.pageTools": "Page settings",
   "shop.search.placeholder": "Finishes, Sanitär suchen…",
   "shop.search.aria": "Produkte suchen",
   "shop.search.title": "Shop durchsuchen",
@@ -144,8 +146,5 @@
   "shop.empty.product": "Produkt nicht gefunden.",
   "shop.empty.order": "Bestellung nicht gefunden",
   "shop.breadcrumb.shop": "Shop",
-  "shop.loading": "PRV Shop wird geladen…",
-  "shop.product.copySku": "Copy code",
-  "shop.product.copySkuDone": "Code copied ✓",
-  "shop.product.copySkuFail": "Could not copy"
+  "shop.loading": "PRV Shop wird geladen…"
 }

@@ -156,7 +156,7 @@ export function renderProduct(main, catalog, slug) {
         await addStockReminder({
           productId: product.id,
           email,
-          lang: window.PRV_I18N?.getLang?.() || "ro",
+          lang: window.PRV_I18N?.getLang?.() || "nl",
         });
       } catch (err) {
         console.error(err);

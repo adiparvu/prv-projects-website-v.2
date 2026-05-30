@@ -7,6 +7,8 @@
   "shop.nav.actions": "Shop actions",
   "shop.nav.theme": "Theme",
   "shop.nav.themeZone": "Display theme",
+  "shop.nav.language": "Language",
+  "shop.nav.pageTools": "Page settings",
   "shop.search.placeholder": "Rechercher finitions, sanitaires…",
   "shop.search.aria": "Rechercher des produits",
   "shop.search.title": "Rechercher dans la boutique",
@@ -144,8 +146,5 @@
   "shop.empty.product": "Produit introuvable.",
   "shop.empty.order": "Commande introuvable",
   "shop.breadcrumb.shop": "Boutique",
-  "shop.loading": "Chargement PRV Shop…",
-  "shop.product.copySku": "Copy code",
-  "shop.product.copySkuDone": "Code copied ✓",
-  "shop.product.copySkuFail": "Could not copy"
+  "shop.loading": "Chargement PRV Shop…"
 }

@@ -10,7 +10,7 @@ export function isApiLive() {
 
 export async function fetchCatalog(lang) {
   if (!isApiLive()) return null;
-  return getJson(`/shop/catalog?lang=${encodeURIComponent(lang || "ro")}`);
+  return getJson(`/shop/catalog?lang=${encodeURIComponent(lang || "nl")}`);
 }
 
 export async function prepareCheckout(payload) {

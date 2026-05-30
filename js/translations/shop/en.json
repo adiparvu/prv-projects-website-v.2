@@ -7,6 +7,8 @@
   "shop.nav.actions": "Shop actions",
   "shop.nav.theme": "Theme",
   "shop.nav.themeZone": "Display theme",
+  "shop.nav.language": "Language",
+  "shop.nav.pageTools": "Page settings",
   "shop.search.placeholder": "Search finishes, sanitary…",
   "shop.search.aria": "Search products",
   "shop.search.title": "Search shop",
@@ -144,8 +146,5 @@
   "shop.empty.product": "Product not found.",
   "shop.empty.order": "Order not found",
   "shop.breadcrumb.shop": "Shop",
-  "shop.loading": "Loading PRV Shop…",
-  "shop.product.copySku": "Copy code",
-  "shop.product.copySkuDone": "Code copied ✓",
-  "shop.product.copySkuFail": "Could not copy"
+  "shop.loading": "Loading PRV Shop…"
 }

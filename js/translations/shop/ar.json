@@ -7,6 +7,8 @@
   "shop.nav.actions": "Shop actions",
   "shop.nav.theme": "Theme",
   "shop.nav.themeZone": "Display theme",
+  "shop.nav.language": "Language",
+  "shop.nav.pageTools": "Page settings",
   "shop.search.placeholder": "ابحث عن تشطيبات، سباكة…",
   "shop.search.aria": "البحث عن منتجات",
   "shop.search.title": "البحث في المتجر",
@@ -144,8 +146,5 @@
   "shop.empty.product": "المنتج غير موجود.",
   "shop.empty.order": "الطلب غير موجود",
   "shop.breadcrumb.shop": "المتجر",
-  "shop.loading": "جاري تحميل PRV Shop…",
-  "shop.product.copySku": "Copy code",
-  "shop.product.copySkuDone": "Code copied ✓",
-  "shop.product.copySkuFail": "Could not copy"
+  "shop.loading": "جاري تحميل PRV Shop…"
 }

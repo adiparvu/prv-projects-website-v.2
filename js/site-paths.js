@@ -66,9 +66,8 @@ export function mountNavShopInActions() {
 
   wireShopNavLinks();
 
-  if (window.PRV_I18N?.applyLang) {
-    window.PRV_I18N.applyLang(window.PRV_I18N.getLang?.() || "ro", { save: false });
-  }
+  window.PRV_I18N?.applyToDOM?.();
+  window.PRV_I18N?.updatePickerUI?.();
 }
 
 /** Meniu site — butonul Shop → magazin */
