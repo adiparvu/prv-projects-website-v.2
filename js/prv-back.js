@@ -99,8 +99,8 @@ function getSmartBackFallback() {
 
 function shouldShowGlassBack() {
   if (document.body.classList.contains("shop-body")) return true;
-  if (canGoBackInSite()) return true;
-  return !isSiteHome();
+  if (isSiteHome()) return false;
+  return true;
 }
 
 /** history.back dacă e posibil, altfel href fallback */
