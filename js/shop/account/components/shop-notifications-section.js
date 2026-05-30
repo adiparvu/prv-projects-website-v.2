@@ -1,9 +1,8 @@
 import { t } from "../../i18n.js";
-import { accountDisclosureHtml } from "./disclosure-group.js";
 
 /** @param {import('../types.js').ShopNotificationPreferences} prefs */
-export function shopNotificationsSectionHtml(prefs) {
-  const body = `
+export function shopNotificationsBodyHtml(prefs) {
+  return `
     <ul class="shop-acct-toggle-list">
       ${toggleRow("orders", "shop.profile.notifications.orders.title", "shop.profile.notifications.orders.desc", prefs.orders)}
       ${toggleRow("returns", "shop.profile.notifications.returns.title", "shop.profile.notifications.returns.desc", prefs.returns)}
@@ -11,7 +10,11 @@ export function shopNotificationsSectionHtml(prefs) {
     </ul>
     <p class="shop-acct-save-status is-success" data-notif-status hidden role="status"></p>
   `;
-  return accountDisclosureHtml("shop.profile.sections.notifications", body, { id: "shop-profile-notifications" });
+}
+
+/** @param {import('../types.js').ShopNotificationPreferences} prefs */
+export function shopNotificationsSectionHtml(prefs) {
+  return shopNotificationsBodyHtml(prefs);
 }
 
 function toggleRow(key, titleKey, descKey, checked) {

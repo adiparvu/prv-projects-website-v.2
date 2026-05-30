@@ -18,7 +18,6 @@ export async function renderAccountOverview(main) {
   main.innerHTML = `
     ${pageBackNav(ShopRoutes.home(), t("shop.breadcrumb.shop"))}
     <h1 class="section-title shop-acct-page-title">${t("shop.account.title")}</h1>
-    ${accountNav("overview")}
   `;
 
   if (!account) {

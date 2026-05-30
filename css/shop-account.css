@@ -279,7 +279,210 @@
   line-height: 1.45;
 }
 
-/* ——— Collapsible disclosure groups ——— */
+/* ——— Settings-style category menu ——— */
+.shop-acct-settings-menu {
+  padding: 0;
+  overflow: hidden;
+}
+
+.shop-acct-settings-menu__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.shop-acct-settings-menu__item + .shop-acct-settings-menu__item {
+  border-top: 1px solid color-mix(in srgb, var(--glass-border) 55%, transparent);
+}
+
+.shop-acct-settings-menu__btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem var(--shop-acct-pad);
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.shop-acct-settings-menu__btn:hover {
+  background: color-mix(in srgb, var(--glass-inset) 55%, transparent);
+}
+
+.shop-acct-settings-menu__btn:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--text-primary) 35%, transparent);
+  outline-offset: -2px;
+}
+
+.shop-acct-settings-menu__icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: calc(var(--shop-acct-radius-sm) * 0.75);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: color-mix(in srgb, var(--text-primary) 8%, var(--glass-inset));
+}
+
+.shop-acct-settings-menu__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.shop-acct-settings-menu__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+
+.shop-acct-settings-menu__text strong {
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.shop-acct-settings-menu__text span {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.shop-acct-settings-menu__chevron {
+  display: grid;
+  place-items: center;
+  opacity: 0.35;
+  flex-shrink: 0;
+}
+
+.shop-acct-settings-menu__chevron svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ——— Navigation stack ——— */
+.shop-acct-stack-viewport {
+  position: relative;
+  overflow: hidden;
+}
+
+.shop-acct-stack-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.shop-acct-stack-screen--enter-forward {
+  animation: shop-acct-stack-in-forward 0.34s var(--ease-out-expo);
+}
+
+.shop-acct-stack-screen--enter-back {
+  animation: shop-acct-stack-in-back 0.34s var(--ease-out-expo);
+}
+
+@keyframes shop-acct-stack-in-forward {
+  from {
+    opacity: 0;
+    transform: translateX(14%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shop-acct-stack-in-back {
+  from {
+    opacity: 0;
+    transform: translateX(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.shop-acct-stack-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 2.25rem;
+}
+
+.shop-acct-stack-back {
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.25rem 0.35rem 0.25rem 0;
+}
+
+.shop-acct-stack-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  flex: 1;
+  min-width: 0;
+}
+
+.shop-acct-detail {
+  padding: var(--shop-acct-pad);
+}
+
+.shop-acct-detail-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.shop-acct-detail-block + .shop-acct-detail-block {
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--glass-border) 45%, transparent);
+}
+
+.shop-acct-detail-block__title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.shop-acct-detail-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.shop-acct-detail-foot {
+  margin-top: 0.85rem;
+  font-size: 0.82rem;
+}
+
+.shop-acct-detail-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.shop-acct-detail-empty__title {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.shop-acct-detail-empty__desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+}
+
+/* ——— Collapsible disclosure groups (legacy) ——— */
 .shop-acct-disclosures {
   display: flex;
   flex-direction: column;
@@ -881,6 +1084,16 @@
 .btn.is-loading {
   opacity: 0.72;
   pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-acct-stack-screen--enter-forward,
+  .shop-acct-stack-screen--enter-back,
+  .shop-acct-disclosure__panel,
+  .shop-acct-disclosure__chevron {
+    animation: none;
+    transition: none;
+  }
 }
 
 @media (max-width: 640px) {

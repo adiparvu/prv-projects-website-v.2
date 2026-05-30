@@ -1,15 +1,15 @@
 import { escapeHtml, formatMoney, formatDate } from "../../format.js";
 import { t } from "../../i18n.js";
 import { ShopRoutes } from "../../routes.js";
-import { accountDisclosureHtml } from "./disclosure-group.js";
 
 /** @param {Array<{ id: string, invoiceNumber?: string, createdAt: string, totalCents: number, status: string }>} orders */
-export function ordersSectionHtml(orders) {
-  const body =
-    orders.length === 0
-      ? `<p class="shop-acct-empty-inline">${t("shop.orders.empty")}</p>`
-      : `
-    <div class="shop-acct-disclosure-table-wrap">
+export function ordersBodyHtml(orders) {
+  if (orders.length === 0) {
+    return `<p class="shop-acct-empty-inline">${t("shop.orders.empty")}</p>`;
+  }
+
+  return `
+    <div class="shop-acct-detail-table-wrap">
       <table class="shop-table">
         <thead>
           <tr>
@@ -33,9 +33,12 @@ export function ordersSectionHtml(orders) {
         </tbody>
       </table>
     </div>
-    <p class="shop-acct-disclosure-foot">
+    <p class="shop-acct-detail-foot">
       <a href="${ShopRoutes.orders()}" class="work-cta">${t("shop.profile.viewAllOrders")}</a>
     </p>`;
+}
 
-  return accountDisclosureHtml("shop.orders.title", body, { id: "shop-profile-orders" });
+/** @param {Array<{ id: string, invoiceNumber?: string, createdAt: string, totalCents: number, status: string }>} orders */
+export function ordersSectionHtml(orders) {
+  return ordersBodyHtml(orders);
 }

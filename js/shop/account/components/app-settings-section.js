@@ -1,7 +1,6 @@
 import { escapeHtml } from "../../format.js";
 import { t } from "../../i18n.js";
 import { ICONS } from "../icons.js";
-import { accountDisclosureHtml } from "./disclosure-group.js";
 
 const LANGS = [
   ["nl", "Nederlands"],
@@ -12,12 +11,12 @@ const LANGS = [
 ];
 
 /** @param {import('../types.js').AppSettings} settings */
-export function appSettingsSectionHtml(settings) {
+export function appSettingsBodyHtml(settings) {
   const langOptions = LANGS.map(
     ([code, label]) => `<option value="${code}" ${settings.language === code ? "selected" : ""}>${label}</option>`
   ).join("");
 
-  const body = `
+  return `
     <ul class="shop-acct-settings-list">
       <li class="shop-acct-toggle-row glass-inset">
         <div class="shop-acct-toggle-row__text">
@@ -76,8 +75,11 @@ export function appSettingsSectionHtml(settings) {
       </li>
     </ul>
   `;
+}
 
-  return accountDisclosureHtml("shop.profile.sections.appSettings", body, { id: "shop-profile-settings" });
+/** @param {import('../types.js').AppSettings} settings */
+export function appSettingsSectionHtml(settings) {
+  return appSettingsBodyHtml(settings);
 }
 
 /** @param {HTMLElement} root @param {{ onToggle: Function, onLanguage: Function }} handlers */
