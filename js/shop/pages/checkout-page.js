@@ -1,6 +1,6 @@
 import { ShopStore } from "../store.js";
 import { ShopRoutes } from "../routes.js";
-import { trustList } from "../components.js";
+import { trustList, pageBackNav } from "../components.js";
 import { computeTotals, renderSummaryHtml, submitCheckout } from "../checkout.js";
 import { getApiBase, createPaymentIntent, prepareCheckout } from "../api.js";
 import { isStripeLive, mountPaymentElement, confirmPayment, destroyPaymentElement } from "../stripe.js";
@@ -19,6 +19,7 @@ export function renderCheckout(main, catalog) {
   const stripeLive = isStripeLive();
 
   main.innerHTML = `
+    ${pageBackNav(ShopRoutes.cart(), t("shop.cart.title"))}
     <h1 class="section-title" style="margin-bottom:1rem">${t("shop.checkout.title")}</h1>
     ${!stripeLive ? `<div class="shop-demo-banner">${t("shop.checkout.demo")}</div>` : ""}
     <div class="shop-layout-2">

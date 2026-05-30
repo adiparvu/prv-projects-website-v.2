@@ -1,6 +1,7 @@
 import { searchProducts } from "../catalog.js";
 import { breadcrumb, productCard } from "../components.js";
 import { ShopRoutes } from "../routes.js";
+import { backLinkHtml } from "../prv-back.js";
 import { escapeHtml } from "../format.js";
 import { t } from "../i18n.js";
 
@@ -22,7 +23,7 @@ export function renderSearch(main, catalog, query) {
     </div>
     ${
       !results.length && q
-        ? `<p class="shop-empty"><a href="${ShopRoutes.home()}" class="btn btn-primary">${t("shop.cart.back")}</a></p>`
+        ? `<p class="shop-empty">${backLinkHtml({ href: ShopRoutes.home(), label: t("shop.cart.back"), className: "prv-back-link--cta" })}</p>`
         : ""
     }
   `;

@@ -1834,6 +1834,54 @@ body.pointer-active .cursor-glow {
   color: var(--accent-1);
 }
 
+/* Back nav — aceeași săgeată ca în shop header */
+.prv-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--accent-1);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: inherit;
+  line-height: 1.2;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s ease;
+}
+
+.prv-back-link:hover,
+.prv-back-link:focus-visible {
+  color: var(--accent-2, var(--accent-1));
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.prv-back-link:active {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.prv-back-link__icon {
+  flex-shrink: 0;
+  display: block;
+}
+
+.prv-back-link--cta {
+  font-size: 0.95rem;
+}
+
+[dir="rtl"] .prv-back-link__icon {
+  transform: scaleX(-1);
+}
+
 .project-hero {
   margin-bottom: 2rem;
 }

@@ -26,6 +26,7 @@ import { mountWelcomePromo } from "./welcome-promo.js";
 import { remountShopPickers } from "./picker-mount.js";
 import { initTheme } from "../prv-theme-picker.js";
 import { initThemeTransition } from "../fx-theme-transition.js";
+import { initBackNav } from "../prv-back.js";
 
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
@@ -140,6 +141,7 @@ export async function bootShop(page) {
     await renderPage(page, main, activeCatalog);
     wireShareButtons(main);
     wireFavoriteButtons(main);
+    initBackNav(main);
 
     [...document.body.classList]
       .filter((c) => c.startsWith("shop-page-"))
@@ -170,6 +172,7 @@ export async function bootShop(page) {
             await renderPage(activePage, m, activeCatalog);
             wireShareButtons(m);
             wireFavoriteButtons(m);
+            initBackNav(m);
           }
           remountShopPickers();
           window.PRV_I18N?.applyLang?.(window.PRV_I18N.getLang?.() || "ro", { save: false, notify: false });

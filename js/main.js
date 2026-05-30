@@ -8,6 +8,7 @@ import { initEffects, showFormSuccess } from "./effects.js";
 import { initEcosystem } from "./prv-platform.js";
 import { mountNavShopInActions } from "./site-paths.js";
 import { initTheme } from "./prv-theme-picker.js";
+import { initBackNav } from "./prv-back.js";
 
 // ——— Liquid canvas background ———
 function initLiquidCanvas() {
@@ -514,6 +515,8 @@ initTextEffects();
 initTilt();
 initParallax();
 initNav();
+initBackNav();
+document.addEventListener("prv:langchange", () => initBackNav());
 initCounters();
 initMaxVisibleCarousels();
 initMagneticButtons();

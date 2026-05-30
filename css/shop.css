@@ -133,6 +133,24 @@ body.shop-body .liquid-canvas {
   flex-shrink: 0;
 }
 
+.shop-page-back {
+  margin-bottom: 1rem;
+}
+
+.shop-page-back .prv-back-link {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.shop-page-back .prv-back-link:hover,
+.shop-page-back .prv-back-link:focus-visible {
+  color: var(--shop-accent);
+}
+
+.shop-empty .prv-back-link--cta {
+  margin-top: 0.75rem;
+}
+
 .shop-categories-scroll {
   display: flex;
   align-items: center;

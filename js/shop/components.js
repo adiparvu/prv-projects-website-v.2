@@ -5,6 +5,7 @@ import { ShopRoutes } from "./routes.js";
 import { productMediaActions } from "./media-actions.js";
 import { ShopStore } from "./store.js";
 import { t } from "./i18n.js";
+import { backLinkHtml } from "../prv-back.js";
 
 export function productCard(product, catalog) {
   const cat = catalog.categories.find((c) => c.slug === product.categorySlug);
@@ -56,10 +57,18 @@ export function breadcrumb(items) {
   return `<nav class="breadcrumb glass-inset" aria-label="Breadcrumb">${items
     .map((item, i) => {
       const sep = i ? '<span aria-hidden="true">/</span>' : "";
+      if (i === 0 && item.href) {
+        return `${sep}${backLinkHtml({ href: item.href, label: item.label, i18nKey: item.i18nKey || "" })}`;
+      }
       const inner = item.href ? `<a href="${item.href}">${escapeHtml(item.label)}</a>` : escapeHtml(item.label);
       return `${sep}${inner}`;
     })
     .join("")}</nav>`;
+}
+
+/** Rând back simplu (coș, checkout, cont…) */
+export function pageBackNav(href, label, i18nKey = "") {
+  return `<nav class="shop-page-back" aria-label="Back">${backLinkHtml({ href, label, i18nKey })}</nav>`;
 }
 
 export function trustList() {

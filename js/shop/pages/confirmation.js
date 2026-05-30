@@ -4,6 +4,7 @@ import { ShopRoutes } from "../routes.js";
 import { completeCheckout, fetchOrder } from "../api.js";
 import { getApiBase } from "../api.js";
 import { trackPurchase } from "../analytics.js";
+import { pageBackNav } from "../components.js";
 import { t } from "../i18n.js";
 
 export async function renderConfirmation(main, orderId) {
@@ -40,11 +41,14 @@ export async function renderConfirmation(main, orderId) {
   if (!order) order = ShopStore.getOrder(orderId);
 
   if (!order) {
-    main.innerHTML = `<div class="shop-empty glass-panel"><p>${t("shop.confirm.notFound")}</p></div>`;
+    main.innerHTML = `
+      ${pageBackNav(ShopRoutes.home(), t("shop.breadcrumb.shop"))}
+      <div class="shop-empty glass-panel"><p>${t("shop.confirm.notFound")}</p></div>`;
     return;
   }
 
   main.innerHTML = `
+    ${pageBackNav(ShopRoutes.home(), t("shop.breadcrumb.shop"))}
     <section class="shop-hero glass-panel" style="text-align:center;align-items:center">
       <p class="eyebrow">${t("shop.confirm.thanks")}</p>
       <h1 class="gradient-text">${t("shop.confirm.order", { id: order.invoiceNumber || order.id.slice(-8) })}</h1>

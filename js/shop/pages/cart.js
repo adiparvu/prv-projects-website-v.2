@@ -1,5 +1,6 @@
 import { formatMoney, escapeHtml } from "../format.js";
-import { trustList } from "../components.js";
+import { trustList, pageBackNav } from "../components.js";
+import { backLinkHtml } from "../prv-back.js";
 import { ShopRoutes } from "../routes.js";
 import { ShopStore } from "../store.js";
 import { computeTotals, renderSummaryHtml } from "../checkout.js";
@@ -13,7 +14,7 @@ export function renderCart(main, catalog) {
       <div class="shop-empty glass-panel">
         <h2>${t("shop.cart.empty.title")}</h2>
         <p>${t("shop.cart.empty.sub")}</p>
-        <a href="${ShopRoutes.home()}" class="btn btn-primary" style="margin-top:1rem">${t("shop.cart.back")}</a>
+        ${backLinkHtml({ href: ShopRoutes.home(), label: t("shop.cart.back"), className: "prv-back-link--cta" })}
       </div>`;
     return;
   }
@@ -21,6 +22,7 @@ export function renderCart(main, catalog) {
   const totals = computeTotals(catalog, cart);
 
   main.innerHTML = `
+    ${pageBackNav(ShopRoutes.home(), t("shop.cart.back"))}
     <h1 class="section-title" style="margin-bottom:1.25rem">${t("shop.cart.title")}</h1>
     <div class="shop-layout-2">
       <div class="glass-panel" style="padding:0 1.25rem">

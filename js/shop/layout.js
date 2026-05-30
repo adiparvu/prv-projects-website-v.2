@@ -5,9 +5,10 @@ import { cartBadgeHtml, uspStrip } from "./components.js";
 import { ShopStore } from "./store.js";
 import { escapeHtml } from "./format.js";
 import { t } from "./i18n.js";
+import { BACK_ARROW_SVG, wireShopHeaderBack } from "../prv-back.js";
 
 const SEARCH_ICON = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>`;
-const BACK_ICON = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>`;
+const BACK_ICON = BACK_ARROW_SVG;
 const ACCOUNT_ICON = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21a8 8 0 10-16 0"/><circle cx="12" cy="8" r="4"/></svg>`;
 const CART_ICON = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 2l1.5 6h9L18 2"/><path d="M4 8h16l-1 14H5L4 8z"/></svg>`;
 
@@ -86,6 +87,7 @@ export function mountShopLayout({ active = "shop", catalog = null, searchQuery =
   `;
 
   wireSearchOverlay(root);
+  wireShopHeaderBack(root);
 
   const refreshBadge = () => {
     const btn = root.querySelector(".shop-cart-btn");

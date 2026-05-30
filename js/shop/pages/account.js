@@ -1,7 +1,7 @@
 import { formatMoney, formatDate, escapeHtml } from "../format.js";
 import { ShopStore } from "../store.js";
 import { ShopRoutes } from "../routes.js";
-import { productCard } from "../components.js";
+import { productCard, pageBackNav } from "../components.js";
 import { getApiBase, requestMagicLink, fetchAccountOrders, fetchOrder, invoiceUrl } from "../api.js";
 import { clearAuth } from "../auth.js";
 import { t } from "../i18n.js";
@@ -26,6 +26,7 @@ export async function renderAccountOverview(main) {
   const apiLive = getApiBase();
 
   main.innerHTML = `
+    ${pageBackNav(ShopRoutes.home(), t("shop.breadcrumb.shop"))}
     <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.account.title")}</h1>
     ${accountNav("overview")}
     <div class="glass-panel" style="padding:1.5rem">
@@ -83,6 +84,7 @@ export async function renderOrders(main) {
   }
 
   main.innerHTML = `
+    ${pageBackNav(ShopRoutes.account(), t("shop.account.title"))}
     <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.orders.title")}</h1>
     ${accountNav("orders")}
     <div class="glass-panel" style="padding:1rem;overflow-x:auto">
@@ -127,6 +129,7 @@ export async function renderOrderDetail(main, orderId) {
       : "";
 
   main.innerHTML = `
+    ${pageBackNav(ShopRoutes.orders(), t("shop.orders.title"))}
     ${accountNav("orders")}
     <div class="glass-panel" style="padding:1.25rem">
       <h1>${escapeHtml(order.invoiceNumber || order.id)}</h1>
@@ -151,6 +154,7 @@ export async function renderInvoices(main) {
   }
 
   main.innerHTML = `
+    ${pageBackNav(ShopRoutes.account(), t("shop.account.title"))}
     <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.invoices.title")}</h1>
     ${accountNav("invoices")}
     <div class="glass-panel" style="padding:1rem">
@@ -181,6 +185,7 @@ export async function renderFavorites(main, catalog) {
   const products = favIds.map((id) => catalog.products.find((p) => p.id === id)).filter(Boolean);
 
   main.innerHTML = `
+    ${pageBackNav(ShopRoutes.account(), t("shop.account.title"))}
     <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.favorites.title")}</h1>
     ${accountNav("favorites")}
     <div class="shop-grid">
