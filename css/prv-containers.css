@@ -1,0 +1,159 @@
+/* PRV — Unified container system (same family as floating nav glass) */
+
+.glass-panel,
+.glass-card,
+.glass-inset {
+  position: relative;
+  backdrop-filter: blur(var(--prv-ui-blur)) saturate(var(--prv-ui-saturate));
+  -webkit-backdrop-filter: blur(var(--prv-ui-blur)) saturate(var(--prv-ui-saturate));
+}
+
+.glass-panel {
+  isolation: isolate;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--prv-ui-shadow);
+  border-radius: var(--prv-ui-radius);
+}
+
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glass-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  mix-blend-mode: normal;
+  z-index: 0;
+}
+
+.glass-inset {
+  background: var(--glass-inset);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--prv-ui-radius);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--glass-border) 55%, transparent) inset,
+    0 4px 12px -6px var(--glass-shadow);
+}
+
+/* Default padding for common container patterns */
+.glass-panel:not(.nav):not(.footer):not(.glass-card):not(.work-item):not(.shop-product-card):not(.shop-cat-card) {
+  --prv-container-pad: var(--prv-ui-pad);
+}
+
+.feature.glass-panel,
+.diff-card.glass-panel,
+.testimonial.glass-panel,
+.project-block.glass-panel,
+.legal-doc.glass-panel,
+.stats.glass-panel,
+.cta.glass-panel,
+.search-section.glass-panel,
+.shop-filters.glass-panel,
+.shop-hero.glass-panel,
+.shop-reviews.glass-panel,
+.shop-promo-dialog.glass-panel {
+  padding: var(--prv-ui-pad);
+}
+
+.glass-inset.search-form,
+.glass-inset.breadcrumb,
+.glass-inset.faq-item,
+.glass-inset.search-empty,
+.glass-inset.search-result,
+.glass-inset.shop-subnav,
+.glass-inset.shop-usp,
+.glass-inset.shop-toolbar,
+.glass-inset.shop-promo,
+.glass-inset.input-wrap,
+.quote-form .glass-inset.input-wrap {
+  padding: var(--prv-ui-pad-sm);
+}
+
+.glass-inset.shop-search-form {
+  padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
+}
+
+/* Nested fields inherit container radius */
+.glass-inset input,
+.glass-inset select,
+.glass-inset textarea,
+.glass-panel input:not([type="checkbox"]):not([type="radio"]),
+.glass-panel select,
+.glass-panel textarea,
+.shop-filter-row input {
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
+}
+
+[data-effective-theme="dark"] .glass-panel::before {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--glass-highlight) 85%, transparent) 0%,
+    transparent 45%,
+    transparent 55%,
+    color-mix(in srgb, var(--glass-highlight) 45%, transparent) 100%
+  );
+}
+
+[data-effective-theme="dark"] .glass-panel::after {
+  background: linear-gradient(
+    180deg,
+    rgba(12, 12, 16, 0.55) 0%,
+    rgba(12, 12, 16, 0.38) 100%
+  );
+}
+
+.footer.glass-panel::before {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--glass-highlight) 55%, transparent) 0%,
+    transparent 44%,
+    transparent 56%,
+    color-mix(in srgb, var(--glass-highlight) 28%, transparent) 100%
+  );
+}
+
+/* Cards that are also glass panels — keep media flush, body padded */
+.shop-product-card.glass-panel,
+.shop-cat-card.glass-panel,
+.work-item.glass-panel {
+  padding: 0;
+  overflow: hidden;
+}
+
+.shop-empty.glass-panel,
+.shop-pdp.glass-panel,
+.shop-checkout-form.glass-panel,
+.article.glass-panel {
+  padding: var(--prv-ui-pad);
+}
+
+.shop-product-card.glass-panel .shop-product-body,
+.work-item.glass-panel .work-body {
+  padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
+}

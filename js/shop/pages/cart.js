@@ -24,7 +24,7 @@ export function renderCart(main, catalog) {
     ${pageBackNav(ShopRoutes.home(), t("shop.cart.back"))}
     <h1 class="section-title" style="margin-bottom:1.25rem">${t("shop.cart.title")}</h1>
     <div class="shop-layout-2">
-      <div class="glass-panel" style="padding:0 1.25rem">
+      <div class="glass-panel shop-cart-lines">
         ${cart.items
           .map(
             (item) => `

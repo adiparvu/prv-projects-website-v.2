@@ -3,8 +3,8 @@
 :root {
   --shop-accent: #0071e3;
   --shop-accent-soft: rgba(0, 113, 227, 0.12);
-  --shop-radius: 16px;
-  --shop-radius-sm: 12px;
+  --shop-radius: var(--prv-ui-radius);
+  --shop-radius-sm: var(--prv-ui-radius);
   --shop-max: 1240px;
   --shop-gap: 1.5rem;
 }
@@ -25,6 +25,22 @@ body.shop-body .ambient {
 
 body.shop-body .liquid-canvas {
   opacity: 0.35;
+}
+
+.shop-cart-lines.glass-panel {
+  padding: 0 var(--prv-ui-pad);
+}
+
+.shop-checkout-form.glass-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.shop-checkout-form .input-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
 /* ——— Shell ——— */
@@ -105,8 +121,7 @@ body.shop-body .shop-top-nav.nav-hidden {
   align-items: center;
   gap: 0.5rem;
   margin: 0 1rem 0.85rem;
-  padding: 0.35rem 0.5rem 0.35rem 0.65rem;
-  border-radius: var(--shop-radius-sm);
+  padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
   min-height: 2.5rem;
 }
 
@@ -184,8 +199,8 @@ body.fx-page-enter.shop-body > footer {
   font-weight: 500;
   color: var(--text-secondary);
   text-decoration: none;
-  padding: 0.4rem 0.7rem;
-  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
   transition: background 0.2s, color 0.2s;
 }
 
@@ -200,8 +215,8 @@ body.fx-page-enter.shop-body > footer {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.35rem 0.5rem 0.35rem 0.85rem;
-  border-radius: 999px;
+  padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
+  border-radius: var(--prv-ui-radius);
   border: 1px solid var(--glass-border);
   background: color-mix(in srgb, var(--prv-surface) 70%, transparent);
 }
@@ -226,7 +241,7 @@ body.fx-page-enter.shop-body > footer {
   width: 36px;
   height: 36px;
   border: none;
-  border-radius: 50%;
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
   background: var(--shop-accent-soft);
   color: var(--shop-accent);
   cursor: pointer;
@@ -234,8 +249,7 @@ body.fx-page-enter.shop-body > footer {
 
 .shop-promo {
   margin: 1.25rem 0 0;
-  padding: 0.85rem 1rem;
-  border-radius: var(--shop-radius-sm);
+  padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
   font-size: 0.9rem;
 }
 
@@ -243,15 +257,14 @@ body.fx-page-enter.shop-body > footer {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.65rem 1rem;
-  border-radius: var(--shop-radius-sm);
+  padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
   font-size: 0.88rem;
 }
 
 .shop-toolbar select {
   font: inherit;
   padding: 0.35rem 0.65rem;
-  border-radius: 8px;
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
   border: 1px solid var(--glass-border);
   background: transparent;
   color: inherit;
@@ -267,7 +280,7 @@ body.fx-page-enter.shop-body > footer {
 .shop-thumb {
   padding: 0;
   border: 2px solid transparent;
-  border-radius: 10px;
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
   overflow: hidden;
   cursor: pointer;
   width: 64px;
@@ -361,10 +374,9 @@ body.fx-page-enter.shop-body > footer {
   flex-wrap: wrap;
   gap: 0.75rem 1.25rem;
   margin: 0.75rem 1rem 0;
-  padding: 0.55rem 1rem;
+  padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
   font-size: 0.78rem;
   color: var(--text-secondary);
-  border-radius: var(--shop-radius-sm);
 }
 
 .shop-usp span {
@@ -388,7 +400,7 @@ body.fx-page-enter.shop-body > footer {
 }
 
 .shop-filters {
-  padding: 1rem;
+  padding: var(--prv-ui-pad);
   position: sticky;
   top: calc(var(--nav-height) + 4rem);
 }
@@ -425,8 +437,8 @@ body.fx-page-enter.shop-body > footer {
 
 .shop-filter-row input {
   font: inherit;
-  padding: 0.4rem 0.5rem;
-  border-radius: 8px;
+  padding: 0.45rem 0.65rem;
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
   border: 1px solid var(--glass-border);
   background: transparent;
   color: inherit;
@@ -563,11 +575,10 @@ body.fx-page-enter.shop-body > footer {
   position: relative;
   z-index: 1;
   width: min(560px, 100%);
-  padding: 0.75rem;
+  padding: var(--prv-ui-pad-sm);
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  border-radius: var(--shop-radius);
 }
 
 .shop-search-panel .shop-search-form {
@@ -662,8 +673,7 @@ body.shop-search-open {
   position: relative;
   z-index: 1;
   width: min(420px, 100%);
-  padding: 1.35rem 1.25rem 1.25rem;
-  border-radius: var(--shop-radius);
+  padding: var(--prv-ui-pad);
   text-align: center;
   outline: none;
 }
@@ -675,7 +685,7 @@ body.shop-search-open {
   width: 36px;
   height: 36px;
   border: none;
-  border-radius: 10px;
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
   background: var(--glass-inset);
   color: var(--text-secondary);
   font-size: 1.35rem;
@@ -776,8 +786,7 @@ body.shop-promo-open {
 
 /* ——— Typography blocks ——— */
 .shop-hero {
-  padding: 2.5rem 2rem;
-  border-radius: calc(var(--shop-radius) + 4px);
+  padding: var(--prv-ui-pad);
   margin-bottom: var(--shop-gap);
   display: grid;
   gap: 1rem;
@@ -828,7 +837,6 @@ body.shop-promo-open {
 .shop-product-card {
   display: flex;
   flex-direction: column;
-  border-radius: var(--shop-radius);
   overflow: hidden;
   text-decoration: none;
   color: inherit;
@@ -837,7 +845,7 @@ body.shop-promo-open {
 
 .shop-product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px -24px var(--glass-shadow);
+  box-shadow: var(--prv-ui-shadow);
 }
 
 .shop-product-media {
@@ -931,7 +939,7 @@ body.shop-promo-open {
 }
 
 .shop-product-body {
-  padding: 1rem 1.1rem 1.15rem;
+  padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -977,8 +985,8 @@ body.shop-promo-open {
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 0.25rem 0.5rem;
-  border-radius: 999px;
+  padding: 0.25rem 0.55rem;
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   backdrop-filter: blur(12px);
@@ -1008,7 +1016,6 @@ body.shop-promo-open {
   display: block;
   text-decoration: none;
   color: inherit;
-  border-radius: var(--shop-radius);
   overflow: hidden;
   min-height: 120px;
   position: relative;
@@ -1048,7 +1055,7 @@ body.shop-promo-open {
 }
 
 .shop-gallery {
-  border-radius: var(--shop-radius);
+  border-radius: var(--prv-ui-radius);
   overflow: hidden;
 }
 
@@ -1193,17 +1200,17 @@ body.shop-promo-open {
   position: fixed;
   z-index: 10050;
   transform: translate(-50%, -100%);
-  padding: 0.45rem 0.75rem;
+  padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--text-primary);
   background: color-mix(in srgb, var(--prv-surface) 92%, transparent);
   border: 1px solid var(--glass-border);
-  border-radius: 10px;
-  box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-radius: var(--prv-ui-radius);
+  box-shadow: var(--prv-ui-shadow);
+  backdrop-filter: blur(var(--prv-ui-blur)) saturate(var(--prv-ui-saturate));
+  -webkit-backdrop-filter: blur(var(--prv-ui-blur)) saturate(var(--prv-ui-saturate));
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.28s var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1)),
@@ -1233,7 +1240,7 @@ body.shop-promo-open {
   display: inline-flex;
   align-items: center;
   border: 1px solid var(--glass-border);
-  border-radius: 12px;
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
   overflow: hidden;
 }
 
@@ -1276,12 +1283,11 @@ body.shop-promo-open {
   width: 72px;
   height: 72px;
   object-fit: cover;
-  border-radius: var(--shop-radius-sm);
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
 }
 
 .shop-summary {
-  padding: 1.25rem;
-  border-radius: var(--shop-radius);
+  padding: var(--prv-ui-pad);
   position: sticky;
   top: calc(var(--nav-height) + 1rem);
 }
@@ -1350,8 +1356,8 @@ body.shop-promo-open {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.65rem 0.75rem;
-  border-radius: 12px;
+  padding: var(--prv-ui-pad-sm);
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
   border: 1px solid var(--glass-border);
   cursor: pointer;
   font-size: 0.85rem;
@@ -1368,15 +1374,15 @@ body.shop-promo-open {
 
 #shop-stripe-mount {
   min-height: 120px;
-  padding: 1rem;
-  border-radius: 12px;
+  padding: var(--prv-ui-pad);
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
   border: 1px dashed var(--glass-border);
   margin-top: 0.5rem;
 }
 
 .shop-demo-banner {
-  padding: 0.75rem 1rem;
-  border-radius: 12px;
+  padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
+  border-radius: var(--prv-ui-radius);
   background: var(--shop-accent-soft);
   font-size: 0.82rem;
   color: var(--text-secondary);
@@ -1393,7 +1399,7 @@ body.shop-promo-open {
 
 .shop-account-nav a {
   padding: 0.45rem 0.85rem;
-  border-radius: 999px;
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
   font-size: 0.85rem;
   text-decoration: none;
   color: var(--text-secondary);

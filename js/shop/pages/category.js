@@ -56,7 +56,7 @@ export function renderCategory(main, catalog, slug) {
       { label: t("shop.breadcrumb.shop"), href: ShopRoutes.home() },
       { label: cat.name },
     ])}
-    <header class="shop-hero glass-panel" style="margin-top:1rem;padding:1.75rem">
+    <header class="shop-hero glass-panel" style="margin-top:1rem">
       <h1>${cat.name}</h1>
       <p>${cat.description}</p>
       <p class="work-meta" data-product-count></p>

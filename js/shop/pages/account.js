@@ -29,7 +29,7 @@ export async function renderAccountOverview(main) {
     ${pageBackNav(ShopRoutes.home(), t("shop.breadcrumb.shop"))}
     <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.account.title")}</h1>
     ${accountNav("overview")}
-    <div class="glass-panel" style="padding:1.5rem">
+    <div class="glass-panel">
       ${
         account
           ? `<p>${t("shop.account.welcome", { email: escapeHtml(account.email) })}</p><button type="button" class="btn btn-glass" id="shop-logout" style="margin-top:1rem">${t("shop.account.logout")}</button>`
@@ -87,7 +87,7 @@ export async function renderOrders(main) {
     ${pageBackNav(ShopRoutes.account(), t("shop.account.title"))}
     <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.orders.title")}</h1>
     ${accountNav("orders")}
-    <div class="glass-panel" style="padding:1rem;overflow-x:auto">
+    <div class="glass-panel shop-table-wrap" style="overflow-x:auto">
       ${
         orders.length
           ? `<table class="shop-table"><thead><tr><th>${t("shop.orders.colOrder")}</th><th>${t("shop.orders.colDate")}</th><th>${t("shop.orders.colTotal")}</th><th>${t("shop.orders.colStatus")}</th></tr></thead><tbody>
@@ -131,7 +131,7 @@ export async function renderOrderDetail(main, orderId) {
   main.innerHTML = `
     ${pageBackNav(ShopRoutes.orders(), t("shop.orders.title"))}
     ${accountNav("orders")}
-    <div class="glass-panel" style="padding:1.25rem">
+    <div class="glass-panel">
       <h1>${escapeHtml(order.invoiceNumber || order.id)}</h1>
       <p class="work-meta">${formatDate(order.createdAt)} · ${escapeHtml(order.status)}</p>
       <ul style="margin:1rem 0;padding:0;list-style:none">
@@ -157,7 +157,7 @@ export async function renderInvoices(main) {
     ${pageBackNav(ShopRoutes.account(), t("shop.account.title"))}
     <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.invoices.title")}</h1>
     ${accountNav("invoices")}
-    <div class="glass-panel" style="padding:1rem">
+    <div class="glass-panel">
       ${
         orders.length
           ? `<table class="shop-table"><thead><tr><th>${t("shop.invoices.colInvoice")}</th><th>${t("shop.invoices.colOrder")}</th><th>${t("shop.invoices.colDate")}</th><th>${t("shop.invoices.colAmount")}</th><th></th></tr></thead><tbody>

@@ -57,7 +57,7 @@ export function renderProduct(main, catalog, slug) {
       { label: cat?.name || "Produs", href: cat ? ShopRoutes.category(cat.slug) : null },
       { label: product.name },
     ])}
-    <article class="shop-pdp glass-panel" style="margin-top:1rem;padding:1.5rem">
+    <article class="shop-pdp glass-panel" style="margin-top:1rem">
       ${galleryHtml(product)}
       <div class="shop-pdp-info">
         <p class="shop-pdp-meta">

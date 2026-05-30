@@ -46,7 +46,7 @@ function showShopFatal(message) {
   const root = document.getElementById("shop-root");
   if (!root) return;
   root.innerHTML = `
-    <div class="glass-panel" style="max-width:520px;margin:2rem auto;padding:1.25rem">
+    <div class="glass-panel" style="max-width:520px;margin:2rem auto">
       <h1 style="font-size:1.15rem;margin:0 0 0.5rem">Shop</h1>
       <p style="margin:0 0 1rem;opacity:0.85">${message}</p>
       <a href="index.html" class="btn btn-primary">OK</a>

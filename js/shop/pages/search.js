@@ -13,7 +13,7 @@ export function renderSearch(main, catalog, query) {
       { label: t("shop.breadcrumb.shop"), href: ShopRoutes.home() },
       { label: q ? t("shop.search.results", { q }) : t("shop.search.title") },
     ])}
-    <header class="shop-hero glass-panel" style="margin-top:1rem;padding:1.5rem">
+    <header class="shop-hero glass-panel" style="margin-top:1rem">
       <h1>${q ? t("shop.search.results", { q: escapeHtml(q) }) : t("shop.search.title")}</h1>
       <p>${results.length ? t("shop.search.found", { n: results.length }) : q ? t("shop.search.none") : t("shop.search.hint")}</p>
     </header>

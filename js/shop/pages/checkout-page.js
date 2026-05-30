@@ -23,7 +23,7 @@ export function renderCheckout(main, catalog) {
     <h1 class="section-title" style="margin-bottom:1rem">${t("shop.checkout.title")}</h1>
     ${!stripeLive ? `<div class="shop-demo-banner">${t("shop.checkout.demo")}</div>` : ""}
     <div class="shop-layout-2">
-      <form class="glass-panel shop-checkout-form" style="padding:1.25rem" id="shop-checkout-form">
+      <form class="glass-panel shop-checkout-form" id="shop-checkout-form">
         <h2 style="font-size:1.1rem;margin-bottom:0.5rem">${t("shop.checkout.shipping")}</h2>
         <div class="input-wrap glass-inset">
           <label for="co-name">${t("shop.checkout.name")}</label>
