@@ -248,6 +248,10 @@ body.pointer-active .cursor-glow {
   gap: 0.35rem;
   font-weight: 700;
   font-family: var(--font-display);
+  flex-shrink: 0;
+  text-decoration: none;
+  color: inherit;
+  z-index: 3;
 }
 
 .logo-icon {
@@ -875,6 +879,11 @@ body.pointer-active .cursor-glow {
 
 .nav--has-back .logo {
   max-width: calc(100% - 5rem);
+  margin-right: 0;
+}
+
+.nav--has-back > .logo {
+  margin-left: 0.15rem;
 }
 
 .shop-page-back {
@@ -3093,33 +3102,33 @@ body.pointer-active .cursor-glow {
 }
 
 @media (max-width: 768px) {
-  /* Header centered on mobile/tablet */
+  /* Header — logo stânga, acțiuni dreapta */
   .nav {
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 0 0.75rem;
   }
 
-  /* Make pill visually symmetric */
   .nav {
-    padding-left: 0.75rem;
+    padding-left: 0.85rem;
     padding-right: 0.75rem;
   }
 
   .nav-header-slot--start {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0;
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin: 0 0.15rem 0 0;
   }
 
   .nav--has-back .logo {
     max-width: calc(100% - 9.5rem);
+    margin-left: 0;
   }
 
   .nav-links,
@@ -3131,11 +3140,16 @@ body.pointer-active .cursor-glow {
     display: flex;
   }
 
-  /* Force true visual centering */
-  .logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+  header.nav > .logo {
+    position: relative;
+    left: auto;
+    transform: none;
+    margin-right: auto;
+    max-width: calc(100% - 6.5rem);
+  }
+
+  .logo-animated .logo-mark {
+    transform: none;
   }
 
   /* Shop vizibil dreapta (lângă hamburger); ascundem limbă + CTA ofertă */

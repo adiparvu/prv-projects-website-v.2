@@ -83,3 +83,18 @@ export function getFooterBasePrefix() {
   const b = getSiteBase();
   return b === "." ? "" : b;
 }
+
+/** URL relativ către dashboard (de pe orice pagină site) */
+export function getDashboardUrl() {
+  const base = getSiteBase();
+  return base === "." ? "dashboard/index.html" : `${base}/dashboard/index.html`;
+}
+
+/** Logo PRV Projects în header → dashboard */
+export function wireNavLogo() {
+  const url = getDashboardUrl();
+  document.querySelectorAll("header.nav .logo:not(.shop-nav-logo)").forEach((link) => {
+    link.href = url;
+    link.setAttribute("data-prv-dashboard-link", "");
+  });
+}
