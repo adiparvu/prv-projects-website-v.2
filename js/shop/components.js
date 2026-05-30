@@ -59,18 +59,25 @@ export function breadcrumb(items) {
   return `<nav class="breadcrumb glass-inset" aria-label="Breadcrumb">${items
     .map((item, i) => {
       const sep = i ? '<span aria-hidden="true">/</span>' : "";
-      if (i === 0 && item.href) {
-        return `${sep}${backLinkHtml({ href: item.href, label: item.label, i18nKey: item.i18nKey || "" })}`;
+      if (item.href) {
+        const i18n = item.i18nKey ? ` data-i18n="${escapeAttr(item.i18nKey)}"` : "";
+        return `${sep}<a href="${escapeAttr(item.href)}"${i18n}>${escapeHtml(item.label)}</a>`;
       }
-      const inner = item.href ? `<a href="${item.href}">${escapeHtml(item.label)}</a>` : escapeHtml(item.label);
-      return `${sep}${inner}`;
+      return `${sep}<span>${escapeHtml(item.label)}</span>`;
     })
     .join("")}</nav>`;
 }
 
-/** Rând back simplu (coș, checkout, cont…) */
-export function pageBackNav(href, label, i18nKey = "") {
-  return `<nav class="shop-page-back" aria-label="Back">${backLinkHtml({ href, label, i18nKey })}</nav>`;
+function escapeAttr(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;");
+}
+
+/** @deprecated — back doar în glass header; păstrat pentru compatibilitate */
+export function pageBackNav() {
+  return "";
 }
 
 export function trustList() {

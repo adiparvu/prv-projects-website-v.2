@@ -25,10 +25,10 @@ import { wireFavoriteButtons } from "./favorites.js";
 import { remountShopPickers } from "./picker-mount.js";
 import { initTheme } from "../prv-theme-picker.js";
 import { initThemeTransition } from "../fx-theme-transition.js";
-import { initBackNav, wireShopHeaderBack } from "../prv-back.js";
+import { initBackNav, wireShopHeaderBack, mountGlassHeaderBack } from "../prv-back.js";
 
 if (typeof window !== "undefined") {
-  window.PRV_BACK = { initBackNav, wireShopHeaderBack };
+  window.PRV_BACK = { initBackNav, wireShopHeaderBack, mountGlassHeaderBack };
 }
 
 function getParam(name) {

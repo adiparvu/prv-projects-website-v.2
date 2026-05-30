@@ -1,5 +1,5 @@
 /**
- * PRV — săgeată back (aceeași ca în shop header), peste tot
+ * PRV — săgeată back simplă în Floating Glass Header (ca shop)
  */
 
 import { getSiteBase, getShopUrl } from "./site-paths.js";
@@ -30,7 +30,7 @@ function backAriaLabel() {
   return window.PRV_I18N?.strings?.["nav.back"] || "Back";
 }
 
-/** Link back: săgeată + etichetă (fără chenar) */
+/** Link back cu săgeată + etichetă (doar zone de conținut, ex. empty state) */
 export function backLinkHtml({ href, label = "", ariaLabel = "", className = "", i18nKey = "" } = {}) {
   const clean = stripArrowPrefix(label);
   const aria = escapeAttr(ariaLabel || clean || backAriaLabel());
@@ -39,44 +39,12 @@ export function backLinkHtml({ href, label = "", ariaLabel = "", className = "",
   const labelHtml = clean
     ? `<span class="prv-back-link__label"${i18nAttr}>${escapeHtml(clean)}</span>`
     : "";
-  return `<a href="${escapeAttr(href)}" class="${cls}" aria-label="${aria}" data-prv-back-smart>${BACK_ARROW_SVG}${labelHtml}</a>`;
+  return `<a href="${escapeAttr(href)}" class="${cls}" aria-label="${aria}">${BACK_ARROW_SVG}${labelHtml}</a>`;
 }
 
-function syncBackLabel(anchor) {
-  const labelEl = anchor.querySelector(".prv-back-link__label");
-  if (!labelEl) return;
-  const label = stripArrowPrefix(labelEl.textContent);
-  if (labelEl.textContent !== label) labelEl.textContent = label;
-  const aria = anchor.getAttribute("aria-label");
-  if (aria && /^←/.test(aria)) anchor.setAttribute("aria-label", stripArrowPrefix(aria));
-}
-
-function enhanceBackLink(anchor) {
-  if (!anchor) return;
-
-  const hasIcon = anchor.querySelector(".prv-back-link__icon, svg");
-  if (hasIcon) {
-    anchor.classList.add("prv-back-link");
-    syncBackLabel(anchor);
-    anchor.removeAttribute("data-i18n");
-    anchor.dataset.prvBackDone = "1";
-    if (!anchor.hasAttribute("data-prv-back-smart")) anchor.setAttribute("data-prv-back-smart", "");
-    return;
-  }
-
-  delete anchor.dataset.prvBackDone;
-
-  anchor.classList.add("prv-back-link");
-  const i18nEl = anchor.querySelector("[data-i18n]");
-  const i18nKey = i18nEl?.getAttribute("data-i18n") || anchor.getAttribute("data-i18n") || "";
-  const raw = (i18nEl?.textContent || anchor.textContent || "").trim();
-  const label = stripArrowPrefix(raw);
-
-  anchor.removeAttribute("data-i18n");
-  anchor.innerHTML = `${BACK_ARROW_SVG}<span class="prv-back-link__label"${i18nKey ? ` data-i18n="${escapeAttr(i18nKey)}"` : ""}>${escapeHtml(label)}</span>`;
-  if (!anchor.getAttribute("aria-label")) anchor.setAttribute("aria-label", label || backAriaLabel());
-  anchor.setAttribute("data-prv-back-smart", "");
-  anchor.dataset.prvBackDone = "1";
+/** Icon simplu pentru glass header (site) */
+export function glassHeaderBackHtml(href) {
+  return `<a href="${escapeAttr(href)}" class="nav-icon-btn nav-back-btn" aria-label="${escapeAttr(backAriaLabel())}" data-i18n-aria="nav.back" data-prv-glass-back>${BACK_ARROW_SVG}</a>`;
 }
 
 function canGoBackInSite() {
@@ -88,6 +56,13 @@ function canGoBackInSite() {
   } catch {
     return true;
   }
+}
+
+function isSiteHome() {
+  const path = location.pathname;
+  if (/\/(shop|projects|blog)(\/|$)/.test(path)) return false;
+  const file = path.split("/").filter(Boolean).pop() || "index.html";
+  return file === "index.html" || file === "";
 }
 
 function isShopHome() {
@@ -122,6 +97,12 @@ function getSmartBackFallback() {
   return siteHome;
 }
 
+function shouldShowGlassBack() {
+  if (document.body.classList.contains("shop-body")) return true;
+  if (canGoBackInSite()) return true;
+  return !isSiteHome();
+}
+
 /** history.back dacă e posibil, altfel href fallback */
 export function wireSmartBack(el, { fallbackHref } = {}) {
   if (!el || el.dataset.prvBackSmartWired === "1") return;
@@ -140,50 +121,44 @@ export function wireSmartBack(el, { fallbackHref } = {}) {
   });
 }
 
-function wireSmartBackLinks(root = document) {
-  root.querySelectorAll("[data-prv-back-smart], .prv-back-link[href], .shop-page-back a[href], .breadcrumb > a[href]").forEach((el) => {
-    wireSmartBack(el);
+/** Săgeată simplă în header glass site (layout ca shop — stânga, fără text) */
+export function mountGlassHeaderBack(root = document) {
+  if (document.body.classList.contains("shop-body")) return;
+
+  root.querySelectorAll("header.nav").forEach((nav) => {
+    if (nav.closest(".shop-shell") || nav.querySelector(".nav-header-slot--start")) return;
+    if (!shouldShowGlassBack()) return;
+
+    const fallback = getSmartBackFallback();
+    const slot = document.createElement("div");
+    slot.className = "nav-header-slot nav-header-slot--start";
+    slot.innerHTML = glassHeaderBackHtml(fallback);
+    nav.insertBefore(slot, nav.firstChild);
+    nav.classList.add("nav--has-back");
+
+    wireSmartBack(slot.querySelector("[data-prv-glass-back]"), { fallbackHref: fallback });
   });
+
+  window.PRV_I18N?.applyToDOM?.(root);
 }
 
-/** Montează săgeata pe breadcrumb-uri și linkuri back din conținut */
+/** Inițializare back — doar glass header (+ shop header via wireShopHeaderBack) */
 export function initBackNav(root = document) {
-  root.querySelectorAll(".breadcrumb > a[href]").forEach((a, i, list) => {
-    if (a === list[0]) enhanceBackLink(a);
-  });
-
-  root.querySelectorAll(".prv-back-link[data-prv-back], [data-prv-back]:not([data-prv-back-done])").forEach((el) => {
-    if (el.tagName === "A") enhanceBackLink(el);
-  });
-
-  root.querySelectorAll(".shop-page-back .prv-back-link[href]").forEach((a) => {
-    if (!a.querySelector("svg")) enhanceBackLink(a);
-    else a.setAttribute("data-prv-back-smart", "");
-  });
-
-  root.querySelectorAll("[data-prv-back-history]").forEach((btn) => {
-    if (btn.dataset.prvBackHistoryBound === "1") return;
-    btn.dataset.prvBackHistoryBound = "1";
-    btn.addEventListener("click", (e) => {
-      if (canGoBackInSite()) {
-        e.preventDefault();
-        window.history.back();
-      }
-    });
-  });
-
-  wireSmartBackLinks(root);
+  mountGlassHeaderBack(root);
 }
 
-/** Header shop: history.back dacă e posibil, altfel href */
+/** Header shop: săgeată simplă, history.back sau fallback */
 export function wireShopHeaderBack(root = document) {
   const btn = root.querySelector(".shop-back-btn");
   if (!btn || btn.dataset.prvBackWired === "1") return;
   btn.dataset.prvBackWired = "1";
 
-  const fallback = isShopHome() ? (getSiteBase() === "." ? "index.html" : `${getSiteBase()}/index.html`) : getShopUrl();
+  const fallback = isShopHome()
+    ? getSiteBase() === "."
+      ? "index.html"
+      : `${getSiteBase()}/index.html`
+    : getShopUrl();
   if (!btn.getAttribute("href")) btn.setAttribute("href", fallback);
-  btn.setAttribute("data-prv-back-smart", "");
   btn.setAttribute("data-i18n-aria", "nav.back");
 
   wireSmartBack(btn, { fallbackHref: fallback });

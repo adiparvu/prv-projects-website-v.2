@@ -897,6 +897,43 @@ body.pointer-active .cursor-glow {
   padding: 8px;
 }
 
+/* Glass header — săgeată back simplă (ca shop), stânga */
+.nav-header-slot {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  z-index: 3;
+}
+
+.nav-header-slot--start {
+  margin-right: 0.15rem;
+}
+
+.nav-back-btn {
+  color: var(--text-primary);
+}
+
+.nav-back-btn:hover,
+.nav-back-btn:focus-visible {
+  color: var(--accent-1);
+}
+
+.nav-back-btn svg {
+  display: block;
+}
+
+[dir="rtl"] .nav-back-btn svg {
+  transform: scaleX(-1);
+}
+
+.nav--has-back .logo {
+  max-width: calc(100% - 5rem);
+}
+
+.shop-page-back {
+  display: none !important;
+}
+
 .nav-toggle span {
   display: block;
   width: 22px;
@@ -3150,6 +3187,18 @@ body.pointer-active .cursor-glow {
   .nav {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
+  }
+
+  .nav-header-slot--start {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+  }
+
+  .nav--has-back .logo {
+    max-width: calc(100% - 9.5rem);
   }
 
   .nav-links,

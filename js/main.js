@@ -8,7 +8,7 @@ import { initEffects, showFormSuccess } from "./effects.js";
 import { initEcosystem } from "./prv-platform.js";
 import { mountNavShopInActions } from "./site-paths.js";
 import { initTheme } from "./prv-theme-picker.js";
-import { initBackNav, wireShopHeaderBack } from "./prv-back.js";
+import { initBackNav, wireShopHeaderBack, mountGlassHeaderBack } from "./prv-back.js";
 
 // ——— Liquid canvas background ———
 function initLiquidCanvas() {
@@ -518,7 +518,7 @@ initBackNav();
 document.addEventListener("prv:langchange", () => initBackNav());
 
 if (typeof window !== "undefined") {
-  window.PRV_BACK = { initBackNav, wireShopHeaderBack };
+  window.PRV_BACK = { initBackNav, wireShopHeaderBack, mountGlassHeaderBack };
 }
 initCounters();
 initMaxVisibleCarousels();
