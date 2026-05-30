@@ -6,7 +6,7 @@
 import { initProjectSlider } from "./project-slider.js";
 import { initEffects, showFormSuccess } from "./effects.js";
 import { initEcosystem } from "./prv-platform.js";
-import { mountNavShopInActions, wireNavLogo } from "./site-paths.js";
+import { mountNavShopInActions } from "./site-paths.js";
 import { initTheme } from "./prv-theme-picker.js";
 import { initBackNav, wireShopHeaderBack, mountGlassHeaderBack, updateShopHeaderBackContext } from "./prv-back.js";
 import { initAmbientFx } from "./fx-ambient.js";
@@ -118,7 +118,6 @@ function initParallax() {
 // ——— Nav scroll hide ———
 function initNav() {
   mountNavShopInActions();
-  wireNavLogo();
   const nav = document.querySelector(".nav");
   const toggle = document.querySelector(".nav-toggle");
   let lastY = 0;
@@ -402,10 +401,7 @@ initTilt();
 initParallax();
 initNav();
 initBackNav();
-document.addEventListener("prv:langchange", () => {
-  initBackNav();
-  wireNavLogo();
-});
+document.addEventListener("prv:langchange", () => initBackNav());
 
 if (typeof window !== "undefined") {
   window.PRV_BACK = { initBackNav, wireShopHeaderBack, mountGlassHeaderBack, updateShopHeaderBackContext };
