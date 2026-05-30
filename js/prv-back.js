@@ -3,6 +3,7 @@
  */
 
 import { getSiteBase, getShopUrl } from "./site-paths.js";
+import { ShopRoutes } from "./shop/routes.js";
 
 export const BACK_ARROW_SVG = `<svg class="prv-back-link__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>`;
 
@@ -73,28 +74,47 @@ function isShopHome() {
   return seg.length === 0 || (seg.length === 1 && seg[0] === "index.html");
 }
 
-function getSmartBackFallback() {
-  const base = getSiteBase();
+function getAccountPageFile() {
   const path = location.pathname;
+  if (!path.includes("/shop/account")) return null;
+  const tail = path.split("/account/")[1] || "";
+  return tail.split("/").filter(Boolean).pop() || "index.html";
+}
+
+/** Parent page in shop hierarchy — never rely on blind history.back when known */
+export function getShopContextualBackHref() {
+  if (document.body.classList.contains("shop-acct-stack-deep")) {
+    return ShopRoutes.account();
+  }
+
+  const path = location.pathname;
+  const base = getSiteBase();
   const siteHome = base === "." ? "index.html" : `${base}/index.html`;
 
-  if (path.includes("/shop")) {
-    if (isShopHome()) return siteHome;
-    return getShopUrl();
+  if (!path.includes("/shop")) {
+    return siteHome;
   }
 
-  if (path.includes("/projects/")) {
-    return base === "." ? "proiecte.html" : `${base}/proiecte.html`;
+  const accountFile = getAccountPageFile();
+  if (accountFile) {
+    if (accountFile === "index.html") return ShopRoutes.home();
+    if (accountFile === "order.html") return ShopRoutes.orders();
+    return ShopRoutes.account();
   }
 
-  if (path.includes("/blog/")) {
-    const tail = path.split("/blog/")[1] || "";
-    if (tail && tail !== "index.html") {
-      return base === "." ? "blog/index.html" : `${base}/blog/index.html`;
-    }
-  }
+  if (path.includes("/shop/confirmation.html")) return ShopRoutes.home();
+  if (path.includes("/shop/checkout.html")) return ShopRoutes.cart();
+  if (path.includes("/shop/cart.html")) return ShopRoutes.home();
+  if (path.includes("/shop/search.html")) return ShopRoutes.home();
+  if (path.includes("/shop/product.html")) return ShopRoutes.home();
+  if (path.includes("/shop/category.html")) return ShopRoutes.home();
 
-  return siteHome;
+  if (isShopHome()) return siteHome;
+  return ShopRoutes.home();
+}
+
+function getSmartBackFallback() {
+  return getShopContextualBackHref();
 }
 
 function shouldShowGlassBack() {
@@ -103,27 +123,67 @@ function shouldShowGlassBack() {
   return true;
 }
 
-/** history.back dacă e posibil, altfel href fallback */
+function handleSmartBackClick(e, el) {
+  if (window.PRV_ACCOUNT_NAV?.canPop?.()) {
+    e.preventDefault();
+    window.PRV_ACCOUNT_NAV.pop();
+    updateShopHeaderBackContext();
+    return;
+  }
+
+  if (document.body.classList.contains("shop-acct-stack-deep")) {
+    e.preventDefault();
+    if (typeof window.PRV_ACCOUNT_NAV?.pop === "function") {
+      window.PRV_ACCOUNT_NAV.pop();
+    } else {
+      window.location.assign(ShopRoutes.account());
+    }
+    updateShopHeaderBackContext();
+    return;
+  }
+
+  const contextual = getShopContextualBackHref();
+  if (contextual) {
+    e.preventDefault();
+    window.location.assign(contextual);
+    return;
+  }
+
+  if (canGoBackInSite()) {
+    e.preventDefault();
+    window.history.back();
+    return;
+  }
+
+  const fallback = el.getAttribute("href");
+  if (fallback) {
+    e.preventDefault();
+    window.location.assign(fallback);
+  }
+}
+
+/** history.back dacă e posibil, altfel href fallback contextual */
 export function wireSmartBack(el, { fallbackHref } = {}) {
   if (!el || el.dataset.prvBackSmartWired === "1") return;
   el.dataset.prvBackSmartWired = "1";
 
   const fallback = fallbackHref || el.getAttribute("href") || getSmartBackFallback();
-  if (el.tagName === "A" && fallback && !el.getAttribute("href")) {
+  if (el.tagName === "A" && fallback) {
     el.setAttribute("href", fallback);
   }
 
-  el.addEventListener("click", (e) => {
-    if (typeof window.PRV_ACCOUNT_NAV?.pop === "function") {
-      e.preventDefault();
-      window.PRV_ACCOUNT_NAV.pop();
-      return;
-    }
-    if (canGoBackInSite()) {
-      e.preventDefault();
-      window.history.back();
-    }
-  });
+  el.addEventListener("click", (e) => handleSmartBackClick(e, el));
+}
+
+/** Actualizează href-ul săgeții din header shop după context (cont stack, pagină curentă) */
+export function updateShopHeaderBackContext() {
+  const btn = document.querySelector(".shop-back-btn");
+  if (!btn) return;
+
+  const href = getShopContextualBackHref();
+  if (href) btn.setAttribute("href", href);
+
+  btn.dataset.accountStack = document.body.classList.contains("shop-acct-stack-deep") ? "1" : "";
 }
 
 /** Săgeată simplă în header glass site (layout ca shop — stânga, fără text) */
@@ -150,21 +210,16 @@ export function mountGlassHeaderBack(root = document) {
 /** Inițializare back — doar glass header (+ shop header via wireShopHeaderBack) */
 export function initBackNav(root = document) {
   mountGlassHeaderBack(root);
+  updateShopHeaderBackContext();
 }
 
-/** Header shop: săgeată simplă, history.back sau fallback */
+/** Header shop: săgeată simplă, navigare contextuală */
 export function wireShopHeaderBack(root = document) {
   const btn = root.querySelector(".shop-back-btn");
   if (!btn || btn.dataset.prvBackWired === "1") return;
   btn.dataset.prvBackWired = "1";
 
-  const fallback = isShopHome()
-    ? getSiteBase() === "."
-      ? "index.html"
-      : `${getSiteBase()}/index.html`
-    : getShopUrl();
-  if (!btn.getAttribute("href")) btn.setAttribute("href", fallback);
+  updateShopHeaderBackContext();
   btn.setAttribute("data-i18n-aria", "nav.back");
-
-  wireSmartBack(btn, { fallbackHref: fallback });
+  wireSmartBack(btn);
 }

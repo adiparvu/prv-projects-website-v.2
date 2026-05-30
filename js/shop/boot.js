@@ -28,10 +28,10 @@ import { initTheme } from "../prv-theme-picker.js";
 import { initThemeTransition } from "../fx-theme-transition.js";
 import { initAmbientFx } from "../fx-ambient.js";
 import { initShopNav } from "./nav.js";
-import { initBackNav, wireShopHeaderBack, mountGlassHeaderBack } from "../prv-back.js";
+import { initBackNav, wireShopHeaderBack, mountGlassHeaderBack, updateShopHeaderBackContext } from "../prv-back.js";
 
 if (typeof window !== "undefined") {
-  window.PRV_BACK = { initBackNav, wireShopHeaderBack, mountGlassHeaderBack };
+  window.PRV_BACK = { initBackNav, wireShopHeaderBack, mountGlassHeaderBack, updateShopHeaderBackContext };
 }
 
 function getParam(name) {

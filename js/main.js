@@ -8,7 +8,7 @@ import { initEffects, showFormSuccess } from "./effects.js";
 import { initEcosystem } from "./prv-platform.js";
 import { mountNavShopInActions } from "./site-paths.js";
 import { initTheme } from "./prv-theme-picker.js";
-import { initBackNav, wireShopHeaderBack, mountGlassHeaderBack } from "./prv-back.js";
+import { initBackNav, wireShopHeaderBack, mountGlassHeaderBack, updateShopHeaderBackContext } from "./prv-back.js";
 import { initAmbientFx } from "./fx-ambient.js";
 
 // ——— Text split & reveal ———
@@ -404,7 +404,7 @@ initBackNav();
 document.addEventListener("prv:langchange", () => initBackNav());
 
 if (typeof window !== "undefined") {
-  window.PRV_BACK = { initBackNav, wireShopHeaderBack, mountGlassHeaderBack };
+  window.PRV_BACK = { initBackNav, wireShopHeaderBack, mountGlassHeaderBack, updateShopHeaderBackContext };
 }
 initCounters();
 initMaxVisibleCarousels();

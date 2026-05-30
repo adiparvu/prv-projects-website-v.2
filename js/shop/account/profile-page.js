@@ -140,16 +140,15 @@ function renderDetailScreen(screenId, ctx, animClass) {
 function syncAccountHeaderBack(navStack, render) {
   window.PRV_ACCOUNT_NAV = window.PRV_ACCOUNT_NAV || {};
 
-  if (navStack.isRoot()) {
-    delete window.PRV_ACCOUNT_NAV.pop;
-    document.body.classList.remove("shop-acct-stack-deep");
-    return;
-  }
-
-  document.body.classList.add("shop-acct-stack-deep");
+  window.PRV_ACCOUNT_NAV.canPop = () => !navStack.isRoot();
   window.PRV_ACCOUNT_NAV.pop = () => {
-    if (navStack.pop()) render();
+    if (!navStack.pop()) return false;
+    render();
+    return true;
   };
+
+  document.body.classList.toggle("shop-acct-stack-deep", !navStack.isRoot());
+  window.PRV_BACK?.updateShopHeaderBackContext?.();
 }
 
 /** @param {{ main: HTMLElement }} ctx @param {string} screenId */
