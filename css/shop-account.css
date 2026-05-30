@@ -365,142 +365,70 @@
   height: 16px;
 }
 
-/* ——— Fullscreen category sheets ——— */
-body.shop-acct-sheet-open {
+/* ——— Navigation stack ——— */
+.shop-acct-stack-viewport {
+  position: relative;
   overflow: hidden;
 }
 
-.shop-acct-root-viewport {
-  position: relative;
-}
-
-.shop-acct-root-screen {
+.shop-acct-stack-screen {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
 }
 
-.shop-acct-sheet {
-  position: fixed;
-  inset: 0;
-  z-index: 120;
+.shop-acct-stack-screen--enter-forward {
+  animation: shop-acct-stack-in-forward 0.34s var(--ease-out-expo);
+}
+
+.shop-acct-stack-screen--enter-back {
+  animation: shop-acct-stack-in-back 0.34s var(--ease-out-expo);
+}
+
+@keyframes shop-acct-stack-in-forward {
+  from {
+    opacity: 0;
+    transform: translateX(14%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shop-acct-stack-in-back {
+  from {
+    opacity: 0;
+    transform: translateX(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.shop-acct-stack-bar {
   display: flex;
-  flex-direction: column;
-  pointer-events: none;
-}
-
-.shop-acct-sheet.is-open {
-  pointer-events: auto;
-}
-
-.shop-acct-sheet__backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(8, 8, 12, 0.42);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  opacity: 0;
-  transition: opacity 0.38s ease;
-}
-
-.shop-acct-sheet.is-open .shop-acct-sheet__backdrop {
-  opacity: 1;
-}
-
-.shop-acct-sheet__panel {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  background: var(--bg-base);
-  transform: translateY(100%);
-  transition: transform 0.44s var(--ease-out-expo);
-  box-shadow: 0 -12px 40px -16px var(--glass-shadow);
-}
-
-.shop-acct-sheet.is-open .shop-acct-sheet__panel {
-  transform: translateY(0);
-}
-
-.shop-acct-sheet__bar {
-  display: grid;
-  grid-template-columns: 2.75rem 1fr 2.75rem;
   align-items: center;
-  gap: 0.5rem;
-  padding: calc(env(safe-area-inset-top, 0px) + 0.65rem) 0.85rem 0.65rem;
-  border-radius: 0;
-  border-left: none;
-  border-right: none;
-  border-top: none;
+  gap: 0.65rem;
+  min-height: 2.25rem;
+}
+
+.shop-acct-stack-back {
   flex-shrink: 0;
-  z-index: 2;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.25rem 0.35rem 0.25rem 0;
 }
 
-.shop-acct-sheet__bar-spacer {
-  width: 2.75rem;
-  height: 2.75rem;
-}
-
-.shop-acct-sheet__title {
-  font-size: 1.02rem;
+.shop-acct-stack-title {
+  font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  text-align: center;
-  min-width: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.shop-acct-sheet__close {
-  width: 2.75rem;
-  height: 2.75rem;
-  border: 1px solid var(--glass-border);
-  border-radius: 50%;
-  background: var(--glass-bg);
-  color: var(--text-primary);
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  justify-self: end;
-  backdrop-filter: blur(var(--prv-ui-blur)) saturate(var(--prv-ui-saturate));
-  -webkit-backdrop-filter: blur(var(--prv-ui-blur)) saturate(var(--prv-ui-saturate));
-  box-shadow: var(--shop-acct-shadow);
-  transition: transform 0.2s var(--ease-out-expo), background 0.2s ease;
-}
-
-.shop-acct-sheet__close svg {
-  width: 18px;
-  height: 18px;
-}
-
-.shop-acct-sheet__close:hover {
-  background: color-mix(in srgb, var(--glass-inset) 70%, var(--glass-bg));
-}
-
-.shop-acct-sheet__close:active {
-  transform: scale(0.94);
-}
-
-.shop-acct-sheet__close:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--text-primary) 35%, transparent);
-  outline-offset: 2px;
-}
-
-.shop-acct-sheet__scroll {
   flex: 1;
-  min-height: 0;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 0 0.85rem calc(env(safe-area-inset-bottom, 0px) + 1.25rem);
+  min-width: 0;
 }
-
-.shop-acct-sheet__scroll .shop-acct-detail {
-  max-width: 680px;
-  margin: 0 auto;
-}
-
-/* ——— Navigation stack (legacy) ——— */
 
 .shop-acct-detail {
   padding: var(--shop-acct-pad);
@@ -1159,8 +1087,8 @@ body.shop-acct-sheet-open {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .shop-acct-sheet__panel,
-  .shop-acct-sheet__backdrop,
+  .shop-acct-stack-screen--enter-forward,
+  .shop-acct-stack-screen--enter-back,
   .shop-acct-disclosure__panel,
   .shop-acct-disclosure__chevron {
     animation: none;

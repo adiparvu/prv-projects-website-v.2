@@ -44,7 +44,7 @@ export function accountCategoryMenuHtml() {
     .map(
       (cat) => `
     <li class="shop-acct-settings-menu__item">
-      <button type="button" class="shop-acct-settings-menu__btn" data-sheet-open="${cat.id}">
+      <button type="button" class="shop-acct-settings-menu__btn" data-stack-push="${cat.id}">
         <span class="shop-acct-settings-menu__icon" aria-hidden="true">${cat.icon}</span>
         <span class="shop-acct-settings-menu__text">
           <strong>${t(cat.titleKey)}</strong>

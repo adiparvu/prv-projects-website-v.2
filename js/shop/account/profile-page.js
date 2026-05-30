@@ -1,5 +1,5 @@
 /**
- * Customer profile page — settings menu + fullscreen category sheets
+ * Customer profile page — settings-style navigation stack
  */
 
 import { t } from "../i18n.js";
@@ -8,6 +8,8 @@ import { validateEmail, validatePhone, validateRequired, validateAddress } from 
 import { fetchCustomerProfile, saveCustomerProfile, addLoyaltyToWallet } from "./profile-api.js";
 import { ProfileStore } from "./profile-store.js";
 import { ShopStore } from "../store.js";
+import { BACK_ARROW_SVG } from "../../prv-back.js";
+import { createAccountNavStack, stackScreenClass } from "./account-nav-stack.js";
 import { accountCategoryMenuHtml, getAccountCategoryTitleKey } from "./components/account-category-menu.js";
 import { accountProfileHeaderHtml, wireAccountProfileHeader } from "./components/account-profile-header.js";
 import { loyaltyCardHtml, wireLoyaltyCard } from "./components/loyalty-card.js";
@@ -69,48 +71,56 @@ async function loadProfileOrders() {
 
 /** @param {import('./types.js').CustomerAccountBundle} bundle */
 function initProfileNavigation(main, bundle, orders, opts) {
+  const navStack = createAccountNavStack();
   /** @type {{ bundle: import('./types.js').CustomerAccountBundle, orders: object[], opts: object, main: HTMLElement }} */
   const ctx = { bundle, orders, opts, main };
 
   main.innerHTML = `
     <div class="shop-acct-page" data-profile-root>
-      <div class="shop-acct-root-viewport" data-acct-root-viewport></div>
+      <div class="shop-acct-stack-viewport" data-acct-stack-viewport></div>
     </div>
   `;
 
-  const rootViewport = main.querySelector("[data-acct-root-viewport]");
-  if (!rootViewport) return;
+  const viewport = main.querySelector("[data-acct-stack-viewport]");
+  if (!viewport) return;
 
-  renderRootScreen(rootViewport, ctx);
+  const render = () => {
+    const direction = navStack.consumeDirection();
+    const screen = navStack.current();
+    const animClass = stackScreenClass(direction);
 
-  main.addEventListener("click", (e) => {
-    const openBtn = e.target.closest("[data-sheet-open]");
-    if (openBtn) {
+    viewport.innerHTML =
+      screen === "root"
+        ? renderRootScreen(ctx, animClass)
+        : renderDetailScreen(screen, ctx, animClass);
+
+    wireCurrentScreen(main, ctx, navStack);
+  };
+
+  viewport.addEventListener("click", (e) => {
+    const pushBtn = e.target.closest("[data-stack-push]");
+    if (pushBtn) {
       e.preventDefault();
-      openCategorySheet(main, ctx, openBtn.getAttribute("data-sheet-open"));
+      if (navStack.push(pushBtn.getAttribute("data-stack-push"))) render();
       return;
     }
 
-    if (e.target.closest("[data-sheet-dismiss]")) {
+    const backBtn = e.target.closest("[data-stack-back]");
+    if (backBtn) {
       e.preventDefault();
-      closeCategorySheet(main);
+      if (navStack.pop()) render();
     }
   });
 
-  main.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && main.querySelector(".shop-acct-sheet.is-open")) {
-      e.preventDefault();
-      closeCategorySheet(main);
-    }
-  });
+  render();
 }
 
 /** @param {{ bundle: import('./types.js').CustomerAccountBundle, orders: object[] }} ctx */
-function renderRootScreen(host, ctx) {
+function renderRootScreen(ctx, animClass) {
   const { profile, loyalty } = ctx.bundle;
 
-  host.innerHTML = `
-    <div class="shop-acct-root-screen" data-stack-screen="root">
+  return `
+    <div class="shop-acct-stack-screen ${animClass}" data-stack-screen="root">
       ${accountProfileHeaderHtml(profile)}
       ${loyaltyCardHtml(loyalty)}
       ${accountCategoryMenuHtml()}
@@ -119,80 +129,24 @@ function renderRootScreen(host, ctx) {
       </div>
     </div>
   `;
-
-  const root = host.closest("[data-profile-root]");
-  wireAccountProfileHeader(root, {});
-  wireLoyaltyCard(root, {
-    onAddWallet: async () => {
-      const res = await addLoyaltyToWallet();
-      if (res.ok) showAccountToast(ctx.main, t("shop.profile.loyalty.walletSuccess"));
-      else showAccountToast(ctx.main, t("shop.profile.saveError"), "error");
-    },
-  });
-  root?.querySelector("#shop-logout")?.addEventListener("click", () => ctx.opts.onLogout?.());
 }
 
-/** @param {HTMLElement} main @param {{ bundle: import('./types.js').CustomerAccountBundle, orders: object[] }} ctx @param {string} screenId */
-function openCategorySheet(main, ctx, screenId) {
-  closeCategorySheet(main, { immediate: true });
-
-  const profileRoot = main.querySelector("[data-profile-root]");
-  if (!profileRoot) return;
-
+/** @param {{ bundle: import('./types.js').CustomerAccountBundle, orders: object[] }} ctx */
+function renderDetailScreen(screenId, ctx, animClass) {
   const titleKey = getAccountCategoryTitleKey(screenId);
-  const sheet = document.createElement("div");
-  sheet.className = "shop-acct-sheet";
-  sheet.dataset.sheetId = screenId;
-  sheet.setAttribute("role", "dialog");
-  sheet.setAttribute("aria-modal", "true");
-  sheet.setAttribute("aria-labelledby", "shop-acct-sheet-title");
-  sheet.innerHTML = `
-    <div class="shop-acct-sheet__backdrop" aria-hidden="true"></div>
-    <div class="shop-acct-sheet__panel">
-      <header class="shop-acct-sheet__bar glass-panel">
-        <div class="shop-acct-sheet__bar-spacer" aria-hidden="true"></div>
-        <h2 class="shop-acct-sheet__title" id="shop-acct-sheet-title">${t(titleKey)}</h2>
-        <button type="button" class="shop-acct-sheet__close" data-sheet-dismiss aria-label="${t("shop.profile.close")}">
-          ${ICONS.close}
+
+  return `
+    <div class="shop-acct-stack-screen ${animClass}" data-stack-screen="${screenId}">
+      <header class="shop-acct-stack-bar">
+        <button type="button" class="shop-acct-stack-back prv-back-link" data-stack-back aria-label="${t("shop.profile.back")}">
+          ${BACK_ARROW_SVG}
+          <span class="prv-back-link__label">${t("shop.profile.back")}</span>
         </button>
+        <h2 class="shop-acct-stack-title">${t(titleKey)}</h2>
       </header>
-      <div class="shop-acct-sheet__scroll">
-        <div class="shop-acct-detail glass-panel">${renderCategoryBody(screenId, ctx)}</div>
-      </div>
+      <div class="shop-acct-detail glass-panel">${renderCategoryBody(screenId, ctx)}</div>
     </div>
   `;
-
-  profileRoot.appendChild(sheet);
-  document.body.classList.add("shop-acct-sheet-open");
-
-  requestAnimationFrame(() => {
-    sheet.classList.add("is-open");
-    sheet.querySelector("[data-sheet-dismiss]")?.focus();
-  });
-
-  wireSheetScreen(main, ctx, screenId);
-}
-
-function closeCategorySheet(main, { immediate = false } = {}) {
-  const sheet = main.querySelector(".shop-acct-sheet");
-  if (!sheet) return;
-
-  const finish = () => {
-    sheet.remove();
-    if (!main.querySelector(".shop-acct-sheet")) {
-      document.body.classList.remove("shop-acct-sheet-open");
-    }
-  };
-
-  if (immediate || !sheet.classList.contains("is-open")) {
-    finish();
-    return;
-  }
-
-  sheet.classList.remove("is-open");
-  const onDone = () => finish();
-  sheet.addEventListener("transitionend", onDone, { once: true });
-  window.setTimeout(onDone, 480);
 }
 
 /** @param {{ bundle: import('./types.js').CustomerAccountBundle, orders: object[] }} ctx */
@@ -216,11 +170,26 @@ function renderCategoryBody(screenId, ctx) {
 }
 
 /** @param {HTMLElement} main */
-function wireSheetScreen(main, ctx, screenId) {
+function wireCurrentScreen(main, ctx, navStack) {
   const root = main.querySelector("[data-profile-root]");
   if (!root) return;
 
-  if (screenId === "profile-details") {
+  const screen = navStack.current();
+
+  if (screen === "root") {
+    wireAccountProfileHeader(root, {});
+    wireLoyaltyCard(root, {
+      onAddWallet: async () => {
+        const res = await addLoyaltyToWallet();
+        if (res.ok) showAccountToast(main, t("shop.profile.loyalty.walletSuccess"));
+        else showAccountToast(main, t("shop.profile.saveError"), "error");
+      },
+    });
+    root.querySelector("#shop-logout")?.addEventListener("click", () => ctx.opts.onLogout?.());
+    return;
+  }
+
+  if (screen === "profile-details") {
     wirePersonalDetailsForm(root, {
       onSave: async (data) => saveProfileFields(root, data, ctx.bundle, main),
       onAvatarChange: async (avatarUrl) => {
@@ -250,7 +219,7 @@ function wireSheetScreen(main, ctx, screenId) {
     return;
   }
 
-  if (screenId === "notifications") {
+  if (screen === "notifications") {
     wireShopNotificationsSection(root, {
       onChange: async (key, value) => {
         await persistBundle({ notifications: { [key]: value } }, ctx.bundle, main);
@@ -260,7 +229,7 @@ function wireSheetScreen(main, ctx, screenId) {
     return;
   }
 
-  if (screenId === "app-settings") {
+  if (screen === "app-settings") {
     wireAppSettingsSection(root, {
       onToggle: async (key, value) => {
         await persistBundle({ appSettings: { [key]: value } }, ctx.bundle, main);
