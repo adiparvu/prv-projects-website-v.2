@@ -1,14 +1,79 @@
 /* PRV Shop — Customer account profile UI */
 
+/* Dimensiuni normale pentru profil (nav rămâne XL) */
+.shop-acct-page,
+.shop-acct-login,
+.shop-acct-profile-host,
+.shop-main {
+  --shop-acct-radius: var(--radius-md);
+  --shop-acct-radius-sm: var(--radius-sm);
+  --shop-acct-pad: 1rem;
+  --shop-acct-pad-sm: 0.75rem;
+  --shop-acct-shadow:
+    0 0 0 1px var(--glass-highlight) inset,
+    0 10px 24px -14px var(--glass-shadow),
+    0 4px 8px -4px var(--glass-shadow);
+}
+
+.shop-acct-page .glass-panel,
+.shop-acct-profile-host .glass-panel,
+.shop-acct-login.glass-panel {
+  border-radius: var(--shop-acct-radius);
+  box-shadow: var(--shop-acct-shadow);
+}
+
+.shop-acct-page .glass-inset,
+.shop-acct-profile-host .glass-inset,
+.shop-acct-login .glass-inset {
+  border-radius: var(--shop-acct-radius-sm);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--glass-border) 50%, transparent) inset,
+    0 2px 8px -4px var(--glass-shadow);
+}
+
+.shop-acct-page .input-wrap.glass-inset,
+.shop-acct-login .input-wrap.glass-inset {
+  padding: 3px;
+}
+
+.shop-acct-page .input-wrap.glass-inset input,
+.shop-acct-page .input-wrap.glass-inset select,
+.shop-acct-page .input-wrap.glass-inset textarea,
+.shop-acct-login .input-wrap.glass-inset input,
+.shop-acct-page .glass-inset input,
+.shop-acct-page .glass-inset select,
+.shop-acct-page .glass-inset textarea,
+.shop-acct-login .glass-inset input {
+  border-radius: calc(var(--shop-acct-radius-sm) * 0.85);
+}
+
+.shop-acct-page .input-wrap.glass-inset input,
+.shop-acct-page .input-wrap.glass-inset select,
+.shop-acct-page .input-wrap.glass-inset textarea,
+.shop-acct-login .input-wrap.glass-inset input {
+  padding: 0.65rem 0.85rem;
+  font-size: 0.9rem;
+}
+
 .shop-acct-page-title {
   margin-bottom: 0.75rem;
+}
+
+.shop-main .shop-account-nav {
+  margin-bottom: 1rem;
+}
+
+.shop-main .shop-account-nav a {
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--shop-acct-radius-sm, var(--radius-sm));
+  font-size: 0.82rem;
 }
 
 .shop-acct-page {
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
-  max-width: 760px;
+  gap: 0.85rem;
+  max-width: 680px;
   margin: 0 auto;
 }
 
@@ -21,22 +86,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: var(--prv-ui-pad);
+  gap: 0.85rem;
+  padding: var(--shop-acct-pad);
   flex-wrap: wrap;
 }
 
 .shop-acct-profile-header__main {
   display: flex;
   align-items: center;
-  gap: 1.1rem;
+  gap: 0.85rem;
   min-width: 0;
 }
 
 .shop-acct-avatar {
   position: relative;
-  width: 88px;
-  height: 88px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -56,7 +121,7 @@
   place-items: center;
   width: 100%;
   height: 100%;
-  font-size: 1.65rem;
+  font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--text-primary);
@@ -66,8 +131,8 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   border: 1px solid var(--glass-border);
   background: var(--glass-bg);
@@ -79,13 +144,13 @@
 }
 
 .shop-acct-avatar__edit svg {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
 }
 
 .shop-acct-profile-header__name {
   font-family: var(--font-display);
-  font-size: clamp(1.35rem, 3vw, 1.65rem);
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.15;
@@ -116,7 +181,7 @@
 
 /* ——— Loyalty card ——— */
 .shop-acct-loyalty {
-  padding: var(--prv-ui-pad);
+  padding: var(--shop-acct-pad);
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--text-primary) 88%, transparent), color-mix(in srgb, var(--accent-2) 75%, transparent)),
     var(--glass-bg);
@@ -146,12 +211,12 @@
 }
 
 .shop-acct-loyalty__points {
-  margin: 1.35rem 0 1rem;
+  margin: 1rem 0 0.85rem;
 }
 
 .shop-acct-loyalty__points-value {
   display: block;
-  font-size: clamp(2.2rem, 6vw, 3rem);
+  font-size: clamp(1.75rem, 5vw, 2.35rem);
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -205,26 +270,26 @@
   z-index: 5;
   width: min(280px, 72vw);
   padding: 0.75rem 0.85rem;
-  border-radius: calc(var(--prv-ui-radius) * 0.55);
+  border-radius: var(--shop-acct-radius-sm);
   background: var(--glass-bg);
   color: var(--text-primary);
   border: 1px solid var(--glass-border);
-  box-shadow: var(--prv-ui-shadow);
+  box-shadow: var(--shop-acct-shadow);
   font-size: 0.78rem;
   line-height: 1.45;
 }
 
 /* ——— Sections ——— */
 .shop-acct-section {
-  padding: var(--prv-ui-pad);
+  padding: var(--shop-acct-pad);
 }
 
 .shop-acct-section__head {
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .shop-acct-section__title {
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -239,7 +304,7 @@
 .shop-acct-form__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.85rem;
+  gap: 0.65rem;
 }
 
 .shop-acct-form__grid--1 {
@@ -313,7 +378,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: var(--prv-ui-pad-sm);
+  padding: var(--shop-acct-pad-sm);
 }
 
 .shop-acct-address-item p {
@@ -332,7 +397,7 @@
   width: 36px;
   height: 36px;
   border: none;
-  border-radius: calc(var(--prv-ui-radius) * 0.45);
+  border-radius: calc(var(--shop-acct-radius-sm) * 0.85);
   background: transparent;
   color: var(--text-secondary);
   display: grid;
@@ -382,7 +447,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: var(--prv-ui-pad-sm);
+  padding: var(--shop-acct-pad-sm);
   cursor: pointer;
 }
 
@@ -413,7 +478,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: var(--prv-ui-pad-sm);
+  padding: var(--shop-acct-pad-sm);
 }
 
 .shop-acct-toggle-row__text label {
@@ -467,7 +532,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: var(--prv-ui-pad-sm);
+  padding: var(--shop-acct-pad-sm);
   border: none;
   background: transparent;
   color: inherit;
@@ -510,7 +575,7 @@
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
+  padding: var(--shop-acct-pad-sm) var(--shop-acct-pad);
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s var(--ease-out-expo);
@@ -545,7 +610,7 @@
 
 /* ——— States ——— */
 .shop-acct-state {
-  padding: var(--prv-ui-pad);
+  padding: var(--shop-acct-pad);
   text-align: center;
 }
 
@@ -585,8 +650,8 @@
 }
 
 .shop-acct-banner--error {
-  padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
-  border-radius: calc(var(--prv-ui-radius) * 0.55);
+  padding: var(--shop-acct-pad-sm) var(--shop-acct-pad);
+  border-radius: var(--shop-acct-radius-sm);
   background: color-mix(in srgb, #c45c26 12%, transparent);
   border: 1px solid color-mix(in srgb, #c45c26 35%, transparent);
   color: var(--text-primary);
@@ -602,10 +667,10 @@
 
 .shop-acct-toast {
   padding: 0.65rem 1rem;
-  border-radius: calc(var(--prv-ui-radius) * 0.55);
+  border-radius: var(--shop-acct-radius-sm);
   font-size: 0.82rem;
   font-weight: 600;
-  box-shadow: var(--prv-ui-shadow);
+  box-shadow: var(--shop-acct-shadow);
 }
 
 .shop-acct-toast--success {
@@ -633,7 +698,7 @@
 }
 
 .shop-acct-dialog__form {
-  padding: var(--prv-ui-pad);
+  padding: var(--shop-acct-pad);
 }
 
 .shop-acct-dialog__title {
@@ -656,8 +721,8 @@
 }
 
 .shop-acct-login {
-  padding: var(--prv-ui-pad);
-  max-width: 760px;
+  padding: var(--shop-acct-pad);
+  max-width: 680px;
   margin: 0 auto;
 }
 
