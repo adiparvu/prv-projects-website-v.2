@@ -11,6 +11,25 @@
 
 /* Shop inherits website glass tokens — no color overrides on body */
 
+/* ——— Boot: fără flash scroll / footer ——— */
+html.shop-entering body.shop-body {
+  overflow: hidden;
+}
+
+html.shop-entering body.shop-body > #shop-root,
+html.shop-entering body.shop-body > footer {
+  visibility: hidden;
+}
+
+body.shop-body.shop-boot-ready > #shop-root,
+body.shop-body.shop-boot-ready > footer {
+  visibility: visible;
+}
+
+#shop-root {
+  min-height: calc(100vh - var(--nav-height) - 2rem);
+}
+
 .shop-cart-lines.glass-panel {
   padding: 0 var(--prv-ui-pad);
 }

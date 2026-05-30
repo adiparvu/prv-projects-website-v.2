@@ -53,6 +53,22 @@ function showShopFatal(message) {
       <a href="index.html" class="btn btn-primary">OK</a>
     </div>
   `;
+  revealShopChrome();
+}
+
+function revealShopChrome() {
+  window.scrollTo(0, 0);
+
+  const show = () => {
+    document.documentElement.classList.remove("shop-entering");
+    document.body.classList.add("shop-boot-ready");
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.body.classList.add("fx-scroll-driven");
+    }
+  };
+
+  requestAnimationFrame(() => requestAnimationFrame(show));
 }
 
 function hasShopStrings() {
@@ -115,6 +131,7 @@ function finishPage(page, main, catalog) {
   wireShareButtons(main);
   wireFavoriteButtons(main);
   initBackNav(main);
+  revealShopChrome();
   initShopNav();
 
   [...document.body.classList]
@@ -131,10 +148,6 @@ function finishPage(page, main, catalog) {
 export async function bootShop(page) {
   activePage = page;
   document.body.classList.add("shop-body", "fx-page-ready");
-
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    document.body.classList.add("fx-scroll-driven");
-  }
 
   if (!window.PRV_I18N?.applyLang) {
     showShopFatal("Traducerile nu s-au încărcat.");

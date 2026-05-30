@@ -5,7 +5,9 @@ export function initShopNav() {
   if (!nav || nav.dataset.prvNavBound === "1") return;
   nav.dataset.prvNavBound = "1";
 
-  let lastY = 0;
+  nav.classList.remove("nav-hidden");
+  let lastY = window.scrollY;
+
   window.addEventListener(
     "scroll",
     () => {
