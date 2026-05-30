@@ -42,8 +42,10 @@ function mountFooterLang() {
   }
 
   picker.className = "lang-picker-host lang-picker-host--minimal footer-lang-picker";
-  picker.innerHTML = "";
-  window.PRV_I18N.rebuildLangPicker();
+  if (picker.dataset.built !== "1") {
+    picker.innerHTML = "";
+    window.PRV_I18N.rebuildLangPicker();
+  }
   picker.dataset.built = "1";
 }
 

@@ -12,24 +12,119 @@ const BACK_ICON = BACK_ARROW_SVG;
 const ACCOUNT_ICON = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21a8 8 0 10-16 0"/><circle cx="12" cy="8" r="4"/></svg>`;
 const CART_ICON = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 2l1.5 6h9L18 2"/><path d="M4 8h16l-1 14H5L4 8z"/></svg>`;
 
-export function mountShopLayout({ active = "shop", catalog = null, searchQuery = "" } = {}) {
-  const root = document.getElementById("shop-root");
-  if (!root) return;
-
-  const account = ShopStore.getAccount();
-  const accountLabel = account ? account.email.split("@")[0] : t("shop.nav.account");
-
-  const categories = (catalog?.categories || [])
+function buildNavCats(catalog) {
+  return (catalog?.categories || [])
     .slice()
-    .sort((a, b) => (a.sort || 0) - (b.sort || 0));
-
-  const navCats = categories
+    .sort((a, b) => (a.sort || 0) - (b.sort || 0))
     .map((c) => {
       const short = c.name.split(/[\s&]/)[0];
       return `<a href="${ShopRoutes.category(c.slug)}">${escapeHtml(short)}</a>`;
     })
     .join("");
+}
 
+function refreshCartBadge(root) {
+  const btn = root.querySelector(".shop-cart-btn");
+  if (!btn) return;
+  btn.querySelector(".shop-cart-badge")?.remove();
+  const html = cartBadgeHtml();
+  if (html) btn.insertAdjacentHTML("beforeend", html);
+}
+
+function wireSearchOverlay(root) {
+  if (root.dataset.searchWired === "1") return;
+  root.dataset.searchWired = "1";
+
+  const overlay = root.querySelector("#shop-search-overlay");
+  const openBtn = root.querySelector("#shop-search-open");
+  const input = root.querySelector("#shop-search-q");
+  if (!overlay || !openBtn) return;
+
+  const open = () => {
+    overlay.hidden = false;
+    openBtn.setAttribute("aria-expanded", "true");
+    document.body.classList.add("shop-search-open");
+    input?.focus({ preventScroll: true });
+  };
+
+  const close = () => {
+    overlay.hidden = true;
+    openBtn.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("shop-search-open");
+    openBtn.focus({ preventScroll: true });
+  };
+
+  openBtn.addEventListener("click", () => {
+    if (overlay.hidden) open();
+    else close();
+  });
+
+  overlay.querySelectorAll("[data-close-search]").forEach((el) => {
+    el.addEventListener("click", close);
+  });
+
+  overlay.querySelector(".shop-search-form")?.addEventListener("submit", () => close());
+
+  if (!window.__prvShopSearchEsc) {
+    window.__prvShopSearchEsc = true;
+    window.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      const o = document.querySelector("#shop-search-overlay");
+      if (o && !o.hidden) {
+        o.hidden = true;
+        document.body.classList.remove("shop-search-open");
+        document.querySelector("#shop-search-open")?.focus({ preventScroll: true });
+      }
+    });
+  }
+}
+
+function wireCartBadgeOnce() {
+  if (window.__prvShopCartBadgeWired) return;
+  window.__prvShopCartBadgeWired = true;
+  window.addEventListener("prv:cartchange", () => {
+    const root = document.getElementById("shop-root");
+    if (root) refreshCartBadge(root);
+  });
+}
+
+export function updateShopLayout({ active = "shop", catalog = null, searchQuery = "" } = {}) {
+  const root = document.getElementById("shop-root");
+  if (!root?.querySelector(".shop-shell")) return false;
+
+  const scroll = root.querySelector(".shop-categories-scroll");
+  if (scroll) {
+    scroll.innerHTML = `<a href="${ShopRoutes.home()}" class="${active === "shop" ? "is-active" : ""}">${t("shop.nav.home")}</a>${buildNavCats(catalog)}`;
+  }
+
+  root.querySelector(".shop-search-toggle")?.classList.toggle("is-active", active === "search");
+  const input = root.querySelector("#shop-search-q");
+  if (input) input.value = searchQuery || "";
+
+  const account = ShopStore.getAccount();
+  const accountLabel = account ? account.email.split("@")[0] : t("shop.nav.account");
+  const accountBtn = root.querySelector(".shop-account-btn");
+  if (accountBtn) {
+    accountBtn.setAttribute("aria-label", accountLabel);
+    accountBtn.setAttribute("title", account?.email || t("shop.nav.account"));
+  }
+
+  refreshCartBadge(root);
+  return true;
+}
+
+export function mountShopLayout({ active = "shop", catalog = null, searchQuery = "" } = {}) {
+  const root = document.getElementById("shop-root");
+  if (!root) return;
+
+  if (root.querySelector(".shop-shell") && updateShopLayout({ active, catalog, searchQuery })) {
+    wireShopHeaderBack(root);
+    return;
+  }
+
+  const account = ShopStore.getAccount();
+  const accountLabel = account ? account.email.split("@")[0] : t("shop.nav.account");
+  const navCats = buildNavCats(catalog);
   const q = escapeAttr(searchQuery);
 
   root.innerHTML = `
@@ -88,57 +183,7 @@ export function mountShopLayout({ active = "shop", catalog = null, searchQuery =
 
   wireSearchOverlay(root);
   wireShopHeaderBack(root);
-
-  const refreshBadge = () => {
-    const btn = root.querySelector(".shop-cart-btn");
-    if (!btn) return;
-    const old = btn.querySelector(".shop-cart-badge");
-    old?.remove();
-    const html = cartBadgeHtml();
-    if (html) btn.insertAdjacentHTML("beforeend", html);
-  };
-
-  window.addEventListener("prv:cartchange", refreshBadge);
-}
-
-function wireSearchOverlay(root) {
-  const overlay = root.querySelector("#shop-search-overlay");
-  const openBtn = root.querySelector("#shop-search-open");
-  const input = root.querySelector("#shop-search-q");
-  if (!overlay || !openBtn) return;
-
-  const open = () => {
-    overlay.hidden = false;
-    openBtn.setAttribute("aria-expanded", "true");
-    document.body.classList.add("shop-search-open");
-    requestAnimationFrame(() => input?.focus());
-  };
-
-  const close = () => {
-    overlay.hidden = true;
-    openBtn.setAttribute("aria-expanded", "false");
-    document.body.classList.remove("shop-search-open");
-    openBtn.focus();
-  };
-
-  openBtn.addEventListener("click", () => {
-    if (overlay.hidden) open();
-    else close();
-  });
-
-  overlay.querySelectorAll("[data-close-search]").forEach((el) => {
-    el.addEventListener("click", close);
-  });
-
-  overlay.querySelector(".shop-search-form")?.addEventListener("submit", () => close());
-
-  window.addEventListener(
-    "keydown",
-    (e) => {
-      if (e.key === "Escape" && !overlay.hidden) close();
-    },
-    { once: false }
-  );
+  wireCartBadgeOnce();
 }
 
 export function openShopSearch() {

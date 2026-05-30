@@ -5,8 +5,8 @@
 import { initThemeTransition } from "./fx-theme-transition.js";
 
 const NAV_OFFSET = 88;
-const STAGGER_BASE_MS = 80;
-const STAGGER_STEP_MS = 10; /* 80, 90, 100, 110, 120 ms */
+const STAGGER_BASE_MS = 24;
+const STAGGER_STEP_MS = 4;
 
 function prefersReduced() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -146,13 +146,7 @@ function initIconDraw() {
 // ——— 7. Page enter ———
 function initPageEnter() {
   if (!document.body.classList.contains("fx-page-enter")) return;
-  if (prefersReduced()) {
-    document.body.classList.add("fx-page-ready");
-    return;
-  }
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => document.body.classList.add("fx-page-ready"));
-  });
+  document.body.classList.add("fx-page-ready");
 }
 
 // ——— 10. Ripple ———
