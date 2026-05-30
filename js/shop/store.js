@@ -1,6 +1,7 @@
 /** PRV Shop — client store (cart, account, orders) — syncs to localStorage until API is live */
 
 import { uid } from "./format.js";
+import { ProfileStore } from "./account/profile-store.js";
 
 const KEYS = {
   cart: "prv_shop_cart",
@@ -73,11 +74,13 @@ export const ShopStore = {
   login(email, name = "") {
     const account = { email, name, loggedInAt: new Date().toISOString() };
     write(KEYS.account, account);
+    ProfileStore.ensureForAccount(account);
     return account;
   },
 
   logout() {
     localStorage.removeItem(KEYS.account);
+    ProfileStore.clear();
   },
 
   getOrders() {

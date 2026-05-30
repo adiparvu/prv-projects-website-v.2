@@ -5,21 +5,11 @@ import { productCard, pageBackNav } from "../components.js";
 import { getApiBase, requestMagicLink, fetchAccountOrders, fetchOrder, invoiceUrl } from "../api.js";
 import { clearAuth } from "../auth.js";
 import { t } from "../i18n.js";
+import { accountNav } from "../account/account-nav.js";
+import { mountCustomerProfilePage } from "../account/profile-page.js";
+import { ProfileStore } from "../account/profile-store.js";
 
-function accountNav(active) {
-  const links = [
-    ["overview", "shop.account.nav.account", ShopRoutes.account()],
-    ["orders", "shop.account.nav.orders", ShopRoutes.orders()],
-    ["invoices", "shop.account.nav.invoices", ShopRoutes.invoices()],
-    ["favorites", "shop.account.nav.favorites", ShopRoutes.favorites()],
-  ];
-  return `<nav class="shop-account-nav">${links
-    .map(
-      ([key, labelKey, href]) =>
-        `<a href="${href}" class="${active === key ? "is-active" : ""}">${t(labelKey)}</a>`
-    )
-    .join("")}</nav>`;
-}
+export { accountNav };
 
 export async function renderAccountOverview(main) {
   const account = ShopStore.getAccount();
@@ -27,50 +17,75 @@ export async function renderAccountOverview(main) {
 
   main.innerHTML = `
     ${pageBackNav(ShopRoutes.home(), t("shop.breadcrumb.shop"))}
-    <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.account.title")}</h1>
+    <h1 class="section-title shop-acct-page-title">${t("shop.account.title")}</h1>
     ${accountNav("overview")}
-    <div class="glass-panel">
-      ${
-        account
-          ? `<p>${t("shop.account.welcome", { email: escapeHtml(account.email) })}</p><button type="button" class="btn btn-glass" id="shop-logout" style="margin-top:1rem">${t("shop.account.logout")}</button>`
-          : `<p>${apiLive ? t("shop.account.magicHint") : t("shop.account.loginHint")}</p>
-             <form id="shop-login-form" class="shop-checkout-form" style="margin-top:1rem;max-width:360px">
-               <div class="input-wrap glass-inset"><label>${t("shop.account.email")}</label><input type="email" name="email" required /></div>
-               <button type="submit" class="btn btn-primary">${apiLive ? t("shop.account.magicSend") : t("shop.account.continue")}</button>
-             </form>
-             <p id="shop-login-msg" class="work-meta" style="margin-top:0.75rem" hidden></p>`
-      }
-    </div>
   `;
 
-  main.querySelector("#shop-login-form")?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = new FormData(e.target).get("email");
-    const msg = main.querySelector("#shop-login-msg");
-    if (apiLive) {
-      try {
-        await requestMagicLink(email);
-        if (msg) {
-          msg.hidden = false;
-          msg.textContent = t("shop.account.magicSent");
-        }
-      } catch {
-        if (msg) {
-          msg.hidden = false;
-          msg.textContent = t("shop.checkout.error");
-        }
-      }
-    } else {
-      ShopStore.login(email);
-      await renderAccountOverview(main);
-    }
-  });
+  if (!account) {
+    const loginHost = document.createElement("div");
+    loginHost.className = "glass-panel shop-acct-login";
+    loginHost.innerHTML = `
+      <p>${apiLive ? t("shop.account.magicHint") : t("shop.account.loginHint")}</p>
+      <form id="shop-login-form" class="shop-checkout-form" style="margin-top:1rem;max-width:420px">
+        <div class="input-wrap glass-inset"><label for="shop-login-email">${t("shop.account.email")}</label><input id="shop-login-email" type="email" name="email" required autocomplete="email" /></div>
+        <button type="submit" class="btn btn-primary">${apiLive ? t("shop.account.magicSend") : t("shop.account.continue")}</button>
+      </form>
+      <p id="shop-login-msg" class="work-meta shop-acct-login-msg" hidden role="status"></p>
+    `;
+    main.appendChild(loginHost);
 
-  main.querySelector("#shop-logout")?.addEventListener("click", async () => {
-    ShopStore.logout();
-    clearAuth();
-    await renderAccountOverview(main);
+    loginHost.querySelector("#shop-login-form")?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = new FormData(e.target).get("email");
+      const msg = loginHost.querySelector("#shop-login-msg");
+      if (apiLive) {
+        try {
+          await requestMagicLink(email);
+          if (msg) {
+            msg.hidden = false;
+            msg.textContent = t("shop.account.magicSent");
+          }
+        } catch {
+          if (msg) {
+            msg.hidden = false;
+            msg.textContent = t("shop.checkout.error");
+          }
+        }
+      } else {
+        ShopStore.login(email);
+        ProfileStore.ensureForAccount(ShopStore.getAccount());
+        await renderAccountOverview(main);
+      }
+    });
+    return;
+  }
+
+  ProfileStore.ensureForAccount(account);
+
+  const profileHost = document.createElement("div");
+  profileHost.className = "shop-acct-profile-host";
+  main.appendChild(profileHost);
+
+  await mountCustomerProfilePage(profileHost, {
+    onLogout: async () => {
+      ShopStore.logout();
+      clearAuth();
+      await renderAccountOverview(main);
+    },
   });
+}
+
+export async function renderReturns(main) {
+  main.innerHTML = `
+    ${pageBackNav(ShopRoutes.account(), t("shop.account.title"))}
+    <h1 class="section-title shop-acct-page-title">${t("shop.returns.title")}</h1>
+    ${accountNav("returns")}
+    <div class="glass-panel shop-acct-state shop-acct-state--empty">
+      <h3>${t("shop.returns.empty.title")}</h3>
+      <p>${t("shop.returns.empty.desc")}</p>
+      ${`<a href="${ShopRoutes.orders()}" class="btn btn-glass btn-sm">${t("shop.returns.viewOrders")}</a>`}
+    </div>
+  `;
 }
 
 export async function renderOrders(main) {
@@ -85,7 +100,7 @@ export async function renderOrders(main) {
 
   main.innerHTML = `
     ${pageBackNav(ShopRoutes.account(), t("shop.account.title"))}
-    <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.orders.title")}</h1>
+    <h1 class="section-title shop-acct-page-title">${t("shop.orders.title")}</h1>
     ${accountNav("orders")}
     <div class="glass-panel shop-table-wrap" style="overflow-x:auto">
       ${
@@ -134,8 +149,8 @@ export async function renderOrderDetail(main, orderId) {
     <div class="glass-panel">
       <h1>${escapeHtml(order.invoiceNumber || order.id)}</h1>
       <p class="work-meta">${formatDate(order.createdAt)} · ${escapeHtml(order.status)}</p>
-      <ul style="margin:1rem 0;padding:0;list-style:none">
-        ${order.items.map((i) => `<li style="padding:0.35rem 0">${escapeHtml(i.name)} × ${i.qty} — ${formatMoney((i.lineTotalCents || i.priceCents * i.qty))}</li>`).join("")}
+      <ul class="shop-acct-order-lines">
+        ${order.items.map((i) => `<li>${escapeHtml(i.name)} × ${i.qty} — ${formatMoney(i.lineTotalCents || i.priceCents * i.qty)}</li>`).join("")}
       </ul>
       <p><strong>${t("shop.cart.total")}: ${formatMoney(order.totalCents)}</strong></p>
       ${invLink}
@@ -155,7 +170,7 @@ export async function renderInvoices(main) {
 
   main.innerHTML = `
     ${pageBackNav(ShopRoutes.account(), t("shop.account.title"))}
-    <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.invoices.title")}</h1>
+    <h1 class="section-title shop-acct-page-title">${t("shop.invoices.title")}</h1>
     ${accountNav("invoices")}
     <div class="glass-panel">
       ${
@@ -186,7 +201,7 @@ export async function renderFavorites(main, catalog) {
 
   main.innerHTML = `
     ${pageBackNav(ShopRoutes.account(), t("shop.account.title"))}
-    <h1 class="section-title" style="margin-bottom:0.75rem">${t("shop.favorites.title")}</h1>
+    <h1 class="section-title shop-acct-page-title">${t("shop.favorites.title")}</h1>
     ${accountNav("favorites")}
     <div class="shop-grid">
       ${products.length ? products.map((p) => productCard(p, catalog)).join("") : `<p class="shop-empty glass-panel">${t("shop.favorites.empty")}</p>`}

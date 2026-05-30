@@ -28,6 +28,7 @@ export const ShopRoutes = {
   order: (id) => `${shopBase()}/account/order.html?id=${encodeURIComponent(id)}`,
   invoices: () => `${shopBase()}/account/invoices.html`,
   favorites: () => `${shopBase()}/account/favorites.html`,
+  returns: () => `${shopBase()}/account/returns.html`,
   search: (q) => `${shopBase()}/search.html?q=${encodeURIComponent(q)}`,
   siteHome: () => `${rootPrefix()}/index.html`,
 };

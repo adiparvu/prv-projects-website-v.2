@@ -1,4 +1,5 @@
 /* PRV Shop — commerce layer (same colors & glass FX as website) */
+@import url("shop-account.css");
 
 :root {
   --shop-accent: var(--accent-1);

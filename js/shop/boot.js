@@ -17,6 +17,7 @@ import {
   renderOrderDetail,
   renderInvoices,
   renderFavorites,
+  renderReturns,
 } from "./pages/account.js";
 import { onShopLangChange } from "./i18n.js";
 import { wireShareButtons } from "./share.js";
@@ -121,6 +122,9 @@ async function renderPage(page, main, catalog) {
       break;
     case "favorites":
       renderFavorites(main, catalog);
+      break;
+    case "returns":
+      await renderReturns(main);
       break;
     default:
       renderHome(main, catalog);
