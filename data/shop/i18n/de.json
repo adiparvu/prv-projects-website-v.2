@@ -1,0 +1,121 @@
+{
+  "categories": {
+    "cat-finisaje": {
+      "name": "Premium-Oberflächen",
+      "description": "Fliesen, Farben, Profile und Zubehör für makellose Oberflächen."
+    },
+    "cat-bai": {
+      "name": "Bäder & Küchen",
+      "description": "Sanitär, Armaturen, Arbeitsplatten und Wet-Room-Lösungen."
+    },
+    "cat-iluminat": {
+      "name": "Beleuchtung",
+      "description": "Architekturleuchten, LED-Schienen und Szenensteuerung."
+    },
+    "cat-unelte": {
+      "name": "Baustellenwerkzeug",
+      "description": "Verbrauchsmaterial und Ausrüstung für PRV-Teams."
+    },
+    "cat-pachete": {
+      "name": "Pakete & Beratung",
+      "description": "Projektbundles und Stunden technische Beratung."
+    }
+  },
+  "products": {
+    "prd-quartz-blanc": {
+      "name": "Alpine White Quarz-Platte",
+      "shortDescription": "Calacatta-inspiriert, gebürstete Oberfläche, 20 mm.",
+      "description": "Premium-Quarzplatte für Küchen und Bäder. Kratz- und fleckenbeständig. CNC-Zuschnitt — Beratung inklusive ab 3 m² Bestellung.",
+      "imageAlts": [
+        "Weiße Quarzplatte",
+        "Detail Küchenplatte"
+      ]
+    },
+    "prd-faucet-matte": {
+      "name": "Matte Black Waschtischarmatur",
+      "shortDescription": "Einhebel, Wassersparer, mattschwarze Oberfläche.",
+      "description": "Premium-Armatur für Waschtisch oder Spüle. 35 mm Keramikkartusche, Flexschlauch inklusive. 5 Jahre Herstellergarantie.",
+      "imageAlts": [
+        "Mattschwarze Armatur"
+      ]
+    },
+    "prd-tile-large": {
+      "name": "Porzellanfliese 120×60 cm",
+      "shortDescription": "Heller Betonlook, rectified, 10 mm.",
+      "description": "Großformat für Wohnzimmer, Bad oder Küche. Palettenlieferung in Belgien. Wir empfehlen PRV-S1 Flexkleber.",
+      "imageAlts": [
+        "Porzellanfliese"
+      ]
+    },
+    "prd-paint-premium": {
+      "name": "Premium-Innenfarbe 15 L",
+      "shortDescription": "Samtmatte, waschbar, null VOC bei Anwendung.",
+      "description": "Dekorative Farbe für Innenwände. Deckkraft ~12 m²/L. Farbtöne auf Anfrage (RAL).",
+      "imageAlts": [
+        "Innenfarbe"
+      ]
+    },
+    "prd-led-profile": {
+      "name": "Aluminium-LED-Profil 2 m",
+      "shortDescription": "Einbau, opaler Diffusor, für 12 mm Band.",
+      "description": "Profil für indirekte Beleuchtung. Endkappen inklusive. Kompatibel mit PRV dimmbaren Treibern.",
+      "imageAlts": [
+        "LED-Profil"
+      ]
+    },
+    "prd-pendant": {
+      "name": "Glass Orbit Pendelleuchte",
+      "shortDescription": "Rauchglas, 2700K LED, dimmbar.",
+      "description": "Hängeleuchte für Esstisch oder Kücheninsel. Verstellbares 1,5 m Kabel.",
+      "imageAlts": [
+        "Glas-Pendelleuchte"
+      ]
+    },
+    "prd-level-laser": {
+      "name": "360° grüner Laser-Nivellierer",
+      "shortDescription": "Selbstnivellierend, Stativ inklusive, magnetische Zielscheibe.",
+      "description": "Für Baustellen und Montage von Oberflächen. 8 h Laufzeit, robustes Gehäuse IP54.",
+      "imageAlts": [
+        "Laser-Nivellierer"
+      ]
+    },
+    "prd-masking-kit": {
+      "name": "Premium-Abklebe-Set",
+      "shortDescription": "Klebeband + Folie + Cutter für saubere Baustelle.",
+      "description": "Verbrauchsset zum Schutz während der Oberflächenarbeiten. 2 Klebebandrollen, Folie 4×5 m, Cutter.",
+      "imageAlts": [
+        "Abklebe-Set"
+      ]
+    },
+    "prd-consult-2h": {
+      "name": "Technische Beratung 2 Stunden",
+      "shortDescription": "Video oder vor Ort in Brüssel & 30 km.",
+      "description": "Sitzung mit PRV-Spezialist: Materialien, Konstruktionsdetails, Budgetoptimierung. Digitaler Gutschein per E-Mail.",
+      "imageAlts": [
+        "Renovierungsberatung"
+      ]
+    },
+    "prd-bundle-bath": {
+      "name": "Essential Bad-Paket",
+      "shortDescription": "Fliese + Fuge + Abdichtung — Starterpaket.",
+      "description": "Bundle für Standard-Badrenovierung (5–8 m²). Inklusive 30 Min. Telefonberatung.",
+      "imageAlts": [
+        "Bad-Paket"
+      ]
+    }
+  },
+  "reviews": {
+    "prd-quartz-blanc|2026-02-10": {
+      "text": "Makellose Oberfläche, das PRV-Team koordinierte den Zuschnitt auf der Baustelle problemlos."
+    },
+    "prd-quartz-blanc|2026-01-18": {
+      "text": "Premium-Qualität, pünktliche Lieferung. Empfehlenswert für anspruchsvolle Küchen."
+    },
+    "prd-faucet-matte|2026-03-02": {
+      "text": "Sehr sauberes Erscheinungsbild, einfache Montage. Passt perfekt zu schwarzen Oberflächen."
+    },
+    "prd-bundle-bath|2026-02-22": {
+      "text": "Komplettpaket für ein kleines Bad — klares Budget von Anfang an."
+    }
+  }
+}

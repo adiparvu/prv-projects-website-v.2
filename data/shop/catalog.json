@@ -1,0 +1,266 @@
+{
+  "meta": { "version": 1, "currency": "EUR", "locale": "ro-BE" },
+  "categories": [
+    {
+      "id": "cat-finisaje",
+      "slug": "finisaje",
+      "name": "Finisaje premium",
+      "description": "Plăci, vopsele, profile și accesorii pentru finisaje impecabile.",
+      "image": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80&auto=format&fit=crop",
+      "sort": 1
+    },
+    {
+      "id": "cat-bai",
+      "slug": "bai-bucatarii",
+      "name": "Băi & bucătării",
+      "description": "Sanitare, robinete, blaturi și soluții wet-room.",
+      "image": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80&auto=format&fit=crop",
+      "sort": 2
+    },
+    {
+      "id": "cat-iluminat",
+      "slug": "iluminat",
+      "name": "Iluminat",
+      "description": "Corpuri arhitecturale, șine LED și control scenarii.",
+      "image": "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=800&q=80&auto=format&fit=crop",
+      "sort": 3
+    },
+    {
+      "id": "cat-unelte",
+      "slug": "unelte-santier",
+      "name": "Unelte șantier",
+      "description": "Consumabile și echipamente pentru echipe PRV.",
+      "image": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80&auto=format&fit=crop",
+      "sort": 4
+    },
+    {
+      "id": "cat-pachete",
+      "slug": "pachete",
+      "name": "Pachete & consultanță",
+      "description": "Bundle-uri pentru proiecte și ore de consultanță tehnică.",
+      "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80&auto=format&fit=crop",
+      "sort": 5
+    }
+  ],
+  "products": [
+    {
+      "id": "prd-quartz-blanc",
+      "slug": "blat-quartz-alpine-white",
+      "sku": "PRV-QZ-001",
+      "name": "Blat quartz Alpine White",
+      "shortDescription": "Calacatta-inspired, finisaj periat, 20 mm.",
+      "description": "Blat quartz premium pentru bucătării și băi. Rezistent la zgârieturi și pete. Tăiere CNC la dimensiune — consultanță inclusă la comandă peste 3 m².",
+      "categorySlug": "bai-bucatarii",
+      "priceCents": 28900,
+      "compareAtCents": 32900,
+      "stock": 12,
+      "featured": true,
+      "images": [
+        { "url": "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=900&q=80&auto=format&fit=crop", "alt": "Blat quartz alb" },
+        { "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80&auto=format&fit=crop", "alt": "Detaliu blat bucătărie" }
+      ],
+      "tags": ["quartz", "bucătărie"]
+    },
+    {
+      "id": "prd-faucet-matte",
+      "slug": "baterie-lavoar-matte-black",
+      "sku": "PRV-FT-014",
+      "name": "Baterie lavoar Matte Black",
+      "shortDescription": "Monocomandă, economizor apă, finisaj negru mat.",
+      "description": "Baterie premium pentru lavoar sau chiuvetă. Cartuș ceramică 35 mm, flexibil inclus. Garanție producător 5 ani.",
+      "categorySlug": "bai-bucatarii",
+      "priceCents": 18900,
+      "compareAtCents": null,
+      "stock": 28,
+      "featured": true,
+      "images": [
+        { "url": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=900&q=80&auto=format&fit=crop", "alt": "Baterie neagră mată" }
+      ],
+      "tags": ["sanitare"]
+    },
+    {
+      "id": "prd-tile-large",
+      "slug": "placa-porcelan-120x60",
+      "sku": "PRV-TL-220",
+      "name": "Placă porcelan 120×60 cm",
+      "shortDescription": "Efect beton deschis, rectificat, 10 mm.",
+      "description": "Placă format mare pentru living, baie sau bucătărie. Livrare pe palet în Belgia. Recomandăm adeziv flexibil PRV-S1.",
+      "categorySlug": "finisaje",
+      "priceCents": 4200,
+      "compareAtCents": 4800,
+      "stock": 240,
+      "featured": true,
+      "images": [
+        { "url": "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=900&q=80&auto=format&fit=crop", "alt": "Placă porcelan" }
+      ],
+      "tags": ["plăci"]
+    },
+    {
+      "id": "prd-paint-premium",
+      "slug": "vopsea-interior-premium-15l",
+      "sku": "PRV-PT-015",
+      "name": "Vopsea interior premium 15 L",
+      "shortDescription": "Mat velvet, lavabil, zero VOC la aplicare.",
+      "description": "Vopsea decorativă pentru pereți interiori. Acoperire ~12 m²/L. Disponibilă în nuanțe la cerere (RAL).",
+      "categorySlug": "finisaje",
+      "priceCents": 8900,
+      "compareAtCents": null,
+      "stock": 45,
+      "featured": false,
+      "images": [
+        { "url": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=900&q=80&auto=format&fit=crop", "alt": "Vopsea interior" }
+      ],
+      "tags": ["vopsea"]
+    },
+    {
+      "id": "prd-led-profile",
+      "slug": "profil-aluminiu-led-2m",
+      "sku": "PRV-LD-2M",
+      "name": "Profil aluminiu LED 2 m",
+      "shortDescription": "Încastrat, difuzor opal, pentru bandă 12 mm.",
+      "description": "Profil pentru iluminat indirect. Include capace finale. Compatibil cu drivere dimabile PRV.",
+      "categorySlug": "iluminat",
+      "priceCents": 3400,
+      "compareAtCents": null,
+      "stock": 80,
+      "featured": false,
+      "images": [
+        { "url": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=900&q=80&auto=format&fit=crop", "alt": "Profil LED" }
+      ],
+      "tags": ["led"]
+    },
+    {
+      "id": "prd-pendant",
+      "slug": "pendant-glass-orbit",
+      "sku": "PRV-LP-008",
+      "name": "Pendul Glass Orbit",
+      "shortDescription": "Sticlă fumurie, LED 2700K, dimabil.",
+      "description": "Corp suspendat pentru masă dining sau insulă bucătărie. Cablu reglabil 1,5 m.",
+      "categorySlug": "iluminat",
+      "priceCents": 24900,
+      "compareAtCents": 27900,
+      "stock": 9,
+      "featured": true,
+      "images": [
+        { "url": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=900&q=80&auto=format&fit=crop", "alt": "Pendul sticlă" }
+      ],
+      "tags": ["lighting"]
+    },
+    {
+      "id": "prd-level-laser",
+      "slug": "nivel-laser-verde-360",
+      "sku": "PRV-TL-360",
+      "name": "Nivel laser verde 360°",
+      "shortDescription": "Autonivelare, trepied inclus, țintă magnetică.",
+      "description": "Pentru șantiere și montaj finisaje. Autonomie 8h, carcasă rezistentă IP54.",
+      "categorySlug": "unelte-santier",
+      "priceCents": 15900,
+      "compareAtCents": null,
+      "stock": 15,
+      "featured": false,
+      "images": [
+        { "url": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=900&q=80&auto=format&fit=crop", "alt": "Nivel laser" }
+      ],
+      "tags": ["unelte"]
+    },
+    {
+      "id": "prd-masking-kit",
+      "slug": "kit-masking-premium",
+      "sku": "PRV-MK-100",
+      "name": "Kit masking premium",
+      "shortDescription": "Banda + folie + cutter pentru șantier curat.",
+      "description": "Set consumabile pentru protecție în timpul finisajelor. 2 role bandă, folie 4×5 m, cutter.",
+      "categorySlug": "unelte-santier",
+      "priceCents": 2900,
+      "compareAtCents": null,
+      "stock": 120,
+      "featured": false,
+      "images": [
+        { "url": "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=80&auto=format&fit=crop", "alt": "Kit masking" }
+      ],
+      "tags": ["consumabile"]
+    },
+    {
+      "id": "prd-consult-2h",
+      "slug": "consultanta-tehnica-2h",
+      "sku": "PRV-CS-2H",
+      "name": "Consultanță tehnică 2 ore",
+      "shortDescription": "Video sau la șantier în Bruxelles & 30 km.",
+      "description": "Sesiune cu specialist PRV: materiale, detalii constructive, optimizare buget. Voucher digital livrat pe email.",
+      "categorySlug": "pachete",
+      "priceCents": 18000,
+      "compareAtCents": null,
+      "stock": 999,
+      "featured": true,
+      "images": [
+        { "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80&auto=format&fit=crop", "alt": "Consultanță renovare" }
+      ],
+      "tags": ["servicii"]
+    },
+    {
+      "id": "prd-bundle-bath",
+      "slug": "pachet-baie-essential",
+      "sku": "PRV-BD-ESS",
+      "name": "Pachet baie Essential",
+      "shortDescription": "Placă + rost + hidroizolație — starter pack.",
+      "description": "Bundle pentru renovări baie standard (5–8 m²). Include consultanță telefonică 30 min.",
+      "categorySlug": "pachete",
+      "priceCents": 44900,
+      "compareAtCents": 51900,
+      "stock": 20,
+      "featured": true,
+      "images": [
+        { "url": "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=900&q=80&auto=format&fit=crop", "alt": "Pachet baie" }
+      ],
+      "tags": ["bundle"]
+    }
+  ],
+  "reviews": [
+    {
+      "productId": "prd-quartz-blanc",
+      "author": "Andrei M.",
+      "rating": 5,
+      "text": "Finisaj impecabil, echipa PRV a coordonat tăierea la șantier fără probleme.",
+      "date": "2026-02-10"
+    },
+    {
+      "productId": "prd-quartz-blanc",
+      "author": "Elena V.",
+      "rating": 4,
+      "text": "Calitate premium, livrare la timp. Recomand pentru bucătării exigente.",
+      "date": "2026-01-18"
+    },
+    {
+      "productId": "prd-faucet-matte",
+      "author": "Thomas K.",
+      "rating": 5,
+      "text": "Aspect foarte curat, montaj simplu. Se potrivește perfect cu finisajele negre.",
+      "date": "2026-03-02"
+    },
+    {
+      "productId": "prd-bundle-bath",
+      "author": "Ioana P.",
+      "rating": 5,
+      "text": "Pachet complet pentru baie mică — buget clar de la început.",
+      "date": "2026-02-22"
+    }
+  ],
+  "discounts": [
+    {
+      "id": "disc-welcome10",
+      "code": "PRV10",
+      "type": "percent",
+      "value": 10,
+      "minSubtotalCents": 10000,
+      "active": true
+    },
+    {
+      "id": "disc-pro50",
+      "code": "PRO50",
+      "type": "fixed",
+      "valueCents": 5000,
+      "minSubtotalCents": 25000,
+      "active": true
+    }
+  ]
+}

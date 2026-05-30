@@ -1,0 +1,582 @@
+/* PRV Projects — efecte preview (fx-) */
+
+/* 1. Light sweep pe glass */
+.fx-sweep {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.fx-sweep::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.45) 48%,
+    rgba(0, 113, 227, 0.12) 52%,
+    transparent 62%
+  );
+  transform: translateX(-130%) skewX(-12deg);
+  pointer-events: none;
+  z-index: 2;
+  animation: fx-sweep 7s ease-in-out infinite;
+}
+
+[data-effective-theme="dark"] .fx-sweep::after {
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.12) 48%,
+    rgba(0, 113, 227, 0.2) 52%,
+    transparent 62%
+  );
+}
+
+@keyframes fx-sweep {
+  0%,
+  72%,
+  100% {
+    transform: translateX(-130%) skewX(-12deg);
+  }
+  18% {
+    transform: translateX(130%) skewX(-12deg);
+  }
+}
+
+/* 2. Stagger reveal — delays set in JS (--stagger-i) */
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(6px);
+}
+
+[data-stagger].fx-stagger-go > * {
+  animation: fx-stagger-in 0.75s var(--ease-out-expo) forwards;
+  animation-delay: var(--stagger-delay, calc(80ms + (var(--stagger-i, 0) * 10ms)));
+}
+
+@keyframes fx-stagger-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* 4. Lazy image reveal */
+.fx-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  filter: blur(16px);
+  transform: scale(1.04);
+  transition: opacity 0.7s var(--ease-out-expo), filter 0.7s var(--ease-out-expo),
+    transform 0.7s var(--ease-out-expo);
+}
+
+.fx-img.is-loaded {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+}
+
+.work-visual .fx-img {
+  position: absolute;
+  inset: 0;
+}
+
+/* 5. Icon stroke draw */
+.feature-icon svg.fx-icon-draw path,
+.feature-icon svg.fx-icon-draw line,
+.feature-icon svg.fx-icon-draw polyline,
+.feature-icon svg.fx-icon-draw rect,
+.feature-icon svg.fx-icon-draw circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+}
+
+.feature-icon svg.fx-icon-draw.fx-drawn path,
+.feature-icon svg.fx-icon-draw.fx-drawn line,
+.feature-icon svg.fx-icon-draw.fx-drawn polyline,
+.feature-icon svg.fx-icon-draw.fx-drawn rect,
+.feature-icon svg.fx-icon-draw.fx-drawn circle {
+  animation: fx-draw 1.1s var(--ease-out-expo) forwards;
+}
+
+.feature-icon svg.fx-icon-draw.fx-drawn path:nth-child(2),
+.feature-icon svg.fx-icon-draw.fx-drawn line:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+@keyframes fx-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.services-grid .feature-icon svg.fx-icon-animated {
+  display: block;
+  overflow: visible;
+}
+
+.services-grid .feature-icon svg.fx-icon-animated.fx-drawn {
+  animation: fx-icon-breathe 3.2s ease-in-out infinite;
+}
+
+.services-grid .feature-icon:hover svg.fx-icon-animated.fx-drawn {
+  animation: fx-icon-breathe 1.6s ease-in-out infinite;
+}
+
+@keyframes fx-icon-breathe {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.04);
+    filter: drop-shadow(0 4px 10px rgba(0, 113, 227, 0.2));
+  }
+}
+
+.services-grid .feature-icon svg.fx-icon-filled.fx-drawn path,
+.services-grid .feature-icon svg.fx-icon-filled.fx-drawn rect,
+.services-grid .feature-icon svg.fx-icon-filled.fx-drawn circle {
+  animation: fx-icon-pop 0.55s var(--ease-out-expo) backwards;
+  transform-origin: center;
+}
+
+.services-grid .feature-icon svg.fx-icon-filled.fx-drawn path:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+@keyframes fx-icon-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 6. Scroll-driven orbs */
+@supports (animation-timeline: scroll()) {
+  body.fx-scroll-driven .orb-1 {
+    animation: fx-orb-scroll-1 linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0% 55%;
+  }
+
+  body.fx-scroll-driven .orb-2 {
+    animation: fx-orb-scroll-2 linear both;
+    animation-timeline: scroll(root);
+    animation-range: 10% 70%;
+  }
+
+  body.fx-scroll-driven .orb-3 {
+    animation: fx-orb-scroll-3 linear both;
+    animation-timeline: scroll(root);
+    animation-range: 20% 100%;
+  }
+}
+
+@keyframes fx-orb-scroll-1 {
+  from {
+    opacity: 0.55;
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    opacity: 0.2;
+    transform: translate(8%, 12%) scale(1.15);
+  }
+}
+
+@keyframes fx-orb-scroll-2 {
+  from {
+    opacity: 0.45;
+    transform: translate(0, 0);
+  }
+  to {
+    opacity: 0.15;
+    transform: translate(-10%, 8%);
+  }
+}
+
+@keyframes fx-orb-scroll-3 {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 0.1;
+    transform: translate(5%, -8%) scale(0.9);
+  }
+}
+
+/* 7. Horizontal scroll proiecte (mobil) */
+@media (max-width: 900px) {
+  .work-grid.fx-h-scroll {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 1rem;
+    padding: 0.25rem 1rem 1.25rem;
+    margin-inline: -1rem;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .work-grid.fx-h-scroll .work-item {
+    flex: 0 0 min(85vw, 320px);
+    scroll-snap-align: start;
+    min-height: 360px;
+  }
+
+  .work-grid.fx-h-scroll .work-item.wide {
+    flex-basis: min(88vw, 340px);
+  }
+}
+
+.work-grid.fx-h-scroll::after {
+  content: "";
+  flex: 0 0 0.5rem;
+}
+
+/* 8. Page enter */
+body.fx-page-enter > main,
+body.fx-page-enter > .nav {
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(12px);
+}
+
+body.fx-page-enter.fx-page-ready > main,
+body.fx-page-enter.fx-page-ready > .nav {
+  transition: opacity 0.85s var(--ease-out-expo), filter 0.85s var(--ease-out-expo),
+    transform 0.85s var(--ease-out-expo);
+}
+
+body.fx-page-enter.fx-page-ready > main {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+}
+
+body.fx-page-enter.fx-page-ready > .nav {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+  transition-delay: 0.05s;
+}
+
+/* 9. Form success */
+.fx-form-success-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.fx-form-check {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 113, 227, 0.15);
+  border: 2px solid rgba(0, 113, 227, 0.55);
+  display: grid;
+  place-items: center;
+  transform: scale(0);
+  animation: fx-check-pop 0.5s var(--ease-spring) forwards;
+}
+
+.fx-form-check svg {
+  width: 16px;
+  height: 16px;
+  stroke: #0071e3;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: fx-check-draw 0.4s ease 0.2s forwards;
+}
+
+@keyframes fx-check-pop {
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fx-check-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* 10. Ripple */
+.btn.fx-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.fx-ripple-wave {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  background: rgba(255, 255, 255, 0.35);
+  animation: fx-ripple 0.55s ease-out forwards;
+  pointer-events: none;
+}
+
+.btn-glass .fx-ripple-wave {
+  background: rgba(0, 113, 227, 0.2);
+}
+
+@keyframes fx-ripple {
+  to {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+/* 11. FAQ accordion polish */
+.faq-item.fx-faq summary {
+  transition: color 0.2s;
+}
+
+.faq-item.fx-faq summary::after {
+  transition: transform 0.35s var(--ease-out-expo);
+}
+
+.faq-item.fx-faq[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.faq-item.fx-faq p {
+  animation: fx-faq-open 0.35s var(--ease-out-expo);
+}
+
+@keyframes fx-faq-open {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 12. Tooltips */
+[data-fx-tooltip] {
+  position: relative;
+  cursor: help;
+  border-bottom: 1px dashed rgba(0, 113, 227, 0.45);
+}
+
+[data-fx-tooltip]::after {
+  content: attr(data-fx-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%) translateY(6px);
+  min-width: 200px;
+  max-width: 280px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-primary);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px var(--glass-shadow);
+  backdrop-filter: blur(16px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.25s var(--ease-out-expo);
+  z-index: 50;
+}
+
+[data-fx-tooltip]:hover::after,
+[data-fx-tooltip]:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* 13. Theme transition overlay */
+#fx-theme-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--bg-base);
+  transition: opacity 0.3s ease;
+}
+
+#fx-theme-overlay.is-active {
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #fx-theme-overlay {
+    transition: none !important;
+    opacity: 0 !important;
+  }
+
+  #fx-theme-overlay.is-active {
+    opacity: 0 !important;
+  }
+}
+
+html.reduced-motion #fx-theme-overlay {
+  transition: none !important;
+  opacity: 0 !important;
+}
+
+html.reduced-motion #fx-theme-overlay.is-active {
+  opacity: 0 !important;
+}
+
+/* 14. CTA particles */
+.btn-primary.fx-particles {
+  position: relative;
+  overflow: visible;
+}
+
+.fx-particle-layer {
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+  overflow: visible;
+  z-index: -1;
+}
+
+.fx-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(0, 113, 227, 0.85);
+  box-shadow: 0 0 8px rgba(0, 113, 227, 0.6);
+  animation: fx-particle-burst 0.7s ease-out forwards;
+}
+
+@keyframes fx-particle-burst {
+  from {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(var(--px), var(--py)) scale(0.2);
+  }
+}
+
+/* Demo page */
+.fx-demo-hero {
+  max-width: 920px;
+  margin: 0 auto 2rem;
+  padding: 1.5rem;
+}
+
+.fx-demo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 920px;
+  margin: 0 auto 4rem;
+  padding: 0 1rem 3rem;
+}
+
+.fx-demo-block {
+  padding: 1.25rem;
+}
+
+.fx-demo-block h2 {
+  font-size: 1rem;
+  margin: 0 0 0.35rem;
+  color: var(--accent-1);
+}
+
+.fx-demo-block .fx-demo-num {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.fx-demo-block p.fx-demo-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0 0 1rem;
+}
+
+.fx-demo-preview {
+  margin-top: 0.75rem;
+}
+
+.fx-demo-nav {
+  position: sticky;
+  top: 4.5rem;
+  z-index: 90;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  max-width: 920px;
+  margin-inline: auto;
+}
+
+.fx-demo-nav a {
+  font-size: 0.7rem;
+  padding: 0.35rem 0.55rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  background: var(--glass-inset);
+}
+
+.fx-demo-nav a:hover {
+  color: var(--text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-sweep::after,
+  .fx-particle,
+  .fx-form-check,
+  .fx-form-check svg {
+    animation: none !important;
+  }
+
+  [data-stagger] > * {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  body.fx-page-enter > main,
+  body.fx-page-enter > .nav {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+
+  .services-grid .feature-icon svg.fx-icon-animated.fx-drawn {
+    animation: none;
+  }
+}

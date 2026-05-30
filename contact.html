@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="nl" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact · PRV Projects</title>
+  <meta name="description" content="Contact PRV Projects. Cere o ofertă pentru renovări interioare premium în Belgia. Răspuns în 24h." />
+  <meta property="og:title" content="Contact · PRV Projects" />
+  <meta property="og:type" content="website" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="stylesheet" href="css/prv-brand.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/effects.css" />
+  <script src="js/lang-init.js"></script>
+  <script src="js/theme-init.js"></script>
+</head>
+<body class="page-contact fx-page-enter fx-scroll-driven">
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <canvas id="liquid-canvas" class="liquid-canvas"></canvas>
+    <div class="grain"></div>
+  </div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <header class="nav glass-panel" data-reveal>
+    <a href="index.html#hero" class="logo logo-animated" aria-label="PRV Projects acasă">
+      <span class="logo-icon" aria-hidden="true">
+        <svg viewBox="0 0 100 100" role="img" aria-label="PRV">
+          <g fill="currentColor">
+            <rect x="22" y="18" width="15" height="64" rx="5"/>
+            <rect x="22" y="67" width="56" height="15" rx="5"/>
+          </g>
+        </svg>
+      </span>
+      <span class="logo-mark">PRV</span>
+      <span class="logo-type">Projects</span>
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="search.html" class="nav-icon-link" aria-label="Caută">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      </a>
+      <a href="shop/index.html" class="nav-shop-link" aria-label="Shop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 2l1.5 6h9L18 2"/><path d="M4 8h16l-1 14H5L4 8z"/><path d="M9 11v7"/><path d="M15 11v7"/></svg>
+        <span>Shop</span>
+      </a>
+<a href="servicii.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l9 7-9 7-9-7 9-7z"/><path d="M3 10v11h18V10"/></svg>
+        <span data-i18n="nav.services">Servicii</span>
+      </a>
+      <a href="proiecte.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 10h8M8 14h5"/></svg>
+        <span data-i18n="nav.work">Proiecte</span>
+      </a>
+      <a href="blog/index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19a2 2 0 0 0 2 2h14"/><path d="M6 17V5a2 2 0 0 1 2-2h12v16H8a2 2 0 0 0-2 2z"/><path d="M10 7h6M10 11h8M10 15h6"/></svg>
+        <span data-i18n="nav.blog">Blog</span>
+      </a>
+      <a href="de-ce-noi.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l3 7 7 .5-5.5 4.5 1.8 7.5L12 18l-6.3 3.5L7.5 14 2 9.5 9 9l3-7z"/></svg>
+        <span data-i18n="nav.why">De ce noi</span>
+      </a>
+      <a href="despre-noi.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span data-i18n="nav.about">Despre noi</span>
+      </a>
+      <a href="contact.html" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg>
+        <span data-i18n="nav.contact">Contact</span>
+      </a>
+    </nav>
+    <div class="nav-actions">
+      <div id="lang-picker" class="lang-picker-host"></div>
+      <a href="contact.html" class="btn btn-primary" data-i18n="nav.cta">Cere o ofertă</a>
+    </div>
+    <button type="button" class="nav-toggle" aria-label="Deschide meniul" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main class="page-main">
+    <section class="section cta-section">
+      <div class="cta glass-panel immersive-panel" data-reveal>
+        <h1 class="cta-title">
+          <span data-split data-i18n="cta.line1">Gata să</span>
+          <span class="gradient-text" data-split data-i18n="cta.line2">începem?</span>
+        </h1>
+        <p data-i18n="cta.sub">Trimite-ne planul, o schiță sau o poză cu spațiul tău. Răspundem în 24h cu o estimare orientativă — fără obligații, fără presiune.</p>
+
+        <form class="quote-form" data-quote-form novalidate>
+          <div class="quote-form-grid">
+            <div class="input-wrap glass-inset">
+              <input type="text" name="name" id="quote-name" data-i18n-placeholder="form.name" placeholder="Nume" required autocomplete="name" />
+            </div>
+            <div class="input-wrap glass-inset">
+              <input type="email" name="email" id="quote-email" data-i18n-placeholder="cta.placeholder" placeholder="tu@email.ro" required autocomplete="email" />
+            </div>
+            <div class="input-wrap glass-inset">
+              <input type="tel" name="phone" id="quote-phone" data-i18n-placeholder="form.phone" placeholder="Telefon" autocomplete="tel" />
+            </div>
+            <div class="input-wrap glass-inset">
+              <input type="text" name="city" id="quote-city" data-i18n-placeholder="form.city" placeholder="Oraș / zonă" autocomplete="address-level2" />
+            </div>
+            <div class="input-wrap glass-inset quote-form-span-2">
+              <select name="projectType" id="quote-type" class="quote-select" aria-label="Tip proiect">
+                <option value="" data-i18n="form.projectTypeDefault">Tip proiect</option>
+                <option value="full" data-i18n="form.projectTypeFull">Renovare completă</option>
+                <option value="kitchen" data-i18n="form.projectTypeKitchen">Bucătărie</option>
+                <option value="bath" data-i18n="form.projectTypeBath">Baie</option>
+                <option value="commercial" data-i18n="form.projectTypeCommercial">Comercial</option>
+                <option value="other" data-i18n="form.projectTypeOther">Altul</option>
+              </select>
+            </div>
+            <div class="input-wrap glass-inset quote-form-span-2">
+              <textarea name="message" id="quote-message" rows="4" data-i18n-placeholder="form.message" placeholder="Descrie pe scurt spațiul, suprafața și termenul dorit…"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg quote-form-submit fx-particles fx-ripple" data-i18n="cta.btn">Cere o ofertă</button>
+        </form>
+
+        <div class="features contact-features">
+          <article class="feature glass-panel" data-reveal>
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg></div>
+            <h3 data-i18n="contact.email.title">Email</h3>
+            <p><a href="mailto:hello@prvprojects.be">hello@prvprojects.be</a></p>
+          </article>
+          <article class="feature glass-panel" data-reveal>
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s8-4.5 8-11a8 8 0 1 0-16 0c0 6.5 8 11 8 11z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <h3 data-i18n="contact.area.title">Arie</h3>
+            <p data-i18n="contact.area.text">Belgia: Bruxelles, Antwerpen, Gent, Brugge, Leuven, Liège, Namur, Charleroi, Mechelen, Hasselt, Mons și împrejurimi.</p>
+          </article>
+          <article class="feature glass-panel" data-reveal>
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M12 3v18"/></svg></div>
+            <h3 data-i18n="contact.reply.title">Ce trimitem înapoi</h3>
+            <p data-i18n="contact.reply.text">Pași clari + estimare orientativă + întrebările corecte ca să nu arzi bani.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+  <script src="js/site-config.js"></script>
+  <script src="js/seo.js"></script>
+  <script src="js/i18n-config.js"></script>
+  <script src="js/newsletter.js"></script>
+  <script src="js/quote-form.js"></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/cookies.js" defer></script>
+  <script src="js/analytics.js" defer></script>
+  <script src="js/footer.js" defer></script>
+<script src="js/main.js" type="module"></script>
+</body>
+</html>

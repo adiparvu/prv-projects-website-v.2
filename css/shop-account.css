@@ -1,0 +1,720 @@
+/* PRV Shop — Customer account profile UI */
+
+.shop-acct-page-title {
+  margin-bottom: 0.75rem;
+}
+
+.shop-acct-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.shop-acct-profile-host {
+  display: contents;
+}
+
+/* ——— Profile header ——— */
+.shop-acct-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: var(--prv-ui-pad);
+  flex-wrap: wrap;
+}
+
+.shop-acct-profile-header__main {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  min-width: 0;
+}
+
+.shop-acct-avatar {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--glass-inset);
+  border: 1px solid var(--glass-border);
+  box-shadow: inset 0 0 0 1px var(--glass-highlight);
+}
+
+.shop-acct-avatar__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shop-acct-avatar__initials {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.shop-acct-avatar__edit {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-primary);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+}
+
+.shop-acct-avatar__edit svg {
+  width: 14px;
+  height: 14px;
+}
+
+.shop-acct-profile-header__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3vw, 1.65rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.shop-acct-profile-header__email,
+.shop-acct-profile-header__number {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+
+.shop-acct-profile-header__number span {
+  font-family: var(--prv-mono, ui-monospace, monospace);
+  letter-spacing: 0.04em;
+}
+
+.shop-acct-profile-header__edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.shop-acct-profile-header__edit svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ——— Loyalty card ——— */
+.shop-acct-loyalty {
+  padding: var(--prv-ui-pad);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--text-primary) 88%, transparent), color-mix(in srgb, var(--accent-2) 75%, transparent)),
+    var(--glass-bg);
+  color: var(--bg-base);
+  border-color: color-mix(in srgb, var(--text-primary) 25%, transparent);
+  overflow: hidden;
+}
+
+.shop-acct-loyalty__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.shop-acct-loyalty__eyebrow {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  opacity: 0.75;
+}
+
+.shop-acct-loyalty__title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+
+.shop-acct-loyalty__points {
+  margin: 1.35rem 0 1rem;
+}
+
+.shop-acct-loyalty__points-value {
+  display: block;
+  font-size: clamp(2.2rem, 6vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.shop-acct-loyalty__points-label {
+  font-size: 0.82rem;
+  opacity: 0.82;
+}
+
+.shop-acct-loyalty__wallet {
+  width: 100%;
+  justify-content: center;
+  gap: 0.45rem;
+  background: color-mix(in srgb, var(--bg-base) 92%, transparent);
+  color: var(--text-primary);
+  box-shadow: none;
+}
+
+.shop-acct-loyalty__wallet svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Tooltip */
+.shop-acct-tooltip-wrap {
+  position: relative;
+}
+
+.shop-acct-tooltip-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--bg-base) 35%, transparent);
+  background: color-mix(in srgb, var(--bg-base) 18%, transparent);
+  color: inherit;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.shop-acct-tooltip-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.shop-acct-tooltip {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  right: 0;
+  z-index: 5;
+  width: min(280px, 72vw);
+  padding: 0.75rem 0.85rem;
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
+  background: var(--glass-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--prv-ui-shadow);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+/* ——— Sections ——— */
+.shop-acct-section {
+  padding: var(--prv-ui-pad);
+}
+
+.shop-acct-section__head {
+  margin-bottom: 1rem;
+}
+
+.shop-acct-section__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.shop-acct-section__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* ——— Forms ——— */
+.shop-acct-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.shop-acct-form__grid--1 {
+  grid-template-columns: 1fr;
+}
+
+.shop-acct-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.shop-acct-field--span-2 {
+  grid-column: 1 / -1;
+}
+
+.shop-acct-field label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.shop-acct-optional {
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.shop-acct-field__error {
+  font-size: 0.75rem;
+  color: #c45c26;
+}
+
+.shop-acct-field--readonly input {
+  opacity: 0.72;
+  cursor: default;
+}
+
+.shop-acct-form__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-top: 0.35rem;
+}
+
+.shop-acct-save-status {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.shop-acct-save-status.is-success {
+  color: #16a34a;
+}
+
+.shop-acct-save-status.is-error {
+  color: #c45c26;
+}
+
+/* ——— Addresses ——— */
+.shop-acct-address-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+}
+
+.shop-acct-address-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: var(--prv-ui-pad-sm);
+}
+
+.shop-acct-address-item p {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+
+.shop-acct-address-item__actions {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.shop-acct-icon-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: calc(var(--prv-ui-radius) * 0.45);
+  background: transparent;
+  color: var(--text-secondary);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.shop-acct-icon-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.shop-acct-icon-btn:hover {
+  color: var(--text-primary);
+  background: var(--glass-inset);
+}
+
+.shop-acct-icon-btn--danger:hover {
+  color: #c45c26;
+}
+
+.shop-acct-add-btn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.shop-acct-add-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.shop-acct-default-badge {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* ——— Payment methods ——— */
+.shop-acct-payment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.shop-acct-payment-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: var(--prv-ui-pad-sm);
+  cursor: pointer;
+}
+
+.shop-acct-payment-item input {
+  accent-color: var(--text-primary);
+}
+
+.shop-acct-payment-item__label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+/* ——— Toggles & settings ——— */
+.shop-acct-toggle-list,
+.shop-acct-settings-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.shop-acct-toggle-row,
+.shop-acct-settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: var(--prv-ui-pad-sm);
+}
+
+.shop-acct-toggle-row__text label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.shop-acct-toggle-row__text p,
+.shop-acct-settings-row p {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+  max-width: 36ch;
+}
+
+.shop-acct-switch {
+  width: 48px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-inset);
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.shop-acct-switch__thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  transition: transform 0.25s var(--ease-out-expo);
+}
+
+.shop-acct-switch.is-on {
+  background: color-mix(in srgb, var(--text-primary) 18%, var(--glass-inset));
+}
+
+.shop-acct-switch.is-on .shop-acct-switch__thumb {
+  transform: translateX(20px);
+}
+
+.shop-acct-settings-link a,
+.shop-acct-settings-action {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: var(--prv-ui-pad-sm);
+  border: none;
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.shop-acct-settings-link svg,
+.shop-acct-settings-action svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.shop-acct-settings-link svg:last-child,
+.shop-acct-settings-action svg:last-child {
+  margin-left: auto;
+  opacity: 0.45;
+}
+
+.shop-acct-lang-select select {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  padding: 0.65rem 0.85rem;
+  cursor: pointer;
+}
+
+/* ——— Nav cards ——— */
+.shop-acct-nav-cards {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.shop-acct-nav-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s var(--ease-out-expo);
+}
+
+.shop-acct-nav-card:hover {
+  transform: translateY(-2px);
+}
+
+.shop-acct-nav-card__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.shop-acct-nav-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  flex: 1;
+}
+
+.shop-acct-nav-card__text span {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.shop-acct-nav-card > svg:last-child {
+  width: 16px;
+  height: 16px;
+  opacity: 0.4;
+}
+
+/* ——— States ——— */
+.shop-acct-state {
+  padding: var(--prv-ui-pad);
+  text-align: center;
+}
+
+.shop-acct-state--loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 160px;
+  justify-content: center;
+}
+
+.shop-acct-state__icon svg.shop-acct-spinner {
+  width: 28px;
+  height: 28px;
+  animation: shop-acct-spin 0.8s linear infinite;
+}
+
+@keyframes shop-acct-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.shop-acct-state--empty h3 {
+  margin-bottom: 0.35rem;
+}
+
+.shop-acct-state--empty p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.shop-acct-empty-inline {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.shop-acct-banner--error {
+  padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
+  background: color-mix(in srgb, #c45c26 12%, transparent);
+  border: 1px solid color-mix(in srgb, #c45c26 35%, transparent);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+}
+
+.shop-acct-toast-host {
+  position: sticky;
+  top: calc(var(--nav-height) + 0.5rem);
+  z-index: 20;
+  margin-bottom: -0.5rem;
+}
+
+.shop-acct-toast {
+  padding: 0.65rem 1rem;
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
+  font-size: 0.82rem;
+  font-weight: 600;
+  box-shadow: var(--prv-ui-shadow);
+}
+
+.shop-acct-toast--success {
+  background: color-mix(in srgb, #16a34a 14%, var(--glass-bg));
+  border: 1px solid color-mix(in srgb, #16a34a 35%, transparent);
+}
+
+.shop-acct-toast--error {
+  background: color-mix(in srgb, #c45c26 14%, var(--glass-bg));
+  border: 1px solid color-mix(in srgb, #c45c26 35%, transparent);
+}
+
+/* ——— Dialog ——— */
+.shop-acct-dialog {
+  border: none;
+  padding: 0;
+  max-width: min(480px, calc(100vw - 2rem));
+  width: 100%;
+  background: transparent;
+}
+
+.shop-acct-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(4px);
+}
+
+.shop-acct-dialog__form {
+  padding: var(--prv-ui-pad);
+}
+
+.shop-acct-dialog__title {
+  font-size: 1.05rem;
+  margin-bottom: 0.85rem;
+}
+
+.shop-acct-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.shop-acct-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.shop-acct-login {
+  padding: var(--prv-ui-pad);
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.shop-acct-logout-row {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0 1.5rem;
+}
+
+.shop-acct-order-lines {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+.shop-acct-order-lines li {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.btn.is-loading {
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .shop-acct-profile-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .shop-acct-profile-header__main {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .shop-acct-profile-header__edit {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .shop-acct-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-acct-field--span-2 {
+    grid-column: auto;
+  }
+
+  .shop-acct-toggle-row,
+  .shop-acct-settings-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .shop-acct-switch {
+    align-self: flex-end;
+  }
+}

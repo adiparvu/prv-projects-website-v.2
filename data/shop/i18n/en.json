@@ -1,0 +1,121 @@
+{
+  "categories": {
+    "cat-finisaje": {
+      "name": "Premium finishes",
+      "description": "Tiles, paints, profiles and accessories for flawless finishes."
+    },
+    "cat-bai": {
+      "name": "Bathrooms & kitchens",
+      "description": "Sanitary ware, faucets, worktops and wet-room solutions."
+    },
+    "cat-iluminat": {
+      "name": "Lighting",
+      "description": "Architectural fixtures, LED tracks and scene control."
+    },
+    "cat-unelte": {
+      "name": "Site tools",
+      "description": "Consumables and equipment for PRV teams."
+    },
+    "cat-pachete": {
+      "name": "Bundles & consulting",
+      "description": "Project bundles and technical consulting hours."
+    }
+  },
+  "products": {
+    "prd-quartz-blanc": {
+      "name": "Alpine White quartz worktop",
+      "shortDescription": "Calacatta-inspired, brushed finish, 20 mm.",
+      "description": "Premium quartz worktop for kitchens and bathrooms. Scratch and stain resistant. CNC cut to size — consultation included on orders over 3 m².",
+      "imageAlts": [
+        "White quartz worktop",
+        "Kitchen worktop detail"
+      ]
+    },
+    "prd-faucet-matte": {
+      "name": "Matte Black basin mixer",
+      "shortDescription": "Single-lever, water saver, matte black finish.",
+      "description": "Premium mixer for basin or sink. 35 mm ceramic cartridge, flex hose included. 5-year manufacturer warranty.",
+      "imageAlts": [
+        "Matte black faucet"
+      ]
+    },
+    "prd-tile-large": {
+      "name": "120×60 cm porcelain tile",
+      "shortDescription": "Light concrete effect, rectified, 10 mm.",
+      "description": "Large-format tile for living room, bathroom or kitchen. Pallet delivery in Belgium. We recommend PRV-S1 flexible adhesive.",
+      "imageAlts": [
+        "Porcelain tile"
+      ]
+    },
+    "prd-paint-premium": {
+      "name": "Premium interior paint 15 L",
+      "shortDescription": "Velvet matt, washable, zero VOC on application.",
+      "description": "Decorative paint for interior walls. Coverage ~12 m²/L. Available in custom shades on request (RAL).",
+      "imageAlts": [
+        "Interior paint"
+      ]
+    },
+    "prd-led-profile": {
+      "name": "2 m aluminium LED profile",
+      "shortDescription": "Recessed, opal diffuser, for 12 mm strip.",
+      "description": "Profile for indirect lighting. End caps included. Compatible with PRV dimmable drivers.",
+      "imageAlts": [
+        "LED profile"
+      ]
+    },
+    "prd-pendant": {
+      "name": "Glass Orbit pendant",
+      "shortDescription": "Smoked glass, 2700K LED, dimmable.",
+      "description": "Suspended fixture for dining table or kitchen island. Adjustable 1.5 m cable.",
+      "imageAlts": [
+        "Glass pendant light"
+      ]
+    },
+    "prd-level-laser": {
+      "name": "360° green laser level",
+      "shortDescription": "Self-levelling, tripod included, magnetic target.",
+      "description": "For construction sites and finish installation. 8 h battery life, IP54 rugged housing.",
+      "imageAlts": [
+        "Laser level"
+      ]
+    },
+    "prd-masking-kit": {
+      "name": "Premium masking kit",
+      "shortDescription": "Tape + film + cutter for a clean job site.",
+      "description": "Consumable set for protection during finishing work. 2 rolls of tape, 4×5 m film, cutter.",
+      "imageAlts": [
+        "Masking kit"
+      ]
+    },
+    "prd-consult-2h": {
+      "name": "2-hour technical consultation",
+      "shortDescription": "Video or on-site in Brussels & 30 km.",
+      "description": "Session with a PRV specialist: materials, construction details, budget optimisation. Digital voucher delivered by email.",
+      "imageAlts": [
+        "Renovation consultation"
+      ]
+    },
+    "prd-bundle-bath": {
+      "name": "Essential bathroom bundle",
+      "shortDescription": "Tile + grout + waterproofing — starter pack.",
+      "description": "Bundle for standard bathroom renovations (5–8 m²). Includes 30 min phone consultation.",
+      "imageAlts": [
+        "Bathroom bundle"
+      ]
+    }
+  },
+  "reviews": {
+    "prd-quartz-blanc|2026-02-10": {
+      "text": "Flawless finish — the PRV team coordinated on-site cutting without any issues."
+    },
+    "prd-quartz-blanc|2026-01-18": {
+      "text": "Premium quality, delivered on time. Highly recommended for demanding kitchens."
+    },
+    "prd-faucet-matte|2026-03-02": {
+      "text": "Very clean look, easy to install. Pairs perfectly with black finishes."
+    },
+    "prd-bundle-bath|2026-02-22": {
+      "text": "Complete package for a small bathroom — clear budget from the start."
+    }
+  }
+}

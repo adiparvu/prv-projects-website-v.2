@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://adiparvu.github.io/prv-projects-website-v.2/sitemap.xml

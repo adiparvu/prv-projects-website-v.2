@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PRV Shop — finisaje premium, materiale și pachete pentru renovări în Belgia." />
+  <title>Shop · PRV Projects</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../css/prv-brand.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/effects.css" />
+  <link rel="stylesheet" href="../css/shop.css" />
+  <script src="../js/lang-init.js"></script>
+  <script src="../js/theme-init.js"></script>
+  <script src="../js/shop/prefetch-catalog.js"></script>
+  <script src="../js/shop/shop-scroll-reset.js"></script>
+</head>
+<body class="shop-body">
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <canvas id="liquid-canvas" class="liquid-canvas"></canvas>
+    <div class="grain"></div>
+  </div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+  <div id="shop-root"></div>
+  <footer id="site-footer"></footer>
+  <script src="../js/site-config.js"></script>
+  <script src="../js/i18n-config.js"></script>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/footer.js" defer></script>
+  <script src="../js/cookies.js" defer></script>
+  <script type="module">
+    import { bootShop } from "../js/shop/boot.js";
+    bootShop("home").catch((e) => {
+      console.error(e);
+      document.getElementById("shop-root").innerHTML =
+        '<div class="glass-panel" style="max-width:480px;margin:2rem auto"><h1>Shop</h1><p>Eroare la încărcare. Încearcă <a href="index.html">reîncărcare</a> sau link direct: <code>/shop/index.html</code></p></div>';
+    });
+  </script>
+</body>
+</html>
