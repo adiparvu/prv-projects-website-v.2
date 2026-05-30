@@ -67,6 +67,8 @@ export async function renderAccountOverview(main) {
 
   await mountCustomerProfilePage(profileHost, {
     onLogout: async () => {
+      delete window.PRV_ACCOUNT_NAV?.pop;
+      document.body.classList.remove("shop-acct-stack-deep");
       ShopStore.logout();
       clearAuth();
       await renderAccountOverview(main);

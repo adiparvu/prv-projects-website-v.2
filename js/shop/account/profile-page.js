@@ -8,7 +8,6 @@ import { validateEmail, validatePhone, validateRequired, validateAddress } from 
 import { fetchCustomerProfile, saveCustomerProfile, addLoyaltyToWallet } from "./profile-api.js";
 import { ProfileStore } from "./profile-store.js";
 import { ShopStore } from "../store.js";
-import { BACK_ARROW_SVG } from "../../prv-back.js";
 import { createAccountNavStack, stackScreenClass } from "./account-nav-stack.js";
 import { accountCategoryMenuHtml, getAccountCategoryTitleKey } from "./components/account-category-menu.js";
 import { accountProfileHeaderHtml, wireAccountProfileHeader } from "./components/account-profile-header.js";
@@ -95,6 +94,8 @@ function initProfileNavigation(main, bundle, orders, opts) {
         : renderDetailScreen(screen, ctx, animClass);
 
     wireCurrentScreen(main, ctx, navStack);
+    syncAccountHeaderBack(navStack, render);
+    updateAccountPageTitle(ctx, navStack.current());
   };
 
   viewport.addEventListener("click", (e) => {
@@ -102,13 +103,6 @@ function initProfileNavigation(main, bundle, orders, opts) {
     if (pushBtn) {
       e.preventDefault();
       if (navStack.push(pushBtn.getAttribute("data-stack-push"))) render();
-      return;
-    }
-
-    const backBtn = e.target.closest("[data-stack-back]");
-    if (backBtn) {
-      e.preventDefault();
-      if (navStack.pop()) render();
     }
   });
 
@@ -137,16 +131,33 @@ function renderDetailScreen(screenId, ctx, animClass) {
 
   return `
     <div class="shop-acct-stack-screen ${animClass}" data-stack-screen="${screenId}">
-      <header class="shop-acct-stack-bar">
-        <button type="button" class="shop-acct-stack-back prv-back-link" data-stack-back aria-label="${t("shop.profile.back")}">
-          ${BACK_ARROW_SVG}
-          <span class="prv-back-link__label">${t("shop.profile.back")}</span>
-        </button>
-        <h2 class="shop-acct-stack-title">${t(titleKey)}</h2>
-      </header>
+      <h2 class="shop-acct-detail-page-title">${t(titleKey)}</h2>
       <div class="shop-acct-detail glass-panel">${renderCategoryBody(screenId, ctx)}</div>
     </div>
   `;
+}
+
+function syncAccountHeaderBack(navStack, render) {
+  window.PRV_ACCOUNT_NAV = window.PRV_ACCOUNT_NAV || {};
+
+  if (navStack.isRoot()) {
+    delete window.PRV_ACCOUNT_NAV.pop;
+    document.body.classList.remove("shop-acct-stack-deep");
+    return;
+  }
+
+  document.body.classList.add("shop-acct-stack-deep");
+  window.PRV_ACCOUNT_NAV.pop = () => {
+    if (navStack.pop()) render();
+  };
+}
+
+/** @param {{ main: HTMLElement }} ctx @param {string} screenId */
+function updateAccountPageTitle(ctx, screenId) {
+  const titleEl = ctx.main.closest("#shop-main")?.querySelector(".shop-acct-page-title");
+  if (!titleEl) return;
+  titleEl.textContent =
+    screenId === "root" ? t("shop.account.title") : t(getAccountCategoryTitleKey(screenId));
 }
 
 /** @param {{ bundle: import('./types.js').CustomerAccountBundle, orders: object[] }} ctx */

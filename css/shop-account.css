@@ -377,6 +377,13 @@
   gap: 0.85rem;
 }
 
+.shop-acct-detail-page-title {
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
 .shop-acct-stack-screen--enter-forward {
   animation: shop-acct-stack-in-forward 0.34s var(--ease-out-expo);
 }
@@ -405,29 +412,6 @@
     opacity: 1;
     transform: translateX(0);
   }
-}
-
-.shop-acct-stack-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  min-height: 2.25rem;
-}
-
-.shop-acct-stack-back {
-  flex-shrink: 0;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  padding: 0.25rem 0.35rem 0.25rem 0;
-}
-
-.shop-acct-stack-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  flex: 1;
-  min-width: 0;
 }
 
 .shop-acct-detail {

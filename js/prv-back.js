@@ -114,6 +114,11 @@ export function wireSmartBack(el, { fallbackHref } = {}) {
   }
 
   el.addEventListener("click", (e) => {
+    if (typeof window.PRV_ACCOUNT_NAV?.pop === "function") {
+      e.preventDefault();
+      window.PRV_ACCOUNT_NAV.pop();
+      return;
+    }
     if (canGoBackInSite()) {
       e.preventDefault();
       window.history.back();
