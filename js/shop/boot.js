@@ -25,6 +25,7 @@ import { wireFavoriteButtons } from "./favorites.js";
 import { remountShopPickers } from "./picker-mount.js";
 import { initTheme } from "../prv-theme-picker.js";
 import { initThemeTransition } from "../fx-theme-transition.js";
+import { initAmbientFx } from "../fx-ambient.js";
 import { initShopNav } from "./nav.js";
 import { initBackNav, wireShopHeaderBack, mountGlassHeaderBack } from "../prv-back.js";
 
@@ -131,6 +132,10 @@ export async function bootShop(page) {
   activePage = page;
   document.body.classList.add("shop-body", "fx-page-ready");
 
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.body.classList.add("fx-scroll-driven");
+  }
+
   if (!window.PRV_I18N?.applyLang) {
     showShopFatal("Traducerile nu s-au încărcat.");
     return;
@@ -138,6 +143,7 @@ export async function bootShop(page) {
 
   initThemeTransition();
   initTheme();
+  initAmbientFx();
   initShopAuth();
   wireShopNavLinks();
   kickShopI18n();

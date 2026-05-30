@@ -1,31 +1,15 @@
-/* PRV Shop — premium commerce layer (open, airy, conversion-focused) */
+/* PRV Shop — commerce layer (same colors & glass FX as website) */
 
 :root {
-  --shop-accent: #0071e3;
-  --shop-accent-soft: rgba(0, 113, 227, 0.12);
+  --shop-accent: var(--accent-1);
+  --shop-accent-soft: color-mix(in srgb, var(--text-primary) 10%, transparent);
   --shop-radius: var(--prv-ui-radius);
   --shop-radius-sm: var(--prv-ui-radius);
   --shop-max: 1240px;
   --shop-gap: 1.5rem;
 }
 
-body.shop-body {
-  --glass-bg: color-mix(in srgb, var(--prv-surface) 82%, transparent);
-  --glass-border: color-mix(in srgb, var(--prv-border) 90%, transparent);
-  --glass-shadow: rgba(0, 0, 0, 0.08);
-  --accent-1: var(--shop-accent);
-  --accent-2: color-mix(in srgb, var(--shop-accent) 65%, var(--prv-text-muted));
-  --accent-3: var(--shop-accent);
-  --gradient-hero: linear-gradient(135deg, var(--shop-accent), #5e5ce6);
-}
-
-body.shop-body .ambient {
-  opacity: 0.55;
-}
-
-body.shop-body .liquid-canvas {
-  opacity: 0.35;
-}
+/* Shop inherits website glass tokens — no color overrides on body */
 
 .shop-cart-lines.glass-panel {
   padding: 0 var(--prv-ui-pad);
@@ -91,7 +75,7 @@ body.shop-body .shop-top-nav.nav-hidden {
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--shop-accent);
+  color: var(--text-secondary);
   margin: 0;
   line-height: 1;
   align-self: flex-end;
@@ -108,7 +92,7 @@ body.shop-body .shop-top-nav.nav-hidden {
 .shop-top-nav .nav-icon-btn.is-active,
 .shop-top-nav .nav-icon-btn:hover,
 .shop-top-nav .nav-icon-btn:focus-visible {
-  color: var(--shop-accent);
+  color: var(--text-primary);
 }
 
 .shop-back-btn {
@@ -218,7 +202,7 @@ body.fx-page-enter.shop-body > footer {
   padding: var(--prv-ui-pad-sm) var(--prv-ui-pad);
   border-radius: var(--prv-ui-radius);
   border: 1px solid var(--glass-border);
-  background: color-mix(in srgb, var(--prv-surface) 70%, transparent);
+  background: var(--glass-inset);
 }
 
 .shop-search-form input {
@@ -240,10 +224,10 @@ body.fx-page-enter.shop-body > footer {
   justify-content: center;
   width: 36px;
   height: 36px;
-  border: none;
+  border: 1px solid var(--glass-border);
   border-radius: calc(var(--prv-ui-radius) * 0.55);
-  background: var(--shop-accent-soft);
-  color: var(--shop-accent);
+  background: var(--glass-bg);
+  color: var(--text-primary);
   cursor: pointer;
 }
 
@@ -500,7 +484,7 @@ body.fx-page-enter.shop-body > footer {
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--shop-accent);
+  color: var(--text-secondary);
   margin: 0;
   line-height: 1;
 }
@@ -771,9 +755,9 @@ body.shop-promo-open {
   padding: 0 5px;
   font-size: 0.65rem;
   font-weight: 700;
-  border-radius: 999px;
-  background: var(--shop-accent);
-  color: #fff;
+  border-radius: calc(var(--prv-ui-radius) * 0.55);
+  background: var(--text-primary);
+  color: var(--bg-base);
   display: grid;
   place-items: center;
 }
@@ -850,7 +834,7 @@ body.shop-promo-open {
 
 .shop-product-media {
   aspect-ratio: 4 / 3;
-  background: color-mix(in srgb, var(--prv-border) 40%, transparent);
+  background: var(--glass-inset);
   overflow: hidden;
   position: relative;
 }
@@ -993,7 +977,7 @@ body.shop-promo-open {
 }
 
 .shop-badge--sale {
-  color: var(--shop-accent);
+  color: var(--text-primary);
 }
 
 .shop-badge--low {
@@ -1061,7 +1045,7 @@ body.shop-promo-open {
 
 .shop-gallery-main {
   aspect-ratio: 1;
-  background: color-mix(in srgb, var(--prv-border) 35%, transparent);
+  background: var(--glass-inset);
   position: relative;
 }
 
@@ -1205,7 +1189,7 @@ body.shop-promo-open {
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--text-primary);
-  background: color-mix(in srgb, var(--prv-surface) 92%, transparent);
+  background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: var(--prv-ui-radius);
   box-shadow: var(--prv-ui-shadow);
