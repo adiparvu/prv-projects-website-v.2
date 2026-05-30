@@ -53,6 +53,8 @@
 
   function applyToDOM() {
     document.querySelectorAll("[data-i18n]").forEach((el) => {
+      // Nu rescrie containere cu copii traduse (ex. prv-back-link: svg + span)
+      if (el.querySelector("[data-i18n]")) return;
       const key = el.getAttribute("data-i18n");
       const text = strings[key];
       if (text != null) el.textContent = text;
@@ -125,6 +127,7 @@
     if (notify) {
       window.dispatchEvent(new CustomEvent("prv:langchange", { detail: { lang, strings } }));
     }
+    window.PRV_BACK?.initBackNav?.();
   }
 
   const LANG_GLOBE_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>`;
@@ -222,6 +225,7 @@
       mountLangUi();
       applyToDOM();
       updatePickerUI();
+      window.PRV_BACK?.initBackNav?.();
     });
     mountLangUi();
   }

@@ -517,6 +517,10 @@ initParallax();
 initNav();
 initBackNav();
 document.addEventListener("prv:langchange", () => initBackNav());
+
+if (typeof window !== "undefined") {
+  window.PRV_BACK = { initBackNav };
+}
 initCounters();
 initMaxVisibleCarousels();
 initMagneticButtons();

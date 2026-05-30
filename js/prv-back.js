@@ -57,13 +57,18 @@ function syncBackLabel(anchor) {
 
 function enhanceBackLink(anchor) {
   if (!anchor) return;
-  if (anchor.querySelector(".prv-back-link__icon, svg")) {
+
+  const hasIcon = anchor.querySelector(".prv-back-link__icon, svg");
+  if (hasIcon) {
     anchor.classList.add("prv-back-link");
     syncBackLabel(anchor);
+    anchor.removeAttribute("data-i18n");
     anchor.dataset.prvBackDone = "1";
     return;
   }
-  if (anchor.dataset.prvBackDone === "1") return;
+
+  // i18n poate rescrie textContent pe <a data-i18n> — refacem structura
+  delete anchor.dataset.prvBackDone;
 
   anchor.classList.add("prv-back-link");
   const i18nEl = anchor.querySelector("[data-i18n]");
@@ -71,6 +76,7 @@ function enhanceBackLink(anchor) {
   const raw = (i18nEl?.textContent || anchor.textContent || "").trim();
   const label = stripArrowPrefix(raw);
 
+  anchor.removeAttribute("data-i18n");
   anchor.innerHTML = `${BACK_ARROW_SVG}<span class="prv-back-link__label"${i18nKey ? ` data-i18n="${escapeAttr(i18nKey)}"` : ""}>${escapeHtml(label)}</span>`;
   if (!anchor.getAttribute("aria-label")) anchor.setAttribute("aria-label", label);
   anchor.dataset.prvBackDone = "1";

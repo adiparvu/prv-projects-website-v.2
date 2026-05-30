@@ -28,6 +28,10 @@ import { initTheme } from "../prv-theme-picker.js";
 import { initThemeTransition } from "../fx-theme-transition.js";
 import { initBackNav } from "../prv-back.js";
 
+if (typeof window !== "undefined") {
+  window.PRV_BACK = { initBackNav };
+}
+
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
 }
