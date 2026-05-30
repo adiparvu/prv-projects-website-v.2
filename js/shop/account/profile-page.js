@@ -92,6 +92,10 @@ function renderProfileShell(main, bundle, opts) {
 
   wirePersonalDetailsForm(root, {
     onSave: async (data) => saveProfileFields(root, data, bundle),
+    onAvatarChange: async (avatarUrl) => {
+      await persistBundle({ profile: { avatarUrl } }, bundle, root);
+      bundle.profile.avatarUrl = avatarUrl;
+    },
   });
 
   wireFavoriteAddressesSection(root, {
