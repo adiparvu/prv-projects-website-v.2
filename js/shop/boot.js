@@ -26,7 +26,6 @@ import { remountShopPickers } from "./picker-mount.js";
 import { initTheme } from "../prv-theme-picker.js";
 import { initThemeTransition } from "../fx-theme-transition.js";
 import { initBackNav } from "../prv-back.js";
-import { dispatchFooterReadyOnce } from "../prv-perf.js";
 
 if (typeof window !== "undefined") {
   window.PRV_BACK = { initBackNav };
@@ -122,7 +121,7 @@ function finishPage(page, main, catalog) {
 
   queueMicrotask(() => {
     remountShopPickers();
-    dispatchFooterReadyOnce();
+    window.dispatchEvent(new CustomEvent("prv:footer-ready"));
   });
 }
 

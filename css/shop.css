@@ -147,27 +147,6 @@ body.shop-body .liquid-canvas {
   color: var(--shop-accent);
 }
 
-/* Shop — fără fundal animat (performanță) */
-body.shop-body .ambient,
-body.shop-body .cursor-glow,
-body.shop-body .liquid-canvas {
-  display: none !important;
-}
-
-body.shop-body .orb {
-  animation: none !important;
-}
-
-body.shop-body .shop-product-card {
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-body.shop-body .shop-product-card .shop-badge {
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
 /* ——— Shop instant (zero delay intrare) ——— */
 body.shop-body {
   opacity: 1 !important;
@@ -1454,17 +1433,7 @@ body.shop-promo-open {
   color: var(--text-secondary);
 }
 
-@media (max-width: 768px) {
-  :root {
-    --blur-strength: 14px;
-    --blur-heavy: 28px;
-  }
-
-  .orb {
-    animation: none !important;
-    filter: blur(48px);
-  }
-
+@media (max-width: 900px) {
   .shop-search-form {
     order: 3;
     flex: 1 1 100%;

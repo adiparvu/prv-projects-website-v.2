@@ -4,8 +4,8 @@
 
 | Pagină | URL |
 |--------|-----|
-| **Shop** | https://reload-three-represent-program.trycloudflare.com/shop/index.html |
-| **Site** | https://reload-three-represent-program.trycloudflare.com/ |
+| **Shop** | https://encouraging-awareness-trucks-towers.trycloudflare.com/shop/index.html |
+| **Site** | https://encouraging-awareness-trucks-towers.trycloudflare.com/ |
 
 > Deschide **/shop/index.html** (cu `index.html`). Hard refresh: Ctrl+Shift+R.
 

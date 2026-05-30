@@ -22,23 +22,18 @@
     return (window.PRV_LANGUAGES || []).find((l) => l.code === code);
   }
 
-  function isShopPage() {
-    return /\/shop(\/|$)/.test(location.pathname);
-  }
-
   async function loadLocale(code) {
     if (cache[code]) return cache[code];
     const base = getBasePath();
-    const mainRes = await fetch(`${base}/js/translations/${code}.json`);
+    const [mainRes, shopRes] = await Promise.all([
+      fetch(`${base}/js/translations/${code}.json`),
+      fetch(`${base}/js/translations/shop/${code}.json`),
+    ]);
     if (!mainRes.ok) throw new Error(`Locale ${code} not found`);
     const data = await mainRes.json();
-    if (isShopPage()) {
-      try {
-        const shopRes = await fetch(`${base}/js/translations/shop/${code}.json`);
-        if (shopRes.ok) Object.assign(data, await shopRes.json());
-      } catch {
-        /* shop strings optional off-shop */
-      }
+    if (shopRes.ok) {
+      const shop = await shopRes.json();
+      Object.assign(data, shop);
     }
     cache[code] = data;
     return data;
@@ -108,16 +103,14 @@
     const codes = (window.PRV_LANGUAGES || []).map((l) => l.code);
     if (!codes.includes(lang)) lang = DEFAULT_LANG;
 
-    if (lang === currentLang && Object.keys(strings).length > 0) {
-      if (notify) {
-        window.dispatchEvent(new CustomEvent("prv:langchange", { detail: { lang, strings } }));
-      }
-      return;
-    }
+    const isSameLang = lang === currentLang && Object.keys(strings).length > 0;
+
+    if (!isSameLang) delete cache[lang];
 
     try {
       strings = await loadLocale(lang);
     } catch {
+      delete cache[DEFAULT_LANG];
       strings = await loadLocale(DEFAULT_LANG);
       lang = DEFAULT_LANG;
     }
@@ -149,11 +142,6 @@
   function buildLangPicker() {
     const host = document.getElementById("lang-picker");
     if (!host || !window.PRV_LANGUAGES) return;
-
-    if (host.dataset.built === "1" && host.querySelector("#lang-trigger")) {
-      updatePickerUI();
-      return;
-    }
 
     const minimal = isMinimalLangHost(host);
     if (minimal) host.classList.add("lang-picker-host--minimal");
@@ -209,26 +197,13 @@
       dropdown.hidden ? openDropdown() : closeDropdown();
     });
 
-    if (!window.__prvLangPickerDocBound) {
-      window.__prvLangPickerDocBound = true;
-      document.addEventListener("click", (e) => {
-        document.querySelectorAll(".lang-picker-host.is-open").forEach((h) => {
-          if (!h.contains(e.target)) {
-            h.classList.remove("is-open");
-            h.querySelector("#lang-dropdown")?.setAttribute("hidden", "");
-            h.querySelector("#lang-trigger")?.setAttribute("aria-expanded", "false");
-          }
-        });
-      });
-      document.addEventListener("keydown", (e) => {
-        if (e.key !== "Escape") return;
-        document.querySelectorAll(".lang-picker-host.is-open").forEach((h) => {
-          h.classList.remove("is-open");
-          h.querySelector("#lang-dropdown")?.setAttribute("hidden", "");
-          h.querySelector("#lang-trigger")?.setAttribute("aria-expanded", "false");
-        });
-      });
-    }
+    document.addEventListener("click", (e) => {
+      if (!host.contains(e.target)) closeDropdown();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeDropdown();
+    });
   }
 
   window.PRV_I18N = {
@@ -250,6 +225,7 @@
       mountLangUi();
       applyToDOM();
       updatePickerUI();
+      window.PRV_BACK?.initBackNav?.();
     });
     mountLangUi();
   }

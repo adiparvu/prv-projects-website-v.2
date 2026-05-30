@@ -48,18 +48,20 @@
 /* 2. Stagger reveal — delays set in JS (--stagger-i) */
 [data-stagger] > * {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(28px);
+  filter: blur(6px);
 }
 
 [data-stagger].fx-stagger-go > * {
-  animation: fx-stagger-in 0.32s ease-out forwards;
-  animation-delay: var(--stagger-delay, calc(24ms + (var(--stagger-i, 0) * 4ms)));
+  animation: fx-stagger-in 0.75s var(--ease-out-expo) forwards;
+  animation-delay: var(--stagger-delay, calc(80ms + (var(--stagger-i, 0) * 10ms)));
 }
 
 @keyframes fx-stagger-in {
   to {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
   }
 }
 
@@ -70,12 +72,15 @@
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transform: scale(1.02);
-  transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+  filter: blur(16px);
+  transform: scale(1.04);
+  transition: opacity 0.7s var(--ease-out-expo), filter 0.7s var(--ease-out-expo),
+    transform 0.7s var(--ease-out-expo);
 }
 
 .fx-img.is-loaded {
   opacity: 1;
+  filter: blur(0);
   transform: scale(1);
 }
 
@@ -249,26 +254,31 @@
   flex: 0 0 0.5rem;
 }
 
-/* 8. Page enter — instant, fără blur */
+/* 8. Page enter */
 body.fx-page-enter > main,
 body.fx-page-enter > .nav {
   opacity: 0;
-  transform: translateY(6px);
+  filter: blur(14px);
+  transform: translateY(12px);
 }
 
 body.fx-page-enter.fx-page-ready > main,
 body.fx-page-enter.fx-page-ready > .nav {
-  transition: opacity 0.22s ease-out, transform 0.22s ease-out;
+  transition: opacity 0.85s var(--ease-out-expo), filter 0.85s var(--ease-out-expo),
+    transform 0.85s var(--ease-out-expo);
 }
 
 body.fx-page-enter.fx-page-ready > main {
   opacity: 1;
+  filter: blur(0);
   transform: none;
 }
 
 body.fx-page-enter.fx-page-ready > .nav {
   opacity: 1;
+  filter: blur(0);
   transform: none;
+  transition-delay: 0.05s;
 }
 
 /* 9. Form success */
@@ -414,7 +424,7 @@ body.fx-page-enter.fx-page-ready > .nav {
   pointer-events: none;
   opacity: 0;
   background: var(--bg-base);
-  transition: opacity 0.15s ease;
+  transition: opacity 0.3s ease;
 }
 
 #fx-theme-overlay.is-active {

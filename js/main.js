@@ -9,30 +9,30 @@ import { initEcosystem } from "./prv-platform.js";
 import { mountNavShopInActions } from "./site-paths.js";
 import { initTheme } from "./prv-theme-picker.js";
 import { initBackNav } from "./prv-back.js";
-import { prefersReducedMotion, isFinePointer, rafThrottle } from "./prv-perf.js";
 
 // ——— Liquid canvas background ———
 function initLiquidCanvas() {
   const canvas = document.getElementById("liquid-canvas");
-  if (!canvas || prefersReducedMotion() || !isFinePointer()) return;
+  if (!canvas || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const ctx = canvas.getContext("2d");
-  let mouse = { x: 0.5, y: 0.5 };
+  let width = 0;
+  let height = 0;
   let time = 0;
-  let rafId = 0;
-  let running = false;
+  let mouse = { x: 0.5, y: 0.5 };
+  let rafId;
 
-  const blobs = Array.from({ length: 4 }, (_, i) => ({
+  const blobs = Array.from({ length: 5 }, (_, i) => ({
     x: Math.random(),
     y: Math.random(),
-    r: 0.14 + Math.random() * 0.1,
-    speed: 0.00025 + i * 0.00008,
+    r: 0.15 + Math.random() * 0.12,
+    speed: 0.0003 + i * 0.0001,
     phase: Math.random() * Math.PI * 2,
   }));
 
   function resize() {
-    canvas.width = window.innerWidth * devicePixelRatio;
-    canvas.height = window.innerHeight * devicePixelRatio;
+    width = canvas.width = window.innerWidth * devicePixelRatio;
+    height = canvas.height = window.innerHeight * devicePixelRatio;
     canvas.style.width = `${window.innerWidth}px`;
     canvas.style.height = `${window.innerHeight}px`;
     ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
@@ -41,27 +41,29 @@ function initLiquidCanvas() {
   function getColors() {
     const dark = document.documentElement.getAttribute("data-effective-theme") === "dark";
     return dark
-      ? ["rgba(0,113,227,0.1)", "rgba(94,92,230,0.08)", "rgba(191,90,242,0.06)"]
-      : ["rgba(0,113,227,0.06)", "rgba(94,92,230,0.05)", "rgba(191,90,242,0.04)"];
+      ? ["rgba(0,113,227,0.12)", "rgba(94,92,230,0.1)", "rgba(191,90,242,0.08)"]
+      : ["rgba(0,113,227,0.08)", "rgba(94,92,230,0.07)", "rgba(191,90,242,0.06)"];
   }
 
   function draw() {
-    if (!running) return;
     const w = window.innerWidth;
     const h = window.innerHeight;
     const colors = getColors();
+
     ctx.clearRect(0, 0, w, h);
 
     blobs.forEach((blob, i) => {
       const t = time * blob.speed + blob.phase;
-      const mx = (mouse.x - 0.5) * 0.06;
-      const my = (mouse.y - 0.5) * 0.06;
-      const x = (blob.x + Math.sin(t) * 0.12 + mx) * w;
-      const y = (blob.y + Math.cos(t * 1.2) * 0.1 + my) * h;
+      const mx = (mouse.x - 0.5) * 0.08;
+      const my = (mouse.y - 0.5) * 0.08;
+      const x = (blob.x + Math.sin(t) * 0.15 + mx) * w;
+      const y = (blob.y + Math.cos(t * 1.3) * 0.12 + my) * h;
       const radius = blob.r * Math.min(w, h);
+
       const grad = ctx.createRadialGradient(x, y, 0, x, y, radius);
       grad.addColorStop(0, colors[i % colors.length]);
       grad.addColorStop(1, "transparent");
+
       ctx.fillStyle = grad;
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);
@@ -72,69 +74,54 @@ function initLiquidCanvas() {
     rafId = requestAnimationFrame(draw);
   }
 
-  function start() {
-    if (running || document.hidden) return;
-    running = true;
-    rafId = requestAnimationFrame(draw);
-  }
+  window.addEventListener("mousemove", (e) => {
+    mouse.x = e.clientX / window.innerWidth;
+    mouse.y = e.clientY / window.innerHeight;
+  });
 
-  function stop() {
-    running = false;
-    cancelAnimationFrame(rafId);
-  }
-
-  window.addEventListener(
-    "mousemove",
-    (e) => {
-      mouse.x = e.clientX / window.innerWidth;
-      mouse.y = e.clientY / window.innerHeight;
-      start();
-    },
-    { passive: true }
-  );
-
-  window.addEventListener("resize", resize, { passive: true });
-  document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()), { passive: true });
-
+  window.addEventListener("resize", resize);
   resize();
-  start();
+  draw();
+
+  const observer = new MutationObserver(() => {
+    /* redraw picks up new colors */
+  });
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-effective-theme"],
+  });
+
+  return () => {
+    cancelAnimationFrame(rafId);
+    observer.disconnect();
+  };
 }
 
 // ——— Cursor glow ———
 function initCursorGlow() {
   const glow = document.getElementById("cursor-glow");
-  if (!glow || prefersReducedMotion() || !isFinePointer()) return;
+  if (!glow || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   let x = 0;
   let y = 0;
   let targetX = 0;
   let targetY = 0;
-  let rafId = 0;
 
-  glow.style.willChange = "transform";
   document.body.classList.add("pointer-active");
 
-  window.addEventListener(
-    "mousemove",
-    (e) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-      if (!rafId) tick();
-    },
-    { passive: true }
-  );
+  window.addEventListener("mousemove", (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+  });
 
   function tick() {
-    x += (targetX - x) * 0.18;
-    y += (targetY - y) * 0.18;
-    glow.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
-
-    if (Math.abs(targetX - x) < 0.4 && Math.abs(targetY - y) < 0.4) {
-      rafId = 0;
-      return;
-    }
-    rafId = requestAnimationFrame(tick);
+    x += (targetX - x) * 0.08;
+    y += (targetY - y) * 0.08;
+    glow.style.left = `${x}px`;
+    glow.style.top = `${y}px`;
+    requestAnimationFrame(tick);
   }
+  tick();
 }
 
 // ——— Text split & reveal ———
@@ -187,7 +174,7 @@ function initTextEffects() {
   // Hero lines stagger
   requestAnimationFrame(() => {
     document.querySelectorAll(".hero-title [data-split]").forEach((el, i) => {
-      el.classList.add("split-done");
+      setTimeout(() => el.classList.add("split-done"), 200 + i * 120);
     });
     document.querySelector(".eyebrow[data-split]")?.classList.add("split-done");
   });
@@ -195,16 +182,18 @@ function initTextEffects() {
 
 // ——— 3D tilt on glass cards ———
 function initTilt() {
-  if (prefersReducedMotion() || !isFinePointer()) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   document.querySelectorAll("[data-tilt]").forEach((el) => {
-    const onMove = rafThrottle((e) => {
+    el.addEventListener("mousemove", (e) => {
       const rect = el.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
-      el.style.transform = `perspective(800px) rotateX(${y * -8}deg) rotateY(${x * 8}deg)`;
+      const rotateX = y * -12;
+      const rotateY = x * 12;
+      el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
     });
-    el.addEventListener("mousemove", onMove, { passive: true });
+
     el.addEventListener("mouseleave", () => {
       el.style.transform = "";
     });
@@ -245,19 +234,17 @@ function initNav() {
   const nav = document.querySelector(".nav");
   const toggle = document.querySelector(".nav-toggle");
   let lastY = 0;
-  let hidden = false;
 
-  const onScroll = rafThrottle(() => {
-    const y = window.scrollY;
-    const shouldHide = y > lastY && y > 120;
-    if (shouldHide !== hidden) {
-      hidden = shouldHide;
-      nav?.classList.toggle("nav-hidden", hidden);
-    }
-    lastY = y;
-  });
-
-  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      const y = window.scrollY;
+      if (y > lastY && y > 120) nav?.classList.add("nav-hidden");
+      else nav?.classList.remove("nav-hidden");
+      lastY = y;
+    },
+    { passive: true }
+  );
 
   toggle?.addEventListener("click", () => {
     const open = nav?.classList.toggle("nav-open");
@@ -405,16 +392,15 @@ function initMaxVisibleCarousels() {
 
 // ——— Magnetic buttons ———
 function initMagneticButtons() {
-  if (prefersReducedMotion() || !isFinePointer()) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   document.querySelectorAll(".btn-primary").forEach((btn) => {
-    const onMove = rafThrottle((e) => {
+    btn.addEventListener("mousemove", (e) => {
       const rect = btn.getBoundingClientRect();
-      const x = (e.clientX - rect.left - rect.width / 2) * 0.12;
-      const y = (e.clientY - rect.top - rect.height / 2) * 0.12;
-      btn.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.02)`;
     });
-    btn.addEventListener("mousemove", onMove, { passive: true });
     btn.addEventListener("mouseleave", () => {
       btn.style.transform = "";
     });
@@ -499,12 +485,32 @@ function initForm() {
 document.getElementById("year") &&
   (document.getElementById("year").textContent = new Date().getFullYear());
 
+document.addEventListener("prv:footer-ready", () => {
+  if (window.PRV_I18N?.applyLang) {
+    window.PRV_I18N.applyLang(window.PRV_I18N.getLang());
+  }
+  document.querySelectorAll("[data-reveal]").forEach((el) => {
+    if (!el.classList.contains("revealed")) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("revealed");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      observer.observe(el);
+    }
+  });
+});
+
 initEcosystem();
 initTheme();
-if (!document.body.classList.contains("shop-body")) {
-  initLiquidCanvas();
-  initCursorGlow();
-}
+initLiquidCanvas();
+initCursorGlow();
 initTextEffects();
 initTilt();
 initParallax();

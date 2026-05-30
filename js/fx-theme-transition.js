@@ -54,25 +54,15 @@ export function initThemeTransition() {
     }
     busy = true;
     overlay.classList.add("is-active");
-    const done = () => {
-      overlay.classList.remove("is-active");
-      busy = false;
-    };
-    const onEnd = (e) => {
-      if (e.target !== overlay) return;
-      overlay.removeEventListener("transitionend", onEnd);
-      done();
-    };
-    overlay.addEventListener("transitionend", onEnd);
     window.setTimeout(() => {
       applyFn(preference);
-      window.setTimeout(() => {
-        if (busy) {
-          overlay.removeEventListener("transitionend", onEnd);
-          done();
-        }
-      }, 120);
-    }, 40);
+      requestAnimationFrame(() => {
+        overlay.classList.remove("is-active");
+        window.setTimeout(() => {
+          busy = false;
+        }, 320);
+      });
+    }, 150);
   };
 }
 

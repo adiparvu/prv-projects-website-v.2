@@ -195,11 +195,7 @@
         : strings["footer.newsletter.error"] || "Introdu un email valid.";
   }
 
-  const dispatchFooterReady = () => {
-    if (window.__prvFooterReadyDone) return;
-    window.__prvFooterReadyDone = true;
-    window.dispatchEvent(new CustomEvent("prv:footer-ready"));
-  };
+  const dispatchFooterReady = () => window.dispatchEvent(new CustomEvent("prv:footer-ready"));
   const pickersSrc = `${base === "." ? "js" : `${base}/js`}/footer-pickers.js`;
 
   if (window.__prvFooterPickersLoaded) {

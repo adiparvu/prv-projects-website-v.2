@@ -63,7 +63,8 @@ export function applyThemeCore(preference) {
 }
 
 export function applyTheme(preference, { animate = true } = {}) {
-  if (animate && shouldAnimateThemeChange()) {
+  const useTransition = animate && window.PRV_FX?.themeTransition;
+  if (useTransition) {
     window.PRV_FX.themeTransition(applyThemeCore, preference);
   } else {
     applyThemeCore(preference);
