@@ -9,12 +9,6 @@ export function personalDetailsFormHtml(profile) {
     <form class="shop-acct-form" id="shop-profile-form" novalidate>
       <input type="file" id="shop-profile-avatar-input" accept="image/*" hidden />
       <div class="shop-acct-form__grid">
-        <div class="shop-acct-field shop-acct-field--readonly">
-          <label for="pf-customer-number">${t("shop.profile.fields.customerNumber")}</label>
-          <div class="input-wrap glass-inset">
-            <input id="pf-customer-number" name="customerNumber" value="${escapeHtml(profile.customerNumber)}" readonly aria-readonly="true" />
-          </div>
-        </div>
         <div class="shop-acct-field">
           <label for="pf-email">${t("shop.profile.fields.email")}</label>
           <div class="input-wrap glass-inset">
