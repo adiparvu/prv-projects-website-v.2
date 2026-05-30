@@ -4,10 +4,27 @@
 :root {
   --shop-accent: var(--accent-1);
   --shop-accent-soft: color-mix(in srgb, var(--text-primary) 10%, transparent);
-  --shop-radius: var(--prv-ui-radius);
-  --shop-radius-sm: var(--prv-ui-radius);
+  --shop-radius: var(--radius-md);
+  --shop-radius-sm: var(--radius-sm);
+  --shop-pad: 1rem;
+  --shop-pad-sm: 0.75rem;
   --shop-max: 1240px;
-  --shop-gap: 1.5rem;
+  --shop-gap: 1.25rem;
+}
+
+/* Chenare normale în conținut — nav / footer rămân XL */
+body.shop-body .shop-main {
+  --prv-ui-pad: var(--shop-pad);
+  --prv-ui-pad-sm: var(--shop-pad-sm);
+  --prv-ui-radius: var(--shop-radius);
+}
+
+body.shop-body .shop-main .glass-panel:not(.shop-product-card):not(.shop-cat-card):not(.work-item) {
+  border-radius: var(--shop-radius);
+}
+
+body.shop-body .shop-main .glass-inset {
+  border-radius: var(--shop-radius-sm);
 }
 
 /* Shop inherits website glass tokens — no color overrides on body */
@@ -41,7 +58,7 @@ body.shop-mode-utility .shop-main {
 }
 
 .shop-cart-lines.glass-panel {
-  padding: 0 var(--prv-ui-pad);
+  padding: 0 var(--shop-pad);
 }
 
 .shop-checkout-form.glass-panel {

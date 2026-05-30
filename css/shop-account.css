@@ -7,14 +7,15 @@
 .shop-main {
   --shop-acct-radius: var(--radius-md);
   --shop-acct-radius-sm: var(--radius-sm);
-  --shop-acct-pad: 1rem;
-  --shop-acct-pad-sm: 0.75rem;
+  --shop-acct-pad: 0.875rem;
+  --shop-acct-pad-sm: 0.65rem;
   --shop-acct-shadow:
     0 0 0 1px var(--glass-highlight) inset,
-    0 10px 24px -14px var(--glass-shadow),
-    0 4px 8px -4px var(--glass-shadow);
+    0 8px 20px -12px var(--glass-shadow),
+    0 3px 6px -3px var(--glass-shadow);
 }
 
+.shop-main .glass-panel,
 .shop-acct-page .glass-panel,
 .shop-acct-profile-host .glass-panel,
 .shop-acct-login.glass-panel {
@@ -22,6 +23,7 @@
   box-shadow: var(--shop-acct-shadow);
 }
 
+.shop-main .glass-inset,
 .shop-acct-page .glass-inset,
 .shop-acct-profile-host .glass-inset,
 .shop-acct-login .glass-inset {
@@ -75,8 +77,8 @@
 .shop-acct-page {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  max-width: 680px;
+  gap: 0.7rem;
+  max-width: 560px;
   margin: 0 auto;
 }
 
@@ -89,7 +91,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.85rem;
+  gap: 0.7rem;
   padding: var(--shop-acct-pad);
   flex-wrap: wrap;
 }
@@ -103,8 +105,8 @@
 
 .shop-acct-avatar {
   position: relative;
-  width: 72px;
-  height: 72px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -214,12 +216,12 @@
 }
 
 .shop-acct-loyalty__points {
-  margin: 1rem 0 0.85rem;
+  margin: 0.75rem 0 0.65rem;
 }
 
 .shop-acct-loyalty__points-value {
   display: block;
-  font-size: clamp(1.75rem, 5vw, 2.35rem);
+  font-size: clamp(1.45rem, 4vw, 1.85rem);
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
@@ -302,8 +304,8 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0.9rem var(--shop-acct-pad);
+  gap: 0.7rem;
+  padding: 0.72rem var(--shop-acct-pad);
   border: none;
   background: transparent;
   color: inherit;
@@ -323,8 +325,8 @@
 }
 
 .shop-acct-settings-menu__icon {
-  width: 2rem;
-  height: 2rem;
+  width: 1.65rem;
+  height: 1.65rem;
   border-radius: calc(var(--shop-acct-radius-sm) * 0.75);
   display: grid;
   place-items: center;
@@ -346,7 +348,7 @@
 }
 
 .shop-acct-settings-menu__text strong {
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
@@ -377,7 +379,7 @@
 .shop-acct-stack-screen {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.7rem;
 }
 
 .shop-acct-detail-page-title {
@@ -948,8 +950,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  min-height: 160px;
+  gap: 0.65rem;
+  min-height: 120px;
   justify-content: center;
 }
 
