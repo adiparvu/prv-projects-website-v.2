@@ -1,7 +1,7 @@
 import { escapeHtml } from "../../format.js";
 import { t } from "../../i18n.js";
 import { ICONS } from "../icons.js";
-import { accountSectionHtml } from "./states.js";
+import { accountDisclosureHtml } from "./disclosure-group.js";
 
 const LANGS = [
   ["nl", "Nederlands"],
@@ -77,7 +77,7 @@ export function appSettingsSectionHtml(settings) {
     </ul>
   `;
 
-  return accountSectionHtml("shop.profile.sections.appSettings", body, { id: "shop-profile-settings" });
+  return accountDisclosureHtml("shop.profile.sections.appSettings", body, { id: "shop-profile-settings" });
 }
 
 /** @param {HTMLElement} root @param {{ onToggle: Function, onLanguage: Function }} handlers */

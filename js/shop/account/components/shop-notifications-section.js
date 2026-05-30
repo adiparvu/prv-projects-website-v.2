@@ -1,5 +1,5 @@
 import { t } from "../../i18n.js";
-import { accountSectionHtml } from "./states.js";
+import { accountDisclosureHtml } from "./disclosure-group.js";
 
 /** @param {import('../types.js').ShopNotificationPreferences} prefs */
 export function shopNotificationsSectionHtml(prefs) {
@@ -11,7 +11,7 @@ export function shopNotificationsSectionHtml(prefs) {
     </ul>
     <p class="shop-acct-save-status is-success" data-notif-status hidden role="status"></p>
   `;
-  return accountSectionHtml("shop.profile.sections.notifications", body, { id: "shop-profile-notifications" });
+  return accountDisclosureHtml("shop.profile.sections.notifications", body, { id: "shop-profile-notifications" });
 }
 
 function toggleRow(key, titleKey, descKey, checked) {

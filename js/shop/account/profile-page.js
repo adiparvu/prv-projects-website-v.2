@@ -3,6 +3,7 @@
  */
 
 import { t } from "../i18n.js";
+import { getApiBase, fetchAccountOrders } from "../api.js";
 import { validateEmail, validatePhone, validateRequired, validateAddress } from "./validation.js";
 import { fetchCustomerProfile, saveCustomerProfile, addLoyaltyToWallet } from "./profile-api.js";
 import { ProfileStore } from "./profile-store.js";
@@ -10,24 +11,23 @@ import { ShopStore } from "../store.js";
 import { accountProfileHeaderHtml, wireAccountProfileHeader } from "./components/account-profile-header.js";
 import { loyaltyCardHtml, wireLoyaltyCard } from "./components/loyalty-card.js";
 import {
-  personalDetailsFormHtml,
   wirePersonalDetailsForm,
   showFieldError,
 } from "./components/personal-details-form.js";
 import {
-  favoriteAddressesSectionHtml,
+  favoriteAddressesBodyHtml,
   wireFavoriteAddressesSection,
 } from "./components/favorite-addresses-section.js";
-import {
-  preferredPaymentMethodSectionHtml,
-  wirePreferredPaymentMethodSection,
-} from "./components/preferred-payment-method-section.js";
+import { wirePreferredPaymentMethodSection } from "./components/preferred-payment-method-section.js";
 import {
   shopNotificationsSectionHtml,
   wireShopNotificationsSection,
 } from "./components/shop-notifications-section.js";
 import { appSettingsSectionHtml, wireAppSettingsSection } from "./components/app-settings-section.js";
-import { ordersAndReturnsSectionHtml } from "./components/orders-and-returns-section.js";
+import { profileDetailsSectionHtml } from "./components/profile-details-section.js";
+import { ordersSectionHtml } from "./components/orders-section.js";
+import { returnsSectionHtml } from "./components/returns-section.js";
+import { wireAccountDisclosures } from "./components/disclosure-group.js";
 import { accountLoadingHtml, accountErrorBannerHtml, showAccountToast } from "./components/states.js";
 import { ICONS } from "./icons.js";
 
@@ -56,23 +56,41 @@ export async function mountCustomerProfilePage(main, opts = {}) {
     return;
   }
 
-  renderProfileShell(main, bundle, opts);
+  const orders = await loadProfileOrders();
+  renderProfileShell(main, bundle, orders, opts);
+}
+
+async function loadProfileOrders() {
+  let orders = ShopStore.getOrders();
+  if (getApiBase()) {
+    try {
+      const fromApi = await fetchAccountOrders();
+      if (fromApi) {
+        orders = fromApi;
+        ShopStore.syncOrdersFromApi(orders);
+      }
+    } catch {
+      /* keep local orders */
+    }
+  }
+  return orders;
 }
 
 /** @param {import('./types.js').CustomerAccountBundle} bundle */
-function renderProfileShell(main, bundle, opts) {
+function renderProfileShell(main, bundle, orders, opts) {
   const { profile, loyalty, notifications, appSettings, paymentMethods } = bundle;
 
   main.innerHTML = `
     <div class="shop-acct-page" data-profile-root>
       ${accountProfileHeaderHtml(profile)}
       ${loyaltyCardHtml(loyalty)}
-      ${personalDetailsFormHtml(profile)}
-      ${favoriteAddressesSectionHtml(profile.addresses)}
-      ${preferredPaymentMethodSectionHtml(paymentMethods, profile.preferredPaymentMethodId)}
-      ${shopNotificationsSectionHtml(notifications)}
-      ${appSettingsSectionHtml(appSettings)}
-      ${ordersAndReturnsSectionHtml()}
+      <div class="shop-acct-disclosures">
+        ${profileDetailsSectionHtml(profile, paymentMethods)}
+        ${ordersSectionHtml(orders)}
+        ${returnsSectionHtml()}
+        ${shopNotificationsSectionHtml(notifications)}
+        ${appSettingsSectionHtml(appSettings)}
+      </div>
       <div class="shop-acct-logout-row">
         <button type="button" class="btn btn-glass" id="shop-logout">${t("shop.account.logout")}</button>
       </div>
@@ -80,6 +98,7 @@ function renderProfileShell(main, bundle, opts) {
   `;
 
   const root = main.querySelector("[data-profile-root]");
+  wireAccountDisclosures(root);
   wireAccountProfileHeader(root, {});
 
   wireLoyaltyCard(root, {
@@ -233,12 +252,10 @@ async function persistBundle(patch, bundle, main) {
 }
 
 function refreshAddressesSection(root, bundle) {
-  const section = root.querySelector("#shop-profile-addresses");
-  if (!section) return;
-  const tmp = document.createElement("div");
-  tmp.innerHTML = favoriteAddressesSectionHtml(bundle.profile.addresses);
-  const newSection = tmp.firstElementChild;
-  section.replaceWith(newSection);
+  const block = root.querySelector("[data-addresses-block]");
+  if (!block) return;
+  const title = block.querySelector(".shop-acct-disclosure-block__title");
+  block.innerHTML = `${title?.outerHTML || ""}${favoriteAddressesBodyHtml(bundle.profile.addresses)}`;
   wireFavoriteAddressesSection(root, {
     onEditRequest: (id) => {
       const addr = bundle.profile.addresses.find((a) => a.id === id);

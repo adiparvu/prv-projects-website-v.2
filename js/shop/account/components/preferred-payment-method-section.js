@@ -1,15 +1,15 @@
 import { escapeHtml } from "../../format.js";
 import { t } from "../../i18n.js";
-import { accountSectionHtml } from "./states.js";
 
 /** @param {import('../types.js').SavedPaymentMethod[]} methods @param {string|null} preferredId */
-export function preferredPaymentMethodSectionHtml(methods, preferredId) {
-  const body =
-    methods.length === 0
-      ? `<p class="shop-acct-empty-inline">${t("shop.profile.payment.empty")}</p>`
-      : `<div class="shop-acct-payment-list">${methods
-          .map(
-            (m) => `
+export function preferredPaymentMethodBodyHtml(methods, preferredId) {
+  if (methods.length === 0) {
+    return `<p class="shop-acct-empty-inline">${t("shop.profile.payment.empty")}</p>`;
+  }
+
+  return `<div class="shop-acct-payment-list">${methods
+    .map(
+      (m) => `
           <label class="shop-acct-payment-item glass-inset">
             <input type="radio" name="preferredPayment" value="${escapeHtml(m.id)}" ${m.id === preferredId ? "checked" : ""} />
             <span class="shop-acct-payment-item__label">
@@ -17,10 +17,13 @@ export function preferredPaymentMethodSectionHtml(methods, preferredId) {
               ${m.last4 ? `<span class="work-meta">•••• ${escapeHtml(m.last4)}</span>` : ""}
             </span>
           </label>`
-          )
-          .join("")}</div>`;
+    )
+    .join("")}</div>`;
+}
 
-  return accountSectionHtml("shop.profile.sections.payment", body, { id: "shop-profile-payment" });
+/** @param {import('../types.js').SavedPaymentMethod[]} methods @param {string|null} preferredId */
+export function preferredPaymentMethodSectionHtml(methods, preferredId) {
+  return preferredPaymentMethodBodyHtml(methods, preferredId);
 }
 
 /** @param {HTMLElement} root @param {{ onChange: (id: string) => void }} handlers */

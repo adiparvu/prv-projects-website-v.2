@@ -1,10 +1,9 @@
 import { escapeHtml } from "../../format.js";
 import { t } from "../../i18n.js";
 import { ICONS } from "../icons.js";
-import { accountSectionHtml } from "./states.js";
 
 /** @param {import('../types.js').CustomerAddress[]} addresses */
-export function favoriteAddressesSectionHtml(addresses) {
+export function favoriteAddressesBodyHtml(addresses) {
   const list =
     addresses.length === 0
       ? `<p class="shop-acct-empty-inline">${t("shop.profile.addresses.empty")}</p>`
@@ -12,7 +11,7 @@ export function favoriteAddressesSectionHtml(addresses) {
           .map((a) => addressItemHtml(a))
           .join("")}</ul>`;
 
-  const body = `
+  return `
     ${list}
     <button type="button" class="btn btn-glass btn-sm shop-acct-add-btn" data-add-address>
       ${ICONS.plus}
@@ -56,8 +55,11 @@ export function favoriteAddressesSectionHtml(addresses) {
       </form>
     </dialog>
   `;
+}
 
-  return accountSectionHtml("shop.profile.sections.addresses", body, { id: "shop-profile-addresses" });
+/** @param {import('../types.js').CustomerAddress[]} addresses */
+export function favoriteAddressesSectionHtml(addresses) {
+  return favoriteAddressesBodyHtml(addresses);
 }
 
 function addressItemHtml(a) {

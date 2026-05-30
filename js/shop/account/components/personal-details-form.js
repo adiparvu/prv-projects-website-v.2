@@ -1,11 +1,10 @@
 import { escapeHtml } from "../../format.js";
 import { t } from "../../i18n.js";
 import { ICONS } from "../icons.js";
-import { accountSectionHtml } from "./states.js";
 
 /** @param {import('../types.js').CustomerProfile} profile */
-export function personalDetailsFormHtml(profile) {
-  const body = `
+export function personalDetailsFormBodyHtml(profile) {
+  return `
     <form class="shop-acct-form" id="shop-profile-form" novalidate>
       <input type="file" id="shop-profile-avatar-input" accept="image/*" hidden />
       <div class="shop-acct-form__grid">
@@ -44,7 +43,11 @@ export function personalDetailsFormHtml(profile) {
       </div>
     </form>
   `;
-  return accountSectionHtml("shop.profile.sections.personal", body, { id: "shop-profile-personal" });
+}
+
+/** @param {import('../types.js').CustomerProfile} profile */
+export function personalDetailsFormHtml(profile) {
+  return personalDetailsFormBodyHtml(profile);
 }
 
 /** @param {HTMLElement} root @param {{ onSave: (data: object) => Promise<{ok: boolean}> }} handlers */
