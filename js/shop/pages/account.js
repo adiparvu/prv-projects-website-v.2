@@ -104,7 +104,7 @@ export async function renderOrders(main) {
     ${pageBackNav(ShopRoutes.account(), t("shop.account.title"))}
     <h1 class="section-title shop-acct-page-title">${t("shop.orders.title")}</h1>
     ${accountNav("orders")}
-    <div class="glass-panel shop-table-wrap" style="overflow-x:auto">
+    <div class="glass-panel shop-table-wrap">
       ${
         orders.length
           ? `<table class="shop-table"><thead><tr><th>${t("shop.orders.colOrder")}</th><th>${t("shop.orders.colDate")}</th><th>${t("shop.orders.colTotal")}</th><th>${t("shop.orders.colStatus")}</th></tr></thead><tbody>
@@ -174,7 +174,7 @@ export async function renderInvoices(main) {
     ${pageBackNav(ShopRoutes.account(), t("shop.account.title"))}
     <h1 class="section-title shop-acct-page-title">${t("shop.invoices.title")}</h1>
     ${accountNav("invoices")}
-    <div class="glass-panel">
+    <div class="glass-panel shop-table-wrap">
       ${
         orders.length
           ? `<table class="shop-table"><thead><tr><th>${t("shop.invoices.colInvoice")}</th><th>${t("shop.invoices.colOrder")}</th><th>${t("shop.invoices.colDate")}</th><th>${t("shop.invoices.colAmount")}</th><th></th></tr></thead><tbody>

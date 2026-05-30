@@ -15,8 +15,13 @@
   }
 
   body.prv-native-shell .shop-shell,
-  body.prv-platform-pwa .shop-shell {
-    padding-bottom: env(safe-area-inset-bottom);
+  body.prv-platform-pwa .shop-shell,
+  body.shop-body .shop-shell {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+
+  body.shop-body > footer {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
   }
 
   .prv-install-bar {
@@ -37,6 +42,20 @@
 
   body.prv-mobile .shop-pay-opt {
     min-height: 48px;
+  }
+
+  body.shop-body .shop-acct-settings-menu__btn {
+    min-height: 48px;
+  }
+
+  body.shop-body .shop-line-remove {
+    min-height: 44px;
+    padding: 0.35rem 0.5rem;
+  }
+
+  body.shop-body .shop-search-close {
+    width: 44px;
+    height: 44px;
   }
 }
 

@@ -58,6 +58,8 @@
 .shop-acct-page-title {
   margin-bottom: 0.75rem;
   scroll-margin-top: calc(var(--nav-height, 80px) + 12px);
+  font-size: clamp(1.35rem, 4vw, 2rem);
+  line-height: 1.15;
 }
 
 .shop-main .shop-account-nav {
@@ -443,6 +445,10 @@
 .shop-acct-detail-table-wrap {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+.shop-acct-detail-table-wrap .shop-table {
+  min-width: 28rem;
 }
 
 .shop-acct-detail-foot {
@@ -1115,5 +1121,30 @@
 
   .shop-acct-switch {
     align-self: flex-end;
+  }
+
+  .shop-acct-address-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .shop-acct-address-item__actions {
+    justify-content: flex-end;
+  }
+
+  .shop-acct-icon-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .shop-acct-avatar__edit {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 900px) {
+  body.shop-acct-stack-deep .shop-main > .shop-acct-page-title {
+    margin-bottom: 0.5rem;
   }
 }

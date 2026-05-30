@@ -14,7 +14,6 @@ export function scrollAccountViewToTop(profileHost) {
 
   const shopMain = profileHost.closest("#shop-main");
   const target =
-    shopMain?.querySelector(".shop-acct-detail-page-title") ||
     shopMain?.querySelector(".shop-acct-page-title") ||
     shopMain;
 

@@ -130,13 +130,10 @@ function renderRootScreen(ctx, animClass) {
   `;
 }
 
-/** @param {{ bundle: import('./types.js').CustomerAccountBundle, orders: object[] }} ctx */
+/** @param {import('./components/account-category-menu.js').AccountCategoryId} screenId */
 function renderDetailScreen(screenId, ctx, animClass) {
-  const titleKey = getAccountCategoryTitleKey(screenId);
-
   return `
     <div class="shop-acct-stack-screen ${animClass}" data-stack-screen="${screenId}">
-      <h2 class="shop-acct-detail-page-title">${t(titleKey)}</h2>
       <div class="shop-acct-detail glass-panel">${renderCategoryBody(screenId, ctx)}</div>
     </div>
   `;

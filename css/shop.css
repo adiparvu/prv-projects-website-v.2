@@ -1431,6 +1431,15 @@ body.shop-promo-open {
   font-size: 0.88rem;
 }
 
+.shop-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.shop-table-wrap .shop-table {
+  min-width: 32rem;
+}
+
 .shop-table th,
 .shop-table td {
   text-align: left;
@@ -1511,12 +1520,6 @@ body.shop-promo-open {
     margin: 0;
   }
 
-  .shop-top-nav .nav-icon-btn,
-  .shop-icon-btn {
-    width: 40px;
-    height: 40px;
-  }
-
   .shop-pdp,
   .shop-layout-2 {
     grid-template-columns: 1fr;
@@ -1524,5 +1527,65 @@ body.shop-promo-open {
 
   .shop-summary {
     position: static;
+  }
+
+  .shop-filter-row {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-line-item {
+    grid-template-columns: 72px 1fr;
+    gap: 0.75rem;
+  }
+
+  .shop-line-actions {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.15rem;
+  }
+
+  .shop-payment-methods {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-account-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-bottom: 1rem;
+    padding-bottom: 0.2rem;
+  }
+
+  .shop-account-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .shop-account-nav a {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .shop-main > .section-title {
+    font-size: clamp(1.35rem, 4vw, 2rem);
+    line-height: 1.15;
+  }
+
+  .shop-main {
+    width: min(var(--shop-max), 100% - 1.25rem);
+    margin: 1rem auto 2.5rem;
+  }
+
+  .shop-top-nav .nav-icon-btn,
+  .shop-icon-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .shop-qty button {
+    width: 44px;
+    height: 44px;
   }
 }
