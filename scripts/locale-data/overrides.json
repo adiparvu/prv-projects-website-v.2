@@ -1,0 +1,51 @@
+{
+  "de": {
+    "hero.line3": "in die Sie einziehen können — keine Baustellen, von denen Sie hoffen, dass sie je fertig werden.",
+    "hero.scroll": "Scrollen",
+    "theme.system": "System",
+    "form.name": "Name",
+    "cta.placeholder": "sie@email.de",
+    "footer.newsletter.placeholder": "sie@firma.de"
+  },
+  "nl": {
+    "hero.scroll": "Scrollen",
+    "cookie.title": "Privacy en cookies",
+    "card2.label": "DEADLINES",
+    "card3.label": "BUDGET"
+  },
+  "fr": {
+    "hero.scroll": "Défiler",
+    "form.projectTypeCommercial": "Commercial",
+    "work.meta9": "STUDIO · BRUGES · 2025"
+  },
+  "pl": {
+    "hero.scroll": "Przewiń"
+  },
+  "es": {
+    "hero.scroll": "Desplazar"
+  },
+  "it": {
+    "hero.scroll": "Scorri",
+    "card1.label": "QUALITÀ",
+    "footer.privacy": "Privacy"
+  },
+  "tr": {
+    "hero.scroll": "Kaydır"
+  },
+  "ar": {
+    "hero.scroll": "تمرير",
+    "cta.placeholder": "you@email.com",
+    "footer.newsletter.placeholder": "you@company.com"
+  },
+  "ru": {
+    "hero.scroll": "Прокрутка",
+    "cta.placeholder": "you@email.com",
+    "footer.newsletter.placeholder": "you@company.com"
+  },
+  "uk": {
+    "hero.scroll": "Прокрутка",
+    "card1.label": "ЯКІСТЬ",
+    "cta.placeholder": "you@email.com",
+    "footer.newsletter.placeholder": "you@company.com"
+  }
+}
